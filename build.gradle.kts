@@ -19,8 +19,14 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.cucumber:cucumber-java:7.20.1")
+	testImplementation("io.cucumber:cucumber-junit:7.20.1")
+	testImplementation("io.cucumber:cucumber-junit-platform-engine:7.20.1")
+	testImplementation("org.junit.jupiter:junit-jupiter:5.11.2")
+	testImplementation("org.junit.platform:junit-platform-suite:1.11.2")
+	testImplementation("org.seleniumhq.selenium:selenium-java:4.25.0")
 }
 
 tasks.withType<Test> {
