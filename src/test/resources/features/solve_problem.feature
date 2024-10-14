@@ -1,7 +1,7 @@
 Feature: Report a problem and install a patch
 
   Scenario: User purchases an application
-#    Given a list of applications
+    Given a list of applications
 #    When the user purchases an application
 #    Then it shows up in the system
 #
