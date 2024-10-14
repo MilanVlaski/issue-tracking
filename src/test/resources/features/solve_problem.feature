@@ -2,7 +2,7 @@ Feature: Report a problem and install a patch
 
   Scenario: User purchases an application
     Given a list of applications
-#    When the user purchases an application
+    When the user purchases an application with any tech support
 #    Then it shows up in the system
 #
 #  Scenario: Enter actions that caused a problem with the application
