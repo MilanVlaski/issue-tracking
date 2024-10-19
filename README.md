@@ -35,3 +35,12 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - Podrška i inženjeri se loginuju i imaju pristup kul stvarima. Mada kao hak, bez logina, mogu unijeti svoje ime ili nesto...
 - Admin ili ko vec, radi sve.
   Ovo je sve tema za spring sekjuriti...
+ # To do
+- [ ] Show a list of applications
+  - [ ] Display apps in a table, or with a logo.
+    - [ ] Learn thymeleaf a bit
+  - [ ] Fetch apps from database
+    - [ ] Write some code that inserts some apps. Calling it from tests would be neat.
+      - [ ] Add the entity manager and use it to insert
+      - [ ] Then use it to fetch the tables
+  - [ ] add the necessary stuff in the controller
