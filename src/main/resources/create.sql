@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 9.x                               */
-/* Created on:     10/17/2024 5:47:48 PM                        */
+/* Created on:     10/21/2024 8:53:09 PM                        */
 /*==============================================================*/
 
 
@@ -63,8 +63,6 @@ drop table VRSTA_PODRSKE;
 drop index INSTALIRA_FK;
 
 drop index PRAVI_FK;
-
-drop index NA_PROBLEMU_FK;
 
 drop index RELATIONSHIP_18_FK;
 
@@ -317,8 +315,9 @@ create unique index VRSTA_PODRSKE_PK on VRSTA_PODRSKE (
 create table ZAKRPA (
                         ID_KRP               INT4                 not null,
                         ID_PRB               INT4                 not null,
-                        ID_INZ               INT4                 not null,
+                        ID_INZ_RJESAVAOCA    INT4                 not null,
                         ID_KOR               INT4                 not null,
+                        ID_INZ_KRPIOCA       INT4                 null,
                         VELICINA_KB          NUMERIC(10,0)        null,
                         DATUM_OBJAVE         DATE                 null,
                         VRSTA_KOMUNIKACIJE   VARCHAR(200)         null,
@@ -337,21 +336,14 @@ create unique index ZAKRPA_PK on ZAKRPA (
 /*==============================================================*/
 create  index RELATIONSHIP_18_FK on ZAKRPA (
                                             ID_PRB,
-                                            ID_INZ
-    );
-
-/*==============================================================*/
-/* Index: NA_PROBLEMU_FK                                        */
-/*==============================================================*/
-create  index NA_PROBLEMU_FK on ZAKRPA (
-                                        ID_PRB
+                                            ID_INZ_RJESAVAOCA
     );
 
 /*==============================================================*/
 /* Index: PRAVI_FK                                              */
 /*==============================================================*/
 create  index PRAVI_FK on ZAKRPA (
-                                  ID_INZ
+                                  ID_INZ_KRPIOCA
     );
 
 /*==============================================================*/
@@ -362,22 +354,22 @@ create  index INSTALIRA_FK on ZAKRPA (
     );
 
 alter table AKCIJA
-    add constraint FK_AKCIJA_UZROKUJE_PROBLEM foreign key (ID_PRB)
+    add constraint FK_AKCIJA_UZROKUJU_PROBLEM foreign key (ID_PRB)
         references PROBLEM (ID_PRB)
         on delete restrict on update restrict;
 
 alter table KUPOVINA
-    add constraint FK_KUPOVINU_KUPUJE_KORISNIK foreign key (ID_KOR)
+    add constraint FK_KUPOVINA_KUPUJE_KORISNIK foreign key (ID_KOR)
         references KORISNIK (ID_KOR)
         on delete restrict on update restrict;
 
 alter table KUPOVINA
-    add constraint FK_KUPOVINA_UZ_PODRSKU foreign key (ID_POD)
+    add constraint FK_KUPOVINA_PODRSKA_VRSTA_PO foreign key (ID_POD)
         references VRSTA_PODRSKE (ID_POD)
         on delete restrict on update restrict;
 
 alter table KUPOVINA
-    add constraint FK_KUPOVINA_APLIKACIJE foreign key (ID_APP)
+    add constraint FK_KUPOVINA_SE_KUPUJE_APLIKACI foreign key (ID_APP)
         references APLIKACIJA (ID_APP)
         on delete restrict on update restrict;
 
@@ -387,47 +379,42 @@ alter table ODGOVOR
         on delete restrict on update restrict;
 
 alter table ODGOVOR
-    add constraint FK_ODGOVOR_NA_PROBLEM foreign key (ID_PRB)
+    add constraint FK_ODGOVOR_NA_PROBLE_PROBLEM foreign key (ID_PRB)
         references PROBLEM (ID_PRB)
         on delete restrict on update restrict;
 
 alter table PROBLEM
-    add constraint FK_PROBLEM_PRIJAVLJUJE_KORISNIK foreign key (ID_KOR)
+    add constraint FK_PROBLEM_PRIJAVLJU_KORISNIK foreign key (ID_KOR)
         references KORISNIK (ID_KOR)
         on delete restrict on update restrict;
 
 alter table PROBLEM
-    add constraint FK_PROBLEM_NA_APLIKACIJI foreign key (ID_APP)
+    add constraint FK_PROBLEM_RELATIONS_APLIKACI foreign key (ID_APP)
         references APLIKACIJA (ID_APP)
         on delete restrict on update restrict;
 
 alter table RJESAVALAC
-    add constraint FK_RJESAVALAC_RADI_KAO_INZENJER foreign key (ID_INZ)
+    add constraint FK_RJESAVAL_RELATIONS_INZENJER foreign key (ID_INZ)
         references INZENJER (ID_INZ)
         on delete restrict on update restrict;
 
 alter table RJESAVALAC
-    add constraint FK_RJESAVALAC_PROBLEMA foreign key (ID_PRB)
+    add constraint FK_RJESAVAL_RELATIONS_PROBLEM foreign key (ID_PRB)
         references PROBLEM (ID_PRB)
         on delete restrict on update restrict;
 
 alter table ZAKRPA
-    add constraint FK_ZAKRPU_INSTALIRA_KORISNIK foreign key (ID_KOR)
+    add constraint FK_ZAKRPA_INSTALIRA_KORISNIK foreign key (ID_KOR)
         references KORISNIK (ID_KOR)
         on delete restrict on update restrict;
 
 alter table ZAKRPA
-    add constraint FK_ZAKRPA_NA_PROBLEMU foreign key (ID_PRB)
-        references PROBLEM (ID_PRB)
-        on delete restrict on update restrict;
-
-alter table ZAKRPA
-    add constraint FK_ZAKRPU_PRAVI_INZENJER foreign key (ID_INZ)
+    add constraint FK_ZAKRPA_PRAVI_INZENJER foreign key (ID_INZ_KRPIOCA)
         references INZENJER (ID_INZ)
         on delete restrict on update restrict;
 
 alter table ZAKRPA
-    add constraint FK_ZAKRPA_ODGOVORAN_RJESAVALAC foreign key (ID_PRB, ID_INZ)
+    add constraint FK_ZAKRPA_RELATIONS_RJESAVAL foreign key (ID_PRB, ID_INZ_RJESAVAOCA)
         references RJESAVALAC (ID_PRB, ID_INZ)
         on delete restrict on update restrict;
 
