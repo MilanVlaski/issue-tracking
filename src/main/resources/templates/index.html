@@ -9,11 +9,11 @@
 
 
 <article th:each="app: ${apps}" class="application">
-    <img th:src="*{logoUrl}" th:alt="|${name} logo|">
-    <h2 th:text="*{name}">Application</h2>
-    <h3 th:text="*{version}">1.0</h3>
-    <p th:text="*{description}"></p>
-    <div th:text="*{releaserYear}"></div>
+    <img th:src="${app.logoUrl}" th:alt="|${app.name} logo|">
+    <h2 th:text="${app.name}">Application</h2>
+    <h3 th:text="${app.version}">1.0</h3>
+    <p th:text="${app.description}"></p>
+    <div th:text="${app.releaseYear}"></div>
 </article>
 </body>
 </html>
