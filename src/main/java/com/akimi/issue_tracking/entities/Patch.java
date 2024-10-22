@@ -9,10 +9,9 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "ZAKRPA", indexes = {
-        @Index(name = "RELATIONSHIP_18_FK", columnList = "ID_PRB, ID_INZ"),
-        @Index(name = "NA_PROBLEMU_FK", columnList = "ID_PRB"),
-        @Index(name = "PRAVI_FK", columnList = "ID_INZ"),
-        @Index(name = "INSTALIRA_FK", columnList = "ID_KOR")
+        @Index(name = "RELATIONSHIP_18_FK", columnList = "ID_PRB, ID_INZ_RJESAVAOCA"),
+        @Index(name = "INSTALIRA_FK", columnList = "ID_KOR"),
+        @Index(name = "PRAVI_FK", columnList = "ID_INZ_KRPIOCA")
 })
 public class Patch {
     @Id
@@ -20,23 +19,28 @@ public class Patch {
     @Column(name = "ID_KRP", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     private ProblemSolver problemSolver;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_KOR", nullable = false)
     private User user;
 
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumn(name = "ID_INZ_KRPIOCA")
+    private Engineer helperEngineer;
+
     @Column(name = "VELICINA_KB", precision = 10)
-    private BigDecimal sizeInKb;
+    private BigDecimal sizeKb;
 
     @Column(name = "DATUM_OBJAVE")
-    private LocalDate datePublished;
+    private LocalDate publishDate;
 
     @Column(name = "VRSTA_KOMUNIKACIJE", length = 200)
-    private String typeOfCommunication;
+    private String communicationType;
 
     public Integer getId() {
         return id;
@@ -65,30 +69,39 @@ public class Patch {
         return this;
     }
 
-    public BigDecimal getSizeInKb() {
-        return sizeInKb;
+    public Engineer getHelperEngineer() {
+        return helperEngineer;
     }
 
-    public Patch setSizeInKb(BigDecimal sizeInKb) {
-        this.sizeInKb = sizeInKb;
+    public Patch setHelperEngineer(Engineer helperEngineer) {
+        this.helperEngineer = helperEngineer;
         return this;
     }
 
-    public LocalDate getDatePublished() {
-        return datePublished;
+    public BigDecimal getSizeKb() {
+        return sizeKb;
     }
 
-    public Patch setDatePublished(LocalDate datePublished) {
-        this.datePublished = datePublished;
+    public Patch setSizeKb(BigDecimal sizeKb) {
+        this.sizeKb = sizeKb;
         return this;
     }
 
-    public String getTypeOfCommunication() {
-        return typeOfCommunication;
+    public LocalDate getPublishDate() {
+        return publishDate;
     }
 
-    public Patch setTypeOfCommunication(String typeOfCommunication) {
-        this.typeOfCommunication = typeOfCommunication;
+    public Patch setPublishDate(LocalDate publishDate) {
+        this.publishDate = publishDate;
+        return this;
+    }
+
+    public String getCommunicationType() {
+        return communicationType;
+    }
+
+    public Patch setCommunicationType(String communicationType) {
+        this.communicationType = communicationType;
         return this;
     }
 

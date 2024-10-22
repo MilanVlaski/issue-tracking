@@ -36,7 +36,7 @@ public class User {
     private Set<Problem> problems = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "idKor")
-    private Set<Patch> patches = new LinkedHashSet<>();
+    private Set<Patch> installedPatches = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -110,12 +110,12 @@ public class User {
         return this;
     }
 
-    public Set<Patch> getPatches() {
-        return patches;
+    public Set<Patch> getInstalledPatches() {
+        return installedPatches;
     }
 
-    public User setPatches(Set<Patch> patches) {
-        this.patches = patches;
+    public User setInstalledPatches(Set<Patch> installedPatches) {
+        this.installedPatches = installedPatches;
         return this;
     }
 

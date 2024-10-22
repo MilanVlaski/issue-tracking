@@ -14,16 +14,16 @@ import java.util.Set;
 })
 public class ProblemSolver {
     @EmbeddedId
-    private ProblemSolverId problemSolverId;
+    private ProblemSolverId id;
 
     @MapsId("idPrb")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_PRB", nullable = false)
     private Problem problem;
 
     @MapsId("idInz")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_INZ", nullable = false)
     private Engineer engineer;
@@ -31,12 +31,12 @@ public class ProblemSolver {
     @OneToMany(mappedBy = "problemSolver")
     private Set<Patch> patches = new LinkedHashSet<>();
 
-    public ProblemSolverId getProblemSolverId() {
-        return problemSolverId;
+    public ProblemSolverId getId() {
+        return id;
     }
 
-    public ProblemSolver setProblemSolverId(ProblemSolverId problemSolverId) {
-        this.problemSolverId = problemSolverId;
+    public ProblemSolver setId(ProblemSolverId id) {
+        this.id = id;
         return this;
     }
 

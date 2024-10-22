@@ -12,31 +12,31 @@ import org.hibernate.annotations.OnDeleteAction;
 })
 public class Purchase {
     @EmbeddedId
-    private PurchaseId purchaseId;
+    private PurchaseId id;
 
     @MapsId("idApp")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_APP", nullable = false)
     private Application application;
 
     @MapsId("idKor")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_KOR", nullable = false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_POD", nullable = false)
     private SupportType supportType;
 
-    public PurchaseId getPurchaseId() {
-        return purchaseId;
+    public PurchaseId getId() {
+        return id;
     }
 
-    public Purchase setPurchaseId(PurchaseId purchaseId) {
-        this.purchaseId = purchaseId;
+    public Purchase setId(PurchaseId id) {
+        this.id = id;
         return this;
     }
 

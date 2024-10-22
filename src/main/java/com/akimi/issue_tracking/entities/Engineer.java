@@ -45,7 +45,7 @@ public class Engineer {
             inverseJoinColumns = @JoinColumn(name = "ID_PRB"))
     private Set<Problem> problems = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "idInz")
+    @OneToMany(mappedBy = "idInzKrpioca")
     private Set<Patch> patches = new LinkedHashSet<>();
 
     public Integer getId() {

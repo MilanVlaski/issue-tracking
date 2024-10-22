@@ -32,6 +32,21 @@ public class Application {
     @OneToMany(mappedBy = "idApp")
     private Set<Problem> problems = new LinkedHashSet<>();
 
+    private String logoUrl;
+
+    public Application(String name, String version, String description,
+            LocalDate releaseYear, String logoUrl) {
+        this.name = name;
+        this.version = version;
+        this.description = description;
+        this.releaseYear = releaseYear;
+        this.logoUrl = logoUrl;
+    }
+
+    public Application() {
+
+    }
+
     public Integer getId() {
         return id;
     }

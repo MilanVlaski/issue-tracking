@@ -13,7 +13,7 @@ public class Action {
     @Column(name = "BR_AKC", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_PRB", nullable = false)
     private Problem problem;

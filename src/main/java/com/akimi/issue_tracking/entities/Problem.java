@@ -18,12 +18,12 @@ public class Problem {
     @Column(name = "ID_PRB", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_KOR", nullable = false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_APP", nullable = false)
     private Application application;
@@ -42,9 +42,6 @@ public class Problem {
 
     @ManyToMany(mappedBy = "problem")
     private Set<Engineer> engineers = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "idPrb")
-    private Set<Patch> patches = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -115,15 +112,6 @@ public class Problem {
 
     public Problem setEngineers(Set<Engineer> engineers) {
         this.engineers = engineers;
-        return this;
-    }
-
-    public Set<Patch> getPatches() {
-        return patches;
-    }
-
-    public Problem setPatches(Set<Patch> patches) {
-        this.patches = patches;
         return this;
     }
 
