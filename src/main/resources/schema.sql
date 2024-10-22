@@ -31,7 +31,7 @@ create  index UZROKUJU_FK on AKCIJA (
 /* Table: APLIKACIJA                                            */
 /*==============================================================*/
 create table APLIKACIJA (
-                            ID_APP               INT4                 not null,
+                            ID_APP               INT4 AUTO_INCREMENT                 not null,
                             NAZIV_APP            VARCHAR(50)          not null,
                             VERZIJA              VARCHAR(20)          not null,
                             OPIS                 VARCHAR(100)         null,
@@ -51,7 +51,7 @@ create unique index APLIKACIJA_PK on APLIKACIJA (
 /* Table: INZENJER                                              */
 /*==============================================================*/
 create table INZENJER (
-                          ID_INZ               INT4                 not null,
+                          ID_INZ               INT4 AUTO_INCREMENT                not null,
                           NAZIV_INZ            VARCHAR(50)          null,
                           OBRAZOVANJE          VARCHAR(50)          null,
                           ZAPOSLEN_OD          DATE                 null,
@@ -73,7 +73,7 @@ create unique index INZENJER_PK on INZENJER (
 /* Table: KORISNIK                                              */
 /*==============================================================*/
 create table KORISNIK (
-                          ID_KOR               INT4                 not null,
+                          ID_KOR               INT4  AUTO_INCREMENT               not null,
                           NAZIV_KOR            VARCHAR(50)          not null,
                           GODINA_RODJENJA      DATE                 null,
                           MEJL_ADRESA_KOR      VARCHAR(50)          null,
@@ -132,7 +132,7 @@ create  index PODRSKA_FK on KUPOVINA (
 /* Table: ODGOVOR                                               */
 /*==============================================================*/
 create table ODGOVOR (
-                         ID_ODG               INT4                 not null,
+                         ID_ODG               INT4   AUTO_INCREMENT              not null,
                          ID_INZ               INT4                 not null,
                          ID_PRB               INT4                 not null,
                          OPIS_ODG             VARCHAR(50)          null,
@@ -164,7 +164,7 @@ create  index NA_PROBLEM_FK on ODGOVOR (
 /* Table: PROBLEM                                               */
 /*==============================================================*/
 create table PROBLEM (
-                         ID_PRB               INT4                 not null,
+                         ID_PRB               INT4    AUTO_INCREMENT             not null,
                          ID_KOR               INT4                 not null,
                          ID_APP               INT4                 not null,
                          STANJE               VARCHAR(20)          not null
@@ -247,7 +247,7 @@ create unique index VRSTA_PODRSKE_PK on VRSTA_PODRSKE (
 /* Table: ZAKRPA                                                */
 /*==============================================================*/
 create table ZAKRPA (
-                        ID_KRP               INT4                 not null,
+                        ID_KRP               INT4   AUTO_INCREMENT              not null,
                         ID_PRB               INT4                 not null,
                         ID_INZ_RJESAVAOCA    INT4                 not null,
                         ID_KOR               INT4                 not null,

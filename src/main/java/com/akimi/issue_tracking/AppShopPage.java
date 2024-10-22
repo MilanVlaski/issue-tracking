@@ -2,8 +2,10 @@ package com.akimi.issue_tracking;
 
 import com.akimi.issue_tracking.entities.Application;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,9 @@ public class AppShopPage {
 
     @PersistenceContext
     private EntityManager em;
+
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
 
     private final List<Application> applications = List.of(
             new Application("Dev Dreams", "1.2", "Develop web apps faster!", LocalDate.of(2020, 1, 1), "https://st3.depositphotos.com/43745012/44906/i/450/depositphotos_449066958-stock-photo-financial-accounting-logo-financial-logo.jpg"),
@@ -37,12 +42,11 @@ public class AppShopPage {
         return "index";
     }
 
-    private void persistApps() {
-        var tr = em.getTransaction();
-        tr.begin();
-        applications.forEach(app -> {
-            em.persist(app);
-        });
-        tr.commit();
+    void persistApps() {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        applications.forEach(em::persist);
+        em.getTransaction().commit();
     }
+
 }

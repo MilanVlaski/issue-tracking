@@ -53,9 +53,8 @@ public class Application {
         return id;
     }
 
-    public Application setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this;
     }
 
     public String getName() {
