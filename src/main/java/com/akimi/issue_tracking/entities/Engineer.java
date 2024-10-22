@@ -36,7 +36,7 @@ public class Engineer {
     @Column(name = "SIFRA_INZ", length = 30)
     private String password;
 
-    @OneToMany(mappedBy = "idInz")
+    @OneToMany(mappedBy = "engineer")
     private Set<Answer> answers = new LinkedHashSet<>();
 
     @ManyToMany
@@ -45,7 +45,7 @@ public class Engineer {
             inverseJoinColumns = @JoinColumn(name = "ID_PRB"))
     private Set<Problem> problems = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "idInzKrpioca")
+    @OneToMany(mappedBy = "helperEngineer")
     private Set<Patch> patches = new LinkedHashSet<>();
 
     public Integer getId() {

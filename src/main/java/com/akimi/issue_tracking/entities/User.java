@@ -29,13 +29,13 @@ public class User {
     @Column(name = "LOKACIIJA", length = 50)
     private String location;
 
-    @OneToMany(mappedBy = "idKor")
+    @OneToMany(mappedBy = "user")
     private Set<Purchase> purchases = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "idKor")
+    @OneToMany(mappedBy = "user")
     private Set<Problem> problems = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "idKor")
+    @OneToMany(mappedBy = "user")
     private Set<Patch> installedPatches = new LinkedHashSet<>();
 
     public Integer getId() {

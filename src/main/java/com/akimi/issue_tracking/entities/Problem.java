@@ -34,13 +34,13 @@ public class Problem {
     @Column(name = "OPIS_PRB", length = 200)
     private String description;
 
-    @OneToMany(mappedBy = "idPrb")
+    @OneToMany(mappedBy = "problem")
     private Set<Action> actions = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "idPrb")
+    @OneToMany(mappedBy = "problem")
     private Set<Answer> answers = new LinkedHashSet<>();
 
-    @ManyToMany(mappedBy = "problem")
+    @ManyToMany(mappedBy = "problems")
     private Set<Engineer> engineers = new LinkedHashSet<>();
 
     public Integer getId() {

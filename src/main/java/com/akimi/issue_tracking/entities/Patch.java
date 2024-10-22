@@ -20,7 +20,10 @@ public class Patch {
     private Integer id;
 
     @ManyToOne(optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumns({
+            @JoinColumn(name = "ID_PRB", referencedColumnName = "ID_PRB"),
+            @JoinColumn(name = "ID_INZ_RJESAVAOCA", referencedColumnName = "ID_INZ")
+    })
     private ProblemSolver problemSolver;
 
     @ManyToOne(optional = false)

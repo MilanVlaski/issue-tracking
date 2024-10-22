@@ -26,13 +26,15 @@ public class Application {
     @Column(name = "GODINA_IZDAVANJA")
     private LocalDate releaseYear;
 
-    @OneToMany(mappedBy = "idApp")
+    @Column(name = "LOGO_URL", length = 500)
+    private String logoUrl;
+
+    @OneToMany(mappedBy = "application")
     private Set<Purchase> purchases = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "idApp")
+    @OneToMany(mappedBy = "application")
     private Set<Problem> problems = new LinkedHashSet<>();
 
-    private String logoUrl;
 
     public Application(String name, String version, String description,
             LocalDate releaseYear, String logoUrl) {
@@ -110,4 +112,12 @@ public class Application {
         return this;
     }
 
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public Application setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
+        return this;
+    }
 }

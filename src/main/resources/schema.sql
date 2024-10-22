@@ -3,73 +3,6 @@
 /* Created on:     10/21/2024 8:53:09 PM                        */
 /*==============================================================*/
 
-
-drop index UZROKUJU_FK;
-
-drop index AKCIJA_PK;
-
-drop table AKCIJA;
-
-drop index APLIKACIJA_PK;
-
-drop table APLIKACIJA;
-
-drop index INZENJER_PK;
-
-drop table INZENJER;
-
-drop index KORISNIK_PK;
-
-drop table KORISNIK;
-
-drop index PODRSKA_FK;
-
-drop index SE_KUPUJE_FK;
-
-drop index KUPUJE_FK;
-
-drop index KUPOVINA_PK;
-
-drop table KUPOVINA;
-
-drop index NA_PROBLEM_FK;
-
-drop index DAJE_FK;
-
-drop index ODGOVOR_PK;
-
-drop table ODGOVOR;
-
-drop index RELATIONSHIP_17_FK;
-
-drop index PRIJAVLJUJE_FK;
-
-drop index PROBLEM_PK;
-
-drop table PROBLEM;
-
-drop index RELATIONSHIP_20_FK;
-
-drop index RELATIONSHIP_19_FK;
-
-drop index RJESAVALAC_PK;
-
-drop table RJESAVALAC;
-
-drop index VRSTA_PODRSKE_PK;
-
-drop table VRSTA_PODRSKE;
-
-drop index INSTALIRA_FK;
-
-drop index PRAVI_FK;
-
-drop index RELATIONSHIP_18_FK;
-
-drop index ZAKRPA_PK;
-
-drop table ZAKRPA;
-
 /*==============================================================*/
 /* Table: AKCIJA                                                */
 /*==============================================================*/
@@ -103,6 +36,7 @@ create table APLIKACIJA (
                             VERZIJA              VARCHAR(20)          not null,
                             OPIS                 VARCHAR(100)         null,
                             GODINA_IZDAVANJA     DATE                 null,
+                            LOGO_URL             VARCHAR(500)         null,
                             constraint PK_APLIKACIJA primary key (ID_APP)
 );
 

@@ -3,6 +3,7 @@ package com.akimi.issue_tracking;
 import com.akimi.issue_tracking.entities.Application;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,10 +38,11 @@ public class AppShopPage {
     }
 
     private void persistApps() {
-        em.getTransaction().begin();
+        var tr = em.getTransaction();
+        tr.begin();
         applications.forEach(app -> {
             em.persist(app);
         });
-        em.getTransaction().commit();
+        tr.commit();
     }
 }

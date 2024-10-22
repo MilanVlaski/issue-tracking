@@ -22,7 +22,7 @@ public class SupportType {
     @Column(name = "CIJENA", precision = 10, scale = 2)
     private BigDecimal price;
 
-    @OneToMany(mappedBy = "idPod")
+    @OneToMany(mappedBy = "supportType")
     private Set<Purchase> purchases = new LinkedHashSet<>();
 
     public String getIdPod() {
