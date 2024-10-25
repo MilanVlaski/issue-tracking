@@ -9,11 +9,15 @@
 
 
 <article th:each="app: ${apps}" class="application">
-    <img th:src="${app.logoUrl}" th:alt="|${app.name} logo|">
-    <h2 th:text="${app.name}">Application</h2>
-    <h3 th:text="${app.version}">1.0</h3>
-    <p th:text="${app.description}"></p>
-    <div th:text="${app.releaseYear}"></div>
+    <form action="/application/buy" method="get">
+        <img th:src="${app.logoUrl}" th:alt="|${app.name} logo|">
+        <h2 th:text="${app.name}">Application</h2>
+        <h3 th:text="${app.version}">1.0</h3>
+        <p th:text="${app.description}"></p>
+        <span>purchase</span>
+        <div th:text="${app.releaseYear}"></div>
+        <button type="submit">Buy</button>
+    </form>
 </article>
 </body>
 </html>
