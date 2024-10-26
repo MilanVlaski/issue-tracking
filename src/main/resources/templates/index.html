@@ -9,7 +9,7 @@
 
 
 <article th:each="app: ${apps}" class="application">
-    <form action="/application/buy" method="get">
+    <form action="/application/buy" method="post">
         <img th:src="${app.logoUrl}" th:alt="|${app.name} logo|">
         <h2 th:text="${app.name}">Application</h2>
         <h3 th:text="${app.version}">1.0</h3>

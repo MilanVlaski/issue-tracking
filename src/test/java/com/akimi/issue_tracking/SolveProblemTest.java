@@ -6,8 +6,10 @@ import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -30,13 +32,20 @@ public class SolveProblemTest {
 
     @When("the user purchases an application with any tech support")
     public void the_user_purchases_an_application() {
+        // buy first application
         driver.findElements(By.className("application"))
               .getFirst()
-              .click();
+              .findElement(By.tagName("form"))
+              .submit();
 
-//        new Select(driver.findElement(By.name("support")))
+//        // select the first support type
+//        var support = driver.findElement(By.name("support"));
+//        new Select(support)
 //                .selectByIndex(0);
 //        driver.findElement(By.tagName("form")).submit();
+//
+//        // Submits the form on which support element was, completing the purchase.
+//        support.submit();
     }
 
     @AfterAll

@@ -36,11 +36,13 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - Admin ili ko vec, radi sve.
   Ovo je sve tema za spring sekjuriti...
  # To do
-- [ ] Show a list of applications
-  - [ ] Display apps in a table, or with a logo.
+- [ ] Create a `/purchase` website with a purchase form. It should receive data from the client.
+- [ ] Find a way to preload database with data. It should 
+- [x] Show a list of applications
+  - [x] Display apps in a table, or with a logo.
     - [x] Learn thymeleaf a bit
-  - [ ] Fetch apps from database
-    - [ ] Write some code that inserts some apps. Calling it from tests would be neat.
-      - [ ] Add the entity manager and use it to insert
-      - [ ] Then use it to fetch the tables
-  - [ ] add the necessary stuff in the controller
+  - [x] Fetch apps from database
+    - [x] Write some code that inserts some apps. Calling it from tests would be neat.
+      - [x] Add the entity manager and use it to insert
+      - [x] Then use it to fetch the tables
+  - [x] add the necessary stuff in the controller
