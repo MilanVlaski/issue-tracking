@@ -73,10 +73,11 @@ create unique index INZENJER_PK on INZENJER (
 /* Table: KORISNIK                                              */
 /*==============================================================*/
 create table KORISNIK (
-                          ID_KOR               INT4  AUTO_INCREMENT               not null,
+                          ID_KOR               INT4  AUTO_INCREMENT not null,
                           NAZIV_KOR            VARCHAR(50)          not null,
                           GODINA_RODJENJA      DATE                 null,
                           MEJL_ADRESA_KOR      VARCHAR(50)          null,
+                          SIFRA_KOR            VARCHAR(20)          null,
                           BROJ_TELEFONA        VARCHAR(20)          null,
                           LOKACIIJA            VARCHAR(50)          null,
                           constraint PK_KORISNIK primary key (ID_KOR)

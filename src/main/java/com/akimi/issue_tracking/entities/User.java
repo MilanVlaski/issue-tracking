@@ -23,6 +23,9 @@ public class User {
     @Column(name = "MEJL_ADRESA_KOR", length = 50)
     private String email;
 
+    @Column(name = "SIFRA_KOR", length = 20)
+    private String password;
+
     @Column(name = "BROJ_TELEFONA", length = 20)
     private String phoneNumber;
 
@@ -37,6 +40,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<Patch> installedPatches = new LinkedHashSet<>();
+
 
     public Integer getId() {
         return id;
