@@ -36,7 +36,8 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - Admin ili ko vec, radi sve.
   Ovo je sve tema za spring sekjuriti...
  # To do
-- [ ] Add `app.js` that can take FormData and send it as json, to the form's action attribute.
+- [ ] Add sign in (Implement spring security so that the purchase page requires a log in.)
+- [x] Add `app.js` that can take FormData and send it as json, to the form's action attribute.
 - [x] Create a `/purchase` website with a purchase form. It should receive data from the client.
 - [x] Find a way to preload database with data. It should 
 - [x] Show a list of applications
