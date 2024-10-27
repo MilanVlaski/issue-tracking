@@ -3,21 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>App shop</title>
+    <script th:src="@{/app.js}"></script>
 </head>
 <body>
-<h1>Hello world</h1>
-
 
 <article th:each="app: ${apps}" class="application">
-    <form action="/application/buy" method="post">
-        <img th:src="${app.logoUrl}" th:alt="|${app.name} logo|">
-        <h2 th:text="${app.name}">Application</h2>
-        <h3 th:text="${app.version}">1.0</h3>
-        <p th:text="${app.description}"></p>
-        <span>purchase</span>
-        <div th:text="${app.releaseYear}"></div>
-        <button type="submit">Buy</button>
-    </form>
+    <img th:src="${app.logoUrl}" th:alt="|${app.name} logo|">
+    <h2 th:text="${app.name}">Application</h2>
+    <h3 th:text="${app.version}">1.0</h3>
+    <p th:text="${app.description}">Application description.</p>
+    <div th:text="${app.releaseYear}">2024</div>
+    <button th:attr="onclick=|handlePurchase('${app.id}')|" aria-label="Buy Application">Buy</button>
 </article>
+
 </body>
 </html>

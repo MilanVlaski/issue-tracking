@@ -11,12 +11,12 @@ import java.util.Set;
 public class SupportType {
     @Id
     @Column(name = "ID_POD", nullable = false, length = 10)
-    private String idPod;
+    private String id;
 
     @Column(name = "NAZIV_POD", nullable = false, length = 50)
     private String name;
 
-    @Column(name = "OPIS_POD", length = 50)
+    @Column(name = "OPIS_POD", length = 100)
     private String description;
 
     @Column(name = "CIJENA", precision = 10, scale = 2)
@@ -25,12 +25,12 @@ public class SupportType {
     @OneToMany(mappedBy = "supportType")
     private Set<Purchase> purchases = new LinkedHashSet<>();
 
-    public String getIdPod() {
-        return idPod;
+    public String getId() {
+        return id;
     }
 
-    public SupportType setIdPod(String idPod) {
-        this.idPod = idPod;
+    public SupportType setId(String idPod) {
+        this.id = idPod;
         return this;
     }
 

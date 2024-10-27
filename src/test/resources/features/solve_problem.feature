@@ -3,7 +3,7 @@ Feature: Report a problem and install a patch
   Scenario: User purchases an application
     Given a list of applications
     When the user purchases an application with any tech support
-#    Then it shows up in the system
+#    Then the user is able to file a problem report on that application
 #
 #  Scenario: Enter actions that caused a problem with the application
 #    Given a user has a problem with application Minga version 1.1

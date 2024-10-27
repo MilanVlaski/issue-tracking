@@ -1,25 +1,25 @@
 package com.akimi.issue_tracking;
 
 import com.akimi.issue_tracking.entities.Application;
+import com.akimi.issue_tracking.entities.SupportType;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 public class AppShopPage {
 
     @PersistenceContext
     private EntityManager em;
-//
+    //
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 //
@@ -35,11 +35,26 @@ public class AppShopPage {
     public String index(Model model) {
 //        persistApps();
         var apps = new ArrayList<Application>(
-                em.createQuery("select a from Application a").getResultList());
+                em.createQuery("select a from Application a").getResultList()
+        );
 
         model.addAttribute("apps", apps);
         return "index";
     }
+
+    @RequestMapping("/application/buy")
+    public String buy(Model model, @RequestParam Integer appId) {
+        var app = em.find(Application.class, appId);
+        var supportTypes = new ArrayList<SupportType>(
+                em.createQuery("select s from SupportType s").getResultList()
+        );
+
+        model.addAttribute("app", app);
+        model.addAttribute("supportTypes", supportTypes);
+        return "buy";
+    }
+
+    public static Logger log = Logger.getLogger(AppShopPage.class.getName());
 
     void persistApps(List<Application> applications) {
         EntityManager em = entityManagerFactory.createEntityManager();

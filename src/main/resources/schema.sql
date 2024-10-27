@@ -231,7 +231,7 @@ create  index RELATIONSHIP_20_FK on RJESAVALAC (
 create table VRSTA_PODRSKE (
                                ID_POD               VARCHAR(10)          not null,
                                NAZIV_POD            VARCHAR(50)          not null,
-                               OPIS_POD             VARCHAR(50)          null,
+                               OPIS_POD             VARCHAR(100)          null,
                                CIJENA               NUMERIC(10,2)        null,
                                constraint PK_VRSTA_PODRSKE primary key (ID_POD)
 );

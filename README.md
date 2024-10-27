@@ -36,8 +36,9 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - Admin ili ko vec, radi sve.
   Ovo je sve tema za spring sekjuriti...
  # To do
-- [ ] Create a `/purchase` website with a purchase form. It should receive data from the client.
-- [ ] Find a way to preload database with data. It should 
+- [ ] Add `app.js` that can take FormData and send it as json, to the form's action attribute.
+- [x] Create a `/purchase` website with a purchase form. It should receive data from the client.
+- [x] Find a way to preload database with data. It should 
 - [x] Show a list of applications
   - [x] Display apps in a table, or with a logo.
     - [x] Learn thymeleaf a bit
