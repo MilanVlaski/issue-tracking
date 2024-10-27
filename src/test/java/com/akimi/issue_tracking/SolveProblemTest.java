@@ -28,7 +28,7 @@ public class SolveProblemTest {
         driver.get("http://localhost:" + port);
     }
 
-    @When("the user purchases an app with any tech support")
+    @When("the user purchases an application with any tech support")
     public void the_user_purchases_an_application() {
         // buy first app
         driver.findElements(By.className("application"))
@@ -36,12 +36,13 @@ public class SolveProblemTest {
               .findElement(By.cssSelector("[aria-label=\"Buy Application\"]"))
               .click();
 
+        // we are not signed in, so we get taken to a sign in page
+        signIn();
+
         // select the first support type
         var support = driver.findElement(By.name("support"));
         new Select(support)
                 .selectByIndex(0);
-
-        signIn();
 
         support.submit();
     }
@@ -50,6 +51,10 @@ public class SolveProblemTest {
         driver.findElement(By.name("name")).sendKeys("John Doe");
         driver.findElement(By.name("email")).sendKeys("john.doe@gmail.com");
         driver.findElement(By.name("password")).sendKeys("secret");
+        // optional
+        driver.findElement(By.name("birthYear")).sendKeys("2020-10-10");
+        driver.findElement(By.name("phoneNumber")).sendKeys("387231231");
+        driver.findElement(By.name("location")).sendKeys("New York");
     }
 
     @AfterAll
