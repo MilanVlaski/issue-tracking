@@ -22,6 +22,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
 	runtimeOnly("com.h2database:h2")
 
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -33,6 +35,7 @@ dependencies {
 	testImplementation("org.junit.jupiter:junit-jupiter:5.11.2")
 	testImplementation("org.junit.platform:junit-platform-suite:1.11.2")
 	testImplementation("org.seleniumhq.selenium:selenium-java:4.25.0")
+	testImplementation("org.springframework.security:spring-security-test")
 }
 
 tasks.withType<Test> {
