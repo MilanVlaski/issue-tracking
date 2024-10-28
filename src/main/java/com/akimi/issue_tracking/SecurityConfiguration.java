@@ -23,10 +23,10 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/", "/register", "/login").permitAll() // Allow access to these pages
+                        .requestMatchers("/", "/register", "login").permitAll() // Allow access to these pages
                         .anyRequest().authenticated() // All other requests require authentication
                 )
-                .formLogin(withDefaults()) // Enable form-based login
+                .formLogin(withDefaults())
                 .logout(withDefaults()); // Enable logout functionality
         return http.build();
     }
@@ -41,8 +41,8 @@ public class SecurityConfiguration {
         return new InMemoryUserDetailsManager(user);
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 }
