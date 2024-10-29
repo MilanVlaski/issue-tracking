@@ -77,7 +77,7 @@ create table KORISNIK (
                           NAZIV_KOR            VARCHAR(50)          not null,
                           GODINA_RODJENJA      DATE                 null,
                           MEJL_ADRESA_KOR      VARCHAR(50)          null,
-                          SIFRA_KOR            VARCHAR(20)          null,
+                          SIFRA_KOR            VARCHAR(60)          null,
                           BROJ_TELEFONA        VARCHAR(20)          null,
                           LOKACIJA            VARCHAR(50)          null,
                           constraint PK_KORISNIK primary key (ID_KOR)
