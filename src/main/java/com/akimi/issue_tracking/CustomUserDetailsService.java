@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (user != null) {
             return org.springframework.security.core.userdetails.User
                     .withUsername(username)
-                    .password(user.getPassword())
+                    .password("{noop}" + user.getPassword()) // {noop} is to skip encoding
                     .roles("USER")
                     .build();
         } else {

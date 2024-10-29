@@ -6,6 +6,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
@@ -20,7 +21,7 @@ public class SolveProblemTest {
     private int port;
 
     private static final WebDriver driver = new ChromeDriver(
-            new ChromeOptions().addArguments("--headless")
+//            new ChromeOptions().addArguments("--headless")
     );
 
     @Given("a list of applications")
@@ -36,7 +37,7 @@ public class SolveProblemTest {
               .findElement(By.cssSelector("[aria-label=\"Buy Application\"]"))
               .click();
 
-        // we are not signed in, so we get taken to a sign in page
+        // we are not signed in, so we get taken to a sign-in page
         signIn();
 
         // select the first support type
@@ -48,13 +49,22 @@ public class SolveProblemTest {
     }
 
     private void signIn() {
-        driver.findElement(By.name("name")).sendKeys("John Doe");
-        driver.findElement(By.name("email")).sendKeys("john.doe@gmail.com");
-        driver.findElement(By.name("password")).sendKeys("secret");
-        // optional
-        driver.findElement(By.name("birthYear")).sendKeys("2020-10-10");
-        driver.findElement(By.name("phoneNumber")).sendKeys("387231231");
-        driver.findElement(By.name("location")).sendKeys("New York");
+        // todo: get rid of duplication
+        inputNameAndEmail();
+//        driver.findElement(By.name("password")).sendKeys("password");
+//        // optional
+//        driver.findElement(By.name("birthYear")).sendKeys("2020-10-10");
+//        driver.findElement(By.name("phoneNumber")).sendKeys("387231231");
+//        driver.findElement(By.name("location")).sendKeys("New York");
+//
+//        inputNameAndEmail();
+    }
+
+    private void inputNameAndEmail() {
+        driver.findElement(By.name("username")).sendKeys("sa");
+        var passwordElement = driver.findElement(By.name("password"));
+        passwordElement.sendKeys("password");
+        passwordElement.submit();
     }
 
     @AfterAll

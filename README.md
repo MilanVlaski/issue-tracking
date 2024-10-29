@@ -37,6 +37,8 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
   Ovo je sve tema za spring sekjuriti...
  # To do
 - [ ] Add sign in (Implement spring security so that the purchase page requires a log in.)
+  - [ ] Register is simple. Just put it in the db, plus, use a password encoder.
+  - [x] But for log-in, do a test that puts in the password and username, and preload it in data.sql. Then in tests, put those values in.
 - [x] Add `app.js` that can take FormData and send it as json, to the form's action attribute.
 - [x] Create a `/purchase` website with a purchase form. It should receive data from the client.
 - [x] Find a way to preload database with data. It should 
