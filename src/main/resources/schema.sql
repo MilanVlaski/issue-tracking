@@ -79,7 +79,7 @@ create table KORISNIK (
                           MEJL_ADRESA_KOR      VARCHAR(50)          null,
                           SIFRA_KOR            VARCHAR(20)          null,
                           BROJ_TELEFONA        VARCHAR(20)          null,
-                          LOKACIIJA            VARCHAR(50)          null,
+                          LOKACIJA            VARCHAR(50)          null,
                           constraint PK_KORISNIK primary key (ID_KOR)
 );
 

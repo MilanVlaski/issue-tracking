@@ -6,8 +6,12 @@ insert into APLIKACIJA (NAZIV_APP, VERZIJA, OPIS, GODINA_IZDAVANJA, LOGO_URL) va
 ('Insight Pro', '1.8', 'Get deep insights from your data!', '2020-11-05', 'https://www.shutterstock.com/image-vector/circle-line-simple-design-logo-600nw-2174926871.jpg'),
 ('Market Pulse', '2.9', 'Track market trends in real-time!', '2018-07-30', 'https://www.logodesign.net/logo/line-art-buildings-in-swoosh-1273ld.png?size=2');
 
-insert into  VRSTA_PODRSKE (ID_POD, NAZIV_POD, OPIS_POD, CIJENA) values
+insert into VRSTA_PODRSKE (ID_POD, NAZIV_POD, OPIS_POD, CIJENA) values
 ('BEZ_POD', 'Bez podrške', 'Bez ikakve usluge.', 0.00),
 ('POLA_RAD', 'Ograničena podrška pola radnog vremena', 'Podrška za dogovoreno vrijeme koje ne premašuje pola radnog vremena kupca.', 1000.00),
 ('CIJELO_RAD', 'Ograničena podrška cijelo radno vrijeme', 'Podrška tokom cijelog radnog vremena kupca.', 2000.00),
-('NEOGRAN', 'Neograničena podrška', 'Podrška 24/7.', 70000.00)
+('NEOGRAN', 'Neograničena podrška', 'Podrška 24/7.', 70000.00);
+
+insert into KORISNIK (NAZIV_KOR, GODINA_RODJENJA, MEJL_ADRESA_KOR, SIFRA_KOR, BROJ_TELEFONA, LOKACIJA)
+VALUES ('sa', '1990-01-01', 'john.doe@example.com', 'password', '123456', 'London');
+

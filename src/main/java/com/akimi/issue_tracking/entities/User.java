@@ -29,8 +29,16 @@ public class User {
     @Column(name = "BROJ_TELEFONA", length = 20)
     private String phoneNumber;
 
-    @Column(name = "LOKACIIJA", length = 50)
+    @Column(name = "LOKACIJA", length = 50)
     private String location;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @OneToMany(mappedBy = "user")
     private Set<Purchase> purchases = new LinkedHashSet<>();
@@ -40,6 +48,18 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<Patch> installedPatches = new LinkedHashSet<>();
+
+    public User(String name, String email, String password, LocalDate birthYear, String location) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.birthYear = birthYear;
+        this.location = location;
+    }
+
+    public User() {
+
+    }
 
 
     public Integer getId() {
