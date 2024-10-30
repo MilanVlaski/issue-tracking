@@ -19,7 +19,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var user = em.createQuery("select u from User u where u.name = :username", User.class)
+        // we use email instead!
+        var user = em.createQuery("select u from User u where u.email = :username", User.class)
                      .setParameter("username", username)
                      .getResultList()
                      .getFirst();

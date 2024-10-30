@@ -26,7 +26,11 @@ public class SecurityConfiguration {
                         .requestMatchers("/", "/register", "login").permitAll() // Allow access to these pages
                         .anyRequest().authenticated() // All other requests require authentication
                 )
-                .formLogin(withDefaults())
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                )
                 .logout(withDefaults()); // Enable logout functionality
         return http.build();
     }

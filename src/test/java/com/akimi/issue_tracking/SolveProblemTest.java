@@ -61,7 +61,7 @@ public class SolveProblemTest {
     }
 
     private void inputNameAndEmail() {
-        driver.findElement(By.name("username")).sendKeys("sa");
+        driver.findElement(By.name("email")).sendKeys("john.doe@example.com");
         var passwordElement = driver.findElement(By.name("password"));
         passwordElement.sendKeys("password");
         passwordElement.submit();
