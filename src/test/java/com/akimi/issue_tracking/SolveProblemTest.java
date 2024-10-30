@@ -6,7 +6,6 @@ import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
@@ -21,7 +20,7 @@ public class SolveProblemTest {
     private int port;
 
     private static final WebDriver driver = new ChromeDriver(
-//            new ChromeOptions().addArguments("--headless")
+            new ChromeOptions().addArguments("--headless")
     );
 
     @Given("a list of applications")
@@ -50,17 +49,15 @@ public class SolveProblemTest {
 
     private void signIn() {
         // todo: get rid of duplication
-        inputNameAndEmail();
-//        driver.findElement(By.name("password")).sendKeys("password");
+        inputEmailAndPassword();
 //        // optional
 //        driver.findElement(By.name("birthYear")).sendKeys("2020-10-10");
 //        driver.findElement(By.name("phoneNumber")).sendKeys("387231231");
 //        driver.findElement(By.name("location")).sendKeys("New York");
 //
-//        inputNameAndEmail();
     }
 
-    private void inputNameAndEmail() {
+    private void inputEmailAndPassword() {
         driver.findElement(By.name("email")).sendKeys("john.doe@example.com");
         var passwordElement = driver.findElement(By.name("password"));
         passwordElement.sendKeys("password");

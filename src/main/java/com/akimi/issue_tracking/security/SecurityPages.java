@@ -1,58 +1,53 @@
 package com.akimi.issue_tracking.security;
 
+import com.akimi.issue_tracking.entities.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 public class SecurityPages {
 
+    @Autowired
+    private RegistrationService registrationService;
 
     @PersistenceContext
     private EntityManager em;
 
     @GetMapping("/login")
-    public String loginUser(Model model) {
+    public String loginUser() {
         return "login";
     }
 
-//    @PostMapping("/user/register")
-//    public ResponseEntity<String> register(@RequestBody RegisterUser registerRequest) {
-//        em.persist(registerRequest.toEntity());
-//        return ResponseEntity.ok("");
-//    }
-//
-//    @PostMapping("/user/login")
-//    public ResponseEntity<String> login(@RequestBody LoginUser loginRequest) {
-//        var user = em.createQuery("select u from User u" +
-//                " where u.name = :username and u.password = :password", User.class)
-//                .getResultList();
-//
-//        if(user.isEmpty()) {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-//        } else {
-//            return ResponseEntity.ok("");
-//        }
-//    }
-//
-//    @Data
-//    class RegisterUser {
-//        private String name;
-//        private String email;
-//        private String password;
-//        private LocalDate birthYear;
-//        private String location;
-//
-//        public User toEntity() {
-//            return new User(name, email, password, birthYear, location);
-//        }
-//    }
-//
-//    @Data
-//    class LoginUser {
-//        private String email;
-//        private String password;
-//    }
+    @GetMapping("/register")
+    public String registerUser(Model model) {
+        model.addAttribute("user", new User());
+        return "registerUser";
+    }
+
+    @PostMapping("/register")
+    public String register(@ModelAttribute("user") User user) {
+        registrationService.register(user);
+        return "redirect:/login";
+    }
+
+    @GetMapping("/check-users")
+    @ResponseBody
+    public List<User> checkUsers() {
+        return em.createQuery("SELECT u FROM User u", User.class).getResultList();
+    }
+
+
 }

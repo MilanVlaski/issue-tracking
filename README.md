@@ -40,7 +40,7 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
   - [x] Add a custom login page
   - [ ] Register is simple. Just put it in the db, plus, use a password encoder. (Might still want to keep a default username and password thingy, because it's simpler for manual debugging.)
   - [] Login redirect works fine. Now I need a register redirect. And I need register to take the user straight to login, or to login the user immediately. However, if it's too much work, just make register redirect to login page. I think every page does this anyway.
-  - [ ] Make it so email is used instead of username. Add a custom login template? I don't know if I will have to manually do the redirection.
+  - [x] Make it so email is used instead of username. Add a custom login template? I don't know if I will have to manually do the redirection.
   - [x] Use encryption for the hardcoded password.
   - [x] But for log-in, do a test that puts in the password and username, and preload it in data.sql. Then in tests, put those values in.
 - [x] Add `app.js` that can take FormData and send it as json, to the form's action attribute.
