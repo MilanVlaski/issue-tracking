@@ -33,12 +33,11 @@ public class SecurityPages {
 
     @GetMapping("/register")
     public String registerUser(Model model) {
-        model.addAttribute("user", new User());
         return "registerUser";
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute("user") User user) {
+    public String register(@ModelAttribute User user) {
         registrationService.register(user);
         return "redirect:/login";
     }
