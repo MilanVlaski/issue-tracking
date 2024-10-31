@@ -21,6 +21,7 @@ public class RegistrationService {
 
     @Transactional
     public void register(User user) {
+        // todo unique email
         log.info("Registering user: " + user.toString());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         em.persist(user);
