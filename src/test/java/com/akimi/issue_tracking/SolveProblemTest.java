@@ -2,10 +2,12 @@ package com.akimi.issue_tracking;
 
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
@@ -15,13 +17,6 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @CucumberContextConfiguration
 public class SolveProblemTest {
-
-    @LocalServerPort
-    private int port;
-
-    private static final WebDriver driver = new ChromeDriver(
-            new ChromeOptions().addArguments("--headless")
-    );
 
     @Given("a list of applications")
     public void a_list_of_applications() {
@@ -37,7 +32,7 @@ public class SolveProblemTest {
               .click();
 
         // we are not signed in, so we get taken to a sign-in page
-        signIn();
+        inputEmailAndPassword();
 
         // select the first support type
         var support = driver.findElement(By.name("support"));
@@ -47,22 +42,38 @@ public class SolveProblemTest {
         support.submit();
     }
 
-    private void signIn() {
-        // todo: get rid of duplication
-        inputEmailAndPassword();
-//        // optional
-//        driver.findElement(By.name("birthYear")).sendKeys("2020-10-10");
-//        driver.findElement(By.name("phoneNumber")).sendKeys("387231231");
-//        driver.findElement(By.name("location")).sendKeys("New York");
-//
-    }
-
     private void inputEmailAndPassword() {
         driver.findElement(By.name("email")).sendKeys("john.doe@example.com");
         var passwordElement = driver.findElement(By.name("password"));
         passwordElement.sendKeys("password");
         passwordElement.submit();
     }
+
+    @Then("the user is able to file a problem report on that application")
+    public void theUserIsAbleToFileAProblemReportOnThatApplication() {
+        var action1 = "I log in using my email and password.";
+        var action2 = "I get an error message saying \"Something whent wrong.\".";
+
+        driver.findElement(By.cssSelector("[href=\"/reportProblem\"]"));
+
+        driver.findElement(By.cssSelector("[formAction=\"/reportProblem\"]")).click();
+        // get taken to a form where you put in Problem(description, Actions(number, description))
+        driver.findElement(By.name("description"))
+              .sendKeys("User cannot access their account at login.");
+
+        var actions = driver.findElement(By.name("actions"));
+        actions
+              .sendKeys(String.join("\n", action1, action2));
+
+        actions.submit();
+    }
+
+    @LocalServerPort
+    private int port;
+
+    private static final WebDriver driver = new ChromeDriver(
+            new ChromeOptions().addArguments("--headless")
+    );
 
     @AfterAll
     public static void tearDown() {

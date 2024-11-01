@@ -36,10 +36,15 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - Admin ili ko vec, radi sve.
   Ovo je sve tema za spring sekjuriti...
  # To do
-- [ ] Add sign in (Implement spring security so that the purchase page requires a log in.)
+- [ ] Be clever and let the user type, hit enter, and have the action show up somewhere as numbered. Also be able to edit or delete each entry.
+- [ ] Be clever and when user goes to `/reportProblem`, if he only has one app, then take him to it
+- [ ] Add a dto for RegisterRequest that encodes the password, and maps it to an entity
+- [ ] Display login error.
+- [ ] Display register error, in case email is not unique.
+- [x] Add sign in (Implement spring security so that the purchase page requires a log in.)
   - [x] Add a custom login page
-  - [ ] Register is simple. Just put it in the db, plus, use a password encoder. (Might still want to keep a default username and password thingy, because it's simpler for manual debugging.)
-  - [] Login redirect works fine. Now I need a register redirect. And I need register to take the user straight to login, or to login the user immediately. However, if it's too much work, just make register redirect to login page. I think every page does this anyway.
+  - [x] Register is simple. Just put it in the db, plus, use a password encoder. (Might still want to keep a default username and password thingy, because it's simpler for manual debugging.)
+  - [x] Login redirect works fine. Now I need a register redirect. And I need register to take the user straight to login, or to login the user immediately. However, if it's too much work, just make register redirect to login page. I think every page does this anyway.
   - [x] Make it so email is used instead of username. Add a custom login template? I don't know if I will have to manually do the redirection.
   - [x] Use encryption for the hardcoded password.
   - [x] But for log-in, do a test that puts in the password and username, and preload it in data.sql. Then in tests, put those values in.
