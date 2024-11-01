@@ -51,9 +51,6 @@ public class SolveProblemTest {
 
     @Then("the user is able to file a problem report on that application")
     public void theUserIsAbleToFileAProblemReportOnThatApplication() {
-        var action1 = "I log in using my email and password.";
-        var action2 = "I get an error message saying \"Something whent wrong.\".";
-
         driver.findElement(By.cssSelector("[href=\"/reportProblem\"]"));
 
         driver.findElement(By.cssSelector("[formAction=\"/reportProblem\"]")).click();
@@ -61,10 +58,10 @@ public class SolveProblemTest {
         driver.findElement(By.name("description"))
               .sendKeys("User cannot access their account at login.");
 
+        var action1 = "I log in using my email and password.";
+        var action2 = "I get an error message saying \"Something whent wrong.\".";
         var actions = driver.findElement(By.name("actions"));
-        actions
-              .sendKeys(String.join("\n", action1, action2));
-
+        actions.sendKeys(String.join("\n", action1, action2));
         actions.submit();
     }
 
