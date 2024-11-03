@@ -31,6 +31,24 @@ public class Purchase {
     @JoinColumn(name = "ID_POD", nullable = false)
     private SupportType supportType;
 
+    public Purchase(User user, Application application, SupportType support) {
+        this.user = user;
+        this.application = application;
+        this.supportType = support;
+
+        id = new PurchaseId()
+                .setIdApp(application.getId())
+                .setIdKor(user.getId());
+
+        user.getPurchases().add(this);
+        application.getPurchases().add(this);
+        support.getPurchases().add(this);
+    }
+
+    public Purchase() {
+
+    }
+
     public PurchaseId getId() {
         return id;
     }

@@ -49,12 +49,20 @@ public class Application {
 
     }
 
+    public Application(int id, String name, String version) {
+        this.id = id;
+        this.name = name;
+        this.version = version;
+    }
+
+
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public Application setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {

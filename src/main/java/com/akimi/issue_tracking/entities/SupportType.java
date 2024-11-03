@@ -25,6 +25,16 @@ public class SupportType {
     @OneToMany(mappedBy = "supportType")
     private Set<Purchase> purchases = new LinkedHashSet<>();
 
+    public SupportType(String id, String name, BigDecimal price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public SupportType() {
+
+    }
+
     public String getId() {
         return id;
     }
