@@ -42,13 +42,6 @@ public class SolveProblemTest {
         support.submit();
     }
 
-    private void inputEmailAndPassword() {
-        driver.findElement(By.name("email")).sendKeys("john.doe@example.com");
-        var passwordElement = driver.findElement(By.name("password"));
-        passwordElement.sendKeys("password");
-        passwordElement.submit();
-    }
-
     @Then("the user is able to file a problem report on that application")
     public void theUserIsAbleToFileAProblemReportOnThatApplication() {
         driver.findElement(By.cssSelector("[href=\"/reportProblem\"]"));
@@ -63,6 +56,13 @@ public class SolveProblemTest {
         var actions = driver.findElement(By.name("actions"));
         actions.sendKeys(String.join("\n", action1, action2));
         actions.submit();
+    }
+
+    private void inputEmailAndPassword() {
+        driver.findElement(By.name("email")).sendKeys("john.doe@example.com");
+        var passwordElement = driver.findElement(By.name("password"));
+        passwordElement.sendKeys("password");
+        passwordElement.submit();
     }
 
     @LocalServerPort
