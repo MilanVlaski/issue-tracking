@@ -1,3 +1,38 @@
+drop table if exists AKCIJA cascade;
+drop table if exists APLIKACIJA cascade;
+drop table if exists INZENJER cascade;
+drop table if exists KORISNIK cascade;
+drop table if exists KUPOVINA cascade;
+drop table if exists ODGOVOR cascade;
+drop table if exists PROBLEM cascade;
+drop table if exists RJESAVALAC cascade;
+drop table if exists VRSTA_PODRSKE cascade;
+drop table if exists ZAKRPA cascade;
+
+drop index if exists UZROKUJU_FK;
+drop index if exists AKCIJA_PK;
+drop index if exists APLIKACIJA_PK;
+drop index if exists INZENJER_PK;
+drop index if exists KORISNIK_PK;
+drop index if exists PODRSKA_FK;
+drop index if exists SE_KUPUJE_FK;
+drop index if exists KUPUJE_FK;
+drop index if exists KUPOVINA_PK;
+drop index if exists NA_PROBLEM_FK;
+drop index if exists DAJE_FK;
+drop index if exists ODGOVOR_PK;
+drop index if exists RELATIONSHIP_17_FK;
+drop index if exists PRIJAVLJUJE_FK;
+drop index if exists PROBLEM_PK;
+drop index if exists RELATIONSHIP_20_FK;
+drop index if exists RELATIONSHIP_19_FK;
+drop index if exists RJESAVALAC_PK;
+drop index if exists VRSTA_PODRSKE_PK;
+drop index if exists INSTALIRA_FK;
+drop index if exists PRAVI_FK;
+drop index if exists RELATIONSHIP_18_FK;
+drop index if exists ZAKRPA_PK;
+
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 9.x                               */
 /* Created on:     10/21/2024 8:53:09 PM                        */
