@@ -1,20 +1,20 @@
 package com.akimi.issue_tracking;
 
+import com.akimi.issue_tracking.selenium_util.SeleniumUtil;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
-import jakarta.transaction.Transactional;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.test.context.ActiveProfiles;
+
+import static com.akimi.issue_tracking.selenium_util.SeleniumUtil.clickLinkByHref;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @CucumberContextConfiguration
@@ -28,9 +28,7 @@ public class SolveProblemTest {
     @When("the user purchases an application with any tech support")
     public void the_user_purchases_an_application() {
         // buy first app
-        driver.findElements(By.className("application"))
-              .getFirst()
-              .findElement(By.cssSelector("[aria-label=\"Buy Application\"]"))
+        driver.findElement(By.xpath("//*[contains(@href, '/application/buy')]"))
               .click();
 
         // we are not signed in, so we get taken to a sign-in page
@@ -46,9 +44,10 @@ public class SolveProblemTest {
 
     @Then("the user is able to file a problem report on that application")
     public void theUserIsAbleToFileAProblemReportOnThatApplication() {
-        driver.findElement(By.cssSelector("[href=\"/reportProblem\"]"));
+        clickLinkByHref("/reportProblem", driver);
 
-        driver.findElement(By.cssSelector("[formAction=\"/reportProblem\"]")).click();
+        driver.findElement(By.cssSelector("[formAction=\"/reportProblem\"]"))
+              .click();
         // get taken to a form where you put in Problem(description, Actions(number, description))
         driver.findElement(By.name("description"))
               .sendKeys("User cannot access their account at login.");
