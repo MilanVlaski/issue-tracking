@@ -15,7 +15,7 @@
     <h3 th:text="${app.version}">1.0</h3>
     <p th:text="${app.description}">Application description.</p>
     <div th:text="${app.releaseYear}">2024</div>
-    <a th:attr="href=@{/application/buy(appId=${app.id})}" aria-label="Buy Application">Buy</a>
+    <a th:attr="href=@{/application/buy(appId=${app.id})}">Buy</a>
 </article>
 
 </body>

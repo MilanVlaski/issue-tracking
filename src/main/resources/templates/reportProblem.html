@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Report a Problem</title>
+</head>
+<body>
+
+<table class="application">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Version</th>
+        <th>Description</th>
+        <th>Release Year</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="app: ${apps}">
+        <td>
+            <img th:src="${app.logoUrl}" th:alt="|${app.name} logo|">
+        </td>
+        <td th:text="${app.name}">Application</td>
+        <td th:text="${app.version}">1.0</td>
+        <td th:text="${app.description}">Application description.</td>
+        <td th:text="${app.releaseYear}">2024</td>
+        <td>
+            <form>
+                <button th:attr="formaction=@{reportProblem(appId=${app.id})}">Report a Problem</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

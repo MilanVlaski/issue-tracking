@@ -13,9 +13,9 @@ public class PurchasingService {
     private EntityManager em;
 
     @Transactional
-    public boolean purchaseApp(String supportTypeId, String appId, String username) {
-        var user = em.createQuery("select u from User u where u.name = :username", User.class)
-                     .setParameter("username", username)
+    public boolean purchaseApp(String supportTypeId, String appId, String email) {
+        var user = em.createQuery("select u from User u where u.email = :email", User.class)
+                     .setParameter("email", email)
                      .getSingleResult();
         var application = em.find(Application.class, Integer.valueOf(appId));
         var support = em.find(SupportType.class, supportTypeId);

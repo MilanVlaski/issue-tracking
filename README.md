@@ -36,6 +36,9 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - Admin ili ko vec, radi sve.
   Ovo je sve tema za spring sekjuriti...
  # To do
+- [ ] Add nice handling for when buy page has error/success.
+- [ ] Check where you are after a purchase.
+- [ ] Rename AppShopPage to AppShopPages
 - [ ] Be clever and let the user type, hit enter, and have the action show up somewhere as numbered. Also be able to edit or delete each entry.
 - [ ] Be clever and when user goes to `/reportProblem`, if he only has one app, then take him to it
 - [ ] Add a dto for RegisterRequest that encodes the password, and maps it to an entity

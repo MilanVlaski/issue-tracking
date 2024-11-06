@@ -46,7 +46,7 @@ public class SolveProblemTest {
     public void theUserIsAbleToFileAProblemReportOnThatApplication() {
         clickLinkByHref("/reportProblem", driver);
 
-        driver.findElement(By.cssSelector("[formAction=\"/reportProblem\"]"))
+        driver.findElement(By.xpath("//*[contains(@formaction, '/reportProblem')]"))
               .click();
         // get taken to a form where you put in Problem(description, Actions(number, description))
         driver.findElement(By.name("description"))
@@ -70,11 +70,11 @@ public class SolveProblemTest {
     private int port;
 
     private static final WebDriver driver = new ChromeDriver(
-            new ChromeOptions().addArguments("--headless")
+//            new ChromeOptions().addArguments("--headless")
     );
 
     @AfterAll
     public static void tearDown() {
-        driver.quit();
+//        driver.quit();
     }
 }
