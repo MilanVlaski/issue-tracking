@@ -7,6 +7,8 @@
 </head>
 <body>
 
+<div th:replace="~{fragments/header :: header}"></div>
+
 <form th:action="@{/login}" method="post">
 
     <label for="email">Email:</label>
