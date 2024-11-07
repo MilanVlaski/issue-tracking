@@ -32,8 +32,7 @@ public class AppShopPage {
     }
 
     @GetMapping("/application/buy")
-    public String buy(Model model, @RequestParam Integer appId,
-            @RequestParam String success) {
+    public String buy(Model model, @RequestParam Integer appId) {
         var app = em.find(Application.class, appId);
         var supportTypes = new ArrayList<SupportType>(
                 em.createQuery("select s from SupportType s").getResultList()

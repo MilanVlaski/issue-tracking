@@ -10,6 +10,13 @@
 
 <div th:replace="fragments/header :: header"></div>
 
+<div th:if="${purchaseStatus == 'success'}">
+    Purchase successful!
+</div>
+<div th:if="${purchaseStatus == 'failure'}">
+    Purchase failed. Please try again.
+</div>
+
 <form method="post" th:action="@{/application/buy(appId=${app.id})}">
     <img th:src="${app.logoUrl}" th:alt="|${app.name} logo|">
     <h2 th:text="${app.name}">Application</h2>

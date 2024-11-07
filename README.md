@@ -36,6 +36,8 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - Admin ili ko vec, radi sve.
   Ovo je sve tema za spring sekjuriti...
  # To do
+- [ ] Add logic so that user can't buy the same app twice (there is already an exception happening on the page.) 
+- [ ] By the end, completely refactor the Entities, and the CRUD operations, to reduce the amount of times I have to manually wire up the associations.
 - [ ] Add nice handling for when buy page has error/success.
 - [ ] Check where you are after a purchase.
 - [ ] Rename AppShopPage to AppShopPages
