@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
 import static com.akimi.issue_tracking.selenium_util.SeleniumUtil.clickLinkByHref;
+import static com.akimi.issue_tracking.selenium_util.SeleniumUtil.clickLinkByHrefContaining;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @CucumberContextConfiguration
@@ -46,8 +47,7 @@ public class SolveProblemTest {
     public void theUserIsAbleToFileAProblemReportOnThatApplication() {
         clickLinkByHref("/reportProblem", driver);
 
-        driver.findElement(By.xpath("//*[contains(@formaction, '/reportProblem')]"))
-              .click();
+       clickLinkByHrefContaining("reportProblem?appId=", driver);
         // get taken to a form where you put in Problem(description, Actions(number, description))
         driver.findElement(By.name("description"))
               .sendKeys("User cannot access their account at login.");
@@ -70,7 +70,7 @@ public class SolveProblemTest {
     private int port;
 
     private static final WebDriver driver = new ChromeDriver(
-//            new ChromeOptions().addArguments("--headless")
+            new ChromeOptions().addArguments("--headless")
     );
 
     @AfterAll

@@ -9,7 +9,6 @@ import java.util.List;
 public class SeleniumUtil {
 
     /**
-     * Re
      * @param href link you want to click on
      * @param driver driver used in your tests
      */
@@ -18,6 +17,25 @@ public class SeleniumUtil {
 
         for (WebElement anchor : anchors) {
             if (anchor.getAttribute("href").contains(href)) {
+                anchor.click();
+                break;
+            }
+        }
+    }
+
+
+    /**
+     * Clicks the first link whose href contains the given substring.
+     *
+     * @param hrefSubstring the substring to search for in the href attribute
+     * @param driver the WebDriver used in your tests
+     */
+    public static void clickLinkByHrefContaining(String hrefSubstring, WebDriver driver) {
+        List<WebElement> anchors = driver.findElements(By.tagName("a"));
+
+        for (WebElement anchor : anchors) {
+            String href = anchor.getAttribute("href");
+            if (href != null && href.contains(hrefSubstring)) {
                 anchor.click();
                 break;
             }
