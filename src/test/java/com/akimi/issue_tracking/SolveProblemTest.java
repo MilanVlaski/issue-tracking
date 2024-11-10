@@ -35,9 +35,7 @@ public class SolveProblemTest {
     @When("the user purchases an application with any tech support")
     public void the_user_purchases_an_application() {
         // buy first app
-//        driver.findElement(By.cssSelector("a[href=\"" + "/application/" + appId + "/buy" + "\"]"))
-//              .click();
-        clickLinkWithHref("/application/" + appId + "/buy");
+        clickLinkLeadingTo("/application/" + appId + "/buy");
 
         // we are not signed in, so we get taken to a sign-in page
         inputEmailAndPassword();
@@ -52,10 +50,10 @@ public class SolveProblemTest {
 
     @Then("the user is able to file a problem report on that application")
     public void theUserIsAbleToFileAProblemReportOnThatApplication() {
-        clickLinkWithHref("/reportProblem");
+        clickLinkLeadingTo("/reportProblem");
 
         var reportProblemOnApplication_Path = "/application/" + appId + "/reportProblem";
-        clickLinkWithHref(reportProblemOnApplication_Path);
+        clickLinkLeadingTo(reportProblemOnApplication_Path);
         // get taken to a form where you put in Problem(description, Actions(number, description))
         driver.findElement(By.name("description"))
               .sendKeys("User cannot access their account at login.");
@@ -86,7 +84,7 @@ public class SolveProblemTest {
         driver.quit();
     }
 
-    public void clickLinkWithHref(String href) {
+    public void clickLinkLeadingTo(String href) {
         wait.until(ExpectedConditions.elementToBeClickable(
                 driver.findElement(By.cssSelector("a[href=\"" + href + "\"]"))
         )).click();
