@@ -37,6 +37,7 @@ dependencies {
 	testImplementation("org.junit.platform:junit-platform-suite:1.11.2")
 	testImplementation("org.seleniumhq.selenium:selenium-java:4.25.0")
 	testImplementation("org.springframework.security:spring-security-test")
+	testImplementation("org.hamcrest:hamcrest:3.0")
 }
 
 tasks.withType<Test> {

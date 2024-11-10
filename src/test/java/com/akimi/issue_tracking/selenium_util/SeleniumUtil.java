@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SeleniumUtil {
 
@@ -25,20 +27,25 @@ public class SeleniumUtil {
 
 
     /**
-     * Clicks the first link whose href contains the given substring.
+     * Clicks the first link whose href contains the given substring, or regex.
      *
-     * @param hrefSubstring the substring to search for in the href attribute
+     * @param hrefRegex the regex to search for in the href attribute
      * @param driver the WebDriver used in your tests
      */
-    public static void clickLinkByHrefContaining(String hrefSubstring, WebDriver driver) {
+    public static void clickLinkByHrefContaining(String hrefRegex, WebDriver driver) {
         List<WebElement> anchors = driver.findElements(By.tagName("a"));
+        Pattern pattern = Pattern.compile(hrefRegex);
 
         for (WebElement anchor : anchors) {
             String href = anchor.getAttribute("href");
-            if (href != null && href.contains(hrefSubstring)) {
-                anchor.click();
-                break;
+            if (href != null) {
+                Matcher matcher = pattern.matcher(href);
+                if (matcher.find()) {
+                    anchor.click();
+                    break;
+                }
             }
         }
     }
+
 }

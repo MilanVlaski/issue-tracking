@@ -29,9 +29,7 @@
         <td th:text="${app.description}">Application description.</td>
         <td th:text="${app.releaseYear}">2024</td>
         <td>
-            <form>
-                <button th:attr="formaction=@{reportProblem(appId=${app.id})}">Report a Problem</button>
-            </form>
+            <a th:href="@{/application/{appId}/reportProblem(appId=${app.id})}">Report a Problem</a>
         </td>
     </tr>
     </tbody>

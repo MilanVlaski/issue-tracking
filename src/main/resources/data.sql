@@ -15,3 +15,5 @@ insert into VRSTA_PODRSKE (ID_POD, NAZIV_POD, OPIS_POD, CIJENA) values
 insert into KORISNIK (NAZIV_KOR, GODINA_RODJENJA, MEJL_ADRESA_KOR, SIFRA_KOR, BROJ_TELEFONA, LOKACIJA)
 VALUES ('sa', '1990-01-01', 'john.doe@example.com', '$2a$10$36JHQEwvmg.veIk08XAW1eCOWDKqv4WeJka32v/Q7gwVOJ.wjw51.', '123456', 'London');
 
+insert into KUPOVINA (ID_APP, ID_KOR, ID_POD) values
+(5, 1, 'BEZ_POD')
