@@ -87,7 +87,8 @@ public class SolveProblemTest {
     }
 
     public void clickLinkWithHref(String href) {
-        driver.findElement(By.cssSelector("a[href=\"" + href + "\"]"))
-              .click();
+        wait.until(ExpectedConditions.elementToBeClickable(
+                driver.findElement(By.cssSelector("a[href=\"" + href + "\"]"))
+        )).click();
     }
 }
