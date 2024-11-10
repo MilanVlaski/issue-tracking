@@ -27,6 +27,7 @@ dependencies {
 	runtimeOnly("com.h2database:h2")
 	implementation("org.projectlombok:lombok:1.18.34")
 
+
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.cucumber:cucumber-java:7.20.1")
@@ -38,6 +39,7 @@ dependencies {
 	testImplementation("org.seleniumhq.selenium:selenium-java:4.25.0")
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("org.hamcrest:hamcrest:3.0")
+
 }
 
 tasks.withType<Test> {
