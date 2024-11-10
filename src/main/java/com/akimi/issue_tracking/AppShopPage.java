@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,8 +32,8 @@ public class AppShopPage {
         return "index";
     }
 
-    @GetMapping("/application/buy")
-    public String buy(Model model, @RequestParam Integer appId) {
+    @GetMapping("/application/{appId}/buy")
+    public String buy(Model model, @PathVariable String appId) {
         var app = em.find(Application.class, appId);
         var supportTypes = new ArrayList<SupportType>(
                 em.createQuery("select s from SupportType s").getResultList()
@@ -46,20 +47,19 @@ public class AppShopPage {
     @Autowired
     private PurchasingService purchasingService;
 
-    @PostMapping("/application/buy")
-    public String processPurchase(@RequestParam String appId, @ModelAttribute Support support,
+    @PostMapping("/application/{appId}/buy")
+    public String processPurchase(@PathVariable String appId, @ModelAttribute Support support,
             RedirectAttributes redirectAttributes) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         log.info("USER NAMED " + email + "CREATING PURCHASE. WITH SUPPORT: " + support.getSupport());
         boolean success = purchasingService.purchaseApp(support.getSupport(), appId, email);
-        var appBuyPath = "/application/buy?appId=" + appId;
         if (success) {
             redirectAttributes.addFlashAttribute("purchaseStatus", "success");
         } else {
             redirectAttributes.addFlashAttribute("purchaseStatus", "failure");
         }
 
-        return "redirect:/application/buy?appId=" + appId;
+        return "redirect:/application/" + appId + "/buy";
 
     }
 

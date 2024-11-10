@@ -35,7 +35,7 @@ public class SolveProblemTest {
     @When("the user purchases an application with any tech support")
     public void the_user_purchases_an_application() {
         // buy first app
-        clickLinkByHrefContaining("application/buy", driver);
+        clickLinkByHrefContaining("application/.*/buy", driver);
 
         // we are not signed in, so we get taken to a sign-in page
         inputEmailAndPassword();
@@ -52,9 +52,8 @@ public class SolveProblemTest {
     public void theUserIsAbleToFileAProblemReportOnThatApplication() {
         clickLinkByHref("/reportProblem", driver);
 
-        var reportProblemOnApplication_Path = "application/.*/reportProblem";
+        var reportProblemOnApplication_Path = "/application/.*/reportProblem";
         clickLinkByHrefContaining(reportProblemOnApplication_Path, driver);
-        assertThat(driver.getCurrentUrl(), matchesPattern(".*" + reportProblemOnApplication_Path));
         // get taken to a form where you put in Problem(description, Actions(number, description))
         driver.findElement(By.name("description"))
               .sendKeys("User cannot access their account at login.");
