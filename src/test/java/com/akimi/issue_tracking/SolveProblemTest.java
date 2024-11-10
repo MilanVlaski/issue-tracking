@@ -84,6 +84,6 @@ public class SolveProblemTest {
 
     @AfterAll
     public static void tearDown() {
-//        driver.quit();
+        driver.quit();
     }
 }
