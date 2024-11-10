@@ -37,8 +37,8 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
   Ovo je sve tema za spring sekjuriti...
  # To do
 - [ ] Make Purchases have a synthetic ID
-- [ ] Change all application paths to use path variable, instead of request parameter
-- [ ] Handle report problem page with no apps.
+- [x] Change all application paths to use path variable, instead of request parameter
+- [x] Handle report problem page with no apps.
 - [ ] Add logic so that user can't buy the same app twice (there is already an exception happening on the page.) 
 - [ ] By the end, completely refactor the Entities, and the CRUD operations, to reduce the amount of times I have to manually wire up the associations.
 - [ ] Add nice handling for when buy page has error/success.

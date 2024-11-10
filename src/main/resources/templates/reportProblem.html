@@ -9,7 +9,11 @@
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
 
-<table class="application">
+<div th:if="${apps.isEmpty()}">
+    No purchases to show.
+</div>
+
+<table th:unless="${apps.isEmpty()}">
     <thead>
     <tr>
         <th>Name</th>
