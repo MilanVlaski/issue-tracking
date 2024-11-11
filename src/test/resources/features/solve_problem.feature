@@ -4,6 +4,9 @@ Feature: Report a problem and install a patch
     Given a list of applications
     When the user purchases an application with any tech support
     Then the user is able to file a problem report on that application
+#    When an engineer signs up to solve the reported problem
+#    Then the engineer can post an answer to the problem
+#    And the user can read it
 
 #  Scenario: Enter actions that caused a problem with the application
 #    Given a user has a problem with application Minga version 1.1
