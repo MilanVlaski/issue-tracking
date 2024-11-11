@@ -3,7 +3,13 @@
 
 ![[Pasted image 20241012095949.png]
 # Note
-Moram na neki način imati vezu između postavljanja zakrpe, i rješavanja problema, i postavljanja nove verzije aplikacije. Ako korisnik instalira patch, on u principu instalira novu aplikaciju. Samo je softver dovoljno pametan da shvati "aha, ovo je 1.0.1 na 1.0, znaci patchujem ga".
+## Postavljanje patcha
+Moram na neki način imati vezu između postavljanja zakrpe, i rješavanja problema, i postavljanja nove verzije aplikacije. Ako korisnik instalira patch, on u principu instalira novu aplikaciju.
+- Inzinjer postavlja patch
+- stavlja problem u rijesen
+- time se pravi nova aplikacija za koju je problem vezan i mijenja se samo verzija 1.0 -> 1.0.1.
+- Korisnik, prijavilac problema, dobija ovu aplikaciju kao jednu od svojih.
+- (Jos uvijek je vlasnik stare, ili se stara brise, ne znam, zanimljivo pitanje.)
 Takodje, kad se uvodi zakrpa, ona rjesava problem (mijenja mu stanje), i daje novu verziju aplikacije. Onda se ta verzija salje na korisniku.
 Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena verzija, plus zadnji patch. Patch je samo broj... To se inace cuva sve kroz git.
 # Slučajevi
@@ -19,7 +25,7 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
     - *Unosi korake.* Hvala, pomoći ćemo vam što prije!
 1. Ako postoji zakrpa, korisnik je instalira.
 2. Inženjer uzima problem.
-3. Inženjer pravi zakrpu, ali ko odlučuje da li je problem riješen? Korisnik ili IT pomoć.
+3. Inženjer pravi zakrpu, ali ko odlučuje da li je problem riješen? Inzenjer, vjerovatno.
     1. Ako radi na problemu, onda se smatra rješiocem problema, i rješ rješavanja problema.
     2. Ako ne, onda ga neko mora odobriti.
 4. Inženjer daje odgovor na problem.
@@ -36,6 +42,8 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - Admin ili ko vec, radi sve.
   Ovo je sve tema za spring sekjuriti...
  # To do
+- [ ] Use id's in selenium tests instead. Then try the function that goes through all the hrefs.
+- [ ] Then just use browser navigation.
 - [x] Change all application paths to use path variable, instead of request parameter
 - [x] Handle report problem page with no apps.
 - [ ] Add logic so that user can't buy the same app twice (there is already an exception happening on the page.) 
