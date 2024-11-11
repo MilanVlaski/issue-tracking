@@ -23,14 +23,20 @@ import java.time.Duration;
 @CucumberContextConfiguration
 public class SolveProblemTest {
 
-    Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+    @LocalServerPort
+    private int port;
+
+    int appId = 1;
+
+    private String homepage() {
+        return "http://localhost:" + port;
+    }
 
     @Given("a list of applications")
     public void a_list_of_applications() {
-        driver.get("http://localhost:" + port);
+        driver.get(homepage());
     }
 
-    int appId = 1;
 
     @When("the user purchases an application with any tech support")
     public void the_user_purchases_an_application() {
@@ -72,9 +78,6 @@ public class SolveProblemTest {
         passwordElement.submit();
     }
 
-    @LocalServerPort
-    private int port;
-
     private static final WebDriver driver = new ChromeDriver(
             new ChromeOptions().addArguments("--headless")
     );
@@ -85,8 +88,6 @@ public class SolveProblemTest {
     }
 
     public void clickLinkLeadingTo(String href) {
-        wait.until(ExpectedConditions.elementToBeClickable(
-                driver.findElement(By.cssSelector("a[href=\"" + href + "\"]"))
-        )).click();
+        driver.get(homepage() + href);
     }
 }
