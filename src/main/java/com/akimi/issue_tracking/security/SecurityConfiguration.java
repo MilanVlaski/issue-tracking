@@ -3,6 +3,7 @@ package com.akimi.issue_tracking.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,14 +17,34 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfiguration {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    @Order(1)
+    public SecurityFilterChain userSecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/", "/register", "login", "check-users").permitAll() // Allow access to these pages
+                        .requestMatchers("/", "/register", "/login").permitAll() // Allow access to these pages
+                        .requestMatchers("/reportProblem", "/application/**", "/problems").hasRole("USER")
                         .anyRequest().authenticated() // All other requests require authentication
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                )
+                .logout(withDefaults()); // Enable logout functionality
+        return http.build();
+    }
+
+    @Bean
+    @Order(2)
+    public SecurityFilterChain engineerSecurityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests(authz -> authz
+                        .requestMatchers("/engineer/login", "/engineer/register", "/login").permitAll() // Allow access to these pages
+                        .requestMatchers("/engineer/**").hasRole("ENGINEER")
+                        .anyRequest().authenticated() // All other requests require authentication
+                )
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/engineer/login")
                         .usernameParameter("email")
                         .passwordParameter("password")
                 )
