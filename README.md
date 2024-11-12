@@ -42,6 +42,7 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - Admin ili ko vec, radi sve.
   Ovo je sve tema za spring sekjuriti...
  # To do
+- [ ] Add logout for both engineer and for user
 - [ ] Use id's in selenium tests instead. Then try the function that goes through all the hrefs.
 - [ ] Then just use browser navigation.
 - [x] Change all application paths to use path variable, instead of request parameter

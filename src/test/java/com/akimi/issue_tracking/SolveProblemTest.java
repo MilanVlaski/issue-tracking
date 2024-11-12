@@ -1,6 +1,7 @@
 package com.akimi.issue_tracking;
 
 import io.cucumber.java.AfterAll;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -28,13 +29,13 @@ public class SolveProblemTest {
 
     int appId = 1;
 
-    private String homepage() {
-        return "http://localhost:" + port;
-    }
-
     @Given("a list of applications")
     public void a_list_of_applications() {
         driver.get(homepage());
+    }
+
+    private String homepage() {
+        return "http://localhost:" + port;
     }
 
 
@@ -71,6 +72,19 @@ public class SolveProblemTest {
         actions.submit();
     }
 
+    @And("an engineer can post an answer to the problem")
+    public void anEngineerCanPostAnAnswerToTheProblem() {
+        // go to /support/problems
+        // click on "Solve a problem" (go to /support/problem/problemId
+        // give an answer
+    }
+
+    @Then("the user can look at the answer and be happy")
+    public void theUserCanLookAtTheAnswerAndBeHappy() {
+        // go to /problems
+        // see your problem answered, nice and green (assertion)
+    }
+
     private void inputEmailAndPassword() {
         driver.findElement(By.name("email")).sendKeys("john.doe@example.com");
         var passwordElement = driver.findElement(By.name("password"));
@@ -82,12 +96,12 @@ public class SolveProblemTest {
             new ChromeOptions().addArguments("--headless")
     );
 
+    public void clickLinkLeadingTo(String href) {
+        driver.get(homepage() + href);
+    }
     @AfterAll
     public static void tearDown() {
         driver.quit();
     }
 
-    public void clickLinkLeadingTo(String href) {
-        driver.get(homepage() + href);
-    }
 }

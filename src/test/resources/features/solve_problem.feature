@@ -4,9 +4,8 @@ Feature: Report a problem and install a patch
     Given a list of applications
     When the user purchases an application with any tech support
     Then the user is able to file a problem report on that application
-    When an engineer signs up to solve the reported problem
-#    Then the engineer can post an answer to the problem
-#    And the user can read it
+    And an engineer can post an answer to the problem
+    Then the user can look at the answer and be happy
 
 #  Scenario: User reports a problem with the application
 #    Given a user has a problem with an application
