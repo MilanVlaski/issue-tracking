@@ -123,7 +123,11 @@ public class SolveProblemTest {
     );
 
     public void clickLinkLeadingTo(String href) {
-        driver.get(homepage() + href);
+//        driver.get(homepage() + href);
+        new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(100)).until(
+                ExpectedConditions.elementToBeClickable(
+                        By.cssSelector("[href=\"" + href + "\"]"))
+        ).click();
     }
 
     @AfterAll
