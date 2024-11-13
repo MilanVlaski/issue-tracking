@@ -19,6 +19,9 @@ public class AppShopPage {
 
     @PersistenceContext
     private EntityManager em;
+    @Autowired
+    private PurchasingService purchasingService;
+
 
     @GetMapping("/")
     public String index(Model model) {
@@ -42,9 +45,6 @@ public class AppShopPage {
         return "buy";
     }
 
-    @Autowired
-    private PurchasingService purchasingService;
-
     @PostMapping("/application/{appId}/buy")
     public String processPurchase(@PathVariable String appId, @ModelAttribute Support support,
             RedirectAttributes redirectAttributes) {
@@ -58,11 +58,9 @@ public class AppShopPage {
         }
 
         return "redirect:/application/" + appId + "/buy";
-
     }
 
 
     Logger log = Logger.getLogger(AppShopPage.class.getName());
-
 }
 

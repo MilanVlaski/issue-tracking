@@ -1,6 +1,7 @@
 package com.akimi.issue_tracking.problem;
 
 import com.akimi.issue_tracking.entities.Application;
+import com.akimi.issue_tracking.entities.Purchase;
 import com.akimi.issue_tracking.entities.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 @Controller
 public class ProblemPages {
@@ -25,14 +27,14 @@ public class ProblemPages {
         var user = em.createQuery("select u from User u where u.email = :email", User.class)
                      .setParameter("email", email)
                      .getSingleResult();
-        var purchases = user.getPurchases().iterator();
-        var apps = new ArrayList<Application>();
+        //        var apps = new ArrayList<Application>();
+//
+//        while (purchases.hasNext()) {
+//            apps.add(purchases.next().getApplication());
+//        }
 
-        while (purchases.hasNext()) {
-            apps.add(purchases.next().getApplication());
-        }
-
-        model.addAttribute("apps", apps);
+        var purchases = user.getPurchases();
+        model.addAttribute("purchases", purchases);
         return "reportProblem";
     }
 
