@@ -17,7 +17,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfiguration {
 
     @Bean
-    @Order(2)
     public SecurityFilterChain userSecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .securityMatcher("/**")
@@ -37,7 +36,6 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    @Order(1)
     public SecurityFilterChain engineerSecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .securityMatcher("/engineer/**")
