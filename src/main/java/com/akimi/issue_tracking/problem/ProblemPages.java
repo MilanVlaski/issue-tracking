@@ -1,4 +1,4 @@
-package com.akimi.issue_tracking;
+package com.akimi.issue_tracking.problem;
 
 import com.akimi.issue_tracking.entities.Application;
 import com.akimi.issue_tracking.entities.User;

@@ -1,4 +1,4 @@
-package com.akimi.issue_tracking;
+package com.akimi.issue_tracking.application;
 
 import com.akimi.issue_tracking.entities.*;
 import jakarta.persistence.EntityManager;
