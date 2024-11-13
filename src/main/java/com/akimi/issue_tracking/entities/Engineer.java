@@ -33,7 +33,7 @@ public class Engineer {
     @Column(name = "MEJL_ADRESA_INZ", length = 50)
     private String email;
 
-    @Column(name = "SIFRA_INZ", length = 30)
+    @Column(name = "SIFRA_INZ", length = 60)
     private String password;
 
     @OneToMany(mappedBy = "engineer")
