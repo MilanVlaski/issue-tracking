@@ -16,4 +16,7 @@ insert into KORISNIK (NAZIV_KOR, GODINA_RODJENJA, MEJL_ADRESA_KOR, SIFRA_KOR, BR
 VALUES ('sa', '1990-01-01', 'john.doe@example.com', '$2a$10$36JHQEwvmg.veIk08XAW1eCOWDKqv4WeJka32v/Q7gwVOJ.wjw51.', '123456', 'London');
 
 insert into KUPOVINA (ID_APP, ID_KOR, ID_POD) values
-(5, 1, 'BEZ_POD')
+(5, 1, 'BEZ_POD');
+
+insert into INZENJER (NAZIV_INZ, OBRAZOVANJE, ZAPOSLEN_OD, ZAPOSLEN_DO, MJESECNA_PLATA, MEJL_ADRESA_INZ, SIFRA_INZ) values
+('John Smith', 'Master of Engineering', '2022-01-01', null, 5000.00, 'john.smith@example.com', '$2a$10$36JHQEwvmg.veIk08XAW1eCOWDKqv4WeJka32v/Q7gwVOJ.wjw51.');

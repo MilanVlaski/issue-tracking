@@ -36,9 +36,20 @@ public class ProblemPages {
         return "reportProblem";
     }
 
-    @GetMapping("application/{appId}/reportProblem")
+    @GetMapping("/application/{appId}/reportProblem")
     public String reportProblem(@PathVariable String appId, Model model) {
         return "describeProblem";
     }
+
+    @PostMapping("/application/{appId}/reportProblem")
+    public String reportProblemPost(@PathVariable String appId, Model model) {
+        return "redirect:/application/" + appId + "/reportProblem";
+    }
+
+    @GetMapping("/engineer/problems")
+    public String index(Model model) {
+        return "engineerProblems";
+    }
+
 
 }

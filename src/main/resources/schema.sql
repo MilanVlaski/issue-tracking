@@ -86,14 +86,14 @@ create unique index APLIKACIJA_PK on APLIKACIJA (
 /* Table: INZENJER                                              */
 /*==============================================================*/
 create table INZENJER (
-                          ID_INZ               INT4 AUTO_INCREMENT                not null,
+                          ID_INZ               INT4 AUTO_INCREMENT  not null,
                           NAZIV_INZ            VARCHAR(50)          null,
                           OBRAZOVANJE          VARCHAR(50)          null,
                           ZAPOSLEN_OD          DATE                 null,
                           ZAPOSLEN_DO          DATE                 null,
                           MJESECNA_PLATA       NUMERIC(10,2)        null,
                           MEJL_ADRESA_INZ      VARCHAR(50)          null,
-                          SIFRA_INZ            VARCHAR(30)          null,
+                          SIFRA_INZ            VARCHAR(60)          null,
                           constraint PK_INZENJER primary key (ID_INZ)
 );
 

@@ -1,4 +1,13 @@
 <header th:fragment="header">
     <a th:href="@{/}">Home</a>
     <a th:href="@{/reportProblem}">Report a problem</a>
+    <div sec:authorize="isAuthenticated()">
+        <!-- Show logout button if authenticated -->
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Logout</button>
+        </form>
+
+        <!-- Optionally show the username if logged in -->
+        <p>Welcome, <span th:text="${#authentication.name}"></span></p>
+    </div>
 </header>

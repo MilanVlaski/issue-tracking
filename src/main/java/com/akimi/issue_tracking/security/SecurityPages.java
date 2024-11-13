@@ -42,6 +42,11 @@ public class SecurityPages {
         return "redirect:/login";
     }
 
+    @GetMapping("/engineer/login")
+    public String engineerLogin() {
+        return "engineerLogin";
+    }
+
     @GetMapping("/check-users")
     @ResponseBody
     public List<User> checkUsers() {

@@ -76,3 +76,15 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
       - [x] Add the entity manager and use it to insert
       - [x] Then use it to fetch the tables
   - [x] add the necessary stuff in the controller
+- Logout
+```html
+    <div th:if="${#authentication != null}">
+        <!-- Show logout button if authenticated -->
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Logout</button>
+        </form>
+        
+        <!-- Optionally show the username if logged in -->
+        <p>Welcome, <span th:text="${#authentication.name}"></span></p>
+    </div>
+```

@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -45,7 +46,7 @@ public class SolveProblemTest {
         clickLinkLeadingTo("/application/" + appId + "/buy");
 
         // we are not signed in, so we get taken to a sign-in page
-        inputEmailAndPassword();
+        inputUserEmailAndPassword();
 
         // select the first support type
         var support = driver.findElement(By.name("support"));
@@ -74,7 +75,20 @@ public class SolveProblemTest {
 
     @And("an engineer can post an answer to the problem")
     public void anEngineerCanPostAnAnswerToTheProblem() {
+        // logout user
+        new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(100)).until(
+                ExpectedConditions.elementToBeClickable(
+                        By.xpath("//button[text()='Logout']"))
+        ).click();
+
+        // Find the logout button using CSS selector (you can target button within a form if needed)
+//        driver.findElement(By.cssSelector("form[action='/logout']"))
+//                .submit();
+
         // go to /support/problems
+        driver.get(homepage() + "/engineer/problems");
+        // login engineer
+        inputEngineerEmailAndPassword();
         // click on "Solve a problem" (go to /support/problem/problemId
         // give an answer
     }
@@ -85,9 +99,21 @@ public class SolveProblemTest {
         // see your problem answered, nice and green (assertion)
     }
 
-    private void inputEmailAndPassword() {
-        driver.findElement(By.name("email")).sendKeys("john.doe@example.com");
-        var passwordElement = driver.findElement(By.name("password"));
+    private void inputUserEmailAndPassword() {
+        var email = "john.doe@example.com";
+        var password = "password";
+        input(email, password);
+    }
+
+    private void inputEngineerEmailAndPassword() {
+        var email = "john.smith@example.com";
+        var password = "password";
+        input(email, password);
+    }
+
+    private void input(String email, String password) {
+        driver.findElement(By.name("email")).sendKeys(email);
+        var passwordElement = driver.findElement(By.name(password));
         passwordElement.sendKeys("password");
         passwordElement.submit();
     }
@@ -99,6 +125,7 @@ public class SolveProblemTest {
     public void clickLinkLeadingTo(String href) {
         driver.get(homepage() + href);
     }
+
     @AfterAll
     public static void tearDown() {
         driver.quit();

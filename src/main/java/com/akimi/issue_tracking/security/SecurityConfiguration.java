@@ -17,9 +17,10 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfiguration {
 
     @Bean
-    @Order(1)
+    @Order(2)
     public SecurityFilterChain userSecurityFilterChain(HttpSecurity http) throws Exception {
         http
+                .securityMatcher("/**")
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/", "/register", "/login").permitAll() // Allow access to these pages
                         .requestMatchers("/reportProblem", "/application/**", "/problems").hasRole("USER")
@@ -30,16 +31,18 @@ public class SecurityConfiguration {
                         .usernameParameter("email")
                         .passwordParameter("password")
                 )
-                .logout(withDefaults()); // Enable logout functionality
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/"));
         return http.build();
     }
 
     @Bean
-    @Order(2)
+    @Order(1)
     public SecurityFilterChain engineerSecurityFilterChain(HttpSecurity http) throws Exception {
         http
+                .securityMatcher("/engineer/**")
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/engineer/login", "/engineer/register", "/login").permitAll() // Allow access to these pages
+                        .requestMatchers("/engineer/login", "/engineer/register").permitAll() // Allow access to these pages
                         .requestMatchers("/engineer/**").hasRole("ENGINEER")
                         .anyRequest().authenticated() // All other requests require authentication
                 )
@@ -48,7 +51,7 @@ public class SecurityConfiguration {
                         .usernameParameter("email")
                         .passwordParameter("password")
                 )
-                .logout(withDefaults()); // Enable logout functionality
+                .logout(withDefaults());
         return http.build();
     }
 

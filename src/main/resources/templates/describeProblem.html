@@ -8,6 +8,8 @@
 </head>
 <body>
 
+<div th:replace="~{fragments/header :: header}"></div>
+
 <form method="post" th:action="@{''}">
     <label for="description">Please briefly describe the problem:</label>
     <input type="text" name="description" id="description">
