@@ -1,5 +1,6 @@
-package com.akimi.issue_tracking.problem;
+package com.akimi.issue_tracking.problem.engineer;
 
+import com.akimi.issue_tracking.problem.Problem;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;

@@ -1,4 +1,4 @@
-package com.akimi.issue_tracking.problem;
+package com.akimi.issue_tracking.problem.engineer;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

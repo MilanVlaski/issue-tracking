@@ -1,6 +1,6 @@
 package com.akimi.issue_tracking.application;
 
-import com.akimi.issue_tracking.problem.Patch;
+import com.akimi.issue_tracking.problem.engineer.Patch;
 import com.akimi.issue_tracking.problem.Problem;
 import jakarta.persistence.*;
 

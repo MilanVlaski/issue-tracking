@@ -2,6 +2,8 @@ package com.akimi.issue_tracking.problem;
 
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
+import com.akimi.issue_tracking.problem.engineer.Answer;
+import com.akimi.issue_tracking.problem.engineer.Engineer;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
