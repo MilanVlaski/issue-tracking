@@ -1,7 +1,5 @@
 package com.akimi.issue_tracking.application;
 
-import com.akimi.issue_tracking.entities.Application;
-import com.akimi.issue_tracking.entities.SupportType;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package com.akimi.issue_tracking;
 
-import com.akimi.issue_tracking.entities.Application;
-import com.akimi.issue_tracking.entities.Problem;
-import com.akimi.issue_tracking.entities.User;
+import com.akimi.issue_tracking.application.Application;
+import com.akimi.issue_tracking.problem.Problem;
+import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.ProblemProcessing;
 import com.akimi.issue_tracking.problem.ProblemReport;
 import org.junit.jupiter.api.Test;

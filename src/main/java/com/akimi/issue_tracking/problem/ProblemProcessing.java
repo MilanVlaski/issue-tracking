@@ -1,13 +1,10 @@
 package com.akimi.issue_tracking.problem;
 
-import com.akimi.issue_tracking.entities.Action;
-import com.akimi.issue_tracking.entities.Application;
-import com.akimi.issue_tracking.entities.Problem;
-import com.akimi.issue_tracking.entities.User;
+import com.akimi.issue_tracking.application.Application;
+import com.akimi.issue_tracking.application.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-import lombok.val;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;

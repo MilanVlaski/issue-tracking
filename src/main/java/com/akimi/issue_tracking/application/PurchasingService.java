@@ -1,6 +1,5 @@
 package com.akimi.issue_tracking.application;
 
-import com.akimi.issue_tracking.entities.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;

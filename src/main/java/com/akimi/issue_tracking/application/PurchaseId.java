@@ -1,4 +1,4 @@
-package com.akimi.issue_tracking.entities;
+package com.akimi.issue_tracking.application;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

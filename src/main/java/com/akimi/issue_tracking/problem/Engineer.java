@@ -1,4 +1,4 @@
-package com.akimi.issue_tracking.entities;
+package com.akimi.issue_tracking.problem;
 
 import jakarta.persistence.*;
 

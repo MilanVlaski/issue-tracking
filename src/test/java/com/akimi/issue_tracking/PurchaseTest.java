@@ -1,9 +1,8 @@
 package com.akimi.issue_tracking;
 
 import com.akimi.issue_tracking.application.PurchasingService;
-import com.akimi.issue_tracking.entities.Application;
-import com.akimi.issue_tracking.entities.Problem;
-import com.akimi.issue_tracking.entities.User;
+import com.akimi.issue_tracking.application.Application;
+import com.akimi.issue_tracking.application.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;

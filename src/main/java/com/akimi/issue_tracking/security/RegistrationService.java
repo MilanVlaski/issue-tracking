@@ -1,6 +1,6 @@
 package com.akimi.issue_tracking.security;
 
-import com.akimi.issue_tracking.entities.User;
+import com.akimi.issue_tracking.application.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
