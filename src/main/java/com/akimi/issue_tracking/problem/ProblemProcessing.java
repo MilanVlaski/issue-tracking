@@ -22,8 +22,7 @@ public class ProblemProcessing {
         var actions = parseActions(problemReport.getActions());
         var application = em.find(Application.class, appId);
 
-        var problem = new Problem(ProblemState.REPORTED.name,
-                problemReport.getDescription(), application, user, actions);
+        var problem = new Problem(problemReport.getDescription(), application, user, actions);
 
         em.persist(application);
         em.persist(user);
