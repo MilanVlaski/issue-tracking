@@ -27,11 +27,6 @@ public class ProblemPages {
         var user = em.createQuery("select u from User u where u.email = :email", User.class)
                      .setParameter("email", email)
                      .getSingleResult();
-        //        var apps = new ArrayList<Application>();
-//
-//        while (purchases.hasNext()) {
-//            apps.add(purchases.next().getApplication());
-//        }
 
         var purchases = user.getPurchases();
         model.addAttribute("purchases", purchases);
