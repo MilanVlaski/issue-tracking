@@ -2,8 +2,10 @@ package com.akimi.issue_tracking.problem;
 
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
+import com.akimi.issue_tracking.security.CurrentUser;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -24,7 +26,7 @@ public class ProblemPages {
 
     @GetMapping("/reportProblem")
     public String reportProblem(Model model) {
-        var purchases = currentUser().getPurchases();
+        var purchases = find().getPurchases();
         model.addAttribute("purchases", purchases);
         return "reportProblem";
     }
@@ -38,16 +40,9 @@ public class ProblemPages {
     public String reportProblemPost(@PathVariable String appId, Model model,
             @ModelAttribute ProblemReport problemReport) {
         var application = em.find(Application.class, appId);
-        var user = currentUser();
+        var user = find();
         problemProcessing.report(problemReport, application, user);
         return "redirect:/application/" + appId + "/reportProblem";
-    }
-
-    private User currentUser() {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        return em.createQuery("select u from User u where u.email = :email", User.class)
-                 .setParameter("email", email)
-                 .getSingleResult();
     }
 
     @GetMapping("/engineer/problems")
@@ -55,5 +50,10 @@ public class ProblemPages {
         return "engineerProblems";
     }
 
-
+    public User find() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        return em.createQuery("select u from User u where u.email = :email", User.class)
+                 .setParameter("email", email)
+                 .getSingleResult();
+    }
 }
