@@ -58,6 +58,7 @@ public class Problem {
 
     public Problem setUser(User user) {
         this.user = user;
+        user.getProblems().add(this);
         return this;
     }
 
@@ -65,8 +66,9 @@ public class Problem {
         return application;
     }
 
-    public Problem setApplication(Application application) {
+    public Problem addApplication(Application application) {
         this.application = application;
+        application.getProblems().add(this);
         return this;
     }
 

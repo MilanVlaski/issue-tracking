@@ -2,6 +2,7 @@ package com.akimi.issue_tracking;
 
 import com.akimi.issue_tracking.application.PurchasingService;
 import com.akimi.issue_tracking.entities.Application;
+import com.akimi.issue_tracking.entities.Problem;
 import com.akimi.issue_tracking.entities.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PurchaseTest {
 
     @Autowired
-    TestEntityManager tem;
+    TestEntityManager em;
 
     @Autowired
     PurchasingService purchasingService;
@@ -31,13 +32,13 @@ public class PurchaseTest {
         var email = "m@v.com";
         var user = new User().setName("Jane Doe").setEmail(email);
         var app = new Application().setName(appName).setVersion("1.1");
-        var userId = tem.persistAndGetId(user);
-        var appId = tem.persistAndGetId(app);
+        var userId = em.persistAndGetId(user);
+        var appId = em.persistAndGetId(app);
 
         purchasingService.purchaseApp(supportId, appId.toString(), email);
 
-        assertEquals(appName, tem.find(User.class, userId).getPurchases().iterator().next()
-                                 .getApplication().getName());
+        assertEquals(appName, em.find(User.class, userId).getPurchases().iterator().next()
+                                .getApplication().getName());
     }
 
 }

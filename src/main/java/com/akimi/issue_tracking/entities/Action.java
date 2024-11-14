@@ -21,6 +21,15 @@ public class Action {
     @Column(name = "OPIS_AKC", length = 200)
     private String description;
 
+    public Action(int id, String description ) {
+        this.id = id;
+        this.description = description;
+    }
+
+    public Action() {
+
+    }
+
     public Integer getId() {
         return id;
     }

@@ -42,6 +42,7 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - Admin ili ko vec, radi sve.
   Ovo je sve tema za spring sekjuriti...
  # To do
+- [ ] Move Entities into package where necessary. 
 - [ ] Add processing of problem actions
 - [ ] Implement engineer security
 - [ ] Add logout for both engineer and for user
