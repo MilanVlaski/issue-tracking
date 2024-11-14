@@ -17,7 +17,7 @@
     Purchase failed. Please try again.
 </div>
 
-<form method="post" th:action="@{/application/{appId}/buy(appId=${app.id})}">
+<form method="post" th:action="@{''}">
     <img th:src="${app.logoUrl}" th:alt="|${app.name} logo|">
     <h2 th:text="${app.name}">Application</h2>
     <h3 th:text="${app.version}">1.0</h3>
