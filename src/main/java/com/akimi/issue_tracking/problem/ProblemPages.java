@@ -1,5 +1,6 @@
 package com.akimi.issue_tracking.problem;
 
+import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -36,8 +37,9 @@ public class ProblemPages {
     @PostMapping("/application/{appId}/reportProblem")
     public String reportProblemPost(@PathVariable String appId, Model model,
             @ModelAttribute ProblemReport problemReport) {
+        var application = em.find(Application.class, appId);
         var user = currentUser();
-        problemProcessing.report(problemReport, appId, user);
+        problemProcessing.report(problemReport, application, user);
         return "redirect:/application/" + appId + "/reportProblem";
     }
 

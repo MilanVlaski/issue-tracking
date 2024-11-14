@@ -18,9 +18,8 @@ public class ProblemProcessing {
     private EntityManager em;
 
     @Transactional
-    public void report(ProblemReport problemReport, String appId, User user) {
+    public void report(ProblemReport problemReport, Application application , User user) {
         var actions = parseActions(problemReport.getActions());
-        var application = em.find(Application.class, appId);
 
         var problem = new Problem(problemReport.getDescription(), application, user, actions);
 
