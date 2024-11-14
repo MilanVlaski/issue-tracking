@@ -31,12 +31,10 @@ public class PurchaseTest {
         var email = "m@v.com";
         var user = new User().setName("Jane Doe").setEmail(email);
         var app = new Application().setName(appName).setVersion("1.1");
-        var userId = em.persistAndGetId(user);
-        var appId = em.persistAndGetId(app);
 
-        purchasingService.purchaseApp(supportId, appId.toString(), email);
+        purchasingService.purchaseApp(supportId, app, user);
 
-        assertEquals(appName, em.find(User.class, userId).getPurchases().iterator().next()
+        assertEquals(appName, user.getPurchases().iterator().next()
                                 .getApplication().getName());
     }
 

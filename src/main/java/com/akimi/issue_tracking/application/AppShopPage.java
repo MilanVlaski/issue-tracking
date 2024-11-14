@@ -48,7 +48,13 @@ public class AppShopPage {
             RedirectAttributes redirectAttributes) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         log.info("USER NAMED " + email + "CREATING PURCHASE. WITH SUPPORT: " + support.getSupport());
-        boolean success = purchasingService.purchaseApp(support.getSupport(), appId, email);
+
+        var user = em.createQuery("select u from User u where u.email = :email", User.class)
+                     .setParameter("email", email)
+                     .getSingleResult();
+        var application = em.find(Application.class, Integer.valueOf(appId));
+
+        boolean success = purchasingService.purchaseApp(support.getSupport(), application, user);
         if (success) {
             redirectAttributes.addFlashAttribute("purchaseStatus", "success");
         } else {

@@ -12,16 +12,10 @@ public class PurchasingService {
     private EntityManager em;
 
     @Transactional
-    public boolean purchaseApp(String supportTypeId, String appId, String email) {
-        var user = em.createQuery("select u from User u where u.email = :email", User.class)
-                     .setParameter("email", email)
-                     .getSingleResult();
-        var application = em.find(Application.class, Integer.valueOf(appId));
-        var support = em.find(SupportType.class, supportTypeId);
-
-        var purchase = new Purchase(user, application, support);
+    public boolean purchaseApp(String supportTypeId, Application application, User user) {
+        var supportType = em.find(SupportType.class, supportTypeId);
+        var purchase = new Purchase(user, application, supportType);
         em.persist(purchase);
-
         return true;
     }
 }
