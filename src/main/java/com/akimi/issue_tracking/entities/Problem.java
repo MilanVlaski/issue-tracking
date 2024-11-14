@@ -45,7 +45,8 @@ public class Problem {
     @ManyToMany(mappedBy = "problems")
     private Set<Engineer> engineers = new LinkedHashSet<>();
 
-    public Problem(String name, String description, Application application, User user, List<Action> actions) {
+    public Problem(String name, String description, Application application,
+            User user, List<Action> actions) {
         this.state = ProblemState.REPORTED.name;
         this.description = description;
         this.application = application;
