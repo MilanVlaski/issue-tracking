@@ -1,10 +1,12 @@
 package com.akimi.issue_tracking.entities;
 
+import com.akimi.issue_tracking.problem.ProblemState;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -43,6 +45,15 @@ public class Problem {
     @ManyToMany(mappedBy = "problems")
     private Set<Engineer> engineers = new LinkedHashSet<>();
 
+    public Problem(String name, String description, Application application, User user, List<Action> actions) {
+        this.state = ProblemState.REPORTED.name;
+        this.description = description;
+        this.application = application;
+        this.actions.addAll(actions);
+        application.getProblems().add(this);
+        addUser(user);
+    }
+
     public Integer getId() {
         return id;
     }
@@ -56,7 +67,7 @@ public class Problem {
         return user;
     }
 
-    public Problem setUser(User user) {
+    public Problem addUser(User user) {
         this.user = user;
         user.getProblems().add(this);
         return this;
@@ -116,5 +127,6 @@ public class Problem {
         this.engineers = engineers;
         return this;
     }
+
 
 }
