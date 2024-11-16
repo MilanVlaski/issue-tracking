@@ -62,6 +62,7 @@ public class Problem {
         this.description = description;
         this.application = application;
         this.actions.addAll(actions);
+
         actions.forEach(a -> a.setProblem(this));
         application.getProblems().add(this);
         addUser(user);
