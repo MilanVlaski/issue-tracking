@@ -5,6 +5,7 @@ import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.engineer.Answer;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -39,7 +40,7 @@ public class Problem {
     @Column(name = "OPIS_PRB", length = 200)
     private String description;
 
-    @OneToMany(mappedBy = "problem")
+    @OneToMany(mappedBy = "problem", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<Action> actions = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "problem")
@@ -61,6 +62,7 @@ public class Problem {
         this.description = description;
         this.application = application;
         this.actions.addAll(actions);
+        actions.forEach(a -> a.setProblem(this));
         application.getProblems().add(this);
         addUser(user);
     }

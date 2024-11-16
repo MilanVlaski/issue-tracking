@@ -31,8 +31,11 @@ public class ProblemProcessingTest {
                 .setVersion("1.0");
         var user = new User().setName("John").setEmail("john@example.com");
 
+        em.persist(application);
+        em.persist(user);
+
         problemProcessing.report(new ProblemReport()
-                .setDescription("Bla bla")
+                .setDescription("Description")
                 .setActions("Bla bla\nAnd another bla\n"), application, user);
 
         var actions = em.find(Problem.class, 1L).getActions();

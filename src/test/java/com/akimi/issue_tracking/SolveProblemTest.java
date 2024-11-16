@@ -5,7 +5,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.en_scouse.An;
 import io.cucumber.spring.CucumberContextConfiguration;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +22,9 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 
 import java.time.Duration;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
+
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @CucumberContextConfiguration
@@ -30,6 +35,9 @@ public class SolveProblemTest {
 
     int appId = 1;
     int problemId = 1;
+    String action1 = "I log in using my email and password.";
+    String action2 = "I get an error message saying \"Something went wrong.\".";
+
 
     @Given("a list of applications")
     public void a_list_of_applications() {
@@ -39,7 +47,6 @@ public class SolveProblemTest {
     private String homepage() {
         return "http://localhost:" + port;
     }
-
 
     @When("the user purchases an application with any tech support")
     public void the_user_purchases_an_application() {
@@ -67,8 +74,6 @@ public class SolveProblemTest {
         driver.findElement(By.name("description"))
               .sendKeys("User cannot access their account at login.");
 
-        var action1 = "I log in using my email and password.";
-        var action2 = "I get an error message saying \"Something went wrong.\".";
         var actions = driver.findElement(By.name("actions"));
         actions.sendKeys(String.join("\n", action1, action2));
         actions.submit();
@@ -78,7 +83,7 @@ public class SolveProblemTest {
     public void anEngineerCanPostAnAnswerToTheProblem() {
         // logout user
         new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(100)).until(
-                ExpectedConditions.elementToBeClickable(
+                elementToBeClickable(
                         By.xpath("//button[text()='Logout']"))
         ).click();
 
@@ -86,10 +91,13 @@ public class SolveProblemTest {
         driver.get(homepage() + "/engineer/problems");
         // login engineer
         inputEngineerEmailAndPassword();
-        // click on "Solve a problem" (go to /engineer/problems/problemId
-        clickLinkLeadingTo("/engineer/application/"+appId+"/problems/"+problemId);
-
+        // click on "Solve Problem"
+        clickLinkLeadingTo("/engineer/problems/" + problemId);
+        // should find actions that the user has posted previously
+        driver.findElement(By.xpath("//*[text()='" + action1 + "']"));
         // give an answer
+//        driver.findElement(By.cssSelector("[aria-label=\"Answer Problem\"]"))
+//              .submit();
     }
 
     @Then("the user can look at the answer and be happy")
@@ -117,21 +125,21 @@ public class SolveProblemTest {
         passwordElement.submit();
     }
 
-    private static final WebDriver driver = new ChromeDriver(
-            new ChromeOptions().addArguments("--headless")
-    );
 
+    private WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(100));
     public void clickLinkLeadingTo(String href) {
-//        driver.get(homepage() + href);
-        new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(100)).until(
-                ExpectedConditions.elementToBeClickable(
-                        By.cssSelector("[href=\"" + href + "\"]"))
+        wait.until(elementToBeClickable(
+                By.cssSelector("[href=\"" + href + "\"]"))
         ).click();
     }
 
+    private static final WebDriver driver = new ChromeDriver(
+//            new ChromeOptions().addArguments("--headless")
+    );
+
     @AfterAll
     public static void tearDown() {
-        driver.quit();
+//        driver.quit();
     }
 
 }

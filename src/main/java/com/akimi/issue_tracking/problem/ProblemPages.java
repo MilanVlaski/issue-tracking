@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Set;
+
 @Controller
 public class ProblemPages {
 
@@ -50,6 +52,15 @@ public class ProblemPages {
         var problems = em.createQuery("select p from Problem p", Problem.class).getResultList();
         model.addAttribute("problems", problems);
         return "engineerProblems";
+    }
+
+    @GetMapping("/engineer/problems/{problemId}")
+    public String answerProblem(@PathVariable String problemId, Model model) {
+        var problem = em.find(Problem.class, problemId);
+        model.addAttribute("problem", problem);
+        var actions = problem.getActions();
+        model.addAttribute("actions", actions);
+        return "answerProblem";
     }
 
     public User find() {

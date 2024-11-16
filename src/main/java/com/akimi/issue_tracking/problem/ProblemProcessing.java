@@ -23,8 +23,6 @@ public class ProblemProcessing {
 
         var problem = new Problem(problemReport.getDescription(), application, user, actions);
 
-        em.persist(application);
-        em.persist(user);
         em.persist(problem);
     }
 
