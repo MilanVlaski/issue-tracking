@@ -42,12 +42,14 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - Admin ili ko vec, radi sve.
   Ovo je sve tema za spring sekjuriti...
  # To do
-- [ ] Move Entities into package where necessary. 
-- [ ] Add processing of problem actions
-- [ ] Implement engineer security
-- [ ] Add logout for both engineer and for user
-- [ ] Use id's in selenium tests instead. Then try the function that goes through all the hrefs.
-- [ ] Then just use browser navigation.
+- [ ] Add number of actions to problem rows. It starts filtered by Reported to begin with.
+- [ ] Add filtering to problems page
+- [ ] Add pagination to all listed pages
+- [ ] Create catalogue of user actions
+- [x] Move Entities into package where necessary. 
+- [x] Add processing of problem actions
+- [x] Implement engineer security
+- [x] Add logout for both engineer and for user
 - [x] Change all application paths to use path variable, instead of request parameter
 - [x] Handle report problem page with no apps.
 - [ ] Add logic so that user can't buy the same app twice (there is already an exception happening on the page.) 

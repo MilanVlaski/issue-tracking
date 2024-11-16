@@ -29,6 +29,7 @@ public class SolveProblemTest {
     private int port;
 
     int appId = 1;
+    int problemId = 1;
 
     @Given("a list of applications")
     public void a_list_of_applications() {
@@ -81,15 +82,13 @@ public class SolveProblemTest {
                         By.xpath("//button[text()='Logout']"))
         ).click();
 
-        // Find the logout button using CSS selector (you can target button within a form if needed)
-//        driver.findElement(By.cssSelector("form[action='/logout']"))
-//                .submit();
-
         // go to /support/problems
         driver.get(homepage() + "/engineer/problems");
         // login engineer
         inputEngineerEmailAndPassword();
-        // click on "Solve a problem" (go to /support/problem/problemId
+        // click on "Solve a problem" (go to /engineer/problems/problemId
+        clickLinkLeadingTo("/engineer/application/"+appId+"/problems/"+problemId);
+
         // give an answer
     }
 

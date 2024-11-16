@@ -49,7 +49,7 @@ public class Problem {
     private Set<Engineer> engineers = new LinkedHashSet<>();
 
     /**
-     * Creates a new problem, with the REPORTED state.
+     * Creates a new problem, with the REPORTED state, on user request.
      * @param description
      * @param application
      * @param user
@@ -63,6 +63,10 @@ public class Problem {
         this.actions.addAll(actions);
         application.getProblems().add(this);
         addUser(user);
+    }
+
+    public Problem() {
+
     }
 
     public Integer getId() {

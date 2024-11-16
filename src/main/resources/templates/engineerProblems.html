@@ -10,5 +10,32 @@
 
 <h1>Engineer Problems Page</h1>
 
+<table th:unless="${problems.isEmpty()}">
+    <thead>application name + version, state, description, number of actions
+    <tr>
+        <th>Application</th>
+        <th>Version</th>
+        <th>State</th>
+        <th>Description</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="problem: ${problems}">
+        <td th:text="${problem.application.name}">Application</td>
+        <td th:text="${problem.application.version}">1.0</td>
+        <td th:text="${problem.state}">Reported.</td>
+        <td th:text="${problem.description}">User can't do something.</td>
+        <td>"/engineer/application/"+appId+"/problems/"+problemId
+
+            <a th:href="@{/engineer/application/{appId}/problems/{problemId}
+            (appId=${problem.application.id},problemId=${problem.id})}">
+                Report a Problem
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>

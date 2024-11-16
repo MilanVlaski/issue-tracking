@@ -47,6 +47,8 @@ public class ProblemPages {
 
     @GetMapping("/engineer/problems")
     public String index(Model model) {
+        var problems = em.createQuery("select p from Problem p", Problem.class).getResultList();
+        model.addAttribute("problems", problems);
         return "engineerProblems";
     }
 
