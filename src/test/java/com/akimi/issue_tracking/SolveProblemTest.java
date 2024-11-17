@@ -94,8 +94,8 @@ public class SolveProblemTest {
         driver.findElement(By.xpath("//*[text()='" + action1 + "']"));
         // give an answer
         driver.findElement(By.name("answer"))
-                .sendKeys("It looks like your password had a space in it." +
-                        " Please change your password, and that should solve things!");
+              .sendKeys("It looks like your password had a space in it." +
+                      " Please change your password, and that should solve things!");
         driver.findElement(By.cssSelector("[aria-label=\"Answer Problem\"]"))
               .submit();
     }
@@ -104,10 +104,11 @@ public class SolveProblemTest {
     public void theUserCanLookAtTheAnswerAndBeHappy() {
         // logout, then log the user back in, on the problems page
         logout();
-//        driver.get(homepage());
-//        driver.findElement(By.cssSelector("[aria-label='Log In']"));
-//        inputUserEmailAndPassword();
+        driver.get(homepage());
+        wait.until(elementToBeClickable(By.cssSelector("[aria-label='Log In']"))).click();
+        inputUserEmailAndPassword();
         // go to /problems
+
         // see your problem answered, nice and green (assertion)
     }
 
@@ -139,6 +140,7 @@ public class SolveProblemTest {
 
 
     private WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(100));
+
     public void clickLinkLeadingTo(String href) {
         wait.until(elementToBeClickable(
                 By.cssSelector("[href=\"" + href + "\"]"))
@@ -146,12 +148,12 @@ public class SolveProblemTest {
     }
 
     private static final WebDriver driver = new ChromeDriver(
-            new ChromeOptions().addArguments("--headless")
+//            new ChromeOptions().addArguments("--headless")
     );
 
     @AfterAll
     public static void tearDown() {
-        driver.quit();
+//        driver.quit();
     }
 
 }

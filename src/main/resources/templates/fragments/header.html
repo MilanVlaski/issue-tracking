@@ -1,4 +1,4 @@
-<header th:fragment="header">
+<header th:fragment="userHeader">
     <a th:href="@{/}">Home</a>
     <a th:href="@{/reportProblem}">Report a problem</a>
     <div sec:authorize="isAuthenticated()">
@@ -12,6 +12,6 @@
     </div>
 
     <div sec:authorize="!isAuthenticated()">
-        <a th:href="@{${loginPath}}">Login</a>
+        <a th:href="@{${loginPath}}" aria-label="Log I">Login</a>
     </div>
 </header>
