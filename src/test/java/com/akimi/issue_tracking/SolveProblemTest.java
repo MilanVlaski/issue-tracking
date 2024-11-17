@@ -108,7 +108,7 @@ public class SolveProblemTest {
         wait.until(elementToBeClickable(By.cssSelector("[aria-label='Log In']"))).click();
         inputUserEmailAndPassword();
         // go to /problems
-
+        wait.until(elementToBeClickable(By.cssSelector("[aria-label='See Reported Problems']"))).click();
         // see your problem answered, nice and green (assertion)
     }
 

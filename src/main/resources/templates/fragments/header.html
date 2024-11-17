@@ -1,11 +1,12 @@
-<div th:fragment="userHeader" th:replace="this :: baseHeader('/','/login')"></div>
-<div th:fragment="engineerHeader" th:replace="this :: baseHeader('/engineer/problems','/engineer/login')"></div>
+<div th:fragment="userHeader" th:replace="~{this :: baseHeader('/','/login')}"></div>
+<div th:fragment="engineerHeader" th:replace="~{this :: baseHeader('/engineer/problems','/engineer/login')}"></div>
 
 
 <header th:fragment="baseHeader(homeUrl, loginUrl)">
     <a th:href="${homeUrl}">Home</a>
     <a th:if="${homeUrl == '/'}" th:href="@{/reportProblem}">Report a problem</a>
     <div sec:authorize="isAuthenticated()">
+        <a th:if="${homeUrl == '/'}" th:href="@{/problems}" aria-label="See Reported Problems">See Reported Problems</a>
         <form th:action="@{/logout}" method="post">
             <button type="submit" aria-label="Log Out">Log Out</button>
         </form>

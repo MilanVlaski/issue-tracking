@@ -3,12 +3,9 @@ package com.akimi.issue_tracking.problem;
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.dto.AnswerDto;
-import com.akimi.issue_tracking.problem.engineer.Answer;
-import com.akimi.issue_tracking.security.CurrentUser;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,8 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.Set;
 
 @Controller
 public class ProblemPages {
@@ -31,7 +26,7 @@ public class ProblemPages {
 
     @GetMapping("/reportProblem")
     public String reportProblem(Model model) {
-        var purchases = find().getPurchases();
+        var purchases = currentUser().getPurchases();
         model.addAttribute("purchases", purchases);
         return "reportProblem";
     }
@@ -45,16 +40,27 @@ public class ProblemPages {
     public String reportProblemPost(@PathVariable String appId, Model model,
             @ModelAttribute ProblemReport problemReport) {
         var application = em.find(Application.class, appId);
-        var user = find();
+        var user = currentUser();
         problemProcessing.report(problemReport, application, user);
         return "redirect:/application/" + appId + "/reportProblem";
     }
 
     @GetMapping("/engineer/problems")
     public String index(Model model) {
-        var problems = em.createQuery("select p from Problem p", Problem.class).getResultList();
+        var problems = em.createQuery("select p from Problem p", Problem.class)
+                         .getResultList();
         model.addAttribute("problems", problems);
         return "engineerProblems";
+    }
+
+    @GetMapping("/problems")
+    public String problems(Model model) {
+        var problems = em.createQuery("select p from Problem p where p.user = :user",
+                                 Problem.class)
+                         .setParameter("user", currentUser())
+                         .getResultList();
+        model.addAttribute("problems", problems);
+        return "problems";
     }
 
     @GetMapping("/engineer/problems/{problemId}")
@@ -71,10 +77,10 @@ public class ProblemPages {
             @ModelAttribute AnswerDto answer, HttpServletRequest request) {
         var problem = em.find(Problem.class, problemId);
         problem.getAnswers().add(answer.toEntity());
-        return "redirect:/engineer/problems/"+problemId;
+        return "redirect:/engineer/problems/" + problemId;
     }
 
-    public User find() {
+    public User currentUser() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         return em.createQuery("select u from User u where u.email = :email", User.class)
                  .setParameter("email", email)

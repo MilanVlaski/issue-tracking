@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>All Problems</title>
+    <title>Reported problems</title>
 </head>
 <body>
 
-<div th:replace="~{fragments/header :: engineerHeader}"></div>
-
-<h1>Active Problems</h1>
+<div th:replace="~{fragments/header :: userHeader}"></div>
+<h1>Reported Problems</h1>
 
 <table th:unless="${problems.isEmpty()}">
     <thead>
@@ -29,9 +28,8 @@
         <td th:text="${problem.state}">Reported.</td>
         <td th:text="${problem.description}">User can't do something.</td>
         <td>
-
             <a th:href="@{/engineer/problems/{problemId}(problemId=${problem.id})}">
-                See Problem
+                See Fixes
             </a>
         </td>
     </tr>
