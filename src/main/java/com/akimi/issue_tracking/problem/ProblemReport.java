@@ -1,25 +1,35 @@
 package com.akimi.issue_tracking.problem;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProblemReport {
 
     private String description;
     private String actions;
 
-    public String getDescription() {
-        return description;
-    }
-
-    public ProblemReport setDescription(String description) {
-        this.description = description;
-        return this;
-    }
-
-    public String getActions() {
-        return actions;
-    }
-
-    public ProblemReport setActions(String actions) {
-        this.actions = actions;
-        return this;
-    }
+//    public String getDescription() {
+//        return description;
+//    }
+//
+//    public ProblemReport setDescription(String description) {
+//        this.description = description;
+//        return this;
+//    }
+//
+//    public String getActions() {
+//        return actions;
+//    }
+//
+//    public ProblemReport setActions(String actions) {
+//        this.actions = actions;
+//        return this;
+//    }
 }

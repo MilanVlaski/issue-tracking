@@ -20,9 +20,7 @@ public class ProblemProcessing {
     @Transactional
     public void report(ProblemReport problemReport, Application application , User user) {
         var actions = parseActions(problemReport.getActions());
-
         var problem = new Problem(problemReport.getDescription(), application, user, actions);
-
         em.persist(problem);
     }
 

@@ -2,9 +2,12 @@ package com.akimi.issue_tracking.problem;
 
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
+import com.akimi.issue_tracking.problem.dto.AnswerDto;
+import com.akimi.issue_tracking.problem.engineer.Answer;
 import com.akimi.issue_tracking.security.CurrentUser;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -62,6 +65,15 @@ public class ProblemPages {
         model.addAttribute("actions", actions);
         return "answerProblem";
     }
+
+//    @PostMapping("/engineer/problems/{problemId}/answer")
+//    public String answerProblemPost(@PathVariable String problemId, Model model,
+//            @ModelAttribute AnswerDto answer, HttpServletRequest request) {
+//        var problem = em.find(Problem.class, problemId);
+//        problem.getAnswers().add()
+//
+//        return "redirect:" + request.getRequestURI();
+//    }
 
     public User find() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();

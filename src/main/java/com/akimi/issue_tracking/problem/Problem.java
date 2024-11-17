@@ -61,11 +61,14 @@ public class Problem {
         this.state = ProblemState.REPORTED.name;
         this.description = description;
         this.application = application;
-        this.actions.addAll(actions);
-
-        actions.forEach(a -> a.setProblem(this));
+        addActions(actions);
         application.getProblems().add(this);
         addUser(user);
+    }
+
+    private void addActions(List<Action> actions) {
+        this.actions.addAll(actions);
+        actions.forEach(a -> a.setProblem(this));
     }
 
     public Problem() {

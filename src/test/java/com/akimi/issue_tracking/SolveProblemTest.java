@@ -96,6 +96,9 @@ public class SolveProblemTest {
         // should find actions that the user has posted previously
         driver.findElement(By.xpath("//*[text()='" + action1 + "']"));
         // give an answer
+        driver.findElement(By.name("answer"))
+                .sendKeys("It looks like your password had a space in it." +
+                        " Please change your password, and that should solve things!");
 //        driver.findElement(By.cssSelector("[aria-label=\"Answer Problem\"]"))
 //              .submit();
     }
@@ -134,12 +137,12 @@ public class SolveProblemTest {
     }
 
     private static final WebDriver driver = new ChromeDriver(
-//            new ChromeOptions().addArguments("--headless")
+            new ChromeOptions().addArguments("--headless")
     );
 
     @AfterAll
     public static void tearDown() {
-//        driver.quit();
+        driver.quit();
     }
 
 }

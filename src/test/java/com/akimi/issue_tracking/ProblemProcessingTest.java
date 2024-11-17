@@ -34,9 +34,9 @@ public class ProblemProcessingTest {
         em.persist(application);
         em.persist(user);
 
-        problemProcessing.report(new ProblemReport()
-                .setDescription("Description")
-                .setActions("Bla bla\nAnd another bla\n"), application, user);
+        ProblemReport problemReport = new ProblemReport("Description" ,
+                "Bla bla\nAnd another bla\n");
+        problemProcessing.report(problemReport, application, user);
 
         var actions = em.find(Problem.class, 1L).getActions();
         assertEquals(2, actions.size());

@@ -12,7 +12,12 @@
     <li th:text="${action.description}">Action description.</li>
 </ol>
 
-<form th:action="@{/engineer/problems/{problemId}(problemId=${problem.id})}" method="post">
+<form th:action="@{answer}" method="post">
+    <label for="answer">
+        <textarea name="answer" id="answer" cols="30" rows="10"
+                  placeholder="How can the problem be resolved?">
+        </textarea>
+    </label>
     <button aria-label="Answer Problem">Answer Problem</button>
 </form>
 
