@@ -96,15 +96,8 @@ public class SolveProblemTest {
         driver.findElement(By.name("answer"))
                 .sendKeys("It looks like your password had a space in it." +
                         " Please change your password, and that should solve things!");
-//        driver.findElement(By.cssSelector("[aria-label=\"Answer Problem\"]"))
-//              .submit();
-    }
-
-    private void logout() {
-        wait.until(
-                elementToBeClickable(
-                        By.cssSelector("[aria-label='Log Out']"))
-        ).click();
+        driver.findElement(By.cssSelector("[aria-label=\"Answer Problem\"]"))
+              .submit();
     }
 
     @Then("the user can look at the answer and be happy")
@@ -116,6 +109,13 @@ public class SolveProblemTest {
 //        inputUserEmailAndPassword();
         // go to /problems
         // see your problem answered, nice and green (assertion)
+    }
+
+    private void logout() {
+        wait.until(
+                elementToBeClickable(
+                        By.cssSelector("[aria-label='Log Out']"))
+        ).click();
     }
 
     private void inputUserEmailAndPassword() {

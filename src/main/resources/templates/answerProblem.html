@@ -8,6 +8,9 @@
 </head>
 <body>
 
+<div th:replace="~{fragments/header :: header}"></div>
+
+
 <ol th:each="action : ${actions}">
     <li th:text="${action.description}">Action description.</li>
 </ol>

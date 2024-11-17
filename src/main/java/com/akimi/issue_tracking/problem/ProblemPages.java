@@ -71,7 +71,7 @@ public class ProblemPages {
             @ModelAttribute AnswerDto answer, HttpServletRequest request) {
         var problem = em.find(Problem.class, problemId);
         problem.getAnswers().add(answer.toEntity());
-        return "redirect:" + request.getHeader("Referer");
+        return "/engineer/problems/"+problemId;
     }
 
     public User find() {

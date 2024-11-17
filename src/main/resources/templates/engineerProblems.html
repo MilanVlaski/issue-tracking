@@ -8,7 +8,9 @@
 </head>
 <body>
 
-<h1>Engineer Problems Page</h1>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<h1>Active Problems</h1>
 
 <table th:unless="${problems.isEmpty()}">
     <thead>application name + version, state, description, number of actions
