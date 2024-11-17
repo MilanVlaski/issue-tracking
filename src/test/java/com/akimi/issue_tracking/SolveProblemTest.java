@@ -106,7 +106,7 @@ public class SolveProblemTest {
         logout();
         driver.get(homepage());
         wait.until(elementToBeClickable(By.cssSelector("[aria-label='Log In']"))).click();
-//        inputUserEmailAndPassword();
+        inputUserEmailAndPassword();
         // go to /problems
 
         // see your problem answered, nice and green (assertion)
