@@ -4,10 +4,14 @@
     <div sec:authorize="isAuthenticated()">
         <!-- Show logout button if authenticated -->
         <form th:action="@{/logout}" method="post">
-            <button type="submit">Logout</button>
+            <button type="submit" aria-label="Log Out">Log Out</button>
         </form>
 
         <!-- Optionally show the username if logged in -->
         <p>Welcome, <span th:text="${#authentication.name}"></span></p>
+    </div>
+
+    <div sec:authorize="!isAuthenticated()">
+        <a th:href="@{${loginPath}}">Login</a>
     </div>
 </header>

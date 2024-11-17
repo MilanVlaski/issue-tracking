@@ -82,10 +82,7 @@ public class SolveProblemTest {
     @And("an engineer can post an answer to the problem")
     public void anEngineerCanPostAnAnswerToTheProblem() {
         // logout user
-        new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(100)).until(
-                elementToBeClickable(
-                        By.xpath("//button[text()='Logout']"))
-        ).click();
+        logout();
 
         // go to /support/problems
         driver.get(homepage() + "/engineer/problems");
@@ -103,8 +100,20 @@ public class SolveProblemTest {
 //              .submit();
     }
 
+    private void logout() {
+        wait.until(
+                elementToBeClickable(
+                        By.cssSelector("[aria-label='Log Out']"))
+        ).click();
+    }
+
     @Then("the user can look at the answer and be happy")
     public void theUserCanLookAtTheAnswerAndBeHappy() {
+        // logout, then log the user back in, on the problems page
+        logout();
+//        driver.get(homepage());
+//        driver.findElement(By.cssSelector("[aria-label='Log In']"));
+//        inputUserEmailAndPassword();
         // go to /problems
         // see your problem answered, nice and green (assertion)
     }
