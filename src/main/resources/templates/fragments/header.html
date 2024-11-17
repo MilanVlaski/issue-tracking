@@ -1,17 +1,17 @@
-<header th:fragment="userHeader">
-    <a th:href="@{/}">Home</a>
-    <a th:href="@{/reportProblem}">Report a problem</a>
+<div th:fragment="userHeader" th:replace="this :: baseHeader('/','/login')"></div>
+<div th:fragment="engineerHeader" th:replace="this :: baseHeader('/engineer/problems','/engineer/login')"></div>
+
+
+<header th:fragment="baseHeader(homeUrl, loginUrl)">
+    <a th:href="${homeUrl}">Home</a>
+    <a th:if="${homeUrl == '/'}" th:href="@{/reportProblem}">Report a problem</a>
     <div sec:authorize="isAuthenticated()">
-        <!-- Show logout button if authenticated -->
         <form th:action="@{/logout}" method="post">
             <button type="submit" aria-label="Log Out">Log Out</button>
         </form>
-
-        <!-- Optionally show the username if logged in -->
         <p>Welcome, <span th:text="${#authentication.name}"></span></p>
     </div>
-
     <div sec:authorize="!isAuthenticated()">
-        <a th:href="@{${loginPath}}" aria-label="Log I">Login</a>
+        <a th:href="${loginUrl}" aria-label="Log In">Login</a>
     </div>
 </header>

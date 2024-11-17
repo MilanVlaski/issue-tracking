@@ -106,7 +106,7 @@ public class SolveProblemTest {
         logout();
         driver.get(homepage());
         wait.until(elementToBeClickable(By.cssSelector("[aria-label='Log In']"))).click();
-        inputUserEmailAndPassword();
+//        inputUserEmailAndPassword();
         // go to /problems
 
         // see your problem answered, nice and green (assertion)
@@ -148,12 +148,12 @@ public class SolveProblemTest {
     }
 
     private static final WebDriver driver = new ChromeDriver(
-//            new ChromeOptions().addArguments("--headless")
+            new ChromeOptions().addArguments("--headless")
     );
 
     @AfterAll
     public static void tearDown() {
-//        driver.quit();
+        driver.quit();
     }
 
 }
