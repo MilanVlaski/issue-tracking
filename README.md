@@ -42,6 +42,10 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - Admin ili ko vec, radi sve.
   Ovo je sve tema za spring sekjuriti...
  # To do
+- [ ] Consider validation in three ways:
+  - Programmatic. Calling `Validation.buildDefaultValidatorFactory();`
+  - `@Valid @ModelAttribute entity, BindingResult result` 
+  - `@Valid @RequestBody entity`
 - [ ] Create page answerProblem with actions in a numbered list.
 - [ ] Create a form submit
 - [ ] Add a helper function that fetches the current user.

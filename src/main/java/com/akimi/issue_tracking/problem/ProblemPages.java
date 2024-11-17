@@ -66,14 +66,13 @@ public class ProblemPages {
         return "answerProblem";
     }
 
-//    @PostMapping("/engineer/problems/{problemId}/answer")
-//    public String answerProblemPost(@PathVariable String problemId, Model model,
-//            @ModelAttribute AnswerDto answer, HttpServletRequest request) {
-//        var problem = em.find(Problem.class, problemId);
-//        problem.getAnswers().add()
-//
-//        return "redirect:" + request.getRequestURI();
-//    }
+    @PostMapping("/engineer/problems/{problemId}/answer")
+    public String answerProblemPost(@PathVariable String problemId, Model model,
+            @ModelAttribute AnswerDto answer, HttpServletRequest request) {
+        var problem = em.find(Problem.class, problemId);
+        problem.getAnswers().add(answer.toEntity());
+        return "redirect:" + request.getHeader("Referer");
+    }
 
     public User find() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
