@@ -150,4 +150,8 @@ public class Problem {
     }
 
 
+    public void add(Answer answer) {
+        answers.add(answer);
+        answer.setProblem(this);
+    }
 }

@@ -37,7 +37,7 @@ public class SolveProblemTest {
     int problemId = 1;
     String action1 = "I log in using my email and password.";
     String action2 = "I get an error message saying \"Something went wrong.\".";
-
+    String problemDescription = "User cannot access their account at login.";
 
     @Given("a list of applications")
     public void a_list_of_applications() {
@@ -63,7 +63,6 @@ public class SolveProblemTest {
 
         support.submit();
     }
-
     @Then("the user is able to file a problem report on that application")
     public void theUserIsAbleToFileAProblemReportOnThatApplication() {
         clickLinkLeadingTo("/reportProblem");
@@ -72,12 +71,15 @@ public class SolveProblemTest {
         clickLinkLeadingTo(reportProblemOnApplication_Path);
         // get taken to a form where you put in Problem(description, Actions(number, description))
         driver.findElement(By.name("description"))
-              .sendKeys("User cannot access their account at login.");
+              .sendKeys(problemDescription);
 
         var actions = driver.findElement(By.name("actions"));
         actions.sendKeys(String.join("\n", action1, action2));
         actions.submit();
     }
+
+    String answer = "It looks like your password had a space in it." +
+            " Please change your password, and that should solve things!";
 
     @And("an engineer can post an answer to the problem")
     public void anEngineerCanPostAnAnswerToTheProblem() {
@@ -94,8 +96,7 @@ public class SolveProblemTest {
         driver.findElement(By.xpath("//*[text()='" + action1 + "']"));
         // give an answer
         driver.findElement(By.name("answer"))
-              .sendKeys("It looks like your password had a space in it." +
-                      " Please change your password, and that should solve things!");
+              .sendKeys(answer);
         driver.findElement(By.cssSelector("[aria-label=\"Answer Problem\"]"))
               .submit();
     }
@@ -105,11 +106,19 @@ public class SolveProblemTest {
         // logout, then log the user back in, on the problems page
         logout();
         driver.get(homepage());
-        wait.until(elementToBeClickable(By.cssSelector("[aria-label='Log In']"))).click();
+        click("Log In");
         inputUserEmailAndPassword();
         // go to /problems
-        wait.until(elementToBeClickable(By.cssSelector("[aria-label='See Reported Problems']"))).click();
-        // see your problem answered, nice and green (assertion)
+        click("See Reported Problems");
+        click("See Fixes");
+        // see your problem answered
+        driver.findElement(By.xpath("//*[text()='" + problemDescription + "']"));
+        driver.findElement(By.xpath("//*[text()='" + answer + "']"));
+        // see problem as resolved
+    }
+
+    private void click(String s) {
+        wait.until(elementToBeClickable(By.cssSelector("[aria-label='" + s + "']"))).click();
     }
 
     private void logout() {

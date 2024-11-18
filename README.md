@@ -42,6 +42,9 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - Admin ili ko vec, radi sve.
   Ovo je sve tema za spring sekjuriti...
  # To do
+- [ ] When an engineer posts an answer, they should be able to choose which state this puts it in. It should be prepopulated with the problem's current state, but allow it to be set to solved. 
+- [ ] Think about what the user would like to see on the fixes page. Probably, I want to see that my problem is fixed, and then immediately click on it to open it. Ideally, I click something, it does a dropdown, in which I see answers and patches. The answers have descriptions, and engineer's names next to them. The patches have names, and other data, and a fake download link (it would be neat if the link held the name and new version of the application) 
+- [ ] FEAT: Assign problem to engineer.
 - [ ] Make a different header for user and engineer.
 - [x] Add login to header
 - [ ] Consider validation in three ways:

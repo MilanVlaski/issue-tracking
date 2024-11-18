@@ -3,6 +3,8 @@ package com.akimi.issue_tracking.problem;
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.dto.AnswerDto;
+import com.akimi.issue_tracking.problem.engineer.Answer;
+import com.akimi.issue_tracking.problem.engineer.Engineer;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpServletRequest;
@@ -56,7 +58,7 @@ public class ProblemPages {
     @GetMapping("/problems")
     public String problems(Model model) {
         var problems = em.createQuery("select p from Problem p where p.user = :user",
-                                 Problem.class)
+                                  Problem.class)
                          .setParameter("user", currentUser())
                          .getResultList();
         model.addAttribute("problems", problems);
@@ -76,13 +78,28 @@ public class ProblemPages {
     public String answerProblemPost(@PathVariable String problemId, Model model,
             @ModelAttribute AnswerDto answer, HttpServletRequest request) {
         var problem = em.find(Problem.class, problemId);
-        problem.getAnswers().add(answer.toEntity());
+        problemProcessing.solveProblem(problem, answer.toEntity(), currentEngineer());
         return "redirect:/engineer/problems/" + problemId;
     }
+
+    @GetMapping("/problem/{problemId}/fixes")
+    public String fixes(@PathVariable String problemId, Model model) {
+        var problem = em.find(Problem.class, problemId);
+        model.addAttribute("answers", problem.getAnswers());
+        return "fixes";
+    }
+
 
     public User currentUser() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         return em.createQuery("select u from User u where u.email = :email", User.class)
+                 .setParameter("email", email)
+                 .getSingleResult();
+    }
+
+    public Engineer currentEngineer() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        return em.createQuery("select e from Engineer e where e.email = :email", Engineer.class)
                  .setParameter("email", email)
                  .getSingleResult();
     }

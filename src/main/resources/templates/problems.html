@@ -11,30 +11,16 @@
 <div th:replace="~{fragments/header :: userHeader}"></div>
 <h1>Reported Problems</h1>
 
-<table th:unless="${problems.isEmpty()}">
-    <thead>
-    <tr>
-        <th>Application</th>
-        <th>Version</th>
-        <th>State</th>
-        <th>Description</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="problem: ${problems}">
-        <td th:text="${problem.application.name}">Application</td>
-        <td th:text="${problem.application.version}">1.0</td>
-        <td th:text="${problem.state}">Reported.</td>
-        <td th:text="${problem.description}">User can't do something.</td>
-        <td>
-            <a th:href="@{/engineer/problems/{problemId}(problemId=${problem.id})}">
-                See Fixes
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div th:unless="${problems.isEmpty()}">
+    <details th:each="problem : ${problems}" aria-label="See Fixes">
+        <summary>
+            Problem with <span th:text="${problem.application.name}"></span>
+            <span th:text="${problem.application.version}"></span>
+            currently <span th:text="${problem.state}"></span>.
+        </summary>
+        <p th:text="${problem.description}"></p>
+    </details>
+</div>
 
 </body>
 </html>

@@ -148,4 +148,8 @@ public class Engineer {
         return this;
     }
 
+    public void add(Answer answer) {
+        answers.add(answer);
+        answer.setEngineer(this);
+    }
 }

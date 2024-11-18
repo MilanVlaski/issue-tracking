@@ -2,6 +2,8 @@ package com.akimi.issue_tracking.problem;
 
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
+import com.akimi.issue_tracking.problem.engineer.Answer;
+import com.akimi.issue_tracking.problem.engineer.Engineer;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -32,5 +34,13 @@ public class ProblemProcessing {
                      .map(String::trim)
                      .map(line -> new Action(id.getAndIncrement(), line))
                      .toList();
+    }
+
+    @Transactional
+    public void solveProblem(Problem problem, Answer answer, Engineer engineer) {
+        problem.add(answer);
+        engineer.add(answer);
+        problem.setState(ProblemState.SOLVED.name);
+        em.persist(answer);
     }
 }
