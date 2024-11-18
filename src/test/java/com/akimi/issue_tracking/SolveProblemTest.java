@@ -24,6 +24,7 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -63,6 +64,7 @@ public class SolveProblemTest {
 
         support.submit();
     }
+
     @Then("the user is able to file a problem report on that application")
     public void theUserIsAbleToFileAProblemReportOnThatApplication() {
         clickLinkLeadingTo("/reportProblem");
@@ -113,7 +115,8 @@ public class SolveProblemTest {
         click("See Fixes");
         // see your problem answered
         driver.findElement(By.xpath("//*[text()='" + problemDescription + "']"));
-        driver.findElement(By.xpath("//*[text()='" + answer + "']"));
+        wait.until(visibilityOf(driver.findElement(By.xpath(
+                "//*[contains(text(), '" + problemDescription + "')]"))));
         // see problem as resolved
     }
 

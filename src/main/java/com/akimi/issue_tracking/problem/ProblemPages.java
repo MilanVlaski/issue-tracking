@@ -57,8 +57,8 @@ public class ProblemPages {
 
     @GetMapping("/problems")
     public String problems(Model model) {
-        var problems = em.createQuery("select p from Problem p where p.user = :user",
-                                  Problem.class)
+        var problems = em.createQuery("select p from Problem p left join fetch p.answers where p.user = :user",
+                                 Problem.class)
                          .setParameter("user", currentUser())
                          .getResultList();
         model.addAttribute("problems", problems);
@@ -80,13 +80,6 @@ public class ProblemPages {
         var problem = em.find(Problem.class, problemId);
         problemProcessing.solveProblem(problem, answer.toEntity(), currentEngineer());
         return "redirect:/engineer/problems/" + problemId;
-    }
-
-    @GetMapping("/problem/{problemId}/fixes")
-    public String fixes(@PathVariable String problemId, Model model) {
-        var problem = em.find(Problem.class, problemId);
-        model.addAttribute("answers", problem.getAnswers());
-        return "fixes";
     }
 
 

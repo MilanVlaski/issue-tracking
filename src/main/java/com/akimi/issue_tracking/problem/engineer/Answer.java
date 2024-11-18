@@ -26,7 +26,7 @@ public class Answer {
     @JoinColumn(name = "ID_PRB", nullable = false)
     private Problem problem;
 
-    @Column(name = "OPIS_ODG", length = 50)
+    @Column(name = "OPIS_ODG", length = 500)
     private String description;
 
     public Integer getId() {

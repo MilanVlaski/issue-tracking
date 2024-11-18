@@ -7,16 +7,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Accessors(fluent = true)
 public class AnswerDto {
     private String answer;
 
-    public Answer toEntity() {
+    public String getAnswer() {
+        return answer;
+    }
 
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public Answer toEntity() {
         return new Answer().setDescription(answer);
     }
 }

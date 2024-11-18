@@ -11,7 +11,7 @@
 <div th:replace="~{fragments/header :: userHeader}"></div>
 <h1>Reported Problems</h1>
 
-<div th:unless="${problems.isEmpty()}">
+<div th:if="${problems}">
     <details th:each="problem : ${problems}" aria-label="See Fixes">
         <summary>
             Problem with <span th:text="${problem.application.name}"></span>
@@ -19,6 +19,13 @@
             currently <span th:text="${problem.state}"></span>.
         </summary>
         <p th:text="${problem.description}"></p>
+        <h3>Answers</h3>
+        <ul th:if="${problem.answers}">
+            <li th:each="answer : ${problem.answers}">
+                <strong th:text="${answer.engineer.name}"></strong>:
+                <span th:text="${answer.description}"></span>
+            </li>
+        </ul>
     </details>
 </div>
 

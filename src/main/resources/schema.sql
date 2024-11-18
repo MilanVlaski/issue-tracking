@@ -171,7 +171,7 @@ create table ODGOVOR (
                          ID_ODG               INT4   AUTO_INCREMENT              not null,
                          ID_INZ               INT4                 not null,
                          ID_PRB               INT4                 not null,
-                         OPIS_ODG             VARCHAR(50)          null,
+                         OPIS_ODG             VARCHAR(500)          null,
                          constraint PK_ODGOVOR primary key (ID_ODG)
 );
 
