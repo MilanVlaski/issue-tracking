@@ -39,6 +39,8 @@ public class SolveProblemTest {
     String action1 = "I log in using my email and password.";
     String action2 = "I get an error message saying \"Something went wrong.\".";
     String problemDescription = "User cannot access their account at login.";
+    String answer = "It looks like your password had a space in it." +
+            " Please change your password, and that should solve things!";
 
     @Given("a list of applications")
     public void a_list_of_applications() {
@@ -79,9 +81,6 @@ public class SolveProblemTest {
         actions.sendKeys(String.join("\n", action1, action2));
         actions.submit();
     }
-
-    String answer = "It looks like your password had a space in it." +
-            " Please change your password, and that should solve things!";
 
     @And("an engineer can post an answer to the problem")
     public void anEngineerCanPostAnAnswerToTheProblem() {
