@@ -42,37 +42,41 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - Admin ili ko vec, radi sve.
   Ovo je sve tema za spring sekjuriti...
  # To do
-- [ ] When an engineer posts an answer, they should be able to choose which state this puts it in. It should be prepopulated with the problem's current state, but allow it to be set to solved. 
-- [ ] Think about what the user would like to see on the fixes page. Probably, I want to see that my problem is fixed, and then immediately click on it to open it. Ideally, I click something, it does a dropdown, in which I see answers and patches. The answers have descriptions, and engineer's names next to them. The patches have names, and other data, and a fake download link (it would be neat if the link held the name and new version of the application) 
+## Must do
+- [ ] **Production postgres environment** (2 days)
+- [ ] **Local postgres** (3 days)
+- [ ] **Styling** (2 days) 
+- [ ] FEAT: Create a patch.
 - [ ] FEAT: Assign problem to engineer.
-- [ ] Make a different header for user and engineer.
-- [x] Add login to header
+- [ ] Add filtering to problems page for the engineer. (User's is prefiltered.)
+## Error handling
+- [ ] Add logic so that user can't buy the same app twice (there is already an exception happening on the page.) 
+- [ ] Add nice handling for when buy page has error/success.
+- [ ] Display login error.
+- [ ] Display register error, in case email is not unique.
+## Nice to have
+- [ ] Add a helper function that fetches the current user.
+- [ ] By the end, completely refactor the Entities, and the CRUD operations, to reduce the amount of times I have to manually wire up the associations.
+  - [ ] Try replacing all the getters and setters with fluent lombok
+  - [ ] Make Purchases have a synthetic ID
+- [ ] Add pagination to all listed pages
+- [ ] Add number of actions to problem rows. 
 - [ ] Consider validation in three ways:
   - Programmatic. Calling `Validation.buildDefaultValidatorFactory();`
   - `@Valid @ModelAttribute entity, BindingResult result` 
   - `@Valid @RequestBody entity`
-- [ ] Create page answerProblem with actions in a numbered list.
-- [ ] Create a form submit
-- [ ] Add a helper function that fetches the current user.
-- [ ] Add number of actions to problem rows. It starts filtered by Reported to begin with.
-- [ ] Add filtering to problems page
-- [ ] Add pagination to all listed pages
-- [ ] Create catalogue of user actions
+- [ ] When an engineer posts an answer, they should be able to choose which state this puts it in. It should be prepopulated with the problem's current state, but allow it to be set to solved. 
+- [ ] Be clever and when user goes to `/reportProblem`, if he only has one app, then take him to it
+- [ ] Add a dto for RegisterRequest that encodes the password, and maps it to an entity
+## Done
+- [x] Make a different header for user and engineer.
+- [x] Think about what the user would like to see on the fixes page. Probably, I want to see that my problem is fixed, and then immediately click on it to open it. Ideally, I click something, it does a dropdown, in which I see answers and patches. The answers have descriptions, and engineer's names next to them. The patches have names, and other data, and a fake download link (it would be neat if the link held the name and new version of the application)
 - [x] Move Entities into package where necessary. 
 - [x] Add processing of problem actions
 - [x] Implement engineer security
 - [x] Add logout for both engineer and for user
 - [x] Change all application paths to use path variable, instead of request parameter
 - [x] Handle report problem page with no apps.
-- [ ] Add logic so that user can't buy the same app twice (there is already an exception happening on the page.) 
-- [ ] By the end, completely refactor the Entities, and the CRUD operations, to reduce the amount of times I have to manually wire up the associations.
-  - [ ] Make Purchases have a synthetic ID
-- [ ] Add nice handling for when buy page has error/success.
-- [ ] Be clever and let the user type, hit enter, and have the action show up somewhere as numbered. Also be able to edit or delete each entry.
-- [ ] Be clever and when user goes to `/reportProblem`, if he only has one app, then take him to it
-- [ ] Add a dto for RegisterRequest that encodes the password, and maps it to an entity
-- [ ] Display login error.
-- [ ] Display register error, in case email is not unique.
 - [x] Add sign in (Implement spring security so that the purchase page requires a log in.)
   - [x] Add a custom login page
   - [x] Register is simple. Just put it in the db, plus, use a password encoder. (Might still want to keep a default username and password thingy, because it's simpler for manual debugging.)
@@ -91,15 +95,3 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
       - [x] Add the entity manager and use it to insert
       - [x] Then use it to fetch the tables
   - [x] add the necessary stuff in the controller
-- Logout
-```html
-    <div th:if="${#authentication != null}">
-        <!-- Show logout button if authenticated -->
-        <form th:action="@{/logout}" method="post">
-            <button type="submit">Logout</button>
-        </form>
-        
-        <!-- Optionally show the username if logged in -->
-        <p>Welcome, <span th:text="${#authentication.name}"></span></p>
-    </div>
-```
