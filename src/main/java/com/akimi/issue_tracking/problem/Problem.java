@@ -40,6 +40,7 @@ public class Problem {
     @Column(name = "OPIS_PRB", length = 200)
     private String description;
 
+    @OrderBy("ordinalNumber ASC")
     @OneToMany(mappedBy = "problem", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<Action> actions = new LinkedHashSet<>();
 

@@ -62,4 +62,7 @@ public class Action {
         return this;
     }
 
+    public Integer getOrdinalNumber() {
+        return ordinalNumber;
+    }
 }
