@@ -68,6 +68,12 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - [ ] When an engineer posts an answer, they should be able to choose which state this puts it in. It should be prepopulated with the problem's current state, but allow it to be set to solved. 
 - [ ] Be clever and when user goes to `/reportProblem`, if he only has one app, then take him to it
 - [ ] Add a dto for RegisterRequest that encodes the password, and maps it to an entity
+## Bugs
+- If user already has application takes us to error page.
+- Order of actions in a problem is messed up, and not numbered in <ol>
+- Key for action is the number of the action.
+  - Either use a composite key, of the number and problem.
+  - Or use a synthetic key, plus an ordinal number for the action. 
 ## Done
 - [x] Make a different header for user and engineer.
 - [x] Think about what the user would like to see on the fixes page. Probably, I want to see that my problem is fixed, and then immediately click on it to open it. Ideally, I click something, it does a dropdown, in which I see answers and patches. The answers have descriptions, and engineer's names next to them. The patches have names, and other data, and a fake download link (it would be neat if the link held the name and new version of the application)
