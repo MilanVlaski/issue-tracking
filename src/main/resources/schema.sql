@@ -10,8 +10,9 @@ drop table if exists VRSTA_PODRSKE cascade;
 drop table if exists ZAKRPA cascade;
 
 create table AKCIJA (
-                        BR_AKC INT not null,
+                        BR_AKC SERIAL not null,
                         ID_PRB INT not null,
+                        RED_BR_AKC INT not null,
                         OPIS_AKC VARCHAR(200) null,
                         constraint PK_AKCIJA primary key (BR_AKC)
 );

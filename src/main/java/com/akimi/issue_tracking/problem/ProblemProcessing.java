@@ -27,12 +27,12 @@ public class ProblemProcessing {
     }
 
     private List<Action> parseActions(String actions1) {
-        var id = new AtomicInteger(1);
+        var ordinalNumber = new AtomicInteger(1);
         return Arrays.stream(actions1.trim().split("\n"))
                      .map(String::trim)
                      .filter(line -> !line.isEmpty())
                      .map(String::trim)
-                     .map(line -> new Action(id.getAndIncrement(), line))
+                     .map(line -> new Action(ordinalNumber.getAndIncrement(), line))
                      .toList();
     }
 

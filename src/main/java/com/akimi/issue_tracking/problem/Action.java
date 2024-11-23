@@ -9,9 +9,14 @@ import org.hibernate.annotations.OnDeleteAction;
         @Index(name = "UZROKUJU_FK", columnList = "ID_PRB")
 })
 public class Action {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BR_AKC", nullable = false)
     private Integer id;
+
+    @Column(name= "RED_BR_AKC", nullable = false)
+    private Integer ordinalNumber;
 
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
@@ -21,8 +26,8 @@ public class Action {
     @Column(name = "OPIS_AKC", length = 200)
     private String description;
 
-    public Action(int id, String description ) {
-        this.id = id;
+    public Action(int ordinalNumber, String description ) {
+        this.ordinalNumber = ordinalNumber;
         this.description = description;
     }
 

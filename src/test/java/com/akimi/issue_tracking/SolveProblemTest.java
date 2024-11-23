@@ -93,8 +93,8 @@ public class SolveProblemTest {
         inputEngineerEmailAndPassword();
         // click on "Solve Problem"
         clickLinkLeadingTo("/engineer/problems/" + problemId);
-        // should find actions that the user has posted previously
-        driver.findElement(By.xpath("//*[text()='" + action1 + "']"));
+        // should find actions that the user has posted previously, in order
+        actionsAppearInSameOrderAsDescribed();
         // give an answer
         driver.findElement(By.name("answer"))
               .sendKeys(answer);
@@ -117,6 +117,14 @@ public class SolveProblemTest {
         wait.until(visibilityOf(driver.findElement(By.xpath(
                 "//*[contains(text(), '" + problemDescription + "')]"))));
         // see problem as resolved
+    }
+
+    private void actionsAppearInSameOrderAsDescribed() {
+        WebElement firstElement = driver.findElement(By.cssSelector("ol > li:first-child"));
+        WebElement secondElement = driver.findElement(By.cssSelector("ol > li:nth-child(2)"));
+
+        assertEquals(action1, firstElement.getText());
+        assertEquals(action2, secondElement.getText());
     }
 
     private void click(String s) {
