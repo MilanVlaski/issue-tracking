@@ -72,8 +72,7 @@ public class SolveProblemTest {
     public void theUserIsAbleToFileAProblemReportOnThatApplication() {
         click("Report a Problem");
 
-        var reportProblemOnApplication_Path = "/application/" + appId + "/reportProblem";
-        clickLinkLeadingTo(reportProblemOnApplication_Path);
+        click("Report a Problem With the Application");
         // get taken to a form where you put in Problem(description, Actions(number, description))
         driver.findElement(By.name("description"))
               .sendKeys(problemDescription);
@@ -87,7 +86,6 @@ public class SolveProblemTest {
     public void anEngineerCanPostAnAnswerToTheProblem() {
         // logout user
         logout();
-
         // go to /support/problems
         driver.get(homepage() + "/engineer/problems");
         // login engineer
