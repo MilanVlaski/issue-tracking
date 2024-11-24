@@ -1,5 +1,6 @@
 package com.akimi.issue_tracking;
 
+import io.cucumber.java.After;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -157,21 +158,22 @@ public class SolveProblemTest {
     }
 
 
-    private WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(100));
-
     public void clickLinkLeadingTo(String href) {
         wait.until(elementToBeClickable(
                 By.cssSelector("[href=\"" + href + "\"]"))
         ).click();
     }
 
-    private static final WebDriver driver = new ChromeDriver(
+
+    private final WebDriver driver = new ChromeDriver(
             new ChromeOptions().addArguments("--headless")
     );
 
-    @AfterAll
-    public static void tearDown() {
+    @After
+    public void tearDown() {
         driver.quit();
     }
+
+    private WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(100));
 
 }
