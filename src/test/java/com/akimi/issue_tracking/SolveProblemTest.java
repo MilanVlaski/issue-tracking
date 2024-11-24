@@ -55,7 +55,7 @@ public class SolveProblemTest {
     @When("the user purchases an application with any tech support")
     public void the_user_purchases_an_application() {
         // buy first app
-        clickLinkLeadingTo("/application/" + appId + "/buy");
+        click("Buy Application");
 
         // we are not signed in, so we get taken to a sign-in page
         inputUserEmailAndPassword();
