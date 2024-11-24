@@ -28,7 +28,6 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@CucumberContextConfiguration
 public class SolveProblemTest {
 
     @LocalServerPort
