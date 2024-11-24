@@ -35,8 +35,6 @@ public class SolveProblemTest {
     @LocalServerPort
     private int port;
 
-    int appId = 1;
-    int problemId = 1;
     String action1 = "I log in using my email and password.";
     String action2 = "I get an error message saying \"Something went wrong.\".";
     String problemDescription = "User cannot access their account at login.";
