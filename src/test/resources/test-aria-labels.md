@@ -7,3 +7,4 @@
 - Report a Problem - shows a list of purchased apps on which the user can report a problme
 - Report a Problem With the Application - reports a problem on a specific application
 - See All Reported Problems
+- See Problem - see one problem

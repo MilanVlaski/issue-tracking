@@ -91,7 +91,7 @@ public class SolveProblemTest {
         // login engineer
         inputEngineerEmailAndPassword();
         // click on "Solve Problem"
-        clickLinkLeadingTo("/engineer/problems/" + problemId);
+        click("View Problem");
         // should find actions that the user has posted previously, in order
         actionsAppearInSameOrderAsDescribed();
         // give an answer

@@ -30,7 +30,8 @@
         <td th:text="${problem.description}">User can't do something.</td>
         <td>
 
-            <a th:href="@{/engineer/problems/{problemId}(problemId=${problem.id})}">
+            <a th:href="@{/engineer/problems/{problemId}(problemId=${problem.id})}"
+            aria-label="View Problem">
                 See Problem
             </a>
         </td>
