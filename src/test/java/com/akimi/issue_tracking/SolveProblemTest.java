@@ -70,7 +70,7 @@ public class SolveProblemTest {
 
     @Then("the user is able to file a problem report on that application")
     public void theUserIsAbleToFileAProblemReportOnThatApplication() {
-        clickLinkLeadingTo("/reportProblem");
+        click("Report a Problem");
 
         var reportProblemOnApplication_Path = "/application/" + appId + "/reportProblem";
         clickLinkLeadingTo(reportProblemOnApplication_Path);
