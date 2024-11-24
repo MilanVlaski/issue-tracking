@@ -43,11 +43,16 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
   Ovo je sve tema za spring sekjuriti...
  # To do
 ## Must do
-- [ ] **Production postgres environment** (2 days)
-- [ ] **Local postgres** (3 days)
+- [ ] **Production postgres environment** (2 days) (Maybe Google Cloud + Secret manager)
+- [x] **Local postgres** (3 days)
 - [ ] **Styling** (2 days) 
-- [ ] FEAT: Create a patch.
-- [ ] FEAT: Assign problem to engineer.
+- [ ] FEAT: Assign a problem to an engineer.
+- [ ] FEAT: Then, create a patch for a problem, MUST be posted by an engineer working on the problem.
+- [ ] FEAT: A problem should display all the engineer's names.
+- [ ] FEAT: See all engineers, with a count of solved problems, and option to see problems they are working on.
+- [ ] FEAT: User installs patch. Also, a user who owns a certain version of an application can install any patch of that MAJOR version (in 1.2.3., if they own the first digit), for free. (Others cannot.)
+- [ ] FEAT: Add date created to answer.
+- [ ] FEAT: When an engineer registers, their "employed from" column gets set to the current date.
 - [ ] Add filtering to problems page for the engineer. (User's is prefiltered.)
 ## Error handling
 - [ ] Add logic so that user can't buy the same app twice (there is already an exception happening on the page.) 
@@ -55,6 +60,7 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - [ ] Display login error.
 - [ ] Display register error, in case email is not unique.
 ## Nice to have
+- [ ] A user can purchase an update or patch of an application for free, so Install should be displayed instead of Buy.
 - [ ] Add a helper function that fetches the current user.
 - [ ] By the end, completely refactor the Entities, and the CRUD operations, to reduce the amount of times I have to manually wire up the associations.
   - [ ] Try replacing all the getters and setters with fluent lombok
