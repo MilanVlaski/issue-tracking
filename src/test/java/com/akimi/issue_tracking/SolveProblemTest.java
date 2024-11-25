@@ -71,7 +71,7 @@ public class SolveProblemTest {
 
     @And("an engineer can post an answer to the problem")
     public void anEngineerCanPostAnAnswerToTheProblem() {
-        logout();
+        click("Log Out");
         driver.get(homepage() + "/engineer/problems");
         inputEngineerEmailAndPassword();
 
@@ -84,7 +84,7 @@ public class SolveProblemTest {
 
     @Then("the user can look at the answer and be happy")
     public void theUserCanLookAtTheAnswerAndBeHappy() {
-        logout();
+        click("Log Out");
         driver.get(homepage());
         click("Log In");
         inputUserEmailAndPassword();
@@ -110,14 +110,9 @@ public class SolveProblemTest {
         assertEquals(action2, secondElement.getText());
     }
 
-    private void click(String s) {
-        wait.until(elementToBeClickable(By.cssSelector("[aria-label='" + s + "']"))).click();
-    }
-
-    private void logout() {
-        wait.until(
-                elementToBeClickable(
-                        By.cssSelector("[aria-label='Log Out']"))
+    public void click(String s) {
+        wait.until(elementToBeClickable(
+                By.cssSelector("[aria-label='" + s + "']"))
         ).click();
     }
 
@@ -139,14 +134,6 @@ public class SolveProblemTest {
         passwordElement.sendKeys("password");
         passwordElement.submit();
     }
-
-
-    public void clickLinkLeadingTo(String href) {
-        wait.until(elementToBeClickable(
-                By.cssSelector("[href=\"" + href + "\"]"))
-        ).click();
-    }
-
 
     private final WebDriver driver = new ChromeDriver(
             new ChromeOptions().addArguments("--headless")
