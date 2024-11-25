@@ -54,10 +54,8 @@ public class SolveProblemTest {
     public void the_user_purchases_an_application() {
         // buy first app
         click("Buy Application");
-
         // we are not signed in, so we get taken to a sign-in page
         inputUserEmailAndPassword();
-
         // select the first support type
         var support = driver.findElement(By.name("support"));
         new Select(support)
@@ -69,9 +67,7 @@ public class SolveProblemTest {
     @Then("the user is able to file a problem report on that application")
     public void theUserIsAbleToFileAProblemReportOnThatApplication() {
         click("Report a Problem");
-
         click("Report a Problem With the Application");
-        // get taken to a form where you put in Problem(description, Actions(number, description))
         driver.findElement(By.name("description"))
               .sendKeys(problemDescription);
 
@@ -82,38 +78,35 @@ public class SolveProblemTest {
 
     @And("an engineer can post an answer to the problem")
     public void anEngineerCanPostAnAnswerToTheProblem() {
-        // logout user
         logout();
-        // go to /support/problems
         driver.get(homepage() + "/engineer/problems");
-        // login engineer
         inputEngineerEmailAndPassword();
-        // click on "Solve Problem"
+
         click("View Problem");
-        // should find actions that the user has posted previously, in order
         actionsAppearInSameOrderAsDescribed();
-        // give an answer
         driver.findElement(By.name("answer"))
               .sendKeys(answer);
-        driver.findElement(By.cssSelector("[aria-label=\"Answer Problem\"]"))
-              .submit();
+        click("Answer Problem");
     }
 
     @Then("the user can look at the answer and be happy")
     public void theUserCanLookAtTheAnswerAndBeHappy() {
-        // logout, then log the user back in, on the problems page
         logout();
         driver.get(homepage());
         click("Log In");
         inputUserEmailAndPassword();
-        // go to /problems
+
         click("See Reported Problems");
         click("See Fixes");
-        // see your problem answered
-        driver.findElement(By.xpath("//*[text()='" + problemDescription + "']"));
+
         wait.until(visibilityOf(driver.findElement(By.xpath(
-                "//*[contains(text(), '" + problemDescription + "')]"))));
-        // see problem as resolved
+                "//*[contains(text(), '" + problemDescription + "')]")))
+        ).click();
+        answerIsVisible();
+    }
+
+    private void answerIsVisible() {
+        driver.findElement(By.xpath("//*[contains(text(), '" + answer + "')]"));
     }
 
     private void actionsAppearInSameOrderAsDescribed() {
