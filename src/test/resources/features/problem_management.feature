@@ -1,8 +1,7 @@
 Feature: Assign problem
 
-#  @SetupReportProblem
-#  Scenario: Engineer assigns a problem to themselves
-#    Given an engineer sees a reported problem
+  Scenario: Engineer assigns a problem to themselves
+    Given a problem has been reported on an application
 #    When the engineer assigns a problem to themselves
 #    Then they have it in their list of problems
 

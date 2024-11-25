@@ -7,6 +7,7 @@ import com.akimi.issue_tracking.problem.ProblemReport;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -33,9 +34,6 @@ public class ProblemTest {
     @LocalServerPort
     private int port;
 
-    @PersistenceContext
-    private EntityManager em;
-
     private String homepage() {
         return "http://localhost:" + port;
     }
@@ -45,22 +43,18 @@ public class ProblemTest {
     @Autowired
     ProblemProcessing problemProcessing;
 
-    @Before("@SetupReportProblem")
-    @Transactional
-    public void reportProblem() {
+    @Given("a problem has been reported on an application")
+    public void aProblemHasBeenReportedOnAnApplication() {
         var user = new User("Joe Schmoe", "joe@dot.com", "password",
                 LocalDate.of(1995, 10, 10), "Kansas");
         var application = new Application("Appigo", "1.2", "Great.",
                 LocalDate.of(2023, 10, 10), "http://wawa.com/img.png");
         var problemReport = new ProblemReport(problemDescription, "Action 1\n Action 2");
 
-        em.persist(user);
-        em.persist(application);
-
         problemProcessing.report(problemReport, application, user);
     }
 
-    @Given("an engineer sees a reported problem")
+    @When("an engineer sees a reported problem")
     public void an_engineer_sees_a_reported_problem() {
         driver.get(homepage() + "/engineer/problems");
         wait.until(visibilityOf(driver.findElement(By.xpath(
