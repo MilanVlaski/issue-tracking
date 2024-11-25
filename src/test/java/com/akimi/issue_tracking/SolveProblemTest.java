@@ -1,23 +1,16 @@
 package com.akimi.issue_tracking;
 
 import io.cucumber.java.After;
-import io.cucumber.java.AfterAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.en_scouse.An;
-import io.cucumber.spring.CucumberContextConfiguration;
-import jakarta.transaction.Transactional;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -83,7 +76,7 @@ public class SolveProblemTest {
         inputEngineerEmailAndPassword();
 
         click("View Problem");
-        actionsAppearInSameOrderAsDescribed();
+        assertThatActionsAppearInSameOrderAsDescribed();
         driver.findElement(By.name("answer"))
               .sendKeys(answer);
         click("Answer Problem");
@@ -102,14 +95,14 @@ public class SolveProblemTest {
         wait.until(visibilityOf(driver.findElement(By.xpath(
                 "//*[contains(text(), '" + problemDescription + "')]")))
         ).click();
-        answerIsVisible();
+        assertThatAnswerIsVisible();
     }
 
-    private void answerIsVisible() {
+    private void assertThatAnswerIsVisible() {
         driver.findElement(By.xpath("//*[contains(text(), '" + answer + "')]"));
     }
 
-    private void actionsAppearInSameOrderAsDescribed() {
+    private void assertThatActionsAppearInSameOrderAsDescribed() {
         WebElement firstElement = driver.findElement(By.cssSelector("ol > li:first-child"));
         WebElement secondElement = driver.findElement(By.cssSelector("ol > li:nth-child(2)"));
 
