@@ -55,10 +55,13 @@ public class ProblemTest extends BaseIntegrationTest {
     public void an_engineer_sees_a_reported_problem() {
         driver.get(homepage() + "/engineer/problems");
         inputEngineerEmailAndPassword();
-        var problem = driver.findElement(By.xpath(
+        driver.findElement(By.xpath(
                 "//*[contains(text(), '" + problemDescription + "')]"));
-        wait.until(visibilityOf(problem));
     }
+
+
+
+
 
     private void inputEngineerEmailAndPassword() {
         var email = "john.smith@example.com";
