@@ -5,32 +5,16 @@ import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.ProblemProcessing;
 import com.akimi.issue_tracking.problem.ProblemReport;
 import io.cucumber.java.After;
-import io.cucumber.java.AfterAll;
-import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import org.junit.jupiter.api.Disabled;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Duration;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ProblemTest extends BaseIntegrationTest {
@@ -55,13 +39,19 @@ public class ProblemTest extends BaseIntegrationTest {
     public void an_engineer_sees_a_reported_problem() {
         driver.get(homepage() + "/engineer/problems");
         inputEngineerEmailAndPassword();
-        driver.findElement(By.xpath(
-                "//*[contains(text(), '" + problemDescription + "')]"));
+        assertElementContainingTextExists(problemDescription);
     }
 
+    @And("the engineer assigns a problem to themselves")
+    public void theEngineerAssignsAProblemToThemselves() {
+        click("Assign Problem to Self");
+        click("My Problems");
+    }
 
-
-
+//    @Then("they have it in their list of problems")
+//    public void theyHaveItInTheirListOfProblems() {
+//        assertElementContainingTextExists(problemDescription);
+//    }
 
     private void inputEngineerEmailAndPassword() {
         var email = "john.smith@example.com";

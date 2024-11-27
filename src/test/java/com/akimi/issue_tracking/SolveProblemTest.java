@@ -6,18 +6,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
@@ -90,11 +81,7 @@ public class SolveProblemTest extends BaseIntegrationTest{
         wait.until(visibilityOf(driver.findElement(By.xpath(
                 "//*[contains(text(), '" + problemDescription + "')]")))
         ).click();
-        assertThatAnswerIsVisible();
-    }
-
-    private void assertThatAnswerIsVisible() {
-        driver.findElement(By.xpath("//*[contains(text(), '" + answer + "')]"));
+        assertElementContainingTextExists(answer);
     }
 
     private void assertThatActionsAppearInSameOrderAsDescribed() {

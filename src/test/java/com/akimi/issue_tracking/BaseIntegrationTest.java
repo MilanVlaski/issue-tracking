@@ -38,4 +38,9 @@ public abstract class BaseIntegrationTest {
         passwordElement.sendKeys("password");
         passwordElement.submit();
     }
+
+    protected void assertElementContainingTextExists(String text) {
+        driver.findElement(By.xpath(
+                "//*[contains(text(), '" + text + "')]"));
+    }
 }
