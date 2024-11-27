@@ -24,10 +24,8 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClick
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class SolveProblemTest {
+public class SolveProblemTest extends BaseIntegrationTest{
 
-    @LocalServerPort
-    private int port;
 
     String action1 = "I log in using my email and password.";
     String action2 = "I get an error message saying \"Something went wrong.\".";
@@ -38,10 +36,6 @@ public class SolveProblemTest {
     @Given("a list of applications")
     public void a_list_of_applications() {
         driver.get(homepage());
-    }
-
-    private String homepage() {
-        return "http://localhost:" + port;
     }
 
     @When("the user purchases an application with any tech support")
@@ -129,22 +123,9 @@ public class SolveProblemTest {
         input(email, password);
     }
 
-    private void input(String email, String password) {
-        driver.findElement(By.name("email")).sendKeys(email);
-        var passwordElement = driver.findElement(By.name(password));
-        passwordElement.sendKeys("password");
-        passwordElement.submit();
-    }
-
-    private final WebDriver driver = new ChromeDriver(
-            new ChromeOptions().addArguments("--headless")
-    );
-
     @After
     public void tearDown() {
         driver.quit();
     }
-
-    private WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(100));
 
 }

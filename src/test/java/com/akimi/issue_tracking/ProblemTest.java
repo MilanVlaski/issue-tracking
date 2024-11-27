@@ -4,6 +4,7 @@ import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.ProblemProcessing;
 import com.akimi.issue_tracking.problem.ProblemReport;
+import io.cucumber.java.After;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -13,6 +14,7 @@ import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.Disabled;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -27,17 +29,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Duration;
 import java.time.LocalDate;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ProblemTest {
-
-    @LocalServerPort
-    private int port;
-
-    private String homepage() {
-        return "http://localhost:" + port;
-    }
+public class ProblemTest extends BaseIntegrationTest {
 
     String problemDescription = "Problem description.";
 
@@ -58,18 +54,20 @@ public class ProblemTest {
     @When("an engineer sees a reported problem")
     public void an_engineer_sees_a_reported_problem() {
         driver.get(homepage() + "/engineer/problems");
-        wait.until(visibilityOf(driver.findElement(By.xpath(
-                "//*[contains(text(), '" + problemDescription + "')]"))));
+        inputEngineerEmailAndPassword();
+        var problem = driver.findElement(By.xpath(
+                "//*[contains(text(), '" + problemDescription + "')]"));
+        wait.until(visibilityOf(problem));
     }
 
-    private static final WebDriver driver = new ChromeDriver(
-            new ChromeOptions().addArguments("--headless")
-    );
+    private void inputEngineerEmailAndPassword() {
+        var email = "john.smith@example.com";
+        var password = "password";
+        input(email, password);
+    }
 
-    private WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(100));
-
-    @AfterAll
-    public static void tearDown() {
+    @After
+    public void tearDown() {
         driver.quit();
     }
 }
