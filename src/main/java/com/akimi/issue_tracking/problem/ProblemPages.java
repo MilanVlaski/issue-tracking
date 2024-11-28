@@ -36,13 +36,14 @@ public class ProblemPages {
     }
 
     @GetMapping("/application/{appId}/reportProblem")
-    public String reportProblem(@PathVariable String appId, Model model) {
+    public String reportProblem() {
         return "describeProblem";
     }
 
     @PostMapping("/application/{appId}/reportProblem")
-    public String reportProblemPost(@PathVariable String appId, Model model,
-            @ModelAttribute ProblemReport problemReport) {
+    public String reportProblemPost(@PathVariable String appId,
+            @ModelAttribute ProblemReport problemReport
+    ) {
         var application = em.find(Application.class, appId);
         var user = currentUser.currentUser();
         problemProcessing.report(problemReport, application, user);
@@ -60,21 +61,26 @@ public class ProblemPages {
     @GetMapping("/engineer/problems/mine")
     public String mine(Model model) {
         var currentEngineer = currentUser.currentEngineer();
-        var myProblems = em.createQuery("select p from Problem p join p.engineers e " +
-                                   "where e.email = :email", Problem.class)
-                           .setParameter("email", currentEngineer.getEmail())
-                           .getResultList();
-        model.addAttribute("problems", myProblems);
+        model.addAttribute(
+                "problems",
+                em.createQuery("select p from Problem p" +
+                          " join p.engineers e where e.email = :email", Problem.class)
+                  .setParameter("email", currentEngineer.getEmail())
+                  .getResultList()
+        );
         return "engineerProblems";
     }
 
     @GetMapping("/problems")
     public String problems(Model model) {
-        var problems = em.createQuery("select p from Problem p left join fetch p.answers where p.user = :user",
-                                 Problem.class)
-                         .setParameter("user", currentUser.currentUser())
-                         .getResultList();
-        model.addAttribute("problems", problems);
+        model.addAttribute(
+                "problems",
+                em.createQuery("select p from Problem p " +
+                                  "left join fetch p.answers where p.user = :user",
+                          Problem.class)
+                  .setParameter("user", currentUser.currentUser())
+                  .getResultList()
+        );
         return "problems";
     }
 
@@ -82,24 +88,26 @@ public class ProblemPages {
     public String answerProblem(@PathVariable String problemId, Model model) {
         var problem = em.find(Problem.class, problemId);
         model.addAttribute("problem", problem);
-        var actions = problem.getActions();
-        model.addAttribute("actions", actions);
+        model.addAttribute("actions", problem.getActions());
         return "answerProblem";
     }
 
     @PostMapping("/engineer/problems/{problemId}/answer")
-    public String answerProblemPost(@PathVariable String problemId, Model model,
-            @ModelAttribute AnswerDto answer, HttpServletRequest request) {
-        var problem = em.find(Problem.class, problemId);
-        problemProcessing.solveProblem(problem, answer.toEntity(), currentUser.currentEngineer());
+    public String answerProblemPost(@PathVariable String problemId,
+            @ModelAttribute AnswerDto answer) {
+        problemProcessing.solveProblem(em.find(Problem.class, problemId),
+                answer.toEntity(),
+                currentUser.currentEngineer()
+        );
         return "redirect:/engineer/problems/" + problemId;
     }
 
     @PostMapping("/engineer/problems/{problemId}/assignEngineer")
     public String assignEngineer(@PathVariable String problemId) {
-        var problem = em.find(Problem.class, problemId);
-        var engineer = currentUser.currentEngineer();
-        problemProcessing.assignEngineerToProblem(engineer, problem);
+        problemProcessing.assignEngineerToProblem(
+                currentUser.currentEngineer(),
+                em.find(Problem.class, problemId)
+        );
         return "redirect:/engineer/problems";
     }
 
