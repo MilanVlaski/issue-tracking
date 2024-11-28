@@ -1,7 +1,7 @@
 package com.akimi.issue_tracking.application;
 
-import com.akimi.issue_tracking.problem.engineer.Patch;
 import com.akimi.issue_tracking.problem.Problem;
+import com.akimi.issue_tracking.problem.engineer.Patch;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
