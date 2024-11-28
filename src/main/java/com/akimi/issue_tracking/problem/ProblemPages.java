@@ -55,6 +55,17 @@ public class ProblemPages {
         return "engineerProblems";
     }
 
+    @GetMapping("/engineer/problems/mine")
+    public String mine(Model model) {
+        var currentEngineer = currentEngineer();
+        var myProblems = em.createQuery("select p from Problem p join p.engineers e " +
+                                   "where e.email = :email", Problem.class)
+                           .setParameter("email", currentEngineer.getEmail())
+                           .getResultList();
+        model.addAttribute("problems", myProblems);
+        return "engineerProblems";
+    }
+
     @GetMapping("/problems")
     public String problems(Model model) {
         var problems = em.createQuery("select p from Problem p left join fetch p.answers where p.user = :user",
@@ -82,6 +93,13 @@ public class ProblemPages {
         return "redirect:/engineer/problems/" + problemId;
     }
 
+    @PostMapping("/engineer/problems/{problemId}/assignEngineer")
+    public String assignEngineer(@PathVariable String problemId) {
+        var problem = em.find(Problem.class, problemId);
+        var engineer = currentEngineer();
+        problemProcessing.assignEngineerToProblem(engineer, problem);
+        return "redirect:/engineer/problems";
+    }
 
     public User currentUser() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();

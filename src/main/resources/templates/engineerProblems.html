@@ -29,11 +29,16 @@
         <td th:text="${problem.state}">Reported.</td>
         <td th:text="${problem.description}">User can't do something.</td>
         <td>
-
             <a th:href="@{/engineer/problems/{problemId}(problemId=${problem.id})}"
-            aria-label="View Problem">
+               aria-label="View Problem">
                 See Problem
             </a>
+        </td>
+        <td>
+            <form method="post"
+                  th:action="@{/engineer/problems/{problemId}/assignEngineer(problemId=${problem.id})}">
+                <button aria-label="Assign Problem to Self">Assign to Self</button>
+            </form>
         </td>
     </tr>
     </tbody>

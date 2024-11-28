@@ -18,7 +18,7 @@ public abstract class BaseIntegrationTest {
     protected int port;
 
     protected final WebDriver driver = new ChromeDriver(
-            new ChromeOptions().addArguments("--headless")
+//            new ChromeOptions().addArguments("--headless")
     );
 
     protected final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(100));

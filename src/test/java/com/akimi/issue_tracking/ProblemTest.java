@@ -45,13 +45,13 @@ public class ProblemTest extends BaseIntegrationTest {
     @And("the engineer assigns a problem to themselves")
     public void theEngineerAssignsAProblemToThemselves() {
         click("Assign Problem to Self");
-        click("My Problems");
     }
 
-//    @Then("they have it in their list of problems")
-//    public void theyHaveItInTheirListOfProblems() {
-//        assertElementContainingTextExists(problemDescription);
-//    }
+    @Then("they have it in their list of problems")
+    public void theyHaveItInTheirListOfProblems() {
+        click("My Problems");
+        assertElementContainingTextExists(problemDescription);
+    }
 
     private void inputEngineerEmailAndPassword() {
         var email = "john.smith@example.com";
@@ -61,7 +61,7 @@ public class ProblemTest extends BaseIntegrationTest {
 
     @After
     public void tearDown() {
-        driver.quit();
+//        driver.quit();
     }
 }
 

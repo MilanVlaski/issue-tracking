@@ -45,4 +45,11 @@ public class ProblemProcessing {
         problem.setState(ProblemState.SOLVED.name);
         em.persist(answer);
     }
+
+    @Transactional
+    public void assignEngineerToProblem(Engineer engineer, Problem problem) {
+        problem.assignEngineer(engineer);
+        em.persist(problem);
+        em.persist(engineer);
+    }
 }

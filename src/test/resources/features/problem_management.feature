@@ -4,7 +4,7 @@ Feature: Assign problem
     Given a problem has been reported on an application
     When an engineer sees a reported problem
     And the engineer assigns a problem to themselves
-#    Then they have it in their list of problems
+    Then they have it in their list of problems
 
 #  Scenario: Engineer starts work on a problem
 #    Given an engineer has an assigned problem

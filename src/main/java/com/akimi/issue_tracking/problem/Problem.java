@@ -155,4 +155,9 @@ public class Problem {
         answers.add(answer);
         answer.setProblem(this);
     }
+
+    public void assignEngineer(Engineer engineer) {
+        engineers.add(engineer);
+        engineer.getProblems().add(this);
+    }
 }
