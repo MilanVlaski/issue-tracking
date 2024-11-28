@@ -17,13 +17,11 @@ import java.time.LocalDate;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ProblemTest extends BaseIntegrationTest {
 
-    String problemDescription = "Problem description.";
-
     @Autowired
     ProblemProcessing problemProcessing;
 
-    @Given("a problem has been reported on an application")
-    public void aProblemHasBeenReportedOnAnApplication() {
+    @Given("a problem has been reported on an application with description {string}")
+    public void aProblemHasBeenReportedOnAnApplication(String problemDescription) {
         var user = new User("Joe Schmoe", "joe@dot.com", "password",
                 LocalDate.of(1995, 10, 10), "Kansas");
         var application = new Application("Appigo", "1.2", "Great.",
@@ -33,20 +31,20 @@ public class ProblemTest extends BaseIntegrationTest {
         problemProcessing.report(problemReport, application, user);
     }
 
-    @When("an engineer sees a reported problem")
-    public void an_engineer_sees_a_reported_problem() {
+    @When("an engineer sees a reported problem with description {string}")
+    public void an_engineer_sees_a_reported_problem(String problemDescription) {
         driver.get(homepage() + "/engineer/problems");
         inputEngineerEmailAndPassword();
         assertElementContainingTextExists(problemDescription);
     }
 
-    @And("the engineer assigns a problem to themselves")
+    @And("the engineer assigns that problem to themselves")
     public void theEngineerAssignsAProblemToThemselves() {
         click("Assign Problem to Self");
     }
 
-    @Then("they have it in their list of problems")
-    public void theyHaveItInTheirListOfProblems() {
+    @Then("they have it in their list of problems with description {string}")
+    public void theyHaveItInTheirListOfProblems(String problemDescription) {
         click("My Problems");
         assertElementContainingTextExists(problemDescription);
     }
@@ -62,4 +60,3 @@ public class ProblemTest extends BaseIntegrationTest {
         driver.quit();
     }
 }
-

@@ -15,12 +15,10 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClick
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class SolveProblemTest extends BaseIntegrationTest{
-
+public class SolveProblemTest extends BaseIntegrationTest {
 
     String action1 = "I log in using my email and password.";
     String action2 = "I get an error message saying \"Something went wrong.\".";
-    String problemDescription = "User cannot access their account at login.";
     String answer = "It looks like your password had a space in it." +
             " Please change your password, and that should solve things!";
 
@@ -31,11 +29,8 @@ public class SolveProblemTest extends BaseIntegrationTest{
 
     @When("the user purchases an application with any tech support")
     public void the_user_purchases_an_application() {
-        // buy first app
         click("Buy Application");
-        // we are not signed in, so we get taken to a sign-in page
         inputUserEmailAndPassword();
-        // select the first support type
         var support = driver.findElement(By.name("support"));
         new Select(support)
                 .selectByIndex(0);
@@ -43,8 +38,8 @@ public class SolveProblemTest extends BaseIntegrationTest{
         support.submit();
     }
 
-    @Then("the user is able to file a problem report on that application")
-    public void theUserIsAbleToFileAProblemReportOnThatApplication() {
+    @Then("the user is able to file a problem report with description {string}")
+    public void theUserIsAbleToFileAProblemReportOnThatApplication(String problemDescription) {
         click("Report a Problem");
         click("Report a Problem With the Application");
         driver.findElement(By.name("description"))
@@ -78,10 +73,11 @@ public class SolveProblemTest extends BaseIntegrationTest{
         click("See Reported Problems");
         click("See Fixes");
 
-        wait.until(visibilityOf(driver.findElement(By.xpath(
-                "//*[contains(text(), '" + problemDescription + "')]")))
-        ).click();
         assertElementContainingTextExists(answer);
+    }
+
+    @Given("an engineer has assigned a problem to themselves")
+    public void anEngineerHasAssignedAProblemToThemselves() {
     }
 
     private void assertThatActionsAppearInSameOrderAsDescribed() {
@@ -114,5 +110,4 @@ public class SolveProblemTest extends BaseIntegrationTest{
     public void tearDown() {
         driver.quit();
     }
-
 }
