@@ -3,7 +3,7 @@ package com.akimi.issue_tracking;
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.ProblemProcessing;
-import com.akimi.issue_tracking.problem.ProblemReport;
+import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;

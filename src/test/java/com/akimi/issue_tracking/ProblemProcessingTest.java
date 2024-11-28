@@ -4,7 +4,7 @@ import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.problem.Problem;
 import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.ProblemProcessing;
-import com.akimi.issue_tracking.problem.ProblemReport;
+import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;

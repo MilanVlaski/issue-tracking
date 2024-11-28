@@ -1,10 +1,9 @@
-package com.akimi.issue_tracking.problem;
+package com.akimi.issue_tracking.problem.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 @Getter
 @Setter

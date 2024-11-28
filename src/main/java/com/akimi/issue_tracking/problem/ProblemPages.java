@@ -1,16 +1,13 @@
 package com.akimi.issue_tracking.problem;
 
 import com.akimi.issue_tracking.application.Application;
-import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.dto.AnswerDto;
-import com.akimi.issue_tracking.problem.engineer.Answer;
-import com.akimi.issue_tracking.problem.engineer.Engineer;
+import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import com.akimi.issue_tracking.security.CurrentUser;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
