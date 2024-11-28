@@ -68,7 +68,4 @@ public class AppShopPage {
                  .getSingleResult();
     }
 
-
-    Logger log = Logger.getLogger(AppShopPage.class.getName());
 }
-
