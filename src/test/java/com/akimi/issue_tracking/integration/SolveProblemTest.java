@@ -1,4 +1,4 @@
-package com.akimi.issue_tracking;
+package com.akimi.issue_tracking.integration;
 
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;

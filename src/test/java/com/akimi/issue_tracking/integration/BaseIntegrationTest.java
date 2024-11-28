@@ -1,4 +1,4 @@
-package com.akimi.issue_tracking;
+package com.akimi.issue_tracking.integration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
