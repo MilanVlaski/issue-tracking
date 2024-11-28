@@ -54,6 +54,7 @@ public class ProblemPages {
         var problems = em.createQuery("select p from Problem p", Problem.class)
                          .getResultList();
         model.addAttribute("problems", problems);
+        model.addAttribute("personal", false);
         return "engineerProblems";
     }
 
@@ -67,6 +68,7 @@ public class ProblemPages {
                   .setParameter("email", currentEngineer.getEmail())
                   .getResultList()
         );
+        model.addAttribute("personal", true);
         return "engineerProblems";
     }
 

@@ -43,7 +43,7 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
   Ovo je sve tema za spring sekjuriti...
  # To do
 ## Must do
-- [ ] You can't assign a problem, if it's already yours. So change the My problems page a bit.
+- [x] You can't assign a problem, if it's already yours. So change the My problems page a bit.
 - [ ] **Production postgres environment** (2 days) (Maybe Google Cloud + Secret manager)
 - [x] **Local postgres** (3 days)
 - [ ] **Styling** (2 days) 

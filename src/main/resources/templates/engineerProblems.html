@@ -34,7 +34,7 @@
                 See Problem
             </a>
         </td>
-        <td>
+        <td th:if="${!personal}">
             <form method="post"
                   th:action="@{/engineer/problems/{problemId}/assignEngineer(problemId=${problem.id})}">
                 <button aria-label="Assign Problem to Self">Assign to Self</button>
