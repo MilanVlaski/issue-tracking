@@ -1,5 +1,6 @@
 package com.akimi.issue_tracking.application;
 
+import com.akimi.issue_tracking.security.CurrentUser;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 @Controller
 public class AppShopPage {
 
+    @Autowired
+    private CurrentUser currentUser;
     @PersistenceContext
     private EntityManager em;
     @Autowired
@@ -48,7 +51,7 @@ public class AppShopPage {
     @PostMapping("/application/{appId}/buy")
     public String processPurchase(@PathVariable String appId, @ModelAttribute Support support,
             RedirectAttributes redirectAttributes) {
-        var user = find();
+        var user = currentUser.currentUser();
         var application = em.find(Application.class, Integer.valueOf(appId));
 
         boolean success = purchasingService.purchaseApp(support.getSupport(), application, user);
@@ -59,13 +62,6 @@ public class AppShopPage {
         }
 
         return "redirect:/application/" + appId + "/buy";
-    }
-
-    public User find() {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        return em.createQuery("select u from User u where u.email = :email", User.class)
-                 .setParameter("email", email)
-                 .getSingleResult();
     }
 
 }
