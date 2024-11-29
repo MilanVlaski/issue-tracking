@@ -12,7 +12,7 @@ Feature: Report a problem and have it be resolved
     When the user purchases an application with any tech support
     Then the user is able to file a problem report with description "App crashes on startup"
     When an engineer sees a reported problem with description "App crashes on startup"
-    And the engineer assigns that problem to themselves
+    And the engineer assigns this problem to themselves
     When the engineer patches the problem
 #    Then the user can install the patch
 

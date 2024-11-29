@@ -1,5 +1,9 @@
 package com.akimi.issue_tracking.integration;
 
+import com.akimi.issue_tracking.application.Application;
+import com.akimi.issue_tracking.application.User;
+import com.akimi.issue_tracking.problem.ProblemProcessing;
+import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -8,7 +12,10 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
@@ -47,11 +54,18 @@ public class SolveProblemTest extends BaseIntegrationTest {
         var actions = driver.findElement(By.name("actions"));
         actions.sendKeys(String.join("\n", action1, action2));
         actions.submit();
+        click("Log Out");
+    }
+
+    @When("an engineer sees a reported problem with description {string}")
+    public void an_engineer_sees_a_reported_problem(String problemDescription) {
+        driver.get(homepage() + "/engineer/problems");
+        inputEngineerEmailAndPassword();
+        assertElementContainingTextExists(problemDescription);
     }
 
     @And("an engineer can post an answer to the problem")
     public void anEngineerCanPostAnAnswerToTheProblem() {
-        click("Log Out");
         driver.get(homepage() + "/engineer/problems");
         inputEngineerEmailAndPassword();
 
@@ -73,6 +87,11 @@ public class SolveProblemTest extends BaseIntegrationTest {
         click("See Fixes");
 
         assertElementContainingTextExists(answer);
+    }
+
+    @And("the engineer assigns this problem to themselves")
+    public void theEngineerAssignsThisProblemToThemselves() {
+        click("Assign Problem to Self");
     }
 
     @When("the engineer patches the problem")
@@ -114,4 +133,30 @@ public class SolveProblemTest extends BaseIntegrationTest {
     public void tearDown() {
         driver.quit();
     }
+
+    @Autowired
+    ProblemProcessing problemProcessing;
+
+    @Given("a problem has been reported on an application with description {string}")
+    public void aProblemHasBeenReportedOnAnApplication(String problemDescription) {
+        var user = new User("Joe Schmoe", "joe@dot.com", "password",
+                LocalDate.of(1995, 10, 10), "Kansas");
+        var application = new Application("Appigo", "1.2", "Great.",
+                LocalDate.of(2023, 10, 10), "http://wawa.com/img.png");
+        var problemReport = new ProblemReport(problemDescription, "Action 1\n Action 2");
+
+        problemProcessing.report(problemReport, application, user);
+    }
+
+    @And("the engineer assigns that problem to themselves")
+    public void theEngineerAssignsAProblemToThemselves() {
+        click("Assign Problem to Self");
+    }
+
+    @Then("they have it in their list of problems with description {string}")
+    public void theyHaveItInTheirListOfProblems(String problemDescription) {
+        click("My Problems");
+        assertElementContainingTextExists(problemDescription);
+    }
+
 }

@@ -10,6 +10,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import java.time.Duration;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 public abstract class BaseIntegrationTest {
 
@@ -17,16 +18,17 @@ public abstract class BaseIntegrationTest {
     protected int port;
 
     protected final WebDriver driver = new ChromeDriver(
-            new ChromeOptions().addArguments("--headless")
+//            new ChromeOptions().addArguments("--headless")
     );
 
-    protected final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(100));
+    protected final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3), Duration.ofMillis(100));
 
     protected String homepage() {
         return "http://localhost:" + port;
     }
 
     protected void click(String label) {
+        wait.until(visibilityOf(driver.findElement(By.cssSelector("[aria-label='" + label + "']")))).click();
         wait.until(elementToBeClickable(By.cssSelector("[aria-label='" + label + "']"))).click();
     }
 
