@@ -6,6 +6,7 @@ import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import com.akimi.issue_tracking.security.CurrentUser;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,6 @@ public class ProblemPages {
 
     @Autowired
     private CurrentUser currentUser;
-    ;
 
     @Autowired
     private ProblemProcessing problemProcessing;
@@ -54,7 +54,6 @@ public class ProblemPages {
         var problems = em.createQuery("select p from Problem p", Problem.class)
                          .getResultList();
         model.addAttribute("problems", problems);
-        model.addAttribute("personal", false);
         return "engineerProblems";
     }
 
@@ -68,7 +67,6 @@ public class ProblemPages {
                   .setParameter("email", currentEngineer.getEmail())
                   .getResultList()
         );
-        model.addAttribute("personal", true);
         return "engineerProblems";
     }
 
@@ -104,12 +102,15 @@ public class ProblemPages {
     }
 
     @PostMapping("/engineer/problems/{problemId}/assignEngineer")
-    public String assignEngineer(@PathVariable String problemId) {
+    public String assignEngineer(@PathVariable String problemId,
+            HttpServletRequest request) {
         problemProcessing.assignEngineerToProblem(
                 currentUser.currentEngineer(),
                 em.find(Problem.class, problemId)
         );
-        return "redirect:/engineer/problems";
+
+        String referer = request.getHeader("Referer");
+        return referer != null ? "redirect:" + referer : "redirect:/default";
     }
 
 }

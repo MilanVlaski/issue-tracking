@@ -1,0 +1,36 @@
+<table th:fragment="problems(viewType)" th:unless="${problems.isEmpty()}">
+    <thead>
+    <tr>
+        <th>Application</th>
+        <th>Version</th>
+        <th>State</th>
+        <th>Description</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="problem: ${problems}">
+        <td th:text="${problem.application.name}">Application</td>
+        <td th:text="${problem.application.version}">1.0</td>
+        <td th:text="${problem.state}">Reported.</td>
+        <td th:text="${problem.description}">User can't do something.</td>
+        <td>
+            <a th:href="@{/engineer/problems/{problemId}(problemId=${problem.id})}" aria-label="View Problem">
+                See Problem
+            </a>
+        </td>
+        <td th:if="${viewType == 'all'}">
+            <form method="post"
+                  th:action="@{/engineer/problems/{problemId}/assignEngineer(problemId=${problem.id})}">
+                <button aria-label="Assign Problem to Self">Assign to Self</button>
+            </form>
+        </td>
+        <td th:if="${viewType == 'personal'}">
+            <a th:href="@{/engineer/problems/{problemId}/uploadPatch(problemId=${problem.id})}"
+               aria-label="Upload a Patch">
+                Upload a Patch
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>

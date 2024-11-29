@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SolveProblemTest extends BaseIntegrationTest {
@@ -76,8 +75,13 @@ public class SolveProblemTest extends BaseIntegrationTest {
         assertElementContainingTextExists(answer);
     }
 
-    @Given("an engineer has assigned a problem to themselves")
-    public void anEngineerHasAssignedAProblemToThemselves() {
+    @When("the engineer patches the problem")
+    public void theEngineerPatchesTheProblem() {
+        click("My Problems");
+        click("Upload a Patch");
+        // We get a display of the problem, and the application,
+        // and a form with size and communication type, (don't forget the publish date)
+        // Get a message saying "Successfully uploaded {app.name} {app.version}"
     }
 
     private void assertThatActionsAppearInSameOrderAsDescribed() {
