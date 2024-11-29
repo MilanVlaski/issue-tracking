@@ -67,7 +67,7 @@ public class ProblemPages {
                   .setParameter("email", currentEngineer.getEmail())
                   .getResultList()
         );
-        return "engineerProblems";
+        return "engineerProblemsOwn";
     }
 
     @GetMapping("/problems")
