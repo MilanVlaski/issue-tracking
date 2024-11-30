@@ -98,9 +98,12 @@ public class SolveProblemTest extends BaseIntegrationTest {
     public void theEngineerPatchesTheProblem() {
         click("My Problems");
         click("Upload a Patch");
-        // We get a display of the problem, and the application,
-        // and a form with size and communication type, (don't forget the publish date)
-        // Get a message saying "Successfully uploaded {app.name} {app.version}"
+        driver.findElement(By.name("size"))
+              .sendKeys("500");
+        var communicationType = driver.findElement(By.name("communicationType"));
+        communicationType.sendKeys("Phone call");
+        communicationType.submit();
+        assertElementContainingTextExists("Successfully uploaded");
     }
 
     private void assertThatActionsAppearInSameOrderAsDescribed() {
@@ -129,11 +132,6 @@ public class SolveProblemTest extends BaseIntegrationTest {
         input(email, password);
     }
 
-    @After
-    public void tearDown() {
-        driver.quit();
-    }
-
     @Autowired
     ProblemProcessing problemProcessing;
 
@@ -157,6 +155,11 @@ public class SolveProblemTest extends BaseIntegrationTest {
     public void theyHaveItInTheirListOfProblems(String problemDescription) {
         click("My Problems");
         assertElementContainingTextExists(problemDescription);
+    }
+
+    @After
+    public void tearDown() {
+        driver.quit();
     }
 
 }

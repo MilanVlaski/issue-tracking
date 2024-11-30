@@ -109,6 +109,28 @@ public class ProblemPages {
                 em.find(Problem.class, problemId)
         );
 
+        return redirectToReferer(request);
+    }
+
+    @GetMapping("/engineer/problems/{problemId}/uploadPatch")
+    public String uploadPatchPage(Model model, @PathVariable String problemId) {
+        var problem = em.find(Problem.class, problemId);
+        model.addAttribute("problem", problem);
+        model.addAttribute("application", problem.getApplication());
+        return "uploadPatch";
+    }
+
+    @PostMapping("/engineer/problems/{problemId}/uploadPatch")
+    public String uploadPatch(Model model, @PathVariable String problemId,
+            @ModelAttribute PatchUpload patchUpload, HttpServletRequest request) {
+
+        var newAppVersion = problemProcessing.patchProblem(em.find(Problem.class, problemId),
+                patchUpload.toEntity(), currentUser.currentEngineer());
+        model.addAttribute("newApp", newAppVersion);
+        return redirectToReferer(request);
+    }
+
+    private String redirectToReferer(HttpServletRequest request) {
         String referer = request.getHeader("Referer");
         return referer != null ? "redirect:" + referer : "redirect:/default";
     }

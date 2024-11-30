@@ -46,6 +46,11 @@ public class Patch {
     @Column(name = "VRSTA_KOMUNIKACIJE", length = 200)
     private String communicationType;
 
+    public Patch(String customerCommunicationType, BigDecimal sizeKb) {
+        this.communicationType = customerCommunicationType;
+        this.sizeKb = sizeKb;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -32,6 +32,12 @@ public class ProblemSolver {
     @OneToMany(mappedBy = "problemSolver")
     private Set<Patch> patches = new LinkedHashSet<>();
 
+    public ProblemSolver(Engineer engineer, Problem problem, Patch patch) {
+        this.engineer = engineer;
+        this.problem = problem;
+        this.patches.add(patch);
+    }
+
     public ProblemSolverId getId() {
         return id;
     }

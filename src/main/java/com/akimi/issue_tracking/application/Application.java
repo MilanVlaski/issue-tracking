@@ -128,4 +128,13 @@ public class Application {
         this.logoUrl = logoUrl;
         return this;
     }
+
+    public Application copyWithIncrementedVersion() {
+        return new Application(this.name, incrementedVersion(), this.description,
+                this.releaseYear, this.logoUrl);
+    }
+
+    private String incrementedVersion() {
+        return version + ".1";
+    }
 }

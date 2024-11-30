@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Upload a Patch</title>
+</head>
+<body>
+
+<form th:action="@{''}" method="post">
+    <label>
+        Size:
+        <input required type="number" name="size" placeholder="Size in kilobytes"/>
+    </label>
+    <label>
+        Communication Type:
+        <input required type="text" name="communicationType"
+               placeholder="Type of communication with the customer"/>
+    </label>
+    <label>
+        Patch Download Url
+        <input type="text" placeholder="Where can the user download the patch?">
+    </label>
+    <button>Upload</button>
+</form>
+
+
+</body>
+</html>

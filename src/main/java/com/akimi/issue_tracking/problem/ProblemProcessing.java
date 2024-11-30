@@ -5,6 +5,7 @@ import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import com.akimi.issue_tracking.problem.engineer.Answer;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
+import com.akimi.issue_tracking.problem.engineer.Patch;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -52,5 +53,15 @@ public class ProblemProcessing {
         problem.assignEngineer(engineer);
         em.persist(problem);
         em.persist(engineer);
+    }
+
+    @Transactional
+    public Application patchProblem(Problem problem, Patch patch, Engineer engineer) {
+        var newApp = engineer.patchProblem(patch, problem);
+        em.persist(newApp);
+        em.persist(engineer);
+        em.persist(patch);
+        em.persist(problem);
+        return newApp;
     }
 }
