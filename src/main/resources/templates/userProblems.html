@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reported problems</title>
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: userHeader}"></div>
+<h1>Reported Problems</h1>
+
+<div th:if="${problemDtos}">
+    <details th:each="problemDto : ${problemDtos}" aria-label="See Fixes">
+        <summary>
+            Problem with <span th:text="${problemDto.problem.application.name}"></span>
+            <span th:text="${problemDto.problem.application.version}"></span>
+            currently <span th:text="${problemDto.problem.state}"></span>.
+        </summary>
+        <p th:text="${problemDto.problem.description}"></p>
+        <h3>Answers</h3>
+        <ul th:if="${problemDto.problem.answers}">
+            <li th:each="answer : ${problemDto.problem.answers}">
+                <strong th:text="${answer.engineer.name}"></strong>
+                :
+                <span th:text="${answer.description}"></span>
+            </li>
+        </ul>
+        <ul th:if="${problemDto.patches}">
+            <li th:each="patch: ${problemDto.patches}">
+                <strong th:text="${patch.problemSolver.engineer.name}"></strong>
+                :
+                <button aria-label="Install Patch"></button>
+                <span th:text="${patch.communicationType}"></span>
+                <span th:text="${patch.publishDate}"></span>
+                <span th:text="${patch.sizeKb} + 'kB'"></span>
+            </li>
+        </ul>
+    </details>
+</div>
+
+</body>
+</html>

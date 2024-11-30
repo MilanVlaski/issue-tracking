@@ -106,16 +106,25 @@ public class SolveProblemTest extends BaseIntegrationTest {
         assertElementContainingTextExists("Successfully uploaded");
     }
 
+    @Then("the user can install the patch")
+    public void theUserCanInstallThePatch() {
+        click("Log Out");
+        driver.get(homepage());
+        click("Log In");
+        inputUserEmailAndPassword();
+
+        click("See Reported Problems");
+        click("See Fixes");
+
+        click("Install Patch");
+    }
+
     private void assertThatActionsAppearInSameOrderAsDescribed() {
         WebElement firstElement = driver.findElement(By.cssSelector("ol > li:first-child"));
         WebElement secondElement = driver.findElement(By.cssSelector("ol > li:nth-child(2)"));
 
         assertEquals(action1, firstElement.getText());
         assertEquals(action2, secondElement.getText());
-    }
-
-    @Then("the user can install the patch")
-    public void theUserCanInstallThePatch() {
     }
 
     private void inputUserEmailAndPassword() {

@@ -4,6 +4,8 @@ import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.engineer.Answer;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
+import com.akimi.issue_tracking.problem.engineer.Patch;
+import com.akimi.issue_tracking.problem.engineer.ProblemSolver;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -48,6 +50,9 @@ public class Problem {
 
     @ManyToMany(mappedBy = "problems")
     private Set<Engineer> engineers = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "problem")
+    private Set<ProblemSolver> problemSolvers = new LinkedHashSet<>();
 
     /**
      * Creates a new problem, with the REPORTED state, on user request.
@@ -158,5 +163,9 @@ public class Problem {
     public void assignEngineer(Engineer engineer) {
         engineers.add(engineer);
         engineer.getProblems().add(this);
+    }
+
+    public Set<ProblemSolver> getProblemSolvers() {
+        return problemSolvers;
     }
 }

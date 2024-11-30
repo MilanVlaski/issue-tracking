@@ -1,6 +1,7 @@
 package com.akimi.issue_tracking.problem.engineer;
 
 import com.akimi.issue_tracking.application.User;
+import com.akimi.issue_tracking.problem.Problem;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -49,6 +50,10 @@ public class Patch {
     public Patch(String customerCommunicationType, BigDecimal sizeKb) {
         this.communicationType = customerCommunicationType;
         this.sizeKb = sizeKb;
+    }
+
+    public Patch() {
+
     }
 
     public Integer getId() {

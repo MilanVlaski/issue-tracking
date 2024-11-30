@@ -48,6 +48,9 @@ public class Engineer {
             inverseJoinColumns = @JoinColumn(name = "ID_PRB"))
     private Set<Problem> problems = new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "engineer")
+    private Set<ProblemSolver> problemSolvers = new LinkedHashSet<>();
+
     @OneToMany(mappedBy = "helperEngineer")
     private Set<Patch> patches = new LinkedHashSet<>();
 
@@ -187,5 +190,9 @@ public class Engineer {
 
     private boolean notAssignedTo(Problem problem) {
         return !(problem.getEngineers().contains(this));
+    }
+
+    public Set<ProblemSolver> getProblemSolvers() {
+        return problemSolvers;
     }
 }

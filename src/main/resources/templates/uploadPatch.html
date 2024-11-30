@@ -6,6 +6,9 @@
     <title>Upload a Patch</title>
 </head>
 <body>
+
+<div th:replace="~{fragments/header :: engineerHeader}"></div>
+
 <div th:if="${newApp}" th:text="'Successfully uploaded app '
  + ${newApp.name} + ' ' + ${newApp.version}">
     Successfully uploaded patch!

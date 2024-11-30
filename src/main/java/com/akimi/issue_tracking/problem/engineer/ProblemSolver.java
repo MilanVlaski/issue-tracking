@@ -37,6 +37,8 @@ public class ProblemSolver {
         this.engineer = engineer;
         this.problem = problem;
         this.patches.add(patch);
+        problem.getProblemSolvers().add(this);
+        engineer.getProblemSolvers().add(this);
     }
 
     public ProblemSolver() {

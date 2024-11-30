@@ -2,6 +2,7 @@ package com.akimi.issue_tracking.problem;
 
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.problem.dto.AnswerDto;
+import com.akimi.issue_tracking.problem.dto.ProblemWithPatches;
 import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import com.akimi.issue_tracking.security.CurrentUser;
 import jakarta.persistence.EntityManager;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 public class ProblemPages {
@@ -73,15 +76,30 @@ public class ProblemPages {
 
     @GetMapping("/problems")
     public String problems(Model model) {
-        model.addAttribute(
-                "problems",
-                em.createQuery("select p from Problem p " +
-                                  "left join fetch p.answers where p.user = :user",
-                          Problem.class)
+        List<Problem> problems =
+                em.createQuery(
+                          "select distinct p from Problem p " +
+//                                  "left join fetch p.answers " +
+//                                  "left join fetch p.problemSolvers ps " +
+//                                  "left join fetch ps.engineer e " +
+//                                  "left join fetch e.patches " +
+                                  "where p.user = :user",
+                          Problem.class
+                  )
                   .setParameter("user", currentUser.currentUser())
-                  .getResultList()
-        );
-        return "problems";
+                  .getResultList();
+
+        // Convert Problems to ProblemDTOs
+        List<ProblemWithPatches> problemDTOs = mapProblemsToDTOs(problems);
+
+        model.addAttribute("problemDtos", problemDTOs);
+        return "userProblems";
+    }
+
+    public List<ProblemWithPatches> mapProblemsToDTOs(List<Problem> problems) {
+        return problems.stream()
+                       .map(ProblemWithPatches::new)
+                       .toList();
     }
 
     @GetMapping("/engineer/problems/{problemId}")
