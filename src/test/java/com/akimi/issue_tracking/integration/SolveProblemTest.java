@@ -114,10 +114,8 @@ public class SolveProblemTest extends BaseIntegrationTest {
         assertEquals(action2, secondElement.getText());
     }
 
-    public void click(String s) {
-        wait.until(elementToBeClickable(
-                By.cssSelector("[aria-label='" + s + "']"))
-        ).click();
+    @Then("the user can install the patch")
+    public void theUserCanInstallThePatch() {
     }
 
     private void inputUserEmailAndPassword() {
@@ -161,5 +159,4 @@ public class SolveProblemTest extends BaseIntegrationTest {
     public void tearDown() {
         driver.quit();
     }
-
 }

@@ -14,7 +14,7 @@ Feature: Report a problem and have it be resolved
     When an engineer sees a reported problem with description "App crashes on startup"
     And the engineer assigns this problem to themselves
     When the engineer patches the problem
-#    Then the user can install the patch
+    Then the user can install the patch
 
   Scenario: Engineer assigns a problem to themselves
     Given a problem has been reported on an application with description "Feature X not working"
