@@ -41,7 +41,7 @@ dependencies {
 	testImplementation("org.seleniumhq.selenium:selenium-java:4.25.0")
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("org.hamcrest:hamcrest:3.0")
-
+	testImplementation("org.mockito:mockito-core:5.14.2")
 }
 
 tasks.withType<Test> {

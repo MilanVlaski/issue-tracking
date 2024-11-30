@@ -150,7 +150,6 @@ public class Application {
         }
     }
 
-
     public boolean equalsExceptVersion(Application other) {
         if (this == other) {
             return true;

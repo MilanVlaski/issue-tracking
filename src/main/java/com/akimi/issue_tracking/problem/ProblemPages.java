@@ -124,13 +124,13 @@ public class ProblemPages {
     public String uploadPatch(Model model, @PathVariable String problemId,
             @ModelAttribute PatchUpload patchUpload, HttpServletRequest request) {
 
-        var newAppVersion = problemProcessing.patchProblem(em.find(Problem.class, problemId),
+        var newApp = problemProcessing.patchProblem(em.find(Problem.class, problemId),
                 patchUpload.toEntity(), currentUser.currentEngineer());
-        model.addAttribute("newApp", newAppVersion);
+        model.addAttribute("newApp", newApp);
         return redirectToReferer(request);
     }
 
-    private String redirectToReferer(HttpServletRequest request) {
+    public static String redirectToReferer(HttpServletRequest request) {
         String referer = request.getHeader("Referer");
         return referer != null ? "redirect:" + referer : "redirect:/default";
     }

@@ -1,6 +1,8 @@
 package com.akimi.issue_tracking.problem.engineer;
 
 import com.akimi.issue_tracking.application.Application;
+import com.akimi.issue_tracking.application.Purchase;
+import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.Problem;
 import jakarta.persistence.*;
 
@@ -58,6 +60,10 @@ public class Engineer {
         this.monthlySalary = new BigDecimal(monthlySalary);
         this.email = email;
         this.password = password;
+    }
+
+    Engineer() {
+
     }
 
     public Integer getId() {
@@ -165,21 +171,20 @@ public class Engineer {
     }
 
     public Application patchProblem(Patch patch, Problem problem) {
-        if(notAssignedTo(problem)) {
+        if (notAssignedTo(problem)) {
             throw new IllegalStateException("The engineer MUST be working on a problem in order to patch it!");
         }
 
         var problematicApp = problem.getApplication();
-        var patchedApp = problematicApp.copyWithIncrementedVersion();
+        var user = problem.getUser();
 
         var problemSolver = new ProblemSolver(this, problem, patch);
 
-        patch.setUser(problem.getUser());
-        patch.setPublishDate(LocalDate.now());
-        patch.setProblemSolver(problemSolver);
+        patch.setUser(user)
+             .setPublishDate(LocalDate.now())
+             .setProblemSolver(problemSolver);
 
-
-        return patchedApp;
+        return problematicApp.copyWithIncrementedVersion();
     }
 
     private boolean notAssignedTo(Problem problem) {

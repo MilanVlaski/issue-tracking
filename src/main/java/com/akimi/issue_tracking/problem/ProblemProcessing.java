@@ -1,6 +1,7 @@
 package com.akimi.issue_tracking.problem;
 
 import com.akimi.issue_tracking.application.Application;
+import com.akimi.issue_tracking.application.SupportType;
 import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import com.akimi.issue_tracking.problem.engineer.Answer;
@@ -9,6 +10,7 @@ import com.akimi.issue_tracking.problem.engineer.Patch;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -22,7 +24,7 @@ public class ProblemProcessing {
     private EntityManager em;
 
     @Transactional
-    public void report(ProblemReport problemReport, Application application , User user) {
+    public void report(ProblemReport problemReport, Application application, User user) {
         var actions = parseActions(problemReport.getActions());
         var problem = new Problem(problemReport.getDescription(), application, user, actions);
         em.persist(application);
@@ -55,13 +57,34 @@ public class ProblemProcessing {
         em.persist(engineer);
     }
 
+    @Autowired
+    private AppDistribution appDistribution;
+
     @Transactional
     public Application patchProblem(Problem problem, Patch patch, Engineer engineer) {
         var newApp = engineer.patchProblem(patch, problem);
+        // distribute app to old users
+        distributeNewAppToOldOwners(problem, newApp);
         em.persist(newApp);
         em.persist(engineer);
         em.persist(patch);
         em.persist(problem);
         return newApp;
+    }
+
+    private void distributeNewAppToOldOwners(Problem problem, Application newApp) {
+        var previousSupportType = getPreviousSupportType(problem);
+        var purchases = appDistribution.sendApplicationToPreviousUsers(newApp, previousSupportType);
+        purchases.forEach(p -> em.persist(p));
+    }
+
+    private SupportType getPreviousSupportType(Problem problem) {
+        return em.createQuery("select p.supportType " +
+                          "from Purchase p " +
+                          "join p.application app " +
+                          "where app = :problemApplication",
+                  SupportType.class)
+         .setParameter("problemApplication", problem.getApplication())
+         .getSingleResult();
     }
 }

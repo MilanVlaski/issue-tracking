@@ -3,6 +3,7 @@ package com.akimi.issue_tracking.application;
 import com.akimi.issue_tracking.problem.Problem;
 import com.akimi.issue_tracking.problem.engineer.Patch;
 import jakarta.persistence.*;
+import lombok.val;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
@@ -152,4 +153,9 @@ public class User {
         return this;
     }
 
+    public boolean ownsApplication(Application app) {
+        return purchases.stream()
+                        .anyMatch(purchase -> purchase
+                                .getApplication().equals(app));
+    }
 }
