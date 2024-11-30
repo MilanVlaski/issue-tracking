@@ -135,6 +135,35 @@ public class Application {
     }
 
     private String incrementedVersion() {
-        return version + ".1";
+        String versionPattern = "(\\d+)\\.(\\d+)\\.(\\d+)";
+        if (version.matches(versionPattern)) {
+            String[] parts = version.split("\\.");
+            int major = Integer.parseInt(parts[0]);
+            int minor = Integer.parseInt(parts[1]);
+            int patch = Integer.parseInt(parts[2]);
+
+            patch++; // Increment the patch version (z)
+
+            return major + "." + minor + "." + patch;
+        } else {
+            throw new IllegalArgumentException("Invalid version format. Expected x.y.z");
+        }
     }
+
+
+    public boolean equalsExceptVersion(Application other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (other == null) {
+            return false;
+        }
+
+        return this.name.equals(other.name) &&
+                this.description.equals(other.description) &&
+                this.releaseYear.equals(other.releaseYear) &&
+                this.logoUrl.equals(other.logoUrl);
+    }
+
 }

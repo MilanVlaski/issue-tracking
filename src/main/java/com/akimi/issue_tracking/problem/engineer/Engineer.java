@@ -179,8 +179,7 @@ public class Engineer {
         patch.setProblemSolver(problemSolver);
 
 
-        var application = new Application();
-        return application;
+        return patchedApp;
     }
 
     private boolean notAssignedTo(Problem problem) {
