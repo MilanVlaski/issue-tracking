@@ -10,6 +10,7 @@ import com.akimi.issue_tracking.problem.ApplicationOwners;
 import com.akimi.issue_tracking.problem.Problem;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
 import com.akimi.issue_tracking.problem.engineer.Patch;
+import com.akimi.issue_tracking.problem.engineer.ProblemSolver;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

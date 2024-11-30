@@ -6,10 +6,11 @@
     <title>Upload a Patch</title>
 </head>
 <body>
-<div th:if="${newApp}" th:text="Successfully uploaded
-app ${newApp.name} ${newApp.version}">
-    Successfully uploaded app!
+<div th:if="${newApp}" th:text="'Successfully uploaded app '
+ + ${newApp.name} + ' ' + ${newApp.version}">
+    Successfully uploaded patch!
 </div>
+
 <form th:action="@{''}" method="post">
     <label>
         Size:

@@ -1,9 +1,8 @@
 package com.akimi.issue_tracking.problem.engineer;
 
 import com.akimi.issue_tracking.application.Application;
-import com.akimi.issue_tracking.application.Purchase;
-import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.Problem;
+import com.akimi.issue_tracking.problem.ProblemState;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -62,7 +61,7 @@ public class Engineer {
         this.password = password;
     }
 
-    Engineer() {
+    public Engineer() {
 
     }
 
@@ -174,15 +173,14 @@ public class Engineer {
         if (notAssignedTo(problem)) {
             throw new IllegalStateException("The engineer MUST be working on a problem in order to patch it!");
         }
+        problem.setState(ProblemState.SOLVED.name);
 
-        var problematicApp = problem.getApplication();
+        Application problematicApp = problem.getApplication();
         var user = problem.getUser();
-
-        var problemSolver = new ProblemSolver(this, problem, patch);
 
         patch.setUser(user)
              .setPublishDate(LocalDate.now())
-             .setProblemSolver(problemSolver);
+             .setProblemSolver(new ProblemSolver(this, problem, patch));
 
         return problematicApp.copyWithIncrementedVersion();
     }

@@ -1,5 +1,6 @@
 package com.akimi.issue_tracking.problem.engineer;
 
+import com.akimi.issue_tracking.problem.Problem;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import org.hibernate.Hibernate;
@@ -23,6 +24,15 @@ public class ProblemSolverId implements Serializable {
     public ProblemSolverId setIdPrb(Integer idPrb) {
         this.idPrb = idPrb;
         return this;
+    }
+
+    public ProblemSolverId() {
+
+    }
+
+    public ProblemSolverId(Problem problem, Engineer engineer) {
+        this.idPrb = problem.getId();
+        this.idInz = engineer.getId();
     }
 
     public Integer getIdInz() {

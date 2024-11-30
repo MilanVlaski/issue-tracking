@@ -33,9 +33,14 @@ public class ProblemSolver {
     private Set<Patch> patches = new LinkedHashSet<>();
 
     public ProblemSolver(Engineer engineer, Problem problem, Patch patch) {
+        this.id = new ProblemSolverId(problem, engineer);
         this.engineer = engineer;
         this.problem = problem;
         this.patches.add(patch);
+    }
+
+    public ProblemSolver() {
+
     }
 
     public ProblemSolverId getId() {

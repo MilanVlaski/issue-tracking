@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ProblemPages {
@@ -122,11 +123,12 @@ public class ProblemPages {
 
     @PostMapping("/engineer/problems/{problemId}/uploadPatch")
     public String uploadPatch(Model model, @PathVariable String problemId,
-            @ModelAttribute PatchUpload patchUpload, HttpServletRequest request) {
+            @ModelAttribute PatchUpload patchUpload, HttpServletRequest request,
+            RedirectAttributes redirectAttributes) {
 
         var newApp = problemProcessing.patchProblem(em.find(Problem.class, problemId),
                 patchUpload.toEntity(), currentUser.currentEngineer());
-        model.addAttribute("newApp", newApp);
+        redirectAttributes.addFlashAttribute("newApp", newApp);
         return redirectToReferer(request);
     }
 
