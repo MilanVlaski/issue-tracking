@@ -55,7 +55,7 @@ public class AppPatchingTest {
     }
 
     @Test
-    public void when_an_application_is_patched_then_the_user_who_owns_the_broken_app_get_the_patched_app_for_free() {
+    public void when_an_application_is_patched_then_the_user_who_owns_the_broken_app_gets_the_patched_app_for_free() {
         var user = new User("Milan", "john@doe.com", "password",
                 LocalDate.of(1989, 12, 12), "Kazakhstan");
         var purchase = new Purchase(user, brokenApp, new SupportType("1", "Bla", new BigDecimal("11.50")));
