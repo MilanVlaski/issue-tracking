@@ -10,8 +10,6 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class PatchUpload {
     private String size;
     private String customerCommunicationType;
