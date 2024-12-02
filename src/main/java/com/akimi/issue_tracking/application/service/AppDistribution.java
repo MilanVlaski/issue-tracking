@@ -19,13 +19,14 @@ public class AppDistribution {
         this.applicationOwners = applicationOwners;
     }
 
-    public List<Purchase> sendApplicationToPreviousUsers(Application application, SupportType supportType) {
+    public List<Purchase> sendApplicationToPreviousUsers(Application application,
+                SupportType supportType) {
         var users = applicationOwners.withApplicationAndFeatureRelease(
                 application.getName(),
                 application.getVersion()
         );
         var purchases = new ArrayList<Purchase>();
-        for(User user : users) {
+        for (User user : users) {
             purchases.add(new Purchase(user, application, supportType));
         }
         return purchases;
