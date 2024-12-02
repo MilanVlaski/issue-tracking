@@ -139,7 +139,8 @@ public class ProblemPages {
             @ModelAttribute PatchUpload patchUpload, HttpServletRequest request,
             RedirectAttributes redirectAttributes) {
 
-        var newApp = problemProcessing.patchProblem(em.find(Problem.class, problemId),
+        var problem = em.find(Problem.class, problemId);
+        var newApp = problemProcessing.patchProblem(problem,
                 patchUpload.toEntity(), currentLogin.engineer());
         redirectAttributes.addFlashAttribute("newApp", newApp);
         return redirectToReferer(request);
