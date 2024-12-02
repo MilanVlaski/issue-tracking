@@ -77,20 +77,13 @@ public class ProblemPages {
 
     @GetMapping("/problems")
     public String problems(Model model) {
-        List<Problem> problems =
-                em.createQuery(
-                          "select distinct p from Problem p " +
-//                                  "left join fetch p.answers " +
-//                                  "left join fetch p.problemSolvers ps " +
-//                                  "left join fetch ps.engineer e " +
-//                                  "left join fetch e.patches " +
-                                  "where p.user = :user",
-                          Problem.class
-                  )
-                  .setParameter("user", currentUser.currentUser())
-                  .getResultList();
+        var problems = em.createQuery(
+                                 "select distinct p from Problem p where p.user = :user",
+                                 Problem.class
+                         )
+                         .setParameter("user", currentUser.currentUser())
+                         .getResultList();
 
-        // Convert Problems to ProblemDTOs
         List<ProblemWithPatches> problemDTOs = mapProblemsToDTOs(problems);
 
         model.addAttribute("problemDtos", problemDTOs);
