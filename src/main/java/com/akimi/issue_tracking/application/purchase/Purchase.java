@@ -82,9 +82,4 @@ public class Purchase {
         return supportType;
     }
 
-    public Purchase setSupportType(SupportType supportType) {
-        this.supportType = supportType;
-        return this;
-    }
-
 }

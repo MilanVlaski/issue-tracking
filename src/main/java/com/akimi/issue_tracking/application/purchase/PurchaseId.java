@@ -16,17 +16,9 @@ public class PurchaseId implements Serializable {
     @Column(name = "ID_KOR", nullable = false)
     private Integer idKor;
 
-    public Integer getIdApp() {
-        return idApp;
-    }
-
     public PurchaseId setIdApp(Integer idApp) {
         this.idApp = idApp;
         return this;
-    }
-
-    public Integer getIdKor() {
-        return idKor;
     }
 
     public PurchaseId setIdKor(Integer idKor) {

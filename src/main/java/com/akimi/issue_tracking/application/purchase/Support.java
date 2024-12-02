@@ -1,13 +1,10 @@
 package com.akimi.issue_tracking.application.purchase;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Support {
     private String support;
-
-    public String getSupport() {
-        return support;
-    }
-
-    public void setSupport(String support) {
-        this.support = support;
-    }
 }
