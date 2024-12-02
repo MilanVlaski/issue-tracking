@@ -1,4 +1,4 @@
-package com.akimi.issue_tracking.problem;
+package com.akimi.issue_tracking.problem.dto;
 
 import com.akimi.issue_tracking.problem.engineer.Patch;
 import lombok.AllArgsConstructor;

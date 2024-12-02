@@ -1,16 +1,15 @@
 package com.akimi.issue_tracking.domain;
 
 import com.akimi.issue_tracking.application.Application;
-import com.akimi.issue_tracking.application.Purchase;
-import com.akimi.issue_tracking.application.SupportType;
+import com.akimi.issue_tracking.application.purchase.Purchase;
+import com.akimi.issue_tracking.application.purchase.SupportType;
 import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.Action;
-import com.akimi.issue_tracking.problem.AppDistribution;
-import com.akimi.issue_tracking.problem.ApplicationOwners;
+import com.akimi.issue_tracking.application.service.AppDistribution;
+import com.akimi.issue_tracking.application.service.ApplicationOwners;
 import com.akimi.issue_tracking.problem.Problem;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
 import com.akimi.issue_tracking.problem.engineer.Patch;
-import com.akimi.issue_tracking.problem.engineer.ProblemSolver;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

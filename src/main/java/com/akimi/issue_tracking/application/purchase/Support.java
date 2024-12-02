@@ -1,4 +1,4 @@
-package com.akimi.issue_tracking.application;
+package com.akimi.issue_tracking.application.purchase;
 
 public class Support {
     private String support;

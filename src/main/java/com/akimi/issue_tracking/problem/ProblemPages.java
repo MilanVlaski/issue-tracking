@@ -2,6 +2,7 @@ package com.akimi.issue_tracking.problem;
 
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.problem.dto.AnswerDto;
+import com.akimi.issue_tracking.problem.dto.PatchUpload;
 import com.akimi.issue_tracking.problem.dto.ProblemWithPatches;
 import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import com.akimi.issue_tracking.security.CurrentUser;

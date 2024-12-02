@@ -1,4 +1,4 @@
-package com.akimi.issue_tracking.application;
+package com.akimi.issue_tracking.application.purchase;
 
 import jakarta.persistence.*;
 

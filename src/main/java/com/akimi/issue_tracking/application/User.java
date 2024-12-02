@@ -1,9 +1,9 @@
 package com.akimi.issue_tracking.application;
 
+import com.akimi.issue_tracking.application.purchase.Purchase;
 import com.akimi.issue_tracking.problem.Problem;
 import com.akimi.issue_tracking.problem.engineer.Patch;
 import jakarta.persistence.*;
-import lombok.val;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;

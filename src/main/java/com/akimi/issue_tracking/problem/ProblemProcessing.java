@@ -1,13 +1,13 @@
 package com.akimi.issue_tracking.problem;
 
 import com.akimi.issue_tracking.application.Application;
-import com.akimi.issue_tracking.application.SupportType;
+import com.akimi.issue_tracking.application.purchase.SupportType;
 import com.akimi.issue_tracking.application.User;
+import com.akimi.issue_tracking.application.service.AppDistribution;
 import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import com.akimi.issue_tracking.problem.engineer.Answer;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
 import com.akimi.issue_tracking.problem.engineer.Patch;
-import com.akimi.issue_tracking.problem.engineer.ProblemSolver;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;

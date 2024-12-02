@@ -1,8 +1,8 @@
-package com.akimi.issue_tracking.problem;
+package com.akimi.issue_tracking.application.service;
 
 import com.akimi.issue_tracking.application.Application;
-import com.akimi.issue_tracking.application.Purchase;
-import com.akimi.issue_tracking.application.SupportType;
+import com.akimi.issue_tracking.application.purchase.Purchase;
+import com.akimi.issue_tracking.application.purchase.SupportType;
 import com.akimi.issue_tracking.application.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
