@@ -29,6 +29,13 @@ public class Answer {
     @Column(name = "OPIS_ODG", length = 500)
     private String description;
 
+    public Answer() {
+    }
+
+    public Answer(String description) {
+        this.description = description;
+    }
+
     public Integer getId() {
         return id;
     }
