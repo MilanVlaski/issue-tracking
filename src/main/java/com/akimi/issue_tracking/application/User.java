@@ -94,11 +94,6 @@ public class User {
         return birthYear;
     }
 
-    public User setBirthYear(LocalDate birthYear) {
-        this.birthYear = birthYear;
-        return this;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -112,45 +107,20 @@ public class User {
         return phoneNumber;
     }
 
-    public User setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-        return this;
-    }
-
     public String getLocation() {
         return location;
-    }
-
-    public User setLocation(String location) {
-        this.location = location;
-        return this;
     }
 
     public Set<Purchase> getPurchases() {
         return purchases;
     }
 
-    public User setPurchases(Set<Purchase> purchases) {
-        this.purchases = purchases;
-        return this;
-    }
-
     public Set<Problem> getProblems() {
         return problems;
     }
 
-    public User setProblems(Set<Problem> problems) {
-        this.problems = problems;
-        return this;
-    }
-
     public Set<Patch> getInstalledPatches() {
         return installedPatches;
-    }
-
-    public User setInstalledPatches(Set<Patch> installedPatches) {
-        this.installedPatches = installedPatches;
-        return this;
     }
 
     public boolean ownsApplication(Application app) {

@@ -49,18 +49,8 @@ public class ProblemSolver {
         return id;
     }
 
-    public ProblemSolver setId(ProblemSolverId id) {
-        this.id = id;
-        return this;
-    }
-
     public Problem getProblem() {
         return problem;
-    }
-
-    public ProblemSolver setProblem(Problem problem) {
-        this.problem = problem;
-        return this;
     }
 
     public Engineer getEngineer() {
@@ -74,11 +64,6 @@ public class ProblemSolver {
 
     public Set<Patch> getPatches() {
         return patches;
-    }
-
-    public ProblemSolver setPatches(Set<Patch> patches) {
-        this.patches = patches;
-        return this;
     }
 
 }
