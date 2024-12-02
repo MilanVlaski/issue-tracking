@@ -98,18 +98,8 @@ public class Application {
         return releaseYear;
     }
 
-    public Application setReleaseYear(LocalDate releaseYear) {
-        this.releaseYear = releaseYear;
-        return this;
-    }
-
     public Set<Purchase> getPurchases() {
         return purchases;
-    }
-
-    public Application setPurchases(Set<Purchase> purchases) {
-        this.purchases = purchases;
-        return this;
     }
 
     public Set<Problem> getProblems() {
@@ -123,11 +113,6 @@ public class Application {
 
     public String getLogoUrl() {
         return logoUrl;
-    }
-
-    public Application setLogoUrl(String logoUrl) {
-        this.logoUrl = logoUrl;
-        return this;
     }
 
     public Application copyWithIncrementedVersion() {
