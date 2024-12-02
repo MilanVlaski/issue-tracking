@@ -16,14 +16,14 @@ public class CurrentUser {
     private EntityManager em;
 
     @Transactional
-    public User currentUser() {
+    public User user() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         var query = em.createQuery("select u from User u where u.email = :email", User.class);
         return userWithEmail(query, email);
     }
 
     @Transactional
-    public Engineer currentEngineer() {
+    public Engineer engineer() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         var query = em.createQuery("select e from Engineer e where e.email = :email", Engineer.class);
         return userWithEmail(query, email);

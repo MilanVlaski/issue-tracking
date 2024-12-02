@@ -53,7 +53,7 @@ public class AppShopPage {
     @PostMapping("/application/{appId}/buy")
     public String processPurchase(@PathVariable String appId, @ModelAttribute Support support,
             RedirectAttributes redirectAttributes) {
-        var user = currentUser.currentUser();
+        var user = currentUser.user();
         var application = em.find(Application.class, Integer.valueOf(appId));
 
         boolean success = purchasingService.purchaseApp(support.getSupport(), application, user);

@@ -24,7 +24,7 @@ import java.util.List;
 public class ProblemPages {
 
     @Autowired
-    private CurrentUser currentUser;
+    private CurrentUser currentLogin;
 
     @Autowired
     private ProblemProcessing problemProcessing;
@@ -34,7 +34,7 @@ public class ProblemPages {
 
     @GetMapping("/reportProblem")
     public String reportProblem(Model model) {
-        var purchases = currentUser.currentUser().getPurchases();
+        var purchases = currentLogin.user().getPurchases();
         model.addAttribute("purchases", purchases);
         return "reportProblem";
     }
@@ -46,12 +46,13 @@ public class ProblemPages {
 
     @PostMapping("/application/{appId}/reportProblem")
     public String reportProblemPost(@PathVariable String appId,
-            @ModelAttribute ProblemReport problemReport
+            @ModelAttribute ProblemReport problemReport,
+            HttpServletRequest request
     ) {
         var application = em.find(Application.class, appId);
-        var user = currentUser.currentUser();
+        var user = currentLogin.user();
         problemProcessing.report(problemReport, application, user);
-        return "redirect:/application/" + appId + "/reportProblem";
+        return redirectToReferer(request);
     }
 
     @GetMapping("/engineer/problems")
@@ -64,7 +65,7 @@ public class ProblemPages {
 
     @GetMapping("/engineer/problems/mine")
     public String mine(Model model) {
-        var currentEngineer = currentUser.currentEngineer();
+        var currentEngineer = currentLogin.engineer();
         model.addAttribute(
                 "problems",
                 em.createQuery("select p from Problem p" +
@@ -81,7 +82,7 @@ public class ProblemPages {
                                  "select distinct p from Problem p where p.user = :user",
                                  Problem.class
                          )
-                         .setParameter("user", currentUser.currentUser())
+                         .setParameter("user", currentLogin.user())
                          .getResultList();
 
         List<ProblemWithPatches> problemDTOs = mapProblemsToDTOs(problems);
@@ -106,19 +107,19 @@ public class ProblemPages {
 
     @PostMapping("/engineer/problems/{problemId}/answer")
     public String answerProblemPost(@PathVariable String problemId,
-            @ModelAttribute AnswerDto answer) {
+            @ModelAttribute AnswerDto answer, HttpServletRequest request) {
         problemProcessing.solveProblem(em.find(Problem.class, problemId),
                 answer.toEntity(),
-                currentUser.currentEngineer()
+                currentLogin.engineer()
         );
-        return "redirect:/engineer/problems/" + problemId;
+        return redirectToReferer(request);
     }
 
     @PostMapping("/engineer/problems/{problemId}/assignEngineer")
     public String assignEngineer(@PathVariable String problemId,
             HttpServletRequest request) {
         problemProcessing.assignEngineerToProblem(
-                currentUser.currentEngineer(),
+                currentLogin.engineer(),
                 em.find(Problem.class, problemId)
         );
 
@@ -139,7 +140,7 @@ public class ProblemPages {
             RedirectAttributes redirectAttributes) {
 
         var newApp = problemProcessing.patchProblem(em.find(Problem.class, problemId),
-                patchUpload.toEntity(), currentUser.currentEngineer());
+                patchUpload.toEntity(), currentLogin.engineer());
         redirectAttributes.addFlashAttribute("newApp", newApp);
         return redirectToReferer(request);
     }
