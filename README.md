@@ -43,6 +43,8 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
   Ovo je sve tema za spring sekjuriti...
  # To do
 ## Must do
+- [ ] Cover case where a patch is created by an engineer who is NOT assigned to a problem. He will have to enter a problem solver name, and do the same process. His name will be optionally rendered on the user page.
+- [ ] Translate problem state to english (probably by using a dto)
 - [ ] Show user the price of support.
 - [x] You can't assign a problem, if it's already yours. So change the My problems page a bit.
 - [ ] **Production postgres environment** (2 days) (Maybe Google Cloud + Secret manager)
