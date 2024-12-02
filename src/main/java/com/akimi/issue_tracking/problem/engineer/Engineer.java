@@ -90,81 +90,36 @@ public class Engineer {
         return education;
     }
 
-    public Engineer setEducation(String education) {
-        this.education = education;
-        return this;
-    }
-
     public LocalDate getEmployedFrom() {
         return employedFrom;
-    }
-
-    public Engineer setEmployedFrom(LocalDate employedFrom) {
-        this.employedFrom = employedFrom;
-        return this;
     }
 
     public LocalDate getEmployedUntil() {
         return employedUntil;
     }
 
-    public Engineer setEmployedUntil(LocalDate employedUntil) {
-        this.employedUntil = employedUntil;
-        return this;
-    }
-
     public BigDecimal getMonthlySalary() {
         return monthlySalary;
-    }
-
-    public Engineer setMonthlySalary(BigDecimal monthlySalary) {
-        this.monthlySalary = monthlySalary;
-        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public Engineer setEmail(String email) {
-        this.email = email;
-        return this;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public Engineer setPassword(String password) {
-        this.password = password;
-        return this;
     }
 
     public Set<Answer> getAnswers() {
         return answers;
     }
 
-    public Engineer setAnswers(Set<Answer> answers) {
-        this.answers = answers;
-        return this;
-    }
-
     public Set<Problem> getProblems() {
         return problems;
     }
 
-    public Engineer setProblems(Set<Problem> problems) {
-        this.problems = problems;
-        return this;
-    }
-
     public Set<Patch> getPatches() {
         return patches;
-    }
-
-    public Engineer setPatches(Set<Patch> patches) {
-        this.patches = patches;
-        return this;
     }
 
     public void add(Answer answer) {

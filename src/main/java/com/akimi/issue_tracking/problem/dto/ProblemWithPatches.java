@@ -2,9 +2,11 @@ package com.akimi.issue_tracking.problem.dto;
 
 import com.akimi.issue_tracking.problem.Problem;
 import com.akimi.issue_tracking.problem.engineer.Patch;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class ProblemWithPatches {
 
     private final Problem problem;
@@ -15,14 +17,6 @@ public class ProblemWithPatches {
         this.patches = problem.getProblemSolvers().stream()
                               .flatMap(ps -> ps.getPatches().stream())
                               .toList();
-    }
-
-    public Problem getProblem() {
-        return problem;
-    }
-
-    public List<Patch> getPatches() {
-        return patches;
     }
 
 }
