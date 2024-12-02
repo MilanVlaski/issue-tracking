@@ -63,9 +63,7 @@ public class ProblemProcessing {
 
     @Transactional
     public Application patchProblem(Problem problem, Patch patch, Engineer engineer) {
-//        var problemSolver = new ProblemSolver(engineer, problem, patch);
         var newApp = engineer.patchProblem(patch, problem);
-        // distribute app to old users
         distributeNewAppToOldOwners(problem, newApp);
 
         em.persist(newApp);
