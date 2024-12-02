@@ -66,18 +66,9 @@ public class SupportType {
         return price;
     }
 
-    public SupportType setPrice(BigDecimal price) {
-        this.price = price;
-        return this;
-    }
-
     public Set<Purchase> getPurchases() {
         return purchases;
     }
 
-    public SupportType setPurchases(Set<Purchase> purchases) {
-        this.purchases = purchases;
-        return this;
-    }
 
 }
