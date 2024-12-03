@@ -15,8 +15,8 @@
 </ol>
 
 <form th:action="@{/engineer/problems/{problemId}/answer(problemId=${actions[0].problem.id})}" method="post">
-    <label for="answer">
-        <textarea name="answer" id="answer" cols="30" rows="10"
+    <label>
+        <textarea name="answer" cols="30" rows="10"
                   placeholder="How can the problem be resolved?">
         </textarea>
     </label>

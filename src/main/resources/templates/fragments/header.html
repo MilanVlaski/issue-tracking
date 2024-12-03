@@ -5,8 +5,9 @@
 <header th:fragment="baseHeader(homeUrl, loginUrl)">
     <a th:href="${homeUrl}">Home</a>
     <a th:if="${homeUrl == '/'}" th:href="@{/reportProblem}"
-       aria-label="Report a Problem"
-    >Report a problem</a>
+       aria-label="Report a Problem">
+        Report a problem
+    </a>
     <div sec:authorize="isAuthenticated()">
         <a th:if="${homeUrl == '/'}" th:href="@{/problems}" aria-label="See Reported Problems">See Reported Problems</a>
         <form th:action="@{/logout}" method="post">
