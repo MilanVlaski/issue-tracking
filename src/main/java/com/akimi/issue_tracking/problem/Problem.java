@@ -4,9 +4,9 @@ import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.engineer.Answer;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
-import com.akimi.issue_tracking.problem.engineer.Patch;
 import com.akimi.issue_tracking.problem.engineer.ProblemSolver;
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -37,6 +37,13 @@ public class Problem {
 
     @Column(name = "STANJE", nullable = false, length = 20)
     private String state;
+    // this is a hack to avoid a better solution
+    @Transient
+    private String engState;
+
+    public String getEngState() {
+        return engState;
+    }
 
     @Column(name = "OPIS_PRB", length = 200)
     private String description;
@@ -63,12 +70,17 @@ public class Problem {
      */
     public Problem(String description, Application application,
             User user, List<Action> actions) {
-        this.state = ProblemState.REPORTED.name;
+        setState(ProblemState.REPORTED);
         this.description = description;
         this.application = application;
         addActions(actions);
         application.getProblems().add(this);
         addUser(user);
+    }
+
+    private void setState(ProblemState problemState) {
+        this.state = problemState.name;
+        this.engState = problemState.engName;
     }
 
     private void addActions(List<Action> actions) {

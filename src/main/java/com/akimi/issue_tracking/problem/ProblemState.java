@@ -2,14 +2,16 @@ package com.akimi.issue_tracking.problem;
 
 public enum ProblemState {
 
-    REPORTED("Prijavljen"),
-    ASSIGNED("Preuzet"),
-    SOLVING("Rješava se"),
-    SOLVED("Riješen");
+    REPORTED("Prijavljen", "Reported"),
+    ASSIGNED("Preuzet", "Assigned to Engineer"),
+    SOLVING("Rješava se", "Being Resolved"),
+    SOLVED("Riješen", "Solved");
 
     public final String name;
+    public final String engName;
 
-    ProblemState(String name) {
+    ProblemState(String name,String engName) {
         this.name = name;
+        this.engName = engName;
     }
 }

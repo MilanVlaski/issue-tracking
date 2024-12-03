@@ -12,7 +12,7 @@
     <tr th:each="problem: ${problems}">
         <td th:text="${problem.application.name}">Application</td>
         <td th:text="${problem.application.version}">1.0</td>
-        <td th:text="${problem.state}">Reported.</td>
+        <td th:text="${problem.engState}">Reported.</td>
         <td th:text="${problem.description}">User can't do something.</td>
         <td>
             <a th:href="@{/engineer/problems/{problemId}(problemId=${problem.id})}" aria-label="View Problem">
