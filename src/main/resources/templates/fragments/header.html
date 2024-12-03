@@ -2,7 +2,7 @@
 <div th:fragment="engineerHeader" th:replace="~{this :: baseHeader('/engineer/problems','/engineer/login')}"></div>
 
 
-<header th:fragment="baseHeader(homeUrl, loginUrl)">
+<header th:fragment="baseHeader(homeUrl, loginUrl)" xmlns:sec="http://www.w3.org/1999/xhtml">
     <a th:href="${homeUrl}">Home</a>
     <a th:if="${homeUrl == '/'}" th:href="@{/reportProblem}"
        aria-label="Report a Problem">
