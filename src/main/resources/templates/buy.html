@@ -16,18 +16,20 @@
     Purchase failed. Please try again.
 </div>
 
+<img th:src="${app.logoUrl ?: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Ffalcon-logo-vector&psig=AOvVaw3ECd4yPPFjAZkkMcYFDLWD&ust=1733337131255000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNCbu5KejIoDFQAAAAAdAAAAABAE'}"
+     th:alt="|${app.name} logo|">
+<h2 th:text="${app.name}">Application</h2>
+<h3 th:text="${app.version}">1.0</h3>
+<p th:text="${app.description}">Application description.</p>
+<div th:text="${app.releaseYear}">2024</div>
 <form method="post" th:action="@{''}">
-    <img th:src="${app.logoUrl}" th:alt="|${app.name} logo|">
-    <h2 th:text="${app.name}">Application</h2>
-    <h3 th:text="${app.version}">1.0</h3>
-    <p th:text="${app.description}">Application description.</p>
-    <div th:text="${app.releaseYear}">2024</div>
     <label for="support"></label>
     <select name="support" id="support">
         <!--            todo, remove this hardcoded database id BEZ_POD-->
         <option value="BEZ_POD">Type of support</option>
         <option th:each="supp: ${supportTypes}" th:value="${supp.id}"
-                th:text="${supp.name} + ' - ' + ${supp.price}"></option>
+                th:text="${supp.name} + ' - ' + ${supp.price} + '$'">No support 0$
+        </option>
     </select>
     <button>Buy</button>
 </form>
