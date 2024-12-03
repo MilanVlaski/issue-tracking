@@ -24,9 +24,10 @@
     <div th:text="${app.releaseYear}">2024</div>
     <label for="support"></label>
     <select name="support" id="support">
-        <!--            todo, remove this hardcoded id BEZ_POD-->
+        <!--            todo, remove this hardcoded database id BEZ_POD-->
         <option value="BEZ_POD">Type of support</option>
-        <option th:each="supp: ${supportTypes}" th:value="${supp.id}" th:text="${supp.name}"></option>
+        <option th:each="supp: ${supportTypes}" th:value="${supp.id}"
+                th:text="${supp.name} + ' - ' + ${supp.price}"></option>
     </select>
     <button>Buy</button>
 </form>

@@ -44,13 +44,13 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
  # To do
 ## Must do
 - [ ] Cover case where a patch is created by an engineer who is NOT assigned to a problem. He will have to enter a problem solver name, and do the same process. His name will be optionally rendered on the user page.
-- [ ] Translate problem state to english (probably by using a dto)
-- [ ] Show user the price of support.
+- [x] Translate problem state to english (probably by using a dto)
+- [x] Show user the price of support.
 - [x] You can't assign a problem, if it's already yours. So change the My problems page a bit.
 - [ ] **Production postgres environment** (2 days) (Maybe Google Cloud + Secret manager)
 - [x] **Local postgres** (3 days)
 - [ ] **Styling** (2 days) 
-- [ ] FEAT: Create a patch for a problem, MUST be posted by an engineer working on the problem.
+- [x] FEAT: Create a patch for a problem, MUST be posted by an engineer working on the problem.
 - [ ] FEAT: User installs patch, by clicking a link on the answered problem page. It takes them to a simple application/buy, and the button says Install instead of Buy. The message is also "App downloading..." 
   - [ ] The shop should not contain the already owned version of the app. (Nobody will check this, tbh)
   - [ ] A user who owns a certain version of an application can install any patch of that MAJOR version (in 1.2.3., if they own the first digit), for free. (Others cannot.)
