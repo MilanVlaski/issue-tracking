@@ -1,25 +1,42 @@
+<link rel="stylesheet" th:href="@{/css/style.css}">
 <div th:fragment="userHeader" th:replace="~{this :: baseHeader('/','/login')}"></div>
 <div th:fragment="engineerHeader" th:replace="~{this :: baseHeader('/engineer/problems','/engineer/login')}"></div>
 
 
 <header th:fragment="baseHeader(homeUrl, loginUrl)" xmlns:sec="http://www.w3.org/1999/xhtml">
-    <a th:href="${homeUrl}">Home</a>
-    <a th:if="${homeUrl == '/'}" th:href="@{/reportProblem}"
-       aria-label="Report a Problem">
-        Report a problem
-    </a>
-    <div sec:authorize="isAuthenticated()">
-        <a th:if="${homeUrl == '/'}" th:href="@{/problems}" aria-label="See Reported Problems">See Reported Problems</a>
-        <form th:action="@{/logout}" method="post">
-            <button type="submit" aria-label="Log Out">Log Out</button>
-        </form>
-        <p>Welcome, <span th:text="${#authentication.name}"></span></p>
-        <a th:if="${homeUrl == '/engineer/problems'}" th:href="@{/engineer/problems/mine}"
-           aria-label="My Problems">
-            My Problems
-        </a>
-    </div>
-    <div sec:authorize="!isAuthenticated()">
-        <a th:href="${loginUrl}" aria-label="Log In">Login</a>
+    <div class="width-container">
+
+        <div id="logo-and-name">
+            <h1 id="header-company">Issue Tracker</h1>
+            <img id="header-logo" th:src="@{/images/logo_transparent_cropped.png}"
+                 alt="Issue Tracking Logo">
+        </div>
+
+        <nav id="navigation">
+            <a th:href="${homeUrl}">Home</a>
+            <div sec:authorize="!isAuthenticated()">
+                <a th:href="${loginUrl}" aria-label="Log In">Login</a>
+            </div>
+            <a th:if="${homeUrl == '/'}" th:href="@{/reportProblem}"
+               aria-label="Report a Problem">
+                Report a problem
+            </a>
+
+            <div sec:authorize="isAuthenticated()">
+                <a th:if="${homeUrl == '/'}" th:href="@{/problems}"
+                   aria-label="See Reported Problems">See Reported Problems
+                </a>
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" aria-label="Log Out">Log Out</button>
+                </form>
+                <p>Welcome, <span th:text="${#authentication.name}"></span></p>
+                <a th:if="${homeUrl == '/engineer/problems'}" th:href="@{/engineer/problems/mine}"
+                   aria-label="My Problems">
+                    My Problems
+                </a>
+            </div>
+
+        </nav>
+
     </div>
 </header>

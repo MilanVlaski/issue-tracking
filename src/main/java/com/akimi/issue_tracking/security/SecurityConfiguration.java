@@ -24,6 +24,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/", "/register", "/login").permitAll() // Allow access to these pages
                         .requestMatchers("/reportProblem", "/application/**", "/problems").hasRole("USER")
+                        .requestMatchers("/css/**", "/images/**", "/js/**").permitAll()  // Allow static resources
                         .anyRequest().authenticated() // All other requests require authentication
                 )
                 .formLogin(formLogin -> formLogin

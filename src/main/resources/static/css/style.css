@@ -1,0 +1,65 @@
+:root {
+    --background-color: #dddddec5;
+    --primary-color: #1358b8;
+    --secondary-color: #6542b6;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+}
+
+header {
+    font-size: 1.4em;
+}
+
+h1,
+h2 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+a:link {
+    color: var(--primary-color)
+}
+
+a:visited {
+    color: var(--secondary-color)
+}
+
+header {
+    background-color: var(--background-color);
+    padding: 1em;
+}
+
+body {
+    margin: 0;
+}
+
+#header-logo {
+    height: 100%;
+    max-width: 6.5em;
+    align-self: center;
+}
+
+#logo-and-name {
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+#navigation {
+    display: flex;
+    justify-content: space-evenly;
+    column-gap: 0.8em;
+}
+
+.width-container {
+    max-width: 80ch;
+    margin: 0 auto;
+}
+
+@media (max-width: 400px) {
+    #header-logo {
+        display: none;
+    }
+}
