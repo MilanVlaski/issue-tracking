@@ -35,7 +35,6 @@
         <td th:text="${purchase.application.name}">Application</td>
         <td th:text="${purchase.application.version}">1.0</td>
         <td th:text="${purchase.supportType.name}">No Support</td>
-        <td th:text="${purchase.application.description}">Application description.</td>
         <td th:text="${purchase.application.releaseYear}">2024</td>
         <td>
             <a th:href="@{/application/{appId}/reportProblem(appId=${purchase.application.id})}"
