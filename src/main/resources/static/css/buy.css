@@ -1,0 +1,30 @@
+.app-logo-purchase {
+    max-width: 250px;
+    border-radius: 5%;
+}
+
+.buy-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.purchase-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 500px;
+    font-size: clamp(16px, 2vw, 20px);
+
+    button,
+    select {
+        font-size: 1em;
+        padding: 0.5em 1em;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+    }
+}

@@ -5,36 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{https://fonts.googleapis.com/css2?family=Montserrat&display=swap}" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/buy.css}">
     <title>Purchase App</title>
 </head>
 <body>
 
 <div th:replace="~{fragments/header :: userHeader}"></div>
 
-<div th:if="${purchaseStatus == 'success'}">
-    Purchase successful!
-</div>
-<div th:if="${purchaseStatus == 'failure'}">
-    Purchase failed. Please try again.
-</div>
+<div id="app-width-container">
 
-<img th:src="${app.logoUrl ?: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Ffalcon-logo-vector&psig=AOvVaw3ECd4yPPFjAZkkMcYFDLWD&ust=1733337131255000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNCbu5KejIoDFQAAAAAdAAAAABAE'}"
-     th:alt="|${app.name} logo|">
-<h2 th:text="${app.name}">Application</h2>
-<h3 th:text="${app.version}">1.0</h3>
-<p th:text="${app.description}">Application description.</p>
-<div th:text="${app.releaseYear}">2024</div>
-<form method="post" th:action="@{''}">
-    <label for="support"></label>
-    <select name="support" id="support">
-        <!--            todo, remove this hardcoded database id BEZ_POD-->
-        <option value="BEZ_POD">Type of support</option>
-        <option th:each="supp: ${supportTypes}" th:value="${supp.id}"
-                th:text="${supp.name} + ' - ' + ${supp.price} + '$'">No support 0$
-        </option>
-    </select>
-    <button>Buy</button>
-</form>
+    <div class="purchase-container">
 
+
+        <div th:if="${purchaseStatus == 'success'}">
+            Purchase successful!
+        </div>
+
+        <div th:if="${purchaseStatus == 'failure'}">
+            Purchase failed. Please try again.
+        </div>
+
+
+        <img th:src="${app.logoUrl ?: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Ffalcon-logo-vector&psig=AOvVaw3ECd4yPPFjAZkkMcYFDLWD&ust=1733337131255000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNCbu5KejIoDFQAAAAAdAAAAABAE'}"
+             th:alt="|${app.name} logo|" class="app-logo-purchase" src="/images/logos/logo.png">
+
+        <h2 th:text="${app.name}">Application</h2>
+        <div><b>Version: </b><span th:text="${app.version}">1.0</span></div>
+        <div><b>Released: </b><span th:text="${app.releaseYear}">2024</span></div>
+        <p th:text="${app.description}">Application description.</p>
+
+        <form method="post" th:action="@{''}">
+
+            <label>
+                <select name="support">
+                    <!--            todo, remove this hardcoded database id BEZ_POD-->
+                    <option value="BEZ_POD">Type of support</option>
+                    <option th:each="supp: ${supportTypes}" th:value="${supp.id}"
+                            th:text="${supp.name} + ' - ' + ${supp.price} + '$'">No support 0$
+                    </option>
+                </select>
+            </label>
+
+            <button class="buy-button">Buy</button>
+
+        </form>
+
+    </div>
+
+</div>
 </body>
 </html>

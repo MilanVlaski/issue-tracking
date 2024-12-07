@@ -29,7 +29,6 @@
                 <form th:action="@{/logout}" method="post">
                     <button type="submit" aria-label="Log Out">Log Out</button>
                 </form>
-                <p>Welcome, <span th:text="${#authentication.name}"></span></p>
                 <a th:if="${homeUrl == '/engineer/problems'}" th:href="@{/engineer/problems/mine}"
                    aria-label="My Problems">
                     My Problems
