@@ -68,7 +68,7 @@ header {
     }
 }
 
-#navigation>a {
+#navigation a {
     text-decoration: none;
-    color: inherit;
+    color: rgba(0, 0, 0, 0.98);
 }
