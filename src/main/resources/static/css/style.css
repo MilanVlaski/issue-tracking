@@ -1,7 +1,6 @@
 :root {
     --background-color: #dddddec5;
     --primary-color: #1358b8;
-    --secondary-color: #6542b6;
 }
 
 body {
@@ -10,31 +9,33 @@ body {
     background-color: #eeeeee;
 }
 
-header {
-    font-size: 1.4em;
-}
 
 h1,
 h2 {
     font-family: 'Montserrat', sans-serif;
 }
 
-nav>a:link {
+a:link {
     color: var(--primary-color)
 }
 
-nav>a:visited {
-    color: var(--secondary-color)
+a:visited {
+    color: #6542b6;
+}
+
+body {
+    margin: 0;
+}
+
+/*---------Header----------*/
+header {
+    font-size: 1.2em;
 }
 
 header {
     background-color: var(--background-color);
     padding: 1em;
     padding-bottom: 0.5em;
-}
-
-body {
-    margin: 0;
 }
 
 #header-logo {
@@ -55,13 +56,19 @@ body {
     column-gap: 0.8em;
 }
 
-.width-container {
+.header-width-container {
     max-width: 80ch;
     margin: 0 auto;
 }
+
 
 @media (max-width: 400px) {
     #header-logo {
         display: none;
     }
+}
+
+#navigation>a {
+    text-decoration: none;
+    color: inherit;
 }

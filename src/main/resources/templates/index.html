@@ -11,7 +11,7 @@
 
 <div th:replace="~{fragments/header :: userHeader}"></div>
 
-<div id="item-container">
+<main id="item-container" class="app-width-container">
 
     <a th:each="app: ${apps}" th:href="@{/application/{appId}/buy(appId=${app.id})}" aria-label="Buy Application" href="">
 
@@ -28,6 +28,6 @@
         </article>
 
     </a>
-</div>
+</main>
 </body>
 </html>

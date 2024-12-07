@@ -1,3 +1,8 @@
+.app-width-container {
+    max-width: 120ch;
+    margin: 0 auto;
+}
+
 .app-logo-big {
     max-width: 170px;
     object-fit: scale-down;
@@ -16,17 +21,19 @@
 }
 
 #item-container>a {
+    /* max-width: 80ch; */
+    /* margin: 0 auto; */
     padding: 0.5em;
     display: flex;
     flex-direction: column;
     flex: 0 1 350px;
     max-width: 170px;
     text-decoration: none;
-    border-radius: 5%;
     color: inherit;
+    border-radius: 5%;
     color: rgba(0, 0, 0, 0.98);
 }
 
 #item-container>a:hover {
-    background-color: #e9e9ea;
+    background-color: #e7e7ea;
 }
