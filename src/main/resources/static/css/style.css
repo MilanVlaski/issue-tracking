@@ -1,3 +1,4 @@
+/*--------Common things-----------*/
 :root {
     --background-color: #dddddec5;
     --primary-color: #1358b8;
@@ -27,48 +28,26 @@ body {
     margin: 0;
 }
 
-/*---------Header----------*/
-header {
-    font-size: 1.2em;
+.significant-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
 }
 
-header {
-    background-color: var(--background-color);
-    padding: 1em;
-    padding-bottom: 0.5em;
+.significant-button:hover {
+    background-color: #114b9c;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
 }
 
-#header-logo {
-    height: 100%;
-    max-width: 6.5em;
-    align-self: center;
-}
-
-#logo-and-name {
-    display: flex;
-    justify-content: center;
-    gap: 0.5em;
-}
-
-#navigation {
-    display: flex;
-    justify-content: space-evenly;
-    column-gap: 0.8em;
-}
-
-.header-width-container {
-    max-width: 80ch;
-    margin: 0 auto;
-}
-
-
-@media (max-width: 400px) {
-    #header-logo {
-        display: none;
-    }
-}
-
-#navigation a {
-    text-decoration: none;
-    color: rgba(0, 0, 0, 0.98);
+.significant-button:active {
+    background-color: #165aba;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(2px);
 }

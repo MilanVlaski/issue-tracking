@@ -1,0 +1,44 @@
+header {
+    font-size: 1.2em;
+}
+
+header {
+    background-color: var(--background-color);
+    padding: 1em;
+    padding-bottom: 0.5em;
+}
+
+#header-logo {
+    height: 100%;
+    max-width: 6.5em;
+    align-self: center;
+}
+
+#logo-and-name {
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+#navigation {
+    display: flex;
+    justify-content: space-evenly;
+    column-gap: 0.8em;
+}
+
+.header-width-container {
+    max-width: 80ch;
+    margin: 0 auto;
+}
+
+
+@media (max-width: 400px) {
+    #header-logo {
+        display: none;
+    }
+}
+
+#navigation>a {
+    text-decoration: none;
+    color: inherit;
+}
