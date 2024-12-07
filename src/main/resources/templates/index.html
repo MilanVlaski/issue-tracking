@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <link th:href="@{https://fonts.googleapis.com/css2?family=Montserrat&display=swap}" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" th:href="@{/css/shop-style.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/shop.css}">
     <title>App shop</title>
 </head>
 <body>
@@ -13,21 +14,24 @@
 
 <main id="item-container" class="app-width-container">
 
-    <a th:each="app: ${apps}" th:href="@{/application/{appId}/buy(appId=${app.id})}" aria-label="Buy Application" href="">
+    <a th:each="app: ${apps}" th:href="@{/application/{appId}/buy(appId=${app.id})}" aria-label="Buy Application"
+       href="">
 
         <article>
 
             <img th:src="${app.logoUrl}" th:alt="|${app.name} logo|" class="app-logo-big"
-                 src="/images/logo_transparent_cropped.png">
+                 src="/images/logos/logo.png">
 
             <b th:text="${app.name}">Application</b>
-            <div th:text="${app.description}">This app will blow your socks off. And we really mean it. Wowza!</div>
-            <b>Version: </b><span id="version" th:text="${app.version}">1.0</span>
-            <b>Released: </b><span id="release-year" th:text="${app.releaseYear.year}">2024</span>
+            <div th:text="${app.description}">This app will blow your socks off. And we really mean it. Wowza!
+            </div>
+            <div id="version" th:text="${app.version}"><b>Version: </b>1.0</div>
+            <div id="release-year" th:text="${app.releaseYear}"><b>Released: </b>2024</div>
 
         </article>
 
     </a>
+
 </main>
 </body>
 </html>
