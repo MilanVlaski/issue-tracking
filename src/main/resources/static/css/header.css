@@ -26,11 +26,6 @@ header {
     column-gap: 0.8em;
 }
 
-.header-width-container {
-    max-width: 80ch;
-    margin: 0 auto;
-}
-
 
 @media (max-width: 400px) {
     #header-logo {
