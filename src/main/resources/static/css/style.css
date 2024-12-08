@@ -28,16 +28,22 @@ body {
     margin: 0;
 }
 
+main {
+    padding: 5px;
+}
+
 .significant-button {
     background-color: var(--primary-color);
     color: white;
     padding: 10px 20px;
     font-size: 16px;
+    text-align: center;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
+
 }
 
 .significant-button:hover {
@@ -50,4 +56,60 @@ body {
     background-color: #165aba;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transform: translateY(2px);
+}
+
+.significant-button.secondary {
+    background-color: #b87612;
+}
+
+.significant-button.secondary:hover {
+    background-color: #a14a10;
+}
+
+.significant-button.secondary:active {
+    background-color: #c25a14;
+}
+
+/*---------Table-----------*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+table thead tr {
+    background-color: #555555;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+table th,
+table td {
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f3f3f3;
+}
+
+
+
+.width-container {
+    max-width: 120ch;
+    margin: 0 auto;
+}
+
+.small-logo {
+    max-width: 50px;
+    align-self: center;
+    border-radius: 5%;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 40px;
 }
