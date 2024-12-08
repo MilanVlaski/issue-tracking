@@ -14,17 +14,17 @@
 
 <main id="item-container" class="app-width-container">
 
-    <a th:each="app: ${apps}" th:href="@{/application/{appId}/buy(appId=${app.id})}" aria-label="Buy Application"
-       href="">
+    <a th:each="app: ${apps}" th:href="@{/application/{appId}/buy(appId=${app.id})}"
+       aria-label="Buy Application" href="">
 
-        <article>
+        <article class="app">
 
-            <img th:src="${app.logoUrl}" th:alt="|${app.name} logo|" class="app-logo-big"
-                 src="/images/logos/logo.png">
+            <img th:src="${app.logoUrl}" th:alt="|${app.name} logo|" class="app-logo-big" src="/images/logos/logo.png">
 
-            <b th:text="${app.name}">Application</b>
-            <div th:text="${app.description}">This app will blow your socks off. And we really mean it. Wowza!
-            </div>
+            <div th:text="${app.name}">Application</div>
+            <p th:text="${app.description}">
+                This app will blow your socks off. And we really mean it. Wowza!
+            </p>
             <div id="version" th:text="${app.version}"><b>Version: </b>1.0</div>
             <div id="release-year" th:text="${app.releaseYear}"><b>Released: </b>2024</div>
 

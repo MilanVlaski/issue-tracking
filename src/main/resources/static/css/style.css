@@ -16,14 +16,6 @@ h2 {
     font-family: 'Montserrat', sans-serif;
 }
 
-a:link {
-    color: var(--primary-color)
-}
-
-a:visited {
-    color: #6542b6;
-}
-
 body {
     margin: 0;
 }
@@ -34,7 +26,7 @@ main {
 
 .significant-button {
     background-color: var(--primary-color);
-    color: white;
+    color: white; !important;
     padding: 10px 20px;
     font-size: 16px;
     text-align: center;
@@ -43,7 +35,7 @@ main {
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
-
+    text-decoration: none;
 }
 
 .significant-button:hover {
@@ -112,4 +104,5 @@ table tbody tr:nth-child(even) {
     display: flex;
     flex-direction: column;
     flex: 1 1 40px;
+    max-width: 300px;
 }
