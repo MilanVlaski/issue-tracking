@@ -19,19 +19,20 @@
         No purchases to show.
     </div>
 
-    <article th:each="purchase : ${purchases}" class="app">
+    <article th:unless="${purchases.isEmpty()}" th:each="purchase : ${purchases}"
+              class="app">
 
         <img th:src="${purchase.application.logoUrl}" th:alt="|${purchase.application.name} logo|"
-             class="app-logo-big" src="/images/logos/logo.png">
+             style="margin-inline: auto;" class="app-logo-big" src="/images/logos/logo.png">
 
-        <div th:text="${purchase.application.name}">Application</div>
+        <div th:utext="'<b>'+${purchase.application.name}+'</b>'" style="margin-inline: auto;">Application</div>
 
         <p th:text="${purchase.application.description}">
             This application will blow your socks off. And we really mean it. Wowza!
         </p>
 
-        <div id="version" th:text="${purchase.application.version}"><b>Version: </b>1.0</div>
-        <div id="release-year" th:text="${purchase.application.releaseYear}"><b>Released: </b>2024</div>
+        <div id="version" th:utext="'<b>Version: </b>' + ${purchase.application.version}"><b>Version: </b>1.0</div>
+        <div id="release-year" th:utext="'<b>Released: </b>' + ${purchase.application.releaseYear}"><b>Released: </b>2024</div>
 
 
         <a th:href="@{/application/{appId}/reportProblem(appId=${purchase.application.id})}"

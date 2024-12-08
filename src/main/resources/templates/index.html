@@ -19,14 +19,16 @@
 
         <article class="app">
 
-            <img th:src="${app.logoUrl}" th:alt="|${app.name} logo|" class="app-logo-big" src="/images/logos/logo.png">
+            <img th:src="${app.logoUrl}" th:alt="|${app.name} logo|"
+                 class="app-logo-big" src="/images/logos/logo.png">
 
-            <div th:text="${app.name}">Application</div>
+            <div th:utext="'<b>'+${app.name}+'</b>'"><b>Application</b></div>
             <p th:text="${app.description}">
                 This app will blow your socks off. And we really mean it. Wowza!
             </p>
-            <div id="version" th:text="${app.version}"><b>Version: </b>1.0</div>
-            <div id="release-year" th:text="${app.releaseYear}"><b>Released: </b>2024</div>
+
+            <div id="version" th:utext="'<b>Version: </b>' + ${app.version}"><b>Version: </b>1.0</div>
+            <div id="release-year" th:utext="'<b>Released: </b>' + ${app.releaseYear.year}"><b>Released: </b>2024</div>
 
         </article>
 
