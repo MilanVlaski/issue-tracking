@@ -13,26 +13,35 @@
         </div>
 
         <nav id="navigation">
+
             <a th:href="${homeUrl}">Home</a>
-            <div sec:authorize="!isAuthenticated()">
-                <a th:href="${loginUrl}" aria-label="Log In">Login</a>
-            </div>
+
+
             <a th:if="${homeUrl == '/'}" th:href="@{/reportProblem}"
                aria-label="Report a Problem">
                 Report a problem
             </a>
 
+
             <div sec:authorize="isAuthenticated()">
+
                 <a th:if="${homeUrl == '/'}" th:href="@{/problems}"
-                   aria-label="See Reported Problems">See Reported Problems
+                aria-label="See Reported Problems">See Reported Problems
                 </a>
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit" aria-label="Log Out">Log Out</button>
-                </form>
+
                 <a th:if="${homeUrl == '/engineer/problems'}" th:href="@{/engineer/problems/mine}"
                    aria-label="My Problems">
                     My Problems
                 </a>
+
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" aria-label="Log Out">Log Out</button>
+                </form>
+
+            </div>
+
+            <div sec:authorize="!isAuthenticated()">
+                <a th:href="${loginUrl}" aria-label="Log In">Login</a>
             </div>
 
         </nav>
