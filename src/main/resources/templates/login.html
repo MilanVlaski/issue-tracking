@@ -12,16 +12,19 @@
 
 <div th:replace="~{fragments/header :: userHeader}"></div>
 
-<form th:action="@{/login}" method="post">
+<main class="width-container">
+    <form th:action="@{/login}" method="post" >
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required placeholder="Email">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required placeholder="Email">
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required placeholder="Password">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required placeholder="Password">
 
-    <button type="submit">Log in</button>
-</form>
+        <button type="submit">Log in</button>
+    </form>
+</main>
+
 <a href="/register">Don't have an account? Create a user account.</a>
 </body>
 </html>
