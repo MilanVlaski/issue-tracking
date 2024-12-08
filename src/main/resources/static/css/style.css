@@ -116,7 +116,12 @@ form {
     flex-direction: column;
     row-gap: 0.5em;
     max-width: 50ch;
-    margin: auto;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 form button {
