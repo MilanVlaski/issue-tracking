@@ -93,7 +93,7 @@ table tbody tr:nth-child(even) {
     margin: 0 auto;
 }
 
-main {
+.main-width-container {
     max-width: 80ch;
     margin: 0 auto;
 }
@@ -116,6 +116,7 @@ form {
     flex-direction: column;
     row-gap: 0.5em;
     max-width: 50ch;
+    margin: auto;
 }
 
 form button {
@@ -130,4 +131,24 @@ form button {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     text-decoration: none;
+}
+
+form input, form textarea, form select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+form input:focus, form textarea:focus, form select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    font-weight: bold;
+    color: #333;
 }
