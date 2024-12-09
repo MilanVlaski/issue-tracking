@@ -43,6 +43,7 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
   Ovo je sve tema za spring sekjuriti...
  # To do
 ## Must do
+- [ ] Add some margin top to the report a problem button
 - [ ] Style Report problem. This should be generic table styling, and small logo.
 - [ ] Style Login and Register pages (generic form styling again)  
 - [x] Translate problem state to english (probably by using a dto)
