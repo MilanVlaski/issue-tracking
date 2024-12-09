@@ -13,19 +13,23 @@
 <div th:replace="~{fragments/header :: userHeader}"></div>
 
 <main class="main-width-container flex-center">
-    <form th:action="@{/login}" method="post" >
 
-        <label>Email:
-            <input type="email" name="email" required placeholder="Email">
-        </label>
+    <div>
+        <h1>Log In</h1>
+        <form th:action="@{/login}" method="post" >
 
-        <label>Password:
-            <input type="password" name="password" required placeholder="Password">
-        </label>
+            <label>Email:
+                <input type="email" name="email" required placeholder="Email">
+            </label>
 
-        <button type="submit">Log in</button>
-        <a href="/register">Don't have an account? Create a user account.</a>
-    </form>
+            <label>Password:
+                <input type="password" name="password" required placeholder="Password">
+            </label>
+
+            <button type="submit">Log in</button>
+            <a href="/register">Don't have an account? Create a user account.</a>
+        </form>
+    </div>
 </main>
 
 </body>
