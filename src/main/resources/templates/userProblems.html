@@ -13,11 +13,13 @@
 
 <div th:replace="~{fragments/header :: userHeader}"></div>
 
-<main class="main-width-container flex-center" style="flex-direction: column">
-
+<main class="main-width-container">
+<div>
     <h1>Reported Problems</h1>
 
     <div th:if="${problemDtos}">
+
+    </div>
         <details th:each="problemDto : ${problemDtos}" aria-label="See Fixes">
             <summary>
                 Problem with <span th:text="${problemDto.problem.application.name}"></span>
