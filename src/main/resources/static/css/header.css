@@ -37,3 +37,19 @@ header {
     text-decoration: none;
     color: inherit;
 }
+
+/*This helps me render buttons inside forms*/
+#navigation form {
+    margin: 0;
+}
+
+#navigation form button {
+    all: unset;
+    background: none;
+    border: none;
+    color: inherit;
+    text-decoration: none;
+    font: inherit;
+    cursor: pointer;
+    padding: 0;
+}

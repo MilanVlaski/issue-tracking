@@ -22,23 +22,20 @@
                 Report a problem
             </a>
 
+            <!-- These are your authenticated only fields. -->
+            <a sec:authorize="isAuthenticated()" th:if="${homeUrl == '/'}" th:href="@{/problems}"
+               aria-label="See Reported Problems">See Reported Problems
+            </a>
 
-            <div sec:authorize="isAuthenticated()">
+            <a sec:authorize="isAuthenticated()" th:if="${homeUrl == '/engineer/problems'}" th:href="@{/engineer/problems/mine}"
+               aria-label="My Problems">
+                My Problems
+            </a>
 
-                <a th:if="${homeUrl == '/'}" th:href="@{/problems}"
-                aria-label="See Reported Problems">See Reported Problems
-                </a>
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                <button type="submit" aria-label="Log Out">Log Out</button>
+            </form>
 
-                <a th:if="${homeUrl == '/engineer/problems'}" th:href="@{/engineer/problems/mine}"
-                   aria-label="My Problems">
-                    My Problems
-                </a>
-
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit" aria-label="Log Out">Log Out</button>
-                </form>
-
-            </div>
 
             <div sec:authorize="!isAuthenticated()">
                 <a th:href="${loginUrl}" aria-label="Log In">Login</a>
