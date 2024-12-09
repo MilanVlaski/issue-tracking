@@ -18,11 +18,13 @@
     <div>
         <h1>Report a Problem</h1>
         <form method="post" th:action="@{''}">
-            <label for="description">Please briefly describe the problem:</label>
-            <input type="text" name="description" id="description">
+            <label >Please briefly describe the problem:
+            <input type="text" name="description" >
+            </label>
 
             <label>Actions that led to the problem occurring:
-                <textarea name="actions" placeholder="Describe each action on a new line, by pressing Enter."></textarea>
+                <textarea name="actions" rows="8"
+                          placeholder="Describe each action on a new line. Press Enter when you're done typing in an action."></textarea>
             </label>
 
             <button type="submit">Submit</button>
