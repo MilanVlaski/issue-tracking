@@ -15,17 +15,28 @@
 
 <main class="main-width-container flex-center">
 
-    <ol>
-        <li th:each="action : ${actions}" th:text="${action.description}">Action description.</li>
-    </ol>
+    <div>
 
-    <form th:action="@{/engineer/problems/{problemId}/answer(problemId=${actions[0].problem.id})}" method="post">
-        <label>
+        <div th:if="${answerStatus == 'success'}">
+            Problem answered successfully!
+        </div>
+
+        <div th:if="${answerStatus == 'failure'}">
+            Problem answering failed.
+        </div>
+
+        <ol>
+            <li th:each="action : ${actions}" th:text="${action.description}">Action description.</li>
+        </ol>
+
+        <form th:action="@{/engineer/problems/{problemId}/answer(problemId=${actions[0].problem.id})}" method="post">
+            <label>
         <textarea name="answer" rows="10"
                   placeholder="How can the problem be resolved?"></textarea>
-        </label>
-        <button aria-label="Answer Problem">Answer Problem</button>
-    </form>
+            </label>
+            <button aria-label="Answer Problem">Answer Problem</button>
+        </form>
+    </div>
 </main>
 
 </body>

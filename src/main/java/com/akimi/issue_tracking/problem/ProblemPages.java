@@ -47,11 +47,12 @@ public class ProblemPages {
     @PostMapping("/application/{appId}/reportProblem")
     public String reportProblemPost(@PathVariable String appId,
             @ModelAttribute ProblemReport problemReport,
-            HttpServletRequest request
+            HttpServletRequest request, RedirectAttributes redirectAttributes
     ) {
         var application = em.find(Application.class, appId);
         var user = currentLogin.user();
         problemProcessing.report(problemReport, application, user);
+        redirectAttributes.addFlashAttribute("problemStatus", "success");
         return redirectToReferer(request);
     }
 
@@ -107,11 +108,13 @@ public class ProblemPages {
 
     @PostMapping("/engineer/problems/{problemId}/answer")
     public String answerProblemPost(@PathVariable String problemId,
-            @ModelAttribute AnswerDto answer, HttpServletRequest request) {
+            @ModelAttribute AnswerDto answer, HttpServletRequest request,
+            RedirectAttributes redirectAttributes) {
         problemProcessing.solveProblem(em.find(Problem.class, problemId),
                 answer.toEntity(),
                 currentLogin.engineer()
         );
+        redirectAttributes.addFlashAttribute("answerStatus", "success");
         return redirectToReferer(request);
     }
 

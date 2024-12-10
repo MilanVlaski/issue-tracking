@@ -16,6 +16,14 @@
 <main class="main-width-container flex-center">
 
     <div>
+        <div th:if="${problemStatus == 'success'}">
+            Your problem will be looked at as soon as possible!
+        </div>
+
+        <div th:if="${problemStatus == 'failure'}">
+            Your problem couldn't be posted. Please, try again.
+        </div>
+
         <h1>Report a Problem</h1>
         <form method="post" th:action="@{''}">
             <label >Please briefly describe the problem:
