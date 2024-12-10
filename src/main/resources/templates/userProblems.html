@@ -20,13 +20,13 @@
     <div th:if="${problemDtos}">
 
     </div>
-        <details th:each="problemDto : ${problemDtos}" aria-label="See Fixes">
+        <details th:each="problemDto, iter : ${problemDtos}" th:attr="open=${iter.index == 0}" aria-label="See Fixes">
             <summary>
                 Problem with <span th:text="${problemDto.problem.application.name}"></span>
                 <span th:text="${problemDto.problem.application.version}"></span>
                 currently <span th:text="${problemDto.problem.state}"></span>.
             </summary>
-            <p th:text="${problemDto.problem.description}"></p>
+            <p th:utext="'<b>Description: </b>'+${problemDto.problem.description}"></p>
             <h3>Answers</h3>
             <ul th:if="${problemDto.problem.answers}">
                 <li th:each="answer : ${problemDto.problem.answers}">
