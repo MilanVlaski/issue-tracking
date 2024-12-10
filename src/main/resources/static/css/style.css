@@ -68,6 +68,7 @@ table {
     margin: 20px 0;
     font-size: 18px;
     text-align: left;
+    padding: 0;
 }
 
 table thead tr {
@@ -78,12 +79,27 @@ table thead tr {
 
 table th,
 table td {
-    padding: 12px 15px;
+    padding: 8px;
     border: 1px solid #dddddd;
 }
 
 table tbody tr:nth-child(even) {
     background-color: #f3f3f3;
+}
+
+/* Small screen adjustments */
+@media (max-width: 600px) {
+    table {
+        font-size: 12px;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    table th.description,
+    table td.description {
+        display: none;
+    }
 }
 
 

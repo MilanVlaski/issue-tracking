@@ -14,12 +14,12 @@
 <div th:replace="~{fragments/header :: userHeader}"></div>
 
 <main class="main-width-container">
-<div>
-    <h1>Reported Problems</h1>
+    <div>
+        <h1>Reported Problems</h1>
 
-    <div th:if="${problemDtos}">
+        <div th:if="${problemDtos}">
 
-    </div>
+        </div>
         <details th:each="problemDto, iter : ${problemDtos}" th:attr="open=${iter.index == 0}" aria-label="See Fixes">
             <summary>
                 Problem with <span th:text="${problemDto.problem.application.name}"></span>
@@ -27,14 +27,16 @@
                 currently <span th:text="${problemDto.problem.engState}"></span>.
             </summary>
             <p th:utext="'<b>Description: </b>'+${problemDto.problem.description}"></p>
-            <h3>Answers</h3>
-            <ul th:if="${problemDto.problem.answers}">
-                <li th:each="answer : ${problemDto.problem.answers}">
-                    <strong th:text="${answer.engineer.name}"></strong>
-                    :
-                    <span th:text="${answer.description}"></span>
-                </li>
-            </ul>
+            <div th:unless="${problemDto.problem.answers.isEmpty()}">
+                <h3>Answers</h3>
+                <ul>
+                    <li th:each="answer : ${problemDto.problem.answers}">
+                        <strong th:text="${answer.engineer.name}"></strong>
+                        :
+                        <span th:text="${answer.description}"></span>
+                    </li>
+                </ul>
+            </div>
             <ul th:if="${problemDto.patches}">
                 <li th:each="patch: ${problemDto.patches}">
                     <strong th:text="${patch.problemSolver.engineer.name}"></strong>

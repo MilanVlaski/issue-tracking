@@ -46,8 +46,8 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - [x] ON the User problems page, Have the problem be open to begin with, and render the patch properly. Add dummy data to start with.
 - [x] Center answer problem page, add a heading to it like (Problem #1) 
 - [x] There should be an extra <th> in engineer problems page
-- [ ] The problem state is not being rendered, or missing in the model (engineerProblems.html)
-- [ ] Remove horizontal padding from the table, and reduce the font on small screens. Add scrolling to the table as a last resort.
+- [x] The problem state is not being rendered, or missing in the model (engineerProblems.html)
+- [x] Remove horizontal padding from the table, and reduce the font on small screens. Remove description column, if necessary.
 - [x] Add rendering on successful form submission to answerProblem page
 - [x] describeProblem should show something on correct form submission
 - [x] Add some margin top to the report a problem button

@@ -10,7 +10,12 @@
     <title>My Problems</title>
 </head>
 <body>
+
 <div th:replace="~{fragments/header :: engineerHeader}"></div>
-<div th:replace="~{fragments/problems :: problems(personal)}"></div>
+
+<main class="flex-center main-width-container">
+    <div th:replace="~{fragments/problems :: problems(personal)}"></div>
+</main>
+
 </body>
 </html>
