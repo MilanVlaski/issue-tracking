@@ -131,7 +131,7 @@ public class Engineer {
         if (notAssignedTo(problem)) {
             throw new IllegalStateException("The engineer MUST be working on a problem in order to patch it!");
         }
-        problem.setState(ProblemState.SOLVED.name);
+        problem.setState(ProblemState.SOLVED);
 
         Application problematicApp = problem.getApplication();
         var user = problem.getUser();

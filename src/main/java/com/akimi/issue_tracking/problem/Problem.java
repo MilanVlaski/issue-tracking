@@ -78,7 +78,7 @@ public class Problem {
         addUser(user);
     }
 
-    private void setState(ProblemState problemState) {
+    public void setState(ProblemState problemState) {
         this.state = problemState.name;
         this.engState = problemState.engName;
     }
@@ -118,15 +118,6 @@ public class Problem {
     public Problem addApplication(Application application) {
         this.application = application;
         application.getProblems().add(this);
-        return this;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public Problem setState(String state) {
-        this.state = state;
         return this;
     }
 

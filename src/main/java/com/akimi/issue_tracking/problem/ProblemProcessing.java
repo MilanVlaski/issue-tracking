@@ -47,13 +47,14 @@ public class ProblemProcessing {
     public void solveProblem(Problem problem, Answer answer, Engineer engineer) {
         problem.add(answer);
         engineer.add(answer);
-        problem.setState(ProblemState.SOLVED.name);
+        problem.setState(ProblemState.SOLVED);
         em.persist(answer);
     }
 
     @Transactional
     public void assignEngineerToProblem(Engineer engineer, Problem problem) {
         problem.assignEngineer(engineer);
+        problem.setState(ProblemState.ASSIGNED);
         em.persist(problem);
         em.persist(engineer);
     }
