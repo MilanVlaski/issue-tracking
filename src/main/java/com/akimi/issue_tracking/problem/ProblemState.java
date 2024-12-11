@@ -23,4 +23,13 @@ public enum ProblemState {
         }
         throw new IllegalArgumentException("Invalid problem state: " + name);
     }
+
+    public static ProblemState fromEngName(String englishName) {
+        for (ProblemState problemState : ProblemState.values()) {
+            if (problemState.engName.equals(englishName)) {
+                return problemState;
+            }
+        }
+        throw new IllegalArgumentException("Invalid problem state: " + englishName);
+    }
 }

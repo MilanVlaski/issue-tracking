@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 public class AnswerDto {
     private String answer;
+    private String problemState;
     public Answer toEntity() {
         return new Answer(answer);
     }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -103,6 +104,8 @@ public class ProblemPages {
         var problem = em.find(Problem.class, problemId);
         model.addAttribute("problem", problem);
         model.addAttribute("actions", problem.getActions());
+        model.addAttribute("problemStates", Arrays.stream(ProblemState.values())
+                                                  .map(value -> value.engName));
         return "answerProblem";
     }
 
@@ -112,7 +115,8 @@ public class ProblemPages {
             RedirectAttributes redirectAttributes) {
         problemProcessing.answerProblem(em.find(Problem.class, problemId),
                 answer.toEntity(),
-                currentLogin.engineer()
+                currentLogin.engineer(),
+                ProblemState.fromEngName(answer.getProblemState())
         );
         redirectAttributes.addFlashAttribute("answerStatus", "success");
         return redirectToReferer(request);

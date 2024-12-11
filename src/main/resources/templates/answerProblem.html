@@ -31,8 +31,12 @@
 
         <form th:action="@{/engineer/problems/{problemId}/answer(problemId=${actions[0].problem.id})}" method="post">
             <label>
-        <textarea name="answer" rows="10"
-                  placeholder="How can the problem be resolved?"></textarea>
+            <textarea name="answer" rows="10"
+                      placeholder="How can the problem be resolved?"></textarea>
+            </label>
+            <label>Problem State:
+                <input type="radio" th:each="problemState, iter: ${problemStates}" name="problemState"
+                th:value="${problemState}" th:attr="checked=${problemState == 'Reported'}" required>
             </label>
             <button aria-label="Answer Problem">Answer Problem</button>
         </form>
