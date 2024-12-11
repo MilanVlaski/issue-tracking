@@ -17,13 +17,13 @@
     <div>
         <h1>Reported Problems</h1>
 
-        <div th:if="${problemDtos}">
-
+        <div th:if="${problemDtos.isEmpty()}">
+            No problems so far!
         </div>
         <details th:each="problemDto, iter : ${problemDtos}" th:attr="open=${iter.index == 0}" aria-label="See Fixes">
             <summary>
                 Problem with <span th:text="${problemDto.problem.application.name}"></span>
-                <span th:text="${problemDto.problem.application.version}"></span>
+                <span th:text="${problemDto.problem.application.version}"></span>,
                 currently <span th:text="${problemDto.problem.engState}"></span>.
             </summary>
             <p th:utext="'<b>Description: </b>'+${problemDto.problem.description}"></p>
@@ -41,10 +41,10 @@
                 <li th:each="patch: ${problemDto.patches}">
                     <strong th:text="${patch.problemSolver.engineer.name}"></strong>
                     :
-                    <button aria-label="Install Patch"></button>
-                    <span th:text="${patch.communicationType}"></span>
-                    <span th:text="${patch.publishDate}"></span>
+                    <button aria-label="Install Patch">Install the Patch</button>
                     <span th:text="${patch.sizeKb} + 'kB'"></span>
+                    <span th:text="${patch.publishDate}"></span>
+                    <span th:text="${patch.communicationType}"></span>
                 </li>
             </ul>
         </details>

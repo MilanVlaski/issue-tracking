@@ -80,7 +80,7 @@ public class ProblemPages {
     @GetMapping("/problems")
     public String problems(Model model) {
         var problems = em.createQuery(
-                                 "select distinct p from Problem p where p.user = :user",
+                                 "select p from Problem p where p.user = :user",
                                  Problem.class
                          )
                          .setParameter("user", currentLogin.user())

@@ -42,7 +42,7 @@ public class Problem {
     private String engState;
 
     public String getEngState() {
-        return engState;
+        return ProblemState.fromDbName(state).engName;
     }
 
     @Column(name = "OPIS_PRB", length = 200)
