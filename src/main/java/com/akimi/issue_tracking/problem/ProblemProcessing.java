@@ -44,7 +44,7 @@ public class ProblemProcessing {
     }
 
     @Transactional
-    public void solveProblem(Problem problem, Answer answer, Engineer engineer) {
+    public void answerProblem(Problem problem, Answer answer, Engineer engineer) {
         problem.add(answer);
         engineer.add(answer);
         problem.setState(ProblemState.SOLVED);

@@ -110,7 +110,7 @@ public class ProblemPages {
     public String answerProblemPost(@PathVariable String problemId,
             @ModelAttribute AnswerDto answer, HttpServletRequest request,
             RedirectAttributes redirectAttributes) {
-        problemProcessing.solveProblem(em.find(Problem.class, problemId),
+        problemProcessing.answerProblem(em.find(Problem.class, problemId),
                 answer.toEntity(),
                 currentLogin.engineer()
         );
