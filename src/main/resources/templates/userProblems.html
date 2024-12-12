@@ -41,10 +41,11 @@
                 <li th:each="patch: ${problemDto.patches}">
                     <strong th:text="${patch.problemSolver.engineer.name}"></strong>
                     :
-                    <button aria-label="Install Patch">Install the Patch</button>
-                    <span th:text="${patch.sizeKb} + 'kB'"></span>
-                    <span th:text="${patch.publishDate}"></span>
-                    <span th:text="${patch.communicationType}"></span>
+                    <a th:href="@{/application/{appId}/buy(appId=${problemDto.problem.application.id})}"
+                       aria-label="Install Patch" href="">Install the Patch</a>
+                    Size: <span th:text="${patch.sizeKb} + 'kB'"></span>
+                    Published: <span th:text="${patch.publishDate}"></span>
+                    Comm type: <span th:text="${patch.communicationType}"></span>
                 </li>
             </ul>
         </details>

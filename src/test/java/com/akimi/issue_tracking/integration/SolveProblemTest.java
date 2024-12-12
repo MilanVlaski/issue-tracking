@@ -117,6 +117,8 @@ public class SolveProblemTest extends BaseIntegrationTest {
         click("See Fixes");
 
         click("Install Patch");
+        click("Install Application");
+        assertElementContainingTextExists("Your application will be installed shortly.");
     }
 
     private void assertThatActionsAppearInSameOrderAsDescribed() {

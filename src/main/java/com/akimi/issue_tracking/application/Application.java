@@ -151,4 +151,7 @@ public class Application {
                 this.logoUrl.equals(other.logoUrl);
     }
 
+    public boolean isOwnedBy(User user) {
+        return user.ownsApplication(this);
+    }
 }

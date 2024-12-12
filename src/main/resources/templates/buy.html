@@ -22,9 +22,16 @@
         <div th:if="${purchaseStatus == 'success'}">
             Purchase successful!
         </div>
-
         <div th:if="${purchaseStatus == 'failure'}">
             Purchase failed. Please try again.
+        </div>
+
+
+        <div th:if="${installed}">
+            Your application will be installed shortly.
+        </div>
+        <div th:unless="${installed}">
+            Couldn't install the application.
         </div>
 
 
@@ -38,17 +45,24 @@
 
         <form method="post" th:action="@{''}">
 
-            <label>
-                <select name="support">
-                    <!--            todo, remove this hardcoded database id BEZ_POD-->
-                    <option value="BEZ_POD">Type of support</option>
-                    <option th:each="supp: ${supportTypes}" th:value="${supp.id}"
-                            th:text="${supp.name} + ' - ' + ${supp.price} + '$'">No support 0$
-                    </option>
-                </select>
-            </label>
+            <div th:if="${ownedByUser}">
+                <button th:formaction="@{/application/{appId}/install(appId=${app.id})}"
+                         aria-label="Install Application">Install</button>
+            </div>
 
-            <button class="significant-button">Buy</button>
+            <div th:unless="${ownedByUser}">
+                <label>
+                    <select name="support">
+                        <!--            todo, remove this hardcoded database id BEZ_POD-->
+                        <option value="BEZ_POD">Type of support</option>
+                        <option th:each="supp: ${supportTypes}" th:value="${supp.id}"
+                                th:text="${supp.name} + ' - ' + ${supp.price} + '$'">No support 0$
+                        </option>
+                    </select>
+                </label>
+
+                <button class="significant-button">Buy</button>
+            </div>
 
         </form>
 
