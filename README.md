@@ -43,9 +43,9 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
   Ovo je sve tema za spring sekjuriti...
  # To do
 ## Must do
-- [ ] Style the userProblems page separately
+- [x] Style the userProblems page separately
 - [x] An engineer can set the state of the problem to any available state, when submitting an answer.
-- [ ] When a problem is resovled with a patch, a user can purchase the resulting app. We do this by simply having a link on the answers page that takes them to the site /applicaton/{appId}/buy. The page itself will have logic to recognize whether it is owned by the user or not, showing an Install button instead of a Buy. Clicking on the button should install it somehow (just an alert for now). This happens with all owned apps. It could even happen when the user is redirected after a buy...
+- [x] When a problem is resovled with a patch, a user can purchase the resulting app. We do this by simply having a link on the answers page that takes them to the site /applicaton/{appId}/buy. The page itself will have logic to recognize whether it is owned by the user or not, showing an Install button instead of a Buy. Clicking on the button should install it somehow (just an alert for now). This happens with all owned apps. It could even happen when the user is redirected after a buy...
 - [x] ON the User problems page, Have the problem be open to begin with, and render the patch properly. Add dummy data to start with.
 - [x] Center answer problem page, add a heading to it like (Problem #1) 
 - [x] There should be an extra <th> in engineer problems page

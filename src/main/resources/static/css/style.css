@@ -4,6 +4,10 @@
     --primary-color: #1358b8;
 }
 
+a:visited {
+    color: #34119c;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 18px;

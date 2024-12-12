@@ -1,17 +1,21 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Montserrat&display=swap}" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Montserrat&display=swap}"
+          href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css" />
+    <link rel="stylesheet" th:href="@{/css/header.css}" href="/css/header.css">
     <title>Reported problems</title>
 </head>
+
 <body>
 
-<div th:replace="~{fragments/header :: userHeader}"></div>
+<div th:fragment="~{fragments/header :: userHeader}"></div>
 
 <main class="main-width-container">
     <div>
@@ -20,33 +24,40 @@
         <div th:if="${problemDtos.isEmpty()}">
             No problems so far!
         </div>
-        <details th:each="problemDto, iter : ${problemDtos}" th:attr="open=${iter.index == 0}" aria-label="See Fixes">
+        <details th:each="problemDto, iter : ${problemDtos}" th:attr="open=${iter.index == 0}"
+                 aria-label="See Fixes" open>
             <summary>
-                Problem with <span th:text="${problemDto.problem.application.name}"></span>
-                <span th:text="${problemDto.problem.application.version}"></span>,
-                currently <span th:text="${problemDto.problem.engState}"></span>.
+                <b>
+
+                    Problem with <span th:text="${problemDto.problem.application.name}">Application</span>
+                    <span th:text="${problemDto.problem.application.version}">1.5.5</span>,
+                    currently <span th:text="${problemDto.problem.engState}">solved</span>.
+                </b>
+
             </summary>
             <p th:utext="'<b>Description: </b>'+${problemDto.problem.description}"></p>
             <div th:unless="${problemDto.problem.answers.isEmpty()}">
-                <h3>Answers</h3>
+                <h4>Answers</h4>
                 <ul>
                     <li th:each="answer : ${problemDto.problem.answers}">
-                        <strong th:text="${answer.engineer.name}"></strong>
+                        <strong th:text="${answer.engineer.name}">John Smith</strong>
                         :
-                        <span th:text="${answer.description}"></span>
+                        <span th:text="${answer.description}">Just turn it off and on again.</span>
                     </li>
                 </ul>
             </div>
             <ul th:if="${problemDto.patches}">
                 <li th:each="patch: ${problemDto.patches}">
-                    <strong th:text="${patch.problemSolver.engineer.name}"></strong>
+                    <strong th:text="${patch.problemSolver.engineer.name}">John Smith</strong>
                     :
                     <a th:href="@{/application/{appId}/buy(appId=${problemDto.problem.application.id})}"
                        aria-label="Install Patch" href="">Install the Patch</a>
-                    Size: <span th:text="${patch.sizeKb} + 'kB'"></span>
-                    Published: <span th:text="${patch.publishDate}"></span>
-                    Comm type: <span th:text="${patch.communicationType}"></span>
-                </li>
+                    <ul>
+                        <li><b>Size: </b><span th:text="${patch.sizeKb} + 'kB'">45 kB</span></li>
+                        <li><b>Published:</b> <span th:text="${patch.publishDate}">12-12-2024</span></li>
+                        <li><b>Communication type: </b> <span th:text="${patch.communicationType}">Shouting</span>
+                        </li>
+                    </ul>
             </ul>
         </details>
     </div>
@@ -54,4 +65,5 @@
 </main>
 
 </body>
+
 </html>
