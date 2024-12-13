@@ -150,4 +150,8 @@ public class Engineer {
     public Set<ProblemSolver> getProblemSolvers() {
         return problemSolvers;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

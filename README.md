@@ -36,37 +36,11 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 9. Korisnik gleda odgovore na probleme koje je postavio.
 10. Korisnik može da instalira zakrpe za sve probleme koje je postavio.
 11. Kako vidjeti koliko je brzo inženjer riješio problem? Pogledati vrijeme od kad je predao problem, do vremena kad je dao zakrpu.
-# Autorizacija
-- Korisnik ne mora da se loginuje. Ima pristup IT podršci ili sličnom, i sajtu.
-- Podrška i inženjeri se loginuju i imaju pristup kul stvarima. Mada kao hak, bez logina, mogu unijeti svoje ime ili nesto...
-- Admin ili ko vec, radi sve.
-  Ovo je sve tema za spring sekjuriti...
  # To do
-## Must do
-- [x] Style the userProblems page separately
-- [x] An engineer can set the state of the problem to any available state, when submitting an answer.
-- [x] When a problem is resovled with a patch, a user can purchase the resulting app. We do this by simply having a link on the answers page that takes them to the site /applicaton/{appId}/buy. The page itself will have logic to recognize whether it is owned by the user or not, showing an Install button instead of a Buy. Clicking on the button should install it somehow (just an alert for now). This happens with all owned apps. It could even happen when the user is redirected after a buy...
-- [x] ON the User problems page, Have the problem be open to begin with, and render the patch properly. Add dummy data to start with.
-- [x] Center answer problem page, add a heading to it like (Problem #1) 
-- [x] There should be an extra <th> in engineer problems page
-- [x] The problem state is not being rendered, or missing in the model (engineerProblems.html)
-- [x] Remove horizontal padding from the table, and reduce the font on small screens. Remove description column, if necessary.
-- [x] Add rendering on successful form submission to answerProblem page
-- [x] describeProblem should show something on correct form submission
-- [x] Add some margin top to the report a problem button
-- [x] Style Report problem. This should be generic table styling, and small logo.
-- [x] Style Login and Register pages (generic form styling again)  
-- [x] Translate problem state to english (probably by using a dto)
-- [x] Show user the price of support.
-- [x] You can't assign a problem, if it's already yours. So change the My problems page a bit.
-- [ ] **Production postgres environment** (2 days) (Maybe Google Cloud + Secret manager)
-- [x] **Local postgres** (3 days)
-- [ ] **Styling** (2 days) 
-- [x] FEAT: Create a patch for a problem, MUST be posted by an engineer working on the problem.
-  - [ ] The shop should not contain the already owned version of the app. (Nobody will check this, tbh)
+## Must do 
+- [ ] FEAT: Register engineer, add application, change state of problem, filtering based on problem state.
 - [ ] FEAT: Add date created to answer.
 - [ ] FEAT: See all engineers, with a count of solved problems, and option to see problems they are working on.
-- [ ] FEAT: When an engineer registers, their "employed from" column gets set to the current date.
 - [ ] Add filtering to problems page for the engineer. (User's is prefiltered.)
 ## Error handling
 - [ ] Add logic so that user can't buy the same app twice (there is already an exception happening on the page.) 
@@ -92,6 +66,25 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 ## Bugs
 - If user already has application takes us to error page.
 ## Done
+- [x] Style the userProblems page separately
+- [x] An engineer can set the state of the problem to any available state, when submitting an answer.
+- [x] When a problem is resovled with a patch, a user can purchase the resulting app. We do this by simply having a link on the answers page that takes them to the site /applicaton/{appId}/buy. The page itself will have logic to recognize whether it is owned by the user or not, showing an Install button instead of a Buy. Clicking on the button should install it somehow (just an alert for now). This happens with all owned apps. It could even happen when the user is redirected after a buy...
+- [x] ON the User problems page, Have the problem be open to begin with, and render the patch properly. Add dummy data to start with.
+- [x] Center answer problem page, add a heading to it like (Problem #1)
+- [x] There should be an extra <th> in engineer problems page
+- [x] The problem state is not being rendered, or missing in the model (engineerProblems.html)
+- [x] Remove horizontal padding from the table, and reduce the font on small screens. Remove description column, if necessary.
+- [x] Add rendering on successful form submission to answerProblem page
+- [x] describeProblem should show something on correct form submission
+- [x] Add some margin top to the report a problem button
+- [x] Style Report problem. This should be generic table styling, and small logo.
+- [x] Style Login and Register pages (generic form styling again)
+- [x] Translate problem state to english (probably by using a dto)
+- [x] Show user the price of support.
+- [x] You can't assign a problem, if it's already yours. So change the My problems page a bit.
+- [x] **Production postgres environment** (2 days) (Maybe Google Cloud + Secret manager)
+- [x] **Local postgres** (3 days)
+- [x] **Styling** (2 days)
 - [x] FEAT: Assign a problem to an engineer.
 - [x] Make a different header for user and engineer.
 - [x] Think about what the user would like to see on the fixes page. Probably, I want to see that my problem is fixed, and then immediately click on it to open it. Ideally, I click something, it does a dropdown, in which I see answers and patches. The answers have descriptions, and engineer's names next to them. The patches have names, and other data, and a fake download link (it would be neat if the link held the name and new version of the application)

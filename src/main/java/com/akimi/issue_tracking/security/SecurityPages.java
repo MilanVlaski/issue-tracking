@@ -1,6 +1,7 @@
 package com.akimi.issue_tracking.security;
 
 import com.akimi.issue_tracking.application.User;
+import com.akimi.issue_tracking.problem.engineer.Engineer;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +44,15 @@ public class SecurityPages {
         return "engineerLogin";
     }
 
-    @GetMapping("/check-users")
-    @ResponseBody
-    public List<User> checkUsers() {
-        return em.createQuery("SELECT u FROM User u", User.class).getResultList();
+    @GetMapping("/engineer/register")
+    public String engineerRegister() {
+        return "engineerRegister";
     }
 
+    @PostMapping("/engineer/register")
+    public String engineerRegister(@ModelAttribute Engineer engineer) {
+        registrationService.register(engineer);
+        return "redirect:/engineer/login";
+    }
 
 }
