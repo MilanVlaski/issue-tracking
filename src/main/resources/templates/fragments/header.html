@@ -36,6 +36,9 @@
                 <button type="submit" aria-label="Log Out">Log Out</button>
             </form>
 
+            <a sec:authorize="isAuthenticated()" th:if="${homeUrl == '/engineer/problems'}"
+            th:href="@{/engineer/application/add}">Add App</a>
+
 
             <div sec:authorize="!isAuthenticated()">
                 <a th:href="${loginUrl}" aria-label="Log In">Login</a>

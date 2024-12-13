@@ -38,7 +38,8 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 11. Kako vidjeti koliko je brzo inženjer riješio problem? Pogledati vrijeme od kad je predao problem, do vremena kad je dao zakrpu.
  # To do
 ## Must do 
-- [ ] FEAT: Register engineer, add application, change state of problem, filtering based on problem state.
+- [ ] Create local db and use the app a bunch with it.
+- [ ] FEAT: Add application, change state of problem, filtering based on problem state.
 - [ ] FEAT: Add date created to answer.
 - [ ] FEAT: See all engineers, with a count of solved problems, and option to see problems they are working on.
 - [ ] Add filtering to problems page for the engineer. (User's is prefiltered.)
