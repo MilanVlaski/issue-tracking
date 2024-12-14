@@ -39,7 +39,13 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
  # To do
 ## Must do 
 - [ ] Create local db and use the app a bunch with it.
-- [ ] FEAT: Add application, change state of problem, filtering based on problem state.
+- [ ] FEAT: Change state of problem
+  - It's a dynamic dropdown (ask chatgpt the simplest way to do it)
+  - Populated with values (iterating over the enums english names)
+  - When the user selects a thing a POST request is made, through JS, if it succeeds then the value in HTML changes. If not, nothing happens, I suppose.
+- [ ] FEAT: Filtering based on state
+  - Add filter field, maybe a radio or select is best. This field should lead to a page reload most likely.
+  - Change the endpoint to take an optional query value, based on which filtering is done.
 - [ ] FEAT: Add date created to answer.
 - [ ] FEAT: See all engineers, with a count of solved problems, and option to see problems they are working on.
 - [ ] Add filtering to problems page for the engineer. (User's is prefiltered.)
@@ -49,6 +55,7 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - [ ] Display login error.
 - [ ] Display register error, in case email is not unique.
 ## Nice to have
+- [ ] FEAT: 
 - [ ] FEAT: A problem should display all the engineer's names.
 - [ ] A user can purchase an update or patch of an application for free, so Install should be displayed instead of Buy.
 - [ ] Add a helper function that fetches the current user.

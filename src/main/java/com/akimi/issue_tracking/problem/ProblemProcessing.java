@@ -25,12 +25,13 @@ public class ProblemProcessing {
     private EntityManager em;
 
     @Transactional
-    public void report(ProblemReport problemReport, Application application, User user) {
+    public Problem report(ProblemReport problemReport, Application application, User user) {
         var actions = parseActions(problemReport.getActions());
         var problem = new Problem(problemReport.getDescription(), application, user, actions);
         em.persist(application);
         em.persist(user);
         em.persist(problem);
+        return problem;
     }
 
     private List<Action> parseActions(String actions1) {

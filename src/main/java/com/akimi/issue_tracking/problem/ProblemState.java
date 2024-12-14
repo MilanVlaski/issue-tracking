@@ -32,4 +32,5 @@ public enum ProblemState {
         }
         throw new IllegalArgumentException("Invalid problem state: " + englishName);
     }
+
 }

@@ -9,13 +9,11 @@ import com.akimi.issue_tracking.security.CurrentUser;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpServletRequest;
+import org.hibernate.id.PostInsertIdentifierGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
@@ -29,6 +27,9 @@ public class ProblemPages {
 
     @Autowired
     private ProblemProcessing problemProcessing;
+
+    @Autowired
+    MyProblemRepository problemRepository;
 
     @PersistenceContext
     private EntityManager em;
@@ -58,10 +59,16 @@ public class ProblemPages {
     }
 
     @GetMapping("/engineer/problems")
-    public String index(Model model) {
-        var problems = em.createQuery("select p from Problem p", Problem.class)
-                         .getResultList();
+    public String index(Model model, @RequestParam(required = false) String state) {
+        List<Problem> problems;
+        if (state != null && !state.isEmpty()) {
+            problems = problemRepository.findByState(state);
+            model.addAttribute("state", state);
+        } else {
+            problems = problemRepository.findAll();
+        }
         model.addAttribute("problems", problems);
+
         return "engineerProblems";
     }
 

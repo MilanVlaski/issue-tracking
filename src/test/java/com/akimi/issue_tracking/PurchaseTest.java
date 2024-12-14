@@ -13,12 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-@AutoConfigureTestEntityManager
 @Transactional
 public class PurchaseTest {
-
-    @Autowired
-    TestEntityManager em;
 
     @Autowired
     PurchasingService purchasingService;

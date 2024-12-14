@@ -1,37 +1,56 @@
-<table th:fragment="problems(viewType)" th:unless="${problems.isEmpty()}">
-    <thead>
-    <tr>
-        <th>App</th>
-        <th>Version</th>
-        <th>State</th>
-        <th class="description">Description</th>
-        <th></th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="problem: ${problems}">
-        <td th:text="${problem.application.name}">Application</td>
-        <td th:text="${problem.application.version}">1.0</td>
-        <td th:text="${problem.engState}">Reported.</td>
-        <td th:text="${problem.description}">User can't do something.</td>
-        <td>
-            <a th:href="@{/engineer/problems/{problemId}(problemId=${problem.id})}" aria-label="View Problem">
-                See Problem
-            </a>
-        </td>
-        <td th:if="${viewType == 'all'}">
-            <form method="post"
-                  th:action="@{/engineer/problems/{problemId}/assignEngineer(problemId=${problem.id})}">
-                <button aria-label="Assign Problem to Self">Assign to Self</button>
-            </form>
-        </td>
-        <td th:if="${viewType == 'personal'}">
-            <a th:href="@{/engineer/problems/{problemId}/uploadPatch(problemId=${problem.id})}"
-               aria-label="Upload a Patch">
-                Upload a Patch
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div th:fragment="problems(viewType)">
+    <label>Filter by State
+        <select name="state" onchange="filterPage()">
+            <option value="">Select a State</option>
+            <option th:each="stateEnum : ${T(com.akimi.issue_tracking.problem.ProblemState).values()}"
+                    th:value="${stateEnum.engName}" th:text="${stateEnum.engName}"
+                    th:selected="${stateEnum.engName == state}"></option>
+        </select>
+    </label>
+
+    <table th:unless="${problems.isEmpty()}">
+        <thead>
+        <tr>
+            <th>App</th>
+            <th>Version</th>
+            <th>State</th>
+            <th class="description">Description</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="problem: ${problems}" class="problem">
+            <td th:text="${problem.application.name}">Application</td>
+            <td th:text="${problem.application.version}">1.0</td>
+            <td th:text="${problem.engState}">Reported</td>
+            <td th:text="${problem.description}">User can't do something.</td>
+            <td>
+                <a th:href="@{/engineer/problems/{problemId}(problemId=${problem.id})}" aria-label="View Problem">
+                    See Problem
+                </a>
+            </td>
+            <td th:if="${viewType == 'all'}">
+                <form method="post"
+                      th:action="@{/engineer/problems/{problemId}/assignEngineer(problemId=${problem.id})}">
+                    <button aria-label="Assign Problem to Self">Assign to Self</button>
+                </form>
+            </td>
+            <td th:if="${viewType == 'personal'}">
+                <a th:href="@{/engineer/problems/{problemId}/uploadPatch(problemId=${problem.id})}"
+                   aria-label="Upload a Patch">
+                    Upload a Patch
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+<script>
+    function filterPage() {
+        let state = document.getElementsByName('state')[0].value
+        let url = new URL(window.location.href)
+        url.searchParams.set('state', state);
+        window.location.href = url.toString()
+    }
+</script>
+</div>

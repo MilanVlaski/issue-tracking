@@ -27,7 +27,9 @@ public class AppPatchingTest {
     private final Application brokenApp = new Application(appName, version, "Great!",
             LocalDate.now(), "url");
 
-    private final Problem problem = new Problem("Won't load", brokenApp, new User(),
+    public final User user = new User("Minga", "minga@mailcom", "wawa",
+            LocalDate.now(), "mista");
+    public final Problem problem = new Problem("Won't load", brokenApp, user,
             List.of(new Action(1, "bla")));
     private final Engineer engineer = new Engineer("Marko", "Bachelor of CS",
             LocalDate.now(), 2500.00, "mik@email.com",

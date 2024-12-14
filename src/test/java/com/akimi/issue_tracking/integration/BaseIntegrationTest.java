@@ -10,20 +10,16 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import java.time.Duration;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 public abstract class BaseIntegrationTest {
 
-    @LocalServerPort
-    protected int port;
-
     protected final WebDriver driver = new ChromeDriver(
-            new ChromeOptions().addArguments("--headless")
+//            new ChromeOptions().addArguments("--headless")
     );
 
     protected final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(100));
 
-    protected String homepage() {
+    protected String homepage(int port) {
         return "http://localhost:" + port;
     }
 
@@ -37,6 +33,18 @@ public abstract class BaseIntegrationTest {
         var passwordElement = driver.findElement(By.name(password));
         passwordElement.sendKeys("password");
         passwordElement.submit();
+    }
+
+    protected void inputUserEmailAndPassword() {
+        var email = "john.doe@example.com";
+        var password = "password";
+        input(email, password);
+    }
+
+    protected void inputEngineerEmailAndPassword() {
+        var email = "john.smith@example.com";
+        var password = "password";
+        input(email, password);
     }
 
     protected void assertElementContainingTextExists(String text) {

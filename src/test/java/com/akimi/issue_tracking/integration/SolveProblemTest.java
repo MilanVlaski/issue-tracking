@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
 import java.time.LocalDate;
 
@@ -23,6 +24,9 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClick
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SolveProblemTest extends BaseIntegrationTest {
 
+    @LocalServerPort
+    private int port;
+
     String action1 = "I log in using my email and password.";
     String action2 = "I get an error message saying \"Something went wrong.\".";
     String answer = "It looks like your password had a space in it." +
@@ -30,7 +34,7 @@ public class SolveProblemTest extends BaseIntegrationTest {
 
     @Given("a list of applications")
     public void a_list_of_applications() {
-        driver.get(homepage());
+        driver.get(homepage(port));
     }
 
     @When("the user purchases an application with any tech support")
@@ -59,14 +63,14 @@ public class SolveProblemTest extends BaseIntegrationTest {
 
     @When("an engineer sees a reported problem with description {string}")
     public void an_engineer_sees_a_reported_problem(String problemDescription) {
-        driver.get(homepage() + "/engineer/problems");
+        driver.get(homepage(port) + "/engineer/problems");
         inputEngineerEmailAndPassword();
         assertElementContainingTextExists(problemDescription);
     }
 
     @And("an engineer can post an answer to the problem")
     public void anEngineerCanPostAnAnswerToTheProblem() {
-        driver.get(homepage() + "/engineer/problems");
+        driver.get(homepage(port) + "/engineer/problems");
         inputEngineerEmailAndPassword();
 
         click("View Problem");
@@ -79,7 +83,7 @@ public class SolveProblemTest extends BaseIntegrationTest {
     @Then("the user can look at the answer and be happy")
     public void theUserCanLookAtTheAnswerAndBeHappy() {
         click("Log Out");
-        driver.get(homepage());
+        driver.get(homepage(port));
         click("Log In");
         inputUserEmailAndPassword();
 
@@ -109,7 +113,7 @@ public class SolveProblemTest extends BaseIntegrationTest {
     @Then("the user can install the patch")
     public void theUserCanInstallThePatch() {
         click("Log Out");
-        driver.get(homepage());
+        driver.get(homepage(port));
         click("Log In");
         inputUserEmailAndPassword();
 
@@ -127,18 +131,6 @@ public class SolveProblemTest extends BaseIntegrationTest {
 
         assertEquals(action1, firstElement.getText());
         assertEquals(action2, secondElement.getText());
-    }
-
-    private void inputUserEmailAndPassword() {
-        var email = "john.doe@example.com";
-        var password = "password";
-        input(email, password);
-    }
-
-    private void inputEngineerEmailAndPassword() {
-        var email = "john.smith@example.com";
-        var password = "password";
-        input(email, password);
     }
 
     @Autowired

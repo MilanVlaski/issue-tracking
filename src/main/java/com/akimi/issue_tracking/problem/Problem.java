@@ -171,4 +171,8 @@ public class Problem {
     public Set<ProblemSolver> getProblemSolvers() {
         return problemSolvers;
     }
+
+    public Problem copy() {
+        return new Problem(description, application, user, List.copyOf(getActions()));
+    }
 }
