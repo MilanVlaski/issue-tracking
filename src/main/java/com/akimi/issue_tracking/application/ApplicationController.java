@@ -1,7 +1,5 @@
-package com.akimi.issue_tracking.application.management;
+package com.akimi.issue_tracking.application;
 
-import com.akimi.issue_tracking.application.Application;
-import com.akimi.issue_tracking.problem.ProblemPages;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import static com.akimi.issue_tracking.problem.ProblemPages.redirectToReferer;
 
 @Controller
-public class ApplicationManagement {
+public class ApplicationController {
 
     @PersistenceContext
     private EntityManager em;

@@ -2,7 +2,7 @@ package com.akimi.issue_tracking.integration;
 
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
-import com.akimi.issue_tracking.problem.ProblemProcessing;
+import com.akimi.issue_tracking.problem.service.ProblemProcessing;
 import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;

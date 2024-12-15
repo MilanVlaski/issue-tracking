@@ -1,9 +1,12 @@
-package com.akimi.issue_tracking.problem;
+package com.akimi.issue_tracking.problem.service;
 
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.purchase.SupportType;
 import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.application.service.AppDistribution;
+import com.akimi.issue_tracking.problem.Action;
+import com.akimi.issue_tracking.problem.Problem;
+import com.akimi.issue_tracking.problem.ProblemState;
 import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import com.akimi.issue_tracking.problem.engineer.Answer;
 import com.akimi.issue_tracking.problem.engineer.Engineer;

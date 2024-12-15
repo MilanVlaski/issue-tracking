@@ -1,5 +1,6 @@
-package com.akimi.issue_tracking.problem;
+package com.akimi.issue_tracking.problem.service;
 
+import com.akimi.issue_tracking.problem.Problem;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
