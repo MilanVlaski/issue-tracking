@@ -72,8 +72,7 @@ public class AppShopPage {
     @PostMapping("/application/{appId}/install")
     public String installApp(@PathVariable String appId, Model model,
             HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        // this is a dummy for now
-        redirectAttributes.addFlashAttribute("installed", true);
+        redirectAttributes.addFlashAttribute("installed", "true");
         return redirectToReferer(request);
     }
 

@@ -38,15 +38,7 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 11. Kako vidjeti koliko je brzo inženjer riješio problem? Pogledati vrijeme od kad je predao problem, do vremena kad je dao zakrpu.
  # To do
 ## Must do 
-- [ ] Check what kind of event is transmitted onchange, and review the javascript code chatgpt spat out
 - [ ] Create local db and use the app a bunch with it.
-- [ ] FEAT: Change state of problem
-  - It's a dynamic dropdown (ask chatgpt the simplest way to do it)
-  - Populated with values (iterating over the enums english names)
-  - When the user selects a thing a POST request is made, through JS, if it succeeds then the value in HTML changes. If not, nothing happens, I suppose.
-- [ ] FEAT: Filtering based on state
-  - Add filter field, maybe a radio or select is best. This field should lead to a page reload most likely.
-  - Change the endpoint to take an optional query value, based on which filtering is done.
 - [ ] FEAT: Add date created to answer.
 - [ ] FEAT: See all engineers, with a count of solved problems, and option to see problems they are working on.
 - [ ] Add filtering to problems page for the engineer. (User's is prefiltered.)
@@ -73,6 +65,13 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - [ ] Be clever and when user goes to `/reportProblem`, if he only has one app, then take him to it
 - [ ] Add a dto for RegisterRequest that encodes the password, and maps it to an entity
 ## Bugs
+- [x] FEAT: Change state of problem
+  - It's a dynamic dropdown (ask chatgpt the simplest way to do it)
+  - Populated with values (iterating over the enums english names)
+  - When the user selects a thing a POST request is made, through JS, if it succeeds then the value in HTML changes. If not, nothing happens, I suppose.
+- [x] FEAT: Filtering based on state
+  - Add filter field, maybe a radio or select is best. This field should lead to a page reload most likely.
+  - Change the endpoint to take an optional query value, based on which filtering is done.
 - If user already has application takes us to error page.
 ## Done
 - [x] Style the userProblems page separately

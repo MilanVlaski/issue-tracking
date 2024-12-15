@@ -27,10 +27,10 @@
         </div>
 
 
-        <div th:if="${installed}">
+        <div th:if="${installed == 'true'}">
             Your application will be installed shortly.
         </div>
-        <div th:unless="${installed}">
+        <div th:if="${installed == 'false'}">
             Couldn't install the application.
         </div>
 
@@ -43,15 +43,14 @@
         <div><b>Released: </b><span th:text="${app.releaseYear}">2024</span></div>
         <p th:text="${app.description}">Application description.</p>
 
+
         <form method="post" th:action="@{''}">
+            <button th:if="${ownedByUser}"
+                    th:formaction="@{/application/{appId}/install(appId=${app.id})}"
+                    aria-label="Install Application">Install
+            </button>
 
-            <div th:if="${ownedByUser}">
-                <button th:formaction="@{/application/{appId}/install(appId=${app.id})}"
-                         aria-label="Install Application">Install</button>
-            </div>
-
-            <div th:unless="${ownedByUser}">
-                <label>
+                <label th:unless="${ownedByUser}">
                     <select name="support">
                         <!--            todo, remove this hardcoded database id BEZ_POD-->
                         <option value="BEZ_POD">Type of support</option>
@@ -61,8 +60,7 @@
                     </select>
                 </label>
 
-                <button class="significant-button">Buy</button>
-            </div>
+                <button th:unless="${ownedByUser}" class="significant-button">Buy</button>
 
         </form>
 
