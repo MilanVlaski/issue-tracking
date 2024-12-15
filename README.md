@@ -39,8 +39,10 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
  # To do
 - Why, when I log in as an engineer, am I still logged in on the user pages? Shouldn't that be a completely different context?
 ## Must do 
+- [ ] Use DTO for Application, and convert it to entity. Later, check if user and engineer registration also misses some fields.
 - [ ] The `/engineer/problems/mine` page can't do filtering, because the path is no good.
 - [ ] Same thing when we are redirected after login, and the path is `?continue`. We don't get filtering.
+- [ ] Reason about how to package and run the app from command line. This will be necessary for a local db operation.
 - [ ] Create local db and use the app a bunch with it.
 - [ ] FEAT: Add date created to answer.
 - [ ] FEAT: See all engineers, with a count of solved problems, and option to see problems they are working on.

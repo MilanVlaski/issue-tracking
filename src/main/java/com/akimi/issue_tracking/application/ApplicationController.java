@@ -3,6 +3,7 @@ package com.akimi.issue_tracking.application;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +21,8 @@ public class ApplicationController {
     public String registerApplication() {
         return "addApplication";
     }
+
+    @Transactional
     @PostMapping("/engineer/application/add")
     public String addApplication(@ModelAttribute Application application,
             HttpServletRequest request) {
