@@ -62,7 +62,7 @@ public class ProblemTableTest extends BaseIntegrationTest {
     public void when_i_change_the_problem_state_filter_it_reloads_the_page_filtering_the_problems() {
         var requestedState = "Reported";
         when(problemRepository.findAll()).thenReturn(List.of(reportedProblem, solvedProblem));
-        when(problemRepository.findByState(requestedState)).thenReturn(List.of(reportedProblem));
+        when(problemRepository.findByState(ProblemState.fromEngName(requestedState).name)).thenReturn(List.of(reportedProblem));
 
 
         driver.get(homepage(port) + "/engineer/problems");
