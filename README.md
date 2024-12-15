@@ -38,6 +38,7 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 11. Kako vidjeti koliko je brzo inženjer riješio problem? Pogledati vrijeme od kad je predao problem, do vremena kad je dao zakrpu.
  # To do
 ## Must do 
+- [ ] Check what kind of event is transmitted onchange, and review the javascript code chatgpt spat out
 - [ ] Create local db and use the app a bunch with it.
 - [ ] FEAT: Change state of problem
   - It's a dynamic dropdown (ask chatgpt the simplest way to do it)

@@ -1,10 +1,12 @@
 <div th:fragment="problems(viewType)">
+    <meta name="_csrf" th:content="${_csrf.token}">
     <label>Filter by State
-        <select name="state" onchange="filterPage()">
+        <select name="state" onchange="filterPage(this.value)">
             <option value="">Select a State</option>
             <option th:each="stateEnum : ${T(com.akimi.issue_tracking.problem.ProblemState).values()}"
                     th:value="${stateEnum.engName}" th:text="${stateEnum.engName}"
                     th:selected="${stateEnum.engName == state}"></option>
+            <!--"state" is a model attribute-->
         </select>
     </label>
 
@@ -23,7 +25,18 @@
         <tr th:each="problem: ${problems}" class="problem">
             <td th:text="${problem.application.name}">Application</td>
             <td th:text="${problem.application.version}">1.0</td>
-            <td th:text="${problem.engState}">Reported</td>
+            <td>
+                <select name="state"
+                        aria-label="Change Problem State"
+                        th:data-problem-id="${problem.id}"
+                        onchange="updateProblemState(event)">
+                    <option th:each="stateEnum : ${T(com.akimi.issue_tracking.problem.ProblemState).values()}"
+                            th:value="${stateEnum.engName}" th:text="${stateEnum.engName}"
+                            th:selected="${stateEnum.engName == problem.engState}">
+                        Reported
+                    </option>
+                </select>
+            </td>
             <td th:text="${problem.description}">User can't do something.</td>
             <td>
                 <a th:href="@{/engineer/problems/{problemId}(problemId=${problem.id})}" aria-label="View Problem">
@@ -46,11 +59,48 @@
         </tbody>
     </table>
 <script>
-    function filterPage() {
-        let state = document.getElementsByName('state')[0].value
+    function filterPage(state) {
         let url = new URL(window.location.href)
         url.searchParams.set('state', state);
         window.location.href = url.toString()
+    }
+    function updateProblemState(event) {
+        const selectElement = event.target;
+        const problemId = selectElement.dataset.problemId;
+        // const previousState = selectElement.getAttribute('data-previous-value');
+        const selectedState = selectElement.value;
+        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+
+        fetch(`/engineer/problems/${problemId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken,
+            },
+            body: JSON.stringify({ state: selectedState,})
+        }).then(response => {
+            if (response.ok) {
+                showToast('State updated successfully. Reload to apply the current filter.');
+                // selectElement.setAttribute('data-previous-value', selectedState);
+            } else {
+                // selectElement.value = previousState;
+                showToast('Failed to update the problem state.');
+            }
+        });
+    }
+
+    function showToast(message, duration = 3000) {
+        const toast = document.createElement('div');
+        toast.textContent = message;
+        toast.style.position = 'fixed';
+        toast.style.bottom = '20px';
+        toast.style.right = '20px';
+        toast.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+        toast.style.color = 'white';
+        toast.style.padding = '10px 20px';
+        toast.style.borderRadius = '5px';
+        toast.style.zIndex = '1000';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), duration);
     }
 </script>
 </div>
