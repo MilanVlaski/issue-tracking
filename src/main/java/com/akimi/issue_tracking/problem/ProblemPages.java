@@ -63,7 +63,8 @@ public class ProblemPages {
     public String index(Model model, @RequestParam(required = false) String state) {
         List<Problem> problems;
         if (state != null && !state.isEmpty()) {
-            problems = problemRepository.findByState(state);
+            var dbState = ProblemState.fromEngName(state).name;
+            problems = problemRepository.findByState(dbState);
             model.addAttribute("state", state);
         } else {
             problems = problemRepository.findAll();
