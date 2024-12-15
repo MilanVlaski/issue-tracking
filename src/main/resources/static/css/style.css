@@ -8,6 +8,10 @@ a:visited {
     color: #34119c;
 }
 
+a.significant-button:visited {
+    color: white;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
