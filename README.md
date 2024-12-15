@@ -37,7 +37,10 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 10. Korisnik može da instalira zakrpe za sve probleme koje je postavio.
 11. Kako vidjeti koliko je brzo inženjer riješio problem? Pogledati vrijeme od kad je predao problem, do vremena kad je dao zakrpu.
  # To do
+- Why, when I log in as an engineer, am I still logged in on the user pages? Shouldn't that be a completely different context?
 ## Must do 
+- [ ] The `/engineer/problems/mine` page can't do filtering, because the path is no good.
+- [ ] Same thing when we are redirected after login, and the path is `?continue`. We don't get filtering.
 - [ ] Create local db and use the app a bunch with it.
 - [ ] FEAT: Add date created to answer.
 - [ ] FEAT: See all engineers, with a count of solved problems, and option to see problems they are working on.

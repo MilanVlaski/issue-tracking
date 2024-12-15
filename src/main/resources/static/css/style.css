@@ -173,6 +173,10 @@ form input, form textarea, form select {
     box-sizing: border-box;
 }
 
+form input[type="radio"] {
+    width: auto;
+}
+
 form input:focus, form textarea:focus, form select:focus {
     border-color: var(--primary-color);
     outline: none;
