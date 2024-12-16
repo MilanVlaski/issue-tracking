@@ -52,12 +52,14 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Patch> installedPatches = new LinkedHashSet<>();
 
-    public User(String name, String email, String password, LocalDate birthYear, String location) {
+    public User(String name, String email, String password, LocalDate birthYear,
+            String location, String phoneNumber) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.birthYear = birthYear;
         this.location = location;
+        this.phoneNumber = phoneNumber;
     }
 
     public User() {

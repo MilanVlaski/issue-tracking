@@ -53,7 +53,6 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - [ ] Display login error.
 - [ ] Display register error, in case email is not unique.
 ## Nice to have
-- [ ] FEAT: 
 - [ ] FEAT: A problem should display all the engineer's names.
 - [ ] A user can purchase an update or patch of an application for free, so Install should be displayed instead of Buy.
 - [ ] Add a helper function that fetches the current user.

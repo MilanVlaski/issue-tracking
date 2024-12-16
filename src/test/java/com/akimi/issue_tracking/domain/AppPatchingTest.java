@@ -28,7 +28,7 @@ public class AppPatchingTest {
             LocalDate.now(), "url");
 
     public final User user = new User("Minga", "minga@mailcom", "wawa",
-            LocalDate.now(), "mista");
+            LocalDate.now(), "mista", "123");
     public final Problem problem = new Problem("Won't load", brokenApp, user,
             List.of(new Action(1, "bla")));
     private final Engineer engineer = new Engineer("Marko", "Bachelor of CS",
@@ -58,7 +58,7 @@ public class AppPatchingTest {
     @Test
     public void when_an_application_is_patched_then_the_user_who_owns_the_broken_app_gets_the_patched_app_for_free() {
         var user = new User("Milan", "john@doe.com", "password",
-                LocalDate.of(1989, 12, 12), "Kazakhstan");
+                LocalDate.of(1989, 12, 12), "Kazakhstan", "123");
         var purchase = new Purchase(user, brokenApp, new SupportType("1", "Bla", new BigDecimal("11.50")));
         var previousOwners = List.of(user);
 

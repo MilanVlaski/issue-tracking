@@ -51,7 +51,7 @@ public class ProblemTableTest extends BaseIntegrationTest {
 
     @BeforeEach
     public void createTwoProblems() {
-        User user = new User("Mista", "email", "123", LocalDate.now(), "`123sdf");
+        User user = new User("Mista", "email", "123", LocalDate.now(), "123sdf", "123");
         Application app = new Application("Wa", "1.2.3", "Good.", LocalDate.now(), "lol");
         reportedProblem = problemProcessing.report(new ProblemReport("Wwa", "minga\nmono\ndesne"), app, user);
         solvedProblem = reportedProblem.copy();

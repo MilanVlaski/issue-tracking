@@ -1,6 +1,7 @@
 package com.akimi.issue_tracking.security;
 
 import com.akimi.issue_tracking.application.User;
+import com.akimi.issue_tracking.problem.dto.UserRegistration;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -34,8 +35,8 @@ public class SecurityPages {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute User user) {
-        registrationService.register(user);
+    public String register(@ModelAttribute UserRegistration userRegistration) {
+        registrationService.register(userRegistration.toEntity());
         return "redirect:/login";
     }
 

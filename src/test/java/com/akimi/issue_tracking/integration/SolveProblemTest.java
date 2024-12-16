@@ -139,7 +139,7 @@ public class SolveProblemTest extends BaseIntegrationTest {
     @Given("a problem has been reported on an application with description {string}")
     public void aProblemHasBeenReportedOnAnApplication(String problemDescription) {
         var user = new User("Joe Schmoe", "joe@dot.com", "password",
-                LocalDate.of(1995, 10, 10), "Kansas");
+                LocalDate.of(1995, 10, 10), "Kansas", "123");
         var application = new Application("Appigo", "1.2", "Great.",
                 LocalDate.of(2023, 10, 10), "http://wawa.com/img.png");
         var problemReport = new ProblemReport(problemDescription, "Action 1\n Action 2");
