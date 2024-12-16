@@ -1,4 +1,4 @@
-package com.akimi.issue_tracking.problem.dto;
+package com.akimi.issue_tracking.security.dto;
 
 import com.akimi.issue_tracking.application.User;
 import lombok.Getter;

@@ -1,8 +1,7 @@
 package com.akimi.issue_tracking.security;
 
-import com.akimi.issue_tracking.application.User;
-import com.akimi.issue_tracking.problem.dto.UserRegistration;
-import com.akimi.issue_tracking.problem.engineer.Engineer;
+import com.akimi.issue_tracking.security.dto.EngineerRegistration;
+import com.akimi.issue_tracking.security.dto.UserRegistration;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 @Controller
 public class SecurityPages {
@@ -51,8 +47,8 @@ public class SecurityPages {
     }
 
     @PostMapping("/engineer/register")
-    public String engineerRegister(@ModelAttribute Engineer engineer) {
-        registrationService.register(engineer);
+    public String engineerRegister(@ModelAttribute EngineerRegistration engineerRegistration) {
+        registrationService.register(engineerRegistration.toEntity());
         return "redirect:/engineer/login";
     }
 
