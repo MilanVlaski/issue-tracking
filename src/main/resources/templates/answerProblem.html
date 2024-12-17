@@ -32,7 +32,7 @@
 
         <form th:action="@{/engineer/problems/{problemId}/answer(problemId=${actions[0].problem.id})}" method="post">
             <label>Answer
-            <textarea name="answer" rows="10" cols="40"
+            <textarea name="answer" rows="10" cols="40" required
                       placeholder="How can the problem be resolved?"></textarea>
             </label>
 
