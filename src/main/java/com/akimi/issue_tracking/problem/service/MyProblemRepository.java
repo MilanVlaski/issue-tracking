@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface MyProblemRepository extends JpaRepository<Problem, Long> {
     List<Problem> findByState(String state);
+    List<Problem> findByStateAndEngineersEmail(String state, String email);
+    List<Problem> findByEngineersEmail(String email);
 }

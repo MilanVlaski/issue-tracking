@@ -10,6 +10,7 @@ import com.akimi.issue_tracking.problem.service.ProblemProcessing;
 import com.akimi.issue_tracking.security.CurrentUser;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -75,16 +76,30 @@ public class ProblemPages {
     }
 
     @GetMapping("/engineer/problems/mine")
-    public String mine(Model model) {
-        var currentEngineer = currentLogin.engineer();
-        model.addAttribute(
-                "problems",
-                em.createQuery("select p from Problem p" +
-                          " join p.engineers e where e.email = :email", Problem.class)
-                  .setParameter("email", currentEngineer.getEmail())
-                  .getResultList()
-        );
+    public String mine(Model model, @RequestParam(required = false) String state) {
+        var problems = filterProblemsByState(model, state);
+        model.addAttribute("problems", problems);
         return "engineerProblemsOwn";
+    }
+
+    private List<Problem> filterProblemsByState(Model model, String state) {
+        var queryString = "select p from Problem p" +
+                " join p.engineers e where e.email = :email";
+
+        if (state != null && !state.isEmpty()) {
+            var dbState = ProblemState.fromEngName(state).name;
+
+            queryString += " and p.state=:state";
+            model.addAttribute("state", state);
+            return em.createQuery(queryString, Problem.class)
+                     .setParameter("email", currentLogin.engineer().getEmail())
+                     .setParameter("state", dbState)
+                     .getResultList();
+        } else {
+            return em.createQuery(queryString, Problem.class)
+                     .setParameter("email", currentLogin.engineer().getEmail())
+                     .getResultList();
+        }
     }
 
     @GetMapping("/problems")
