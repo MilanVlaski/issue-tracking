@@ -4,7 +4,7 @@
 # Running
 1. To run an empty app, run `./gradlew bootRun`
    - There are  5 applications in the shop, a user with email john.doe@example.com, and an engineer john.smith@example.com, with passwords set to "password".
-2. To run an app with a local database, run `SPRING_PROFILES_ACTIVE=local ./gradlew bootRun`
+2. To run an app with a local database, run `DB_USERNAME=your_username DB_PASSWORD=your_password SPRING_PROFILES_ACTIVE=local ./gradlew bootRun` on linux, and for Powershell, `$env:DB_USERNAME="your_username"; $env:DB_PASSWORD="your_password"; $env:SPRING_PROFILES_ACTIVE="local"; ./gradlew bootRun`
 
 ![[Pasted image 20241012095949.png]
 # Note
