@@ -43,7 +43,7 @@ public class SecurityPages {
 
     @GetMapping("/engineer/register")
     public String engineerRegister() {
-        return "engineerRegister";
+        return "registerEngineer";
     }
 
     @PostMapping("/engineer/register")
