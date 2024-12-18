@@ -1,6 +1,11 @@
 # Projekat 1
 > Projektovati sistem za potrebe kompanije u cilju praćenja problema. Kompanija razvija aplikacije (naziv, verzija, opis, godina izdavanja) za koje korisnik pri kupovini bira jedan od četiri tipa podrške (bez podrške, ograničena podrška cijelo radno vrijeme, ograničena podrška pola radnog veremena, i neograničena podrška). Korisnik prijavljuje problem kao niz akcija pri kojima se problem manifestuje. Za svaku akciju se evidentira redni broj akcije i opis akcije. Postoje četiri moguća stanja u kojima se problem može naći (prijavljen, preuzet, u fazi rješavanja, riješen). Na problemu može raditi veći broj inženjera a može biti angažovan i samo jedan. Svaki inženjer, bez obzira da li radi na problemu ili ne, može da objavi odgovor (moguće rješenje problema) i pri tome je neophodno voditi evidenciju o datumu objavljivanja i inžinjeru koji ga je objavio. Međutim samo inženjer koji radi na problemu može odrediti da li se neka zakrpa tj. patch (veličina, datum objave, vrsta komunikacije sa korisnikom) odnosi na taj problem. Svaki korisnik ima pravo da instalira proizvoljne zakrpe (bez obzira da li je prijavio konkretan problem ili ne)Projektovati sistem za potrebe kompanije u cilju praćenja problema. Kompanija razvija aplikacije (naziv, verzija, opis, godina izdavanja) za koje korisnik pri kupovini bira jedan od četiri tipa podrške (bez podrške, ograničena podrška cijelo radno vrijeme, ograničena podrška pola radnog veremena, i neograničena podrška). Korisnik prijavljuje problem kao niz akcija pri kojima se problem manifestuje. Za svaku akciju se evidentira redni broj akcije i opis akcije. Postoje četiri moguća stanja u kojima se problem može naći (prijavljen, preuzet, u fazi rješavanja, riješen). Na problemu može raditi veći broj inženjera a može biti angažovan i samo jedan. Svaki inženjer, bez obzira da li radi na problemu ili ne, može da objavi odgovor (moguće rješenje problema) i pri tome je neophodno voditi evidenciju o datumu objavljivanja i inžinjeru koji ga je objavio. Međutim samo inženjer koji radi na problemu može odrediti da li se neka zakrpa tj. patch (veličina, datum objave, vrsta komunikacije sa korisnikom) odnosi na taj problem. Svaki korisnik ima pravo da instalira proizvoljne zakrpe (bez obzira da li je prijavio konkretan problem ili ne).
 
+# Running
+1. To run an empty app, run `./gradlew bootRun`
+   - There are  5 applications in the shop, a user with email john.doe@example.com, and an engineer john.smith@example.com, with passwords set to "password".
+2. To run an app with a local database, run `SPRING_PROFILES_ACTIVE=local ./gradlew bootRun`
+
 ![[Pasted image 20241012095949.png]
 # Note
 ## Postavljanje patcha
@@ -40,7 +45,7 @@ Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena ver
 - Why, when I log in as an engineer, am I still logged in on the user pages? Shouldn't that be a completely different context?
 ## Must do 
 - [x] Use DTO for Application, and convert it to entity. Later, check if user and engineer registration also misses some fields.
-- [ ] The `/engineer/problems/mine` page can't do filtering, because the path is no good.
+- [x] The `/engineer/problems/mine` page can't do filtering, because the path is no good.
 - [ ] Same thing when we are redirected after login, and the path is `?continue`. We don't get filtering.
 - [ ] Reason about how to package and run the app from command line. This will be necessary for a local db operation.
 - [ ] Create local db and use the app a bunch with it.
