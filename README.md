@@ -1,54 +1,38 @@
 # Projekat 1
+## Problem
 > Projektovati sistem za potrebe kompanije u cilju praćenja problema. Kompanija razvija aplikacije (naziv, verzija, opis, godina izdavanja) za koje korisnik pri kupovini bira jedan od četiri tipa podrške (bez podrške, ograničena podrška cijelo radno vrijeme, ograničena podrška pola radnog veremena, i neograničena podrška). Korisnik prijavljuje problem kao niz akcija pri kojima se problem manifestuje. Za svaku akciju se evidentira redni broj akcije i opis akcije. Postoje četiri moguća stanja u kojima se problem može naći (prijavljen, preuzet, u fazi rješavanja, riješen). Na problemu može raditi veći broj inženjera a može biti angažovan i samo jedan. Svaki inženjer, bez obzira da li radi na problemu ili ne, može da objavi odgovor (moguće rješenje problema) i pri tome je neophodno voditi evidenciju o datumu objavljivanja i inžinjeru koji ga je objavio. Međutim samo inženjer koji radi na problemu može odrediti da li se neka zakrpa tj. patch (veličina, datum objave, vrsta komunikacije sa korisnikom) odnosi na taj problem. Svaki korisnik ima pravo da instalira proizvoljne zakrpe (bez obzira da li je prijavio konkretan problem ili ne)Projektovati sistem za potrebe kompanije u cilju praćenja problema. Kompanija razvija aplikacije (naziv, verzija, opis, godina izdavanja) za koje korisnik pri kupovini bira jedan od četiri tipa podrške (bez podrške, ograničena podrška cijelo radno vrijeme, ograničena podrška pola radnog veremena, i neograničena podrška). Korisnik prijavljuje problem kao niz akcija pri kojima se problem manifestuje. Za svaku akciju se evidentira redni broj akcije i opis akcije. Postoje četiri moguća stanja u kojima se problem može naći (prijavljen, preuzet, u fazi rješavanja, riješen). Na problemu može raditi veći broj inženjera a može biti angažovan i samo jedan. Svaki inženjer, bez obzira da li radi na problemu ili ne, može da objavi odgovor (moguće rješenje problema) i pri tome je neophodno voditi evidenciju o datumu objavljivanja i inžinjeru koji ga je objavio. Međutim samo inženjer koji radi na problemu može odrediti da li se neka zakrpa tj. patch (veličina, datum objave, vrsta komunikacije sa korisnikom) odnosi na taj problem. Svaki korisnik ima pravo da instalira proizvoljne zakrpe (bez obzira da li je prijavio konkretan problem ili ne).
 
 # Running
+User pages are at `/`, and the engineers pages are at `/engineer/problems`
 1. To run an empty app, run `./gradlew bootRun`
    - There are  5 applications in the shop, a user with email john.doe@example.com, and an engineer john.smith@example.com, with passwords set to "password".
 2. To run an app with a local database, run `DB_USERNAME=your_username DB_PASSWORD=your_password SPRING_PROFILES_ACTIVE=local ./gradlew bootRun` on linux, and for Powershell, `$env:DB_USERNAME="your_username"; $env:DB_PASSWORD="your_password"; $env:SPRING_PROFILES_ACTIVE="local"; ./gradlew bootRun`
+To set the db up, you will have to use postgres, run the `src/main/resources/schema.sql` to create the tables as well as the script below, to create a user and allow them to access sequences. Optionally, `src/main/resources/data.sql` is a sql script for some dummy data. It runs in the above configuration by default.
+```postgresql
+CREATE USER youruser WITH PASSWORD 'yourpassword';
+GRANT CONNECT ON DATABASE "issue-tracking-pg" TO youruser;
+GRANT USAGE ON SCHEMA public TO youruser;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO youruser;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO youruser;
 
-![[Pasted image 20241012095949.png]
-# Note
-## Postavljanje patcha
-Moram na neki način imati vezu između postavljanja zakrpe, i rješavanja problema, i postavljanja nove verzije aplikacije. Ako korisnik instalira patch, on u principu instalira novu aplikaciju.
-- Inzinjer postavlja patch
-- stavlja problem u rijesen
-- time se pravi nova aplikacija za koju je problem vezan i mijenja se samo verzija 1.0 -> 1.0.1.
-- Korisnik, prijavilac problema, dobija ovu aplikaciju kao jednu od svojih.
-- (Jos uvijek je vlasnik stare, ili se stara brise, ne znam, zanimljivo pitanje.)
-Takodje, kad se uvodi zakrpa, ona rjesava problem (mijenja mu stanje), i daje novu verziju aplikacije. Onda se ta verzija salje na korisniku.
-Ako uradimo neku pretragu latest verzije, to ce biti naziv aplikacije, njena verzija, plus zadnji patch. Patch je samo broj... To se inace cuva sve kroz git.
-# Slučajevi
-1. Korisnik kupuje aplikaciju, uz biranje vrste podrške. (Imamo stranicu sa pregledom kupovina?)
-2. Korisnik prijavljuje problem na aplikaciji koju je kupio. Sam ili naknadno, upisuje akcije koje su dovele do problema.
-    - Halo. Imam problem s aplikacijom.
-    - Kojom?
-    - Zove se Power Draw. (Drop down sa pretragom)
-    - Verzija?
-    - Cek... 0.8 /(Dropdown sa pretragom, a varijabla je naziv app)
-    - *Traži aplikaciju, i za nju unosi korake.* Kako je došlo do greške?
-    - *Opisuje korake*
-    - *Unosi korake.* Hvala, pomoći ćemo vam što prije!
-1. Ako postoji zakrpa, korisnik je instalira.
-2. Inženjer uzima problem.
-3. Inženjer pravi zakrpu, ali ko odlučuje da li je problem riješen? Inzenjer, vjerovatno.
-    1. Ako radi na problemu, onda se smatra rješiocem problema, i rješ rješavanja problema.
-    2. Ako ne, onda ga neko mora odobriti.
-4. Inženjer daje odgovor na problem.
-5. Inženjer želi da pregleda sve probleme na nekoj aplikaciji, radi odabira. (stanja: Prijavljen, Preuzet, Rješava se, Rješen). Admin, ili CEO, može da pregleda sve probleme i dodijeli ih, ili gleda statistiku i da filtrira.
-6. Akcije može unijeti korisnik, sam, na nekoj formi. Ili, pozivom na telefon, osoblje može ispuniti ovu formu.
-7. Inženjer može da vidi sve probleme koje rješava, ida nekome od njih doda odgovor.
-8. Inženjeri mogu da gledaju sve probleme, ili one kojima su dodijeljeni.
-9. Korisnik gleda odgovore na probleme koje je postavio.
-10. Korisnik može da instalira zakrpe za sve probleme koje je postavio.
-11. Kako vidjeti koliko je brzo inženjer riješio problem? Pogledati vrijeme od kad je predao problem, do vremena kad je dao zakrpu.
+
+DO $$ 
+BEGIN
+    EXECUTE (
+        SELECT STRING_AGG('GRANT USAGE, SELECT, UPDATE ON SEQUENCE ' || quote_ident(schemaname) || '.' || quote_ident(sequencename) || ' TO youruser', '; ')
+        FROM pg_sequences
+        WHERE schemaname = 'public'
+    );
+END $$;
+```
  # To do
 - Why, when I log in as an engineer, am I still logged in on the user pages? Shouldn't that be a completely different context?
 ## Must do 
 - [x] Use DTO for Application, and convert it to entity. Later, check if user and engineer registration also misses some fields.
 - [x] The `/engineer/problems/mine` page can't do filtering, because the path is no good.
-- [ ] Same thing when we are redirected after login, and the path is `?continue`. We don't get filtering.
-- [ ] Reason about how to package and run the app from command line. This will be necessary for a local db operation.
-- [ ] Create local db and use the app a bunch with it.
+- [x] Same thing when we are redirected after login, and the path is `?continue`. We don't get filtering.
+- [x] Reason about how to package and run the app from command line. This will be necessary for a local db operation.
+- [x] Create local db and use the app a bunch with it.
 - [ ] FEAT: Add date created to answer.
 - [ ] FEAT: See all engineers, with a count of solved problems, and option to see problems they are working on.
 - [ ] Add filtering to problems page for the engineer. (User's is prefiltered.)
