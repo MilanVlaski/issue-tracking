@@ -15,6 +15,9 @@
         <nav id="navigation">
 
             <a th:href="${homeUrl}">Home</a>
+            <a th:if="${homeUrl == '/engineer/problems'}" th:href="@{/engineer/problems/solutions}">
+                Problems and Solutions
+            </a>
 
 
             <a th:if="${homeUrl == '/'}" th:href="@{/reportProblem}"
@@ -27,17 +30,20 @@
                aria-label="See Reported Problems">See Reported Problems
             </a>
 
-            <a sec:authorize="isAuthenticated()" th:if="${homeUrl == '/engineer/problems'}" th:href="@{/engineer/problems/mine}"
-               aria-label="My Problems">
+
+            <a sec:authorize="isAuthenticated()" th:if="${homeUrl == '/engineer/problems'}"
+               th:href="@{/engineer/problems/mine}" aria-label="My Problems">
                 My Problems
             </a>
+
+            <a sec:authorize="isAuthenticated()" th:if="${homeUrl == '/engineer/problems'}"
+               th:href="@{/engineer/application/add}">Add App
+            </a>
+
 
             <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
                 <button type="submit" aria-label="Log Out">Log Out</button>
             </form>
-
-            <a sec:authorize="isAuthenticated()" th:if="${homeUrl == '/engineer/problems'}"
-            th:href="@{/engineer/application/add}">Add App</a>
 
 
             <div sec:authorize="!isAuthenticated()">

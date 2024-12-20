@@ -104,16 +104,25 @@ public class ProblemPages {
 
     @GetMapping("/problems")
     public String problems(Model model) {
-        var problems = em.createQuery(
-                                 "select p from Problem p where p.user = :user",
-                                 Problem.class
-                         )
-                         .setParameter("user", currentLogin.user())
-                         .getResultList();
+        var user = currentLogin.user();
+        queryProblemsAndSolutions(em.createQuery(
+                               "select p from Problem p where p.user = :user",
+                               Problem.class
+                       )
+                                    .setParameter("user", user), model);
+        return "problemsAndSolutions";
+    }
+
+    private void queryProblemsAndSolutions(TypedQuery<Problem> em, Model model) {
+        var problems = em.getResultList();
 
         List<ProblemWithPatches> problemDTOs = mapProblemsToDTOs(problems);
-
         model.addAttribute("problemDtos", problemDTOs);
+    }
+
+    @GetMapping("/engineer/problems/solutions")
+    public String problemsAndSolutions(Model model) {
+        queryProblemsAndSolutions(em.createQuery("select p from Problem p", Problem.class), model);
         return "problemsAndSolutions";
     }
 
