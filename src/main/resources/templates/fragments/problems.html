@@ -1,4 +1,5 @@
 <div th:fragment="problems(viewType)">
+    <h2>Problems</h2>
     <meta name="_csrf" th:content="${_csrf.token}">
     <label>Filter by State
         <select name="state" onchange="filterPage(this.value)">
