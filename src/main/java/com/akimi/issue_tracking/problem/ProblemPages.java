@@ -114,7 +114,7 @@ public class ProblemPages {
         List<ProblemWithPatches> problemDTOs = mapProblemsToDTOs(problems);
 
         model.addAttribute("problemDtos", problemDTOs);
-        return "userProblems";
+        return "problemsAndSolutions";
     }
 
     public List<ProblemWithPatches> mapProblemsToDTOs(List<Problem> problems) {

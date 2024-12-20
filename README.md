@@ -26,15 +26,13 @@ BEGIN
 END $$;
 ```
  # To do
-- Why, when I log in as an engineer, am I still logged in on the user pages? Shouldn't that be a completely different context?
-## Must do 
-- [x] Use DTO for Application, and convert it to entity. Later, check if user and engineer registration also misses some fields.
-- [x] The `/engineer/problems/mine` page can't do filtering, because the path is no good.
-- [x] Same thing when we are redirected after login, and the path is `?continue`. We don't get filtering.
-- [x] Reason about how to package and run the app from command line. This will be necessary for a local db operation.
-- [x] Create local db and use the app a bunch with it.
+## Must do
+- [ ] Engi should be able to see the problem answers as well, not sure how to display it, though. Maybe just display all problems, in the exact same way that the user sees them.
+- [ ] Engi page should say <h2>Problems</h2>
+- [ ] Center the filter
+- [ ] Put english in the database for support type
+- [ ] Engineer should be able to see own patches as well as other's
 - [ ] FEAT: Add date created to answer.
-- [ ] FEAT: See all engineers, with a count of solved problems, and option to see problems they are working on.
 - [ ] Add filtering to problems page for the engineer. (User's is prefiltered.)
 ## Error handling
 - [ ] Add logic so that user can't buy the same app twice (there is already an exception happening on the page.) 
@@ -42,6 +40,9 @@ END $$;
 - [ ] Display login error.
 - [ ] Display register error, in case email is not unique.
 ## Nice to have
+- [ ] FEAT: See all engineers, with a count of solved problems, and option to see problems they are working on.
+- [ ] Report problem page should have a logo and app name, of the app the problem relates to
+- [ ] Actions should be optional
 - [ ] FEAT: A problem should display all the engineer's names.
 - [ ] A user can purchase an update or patch of an application for free, so Install should be displayed instead of Buy.
 - [ ] Add a helper function that fetches the current user.
@@ -67,6 +68,11 @@ END $$;
   - Change the endpoint to take an optional query value, based on which filtering is done.
 - If user already has application takes us to error page.
 ## Done
+- [x] Use DTO for Application, and convert it to entity. Later, check if user and engineer registration also misses some fields.
+- [x] The `/engineer/problems/mine` page can't do filtering, because the path is no good.
+- [x] Same thing when we are redirected after login, and the path is `?continue`. We don't get filtering.
+- [x] Reason about how to package and run the app from command line. This will be necessary for a local db operation.
+- [x] Create local db and use the app a bunch with it.
 - [x] Style the userProblems page separately
 - [x] An engineer can set the state of the problem to any available state, when submitting an answer.
 - [x] When a problem is resovled with a patch, a user can purchase the resulting app. We do this by simply having a link on the answers page that takes them to the site /applicaton/{appId}/buy. The page itself will have logic to recognize whether it is owned by the user or not, showing an Install button instead of a Buy. Clicking on the button should install it somehow (just an alert for now). This happens with all owned apps. It could even happen when the user is redirected after a buy...
