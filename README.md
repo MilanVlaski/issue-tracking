@@ -29,7 +29,7 @@ END $$;
 ## Must do
 - [x] Engi should be able to see the problem answers as well, not sure how to display it, though. Maybe just display all problems, in the exact same way that the user sees them.
 - [x] Engi page should say <h2>Problems</h2>
-- [ ] Center the filter
+- [x] Center the filter
 - [ ] Put english in the database for support type
 - [ ] Engineer should be able to see own patches as well as other's
 - [ ] FEAT: Add date created to answer.
