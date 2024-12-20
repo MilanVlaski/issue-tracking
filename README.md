@@ -31,7 +31,7 @@ END $$;
 - [x] Engi page should say <h2>Problems</h2>
 - [x] Center the filter
 - [ ] Put english in the database for support type
-- [ ] Engineer should be able to see own patches as well as other's
+- [x] Engineer should be able to see own patches as well as other's
 - [ ] FEAT: Add date created to answer.
 - [ ] Add filtering to problems page for the engineer. (User's is prefiltered.)
 ## Error handling
