@@ -6,17 +6,23 @@ insert into APLIKACIJA (NAZIV_APP, VERZIJA, OPIS, GODINA_IZDAVANJA, LOGO_URL) va
 ('Insight Pro', '1.8.0', 'Get deep insights from your data!', '2020-11-05', 'https://www.shutterstock.com/image-vector/circle-line-simple-design-logo-600nw-2174926871.jpg'),
 ('Market Pulse', '2.9.0', 'Track market trends in real-time!', '2018-07-30', 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/company-logo-design-template-e089327a5c476ce5c70c74f7359c5898_screen.jpg?ts=1672291305');
 
+-- insert into VRSTA_PODRSKE (ID_POD, NAZIV_POD, OPIS_POD, CIJENA) values
+-- ('BEZ_POD', 'Bez podrške', 'Bez ikakve usluge.', 0.00),
+-- ('POLA_RAD', 'Ograničena podrška pola radnog vremena', 'Podrška za dogovoreno vrijeme koje ne premašuje pola radnog vremena kupca.', 1000.00),
+-- ('CIJELO_RAD', 'Ograničena podrška cijelo radno vrijeme', 'Podrška tokom cijelog radnog vremena kupca.', 2000.00),
+-- ('NEOGRAN', 'Neograničena podrška', 'Podrška 24/7.', 70000.00);
+
 insert into VRSTA_PODRSKE (ID_POD, NAZIV_POD, OPIS_POD, CIJENA) values
-('BEZ_POD', 'Bez podrške', 'Bez ikakve usluge.', 0.00),
-('POLA_RAD', 'Ograničena podrška pola radnog vremena', 'Podrška za dogovoreno vrijeme koje ne premašuje pola radnog vremena kupca.', 1000.00),
-('CIJELO_RAD', 'Ograničena podrška cijelo radno vrijeme', 'Podrška tokom cijelog radnog vremena kupca.', 2000.00),
-('NEOGRAN', 'Neograničena podrška', 'Podrška 24/7.', 70000.00);
+('NO_SUPP', 'No Support', 'No support service.', 0.00),
+('HALF_WORK', 'Half Day Support', 'Support for agreed upon time not exceeding half of the customer working hours.', 1000.00),
+('FULL_WORK', 'Full Day Support', 'Support throughout the customer working hours.', 2000.00),
+('UNLIMITED', '24/7 Support', '24/7 support.', 70000.00);
 
 insert into KORISNIK (NAZIV_KOR, GODINA_RODJENJA, MEJL_ADRESA_KOR, SIFRA_KOR, BROJ_TELEFONA, LOKACIJA)
 VALUES ('sa', '1990-01-01', 'john.doe@example.com', '$2a$10$36JHQEwvmg.veIk08XAW1eCOWDKqv4WeJka32v/Q7gwVOJ.wjw51.', '123456', 'London');
 
 insert into KUPOVINA (ID_APP, ID_KOR, ID_POD) values
-(5, 1, 'BEZ_POD');
+(5, 1, 'NO_SUPP');
 
 insert into INZENJER (NAZIV_INZ, OBRAZOVANJE, ZAPOSLEN_OD, ZAPOSLEN_DO, MJESECNA_PLATA, MEJL_ADRESA_INZ, SIFRA_INZ) values
 ('John Smith', 'Master of Engineering', '2022-01-01', null, 5000.00, 'john.smith@example.com', '$2a$10$36JHQEwvmg.veIk08XAW1eCOWDKqv4WeJka32v/Q7gwVOJ.wjw51.');

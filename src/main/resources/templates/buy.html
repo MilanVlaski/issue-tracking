@@ -53,7 +53,7 @@
                 <label th:unless="${ownedByUser}">
                     <select name="support">
                         <!--            todo, remove this hardcoded database id BEZ_POD-->
-                        <option value="BEZ_POD">Type of support</option>
+                        <option value="NO_SUPP">Type of support</option>
                         <option th:each="supp: ${supportTypes}" th:value="${supp.id}"
                                 th:text="${supp.name} + ' - ' + ${supp.price} + '$'">No support 0$
                         </option>

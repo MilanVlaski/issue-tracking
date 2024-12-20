@@ -30,16 +30,16 @@ END $$;
 - [x] Engi should be able to see the problem answers as well, not sure how to display it, though. Maybe just display all problems, in the exact same way that the user sees them.
 - [x] Engi page should say <h2>Problems</h2>
 - [x] Center the filter
-- [ ] Put english in the database for support type
+- [x] Put english in the database for support type
 - [x] Engineer should be able to see own patches as well as other's
-- [ ] FEAT: Add date created to answer.
-- [ ] Add filtering to problems page for the engineer. (User's is prefiltered.)
+- [x] Add filtering to problems page for the engineer. (User's is prefiltered.)
 ## Error handling
 - [ ] Add logic so that user can't buy the same app twice (there is already an exception happening on the page.) 
 - [ ] Add nice handling for when buy page has error/success.
 - [ ] Display login error.
 - [ ] Display register error, in case email is not unique.
 ## Nice to have
+- [ ] FEAT: Add date created to answer.
 - [] FEAT: See all engineers, with a count of solved problems, and option to see problems they are working on.
 - [ ] Report problem page should have a logo and app name, of the app the problem relates to
 - [ ] Actions should be optional

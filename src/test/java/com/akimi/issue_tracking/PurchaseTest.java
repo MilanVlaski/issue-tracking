@@ -22,7 +22,8 @@ public class PurchaseTest {
     @Test
     public void testPurchase() {
         var appName = "Best app";
-        var supportId = "BEZ_POD"; // this is in the database by default
+
+        var supportId = "NO_SUPP"; // this is in the database by default
 
         var email = "m@v.com";
         var user = new User().setName("Jane Doe").setEmail(email);
