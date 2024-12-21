@@ -2,16 +2,18 @@
     <meta name="_csrf" th:content="${_csrf.token}">
 
     <div class="flex-center">
-    <h2>Problems</h2>
-        <label>Filter by State
-            <select name="state" onchange="filterPage(this.value)">
-                <option value="">Select a State</option>
-                <option th:each="stateEnum : ${T(com.akimi.issue_tracking.problem.ProblemState).values()}"
-                        th:value="${stateEnum.engName}" th:text="${stateEnum.engName}"
-                        th:selected="${stateEnum.engName == state}"></option>
-                <!--"state" is a model attribute-->
-            </select>
-        </label>
+        <div>
+            <h2>Problems</h2>
+            <label>Filter by State
+                <select name="state" onchange="filterPage(this.value)">
+                    <option value="">Select a State</option>
+                    <option th:each="stateEnum : ${T(com.akimi.issue_tracking.problem.ProblemState).values()}"
+                            th:value="${stateEnum.engName}" th:text="${stateEnum.engName}"
+                            th:selected="${stateEnum.engName == state}"></option>
+                    <!--"state" is a model attribute-->
+                </select>
+            </label>
+        </div>
     </div>
 
     <table th:unless="${problems.isEmpty()}">
