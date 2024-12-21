@@ -39,7 +39,7 @@ END $$;
 - [ ] Display login error.
 - [ ] Display register error, in case email is not unique.
 ## Nice to have
-- [ ] Patch and Answer problem functions should appear, wherever a problem is rendered, with Patch only appearing if the problem belongs to the current user. To do this, I will need a ProblemDto that has a boolean `mine`.
+- [ ] Patch and Answer problem functions should appear, wherever a problem is rendered, with Patch only appearing if the problem belongs to the current user. To do this, I will need to map to a ProblemDto that has a boolean `mine`.
 - [ ] FEAT: Add date created to answer.
 - [] FEAT: See all engineers, with a count of solved problems, and option to see problems they are working on.
 - [ ] Report problem page should have a logo and app name, of the app the problem relates to
