@@ -27,6 +27,12 @@ END $$;
 ```
  # To do
 ## Must do
+- The model itself can know which role the user has. (engineer or user), but I have to invent a variable to do it.
+- Why not just use the existing security thing, which already knows the role, and use that to decide how to show templates?
+- The header should be decided based on a variable. The problemsAndSolutions page may show up for users or engineers. 
+- Templates should not know anything. (No ifs.)
+- Each template may not necessarily know who it refers to.
+- Currently, the role is hard coded in the header (the header defines it). So it's coupled to the template.
 - [x] Engi should be able to see the problem answers as well, not sure how to display it, though. Maybe just display all problems, in the exact same way that the user sees them.
 - [x] Engi page should say <h2>Problems</h2>
 - [x] Center the filter

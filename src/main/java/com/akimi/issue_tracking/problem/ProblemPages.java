@@ -110,6 +110,7 @@ public class ProblemPages {
                                Problem.class
                        )
                                     .setParameter("user", user), model);
+        model.addAttribute("userRole", "USER");
         return "problemsAndSolutions";
     }
 
@@ -123,6 +124,7 @@ public class ProblemPages {
     @GetMapping("/engineer/problems/solutions")
     public String problemsAndSolutions(Model model) {
         queryProblemsAndSolutions(em.createQuery("select p from Problem p", Problem.class), model);
+        model.addAttribute("userRole", "ENGINEER");
         return "problemsAndSolutions";
     }
 

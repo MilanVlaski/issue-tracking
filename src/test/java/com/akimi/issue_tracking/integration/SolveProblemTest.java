@@ -160,6 +160,6 @@ public class SolveProblemTest extends BaseIntegrationTest {
 
     @After
     public void tearDown() {
-        driver.quit();
+//        driver.quit();
     }
 }
