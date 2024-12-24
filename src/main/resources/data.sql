@@ -6,12 +6,6 @@ insert into APLIKACIJA (NAZIV_APP, VERZIJA, OPIS, GODINA_IZDAVANJA, LOGO_URL) va
 ('Insight Pro', '1.8.0', 'Get deep insights from your data!', '2020-11-05', 'https://www.shutterstock.com/image-vector/circle-line-simple-design-logo-600nw-2174926871.jpg'),
 ('Market Pulse', '2.9.0', 'Track market trends in real-time!', '2018-07-30', 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/company-logo-design-template-e089327a5c476ce5c70c74f7359c5898_screen.jpg?ts=1672291305');
 
--- insert into VRSTA_PODRSKE (ID_POD, NAZIV_POD, OPIS_POD, CIJENA) values
--- ('BEZ_POD', 'Bez podrške', 'Bez ikakve usluge.', 0.00),
--- ('POLA_RAD', 'Ograničena podrška pola radnog vremena', 'Podrška za dogovoreno vrijeme koje ne premašuje pola radnog vremena kupca.', 1000.00),
--- ('CIJELO_RAD', 'Ograničena podrška cijelo radno vrijeme', 'Podrška tokom cijelog radnog vremena kupca.', 2000.00),
--- ('NEOGRAN', 'Neograničena podrška', 'Podrška 24/7.', 70000.00);
-
 insert into VRSTA_PODRSKE (ID_POD, NAZIV_POD, OPIS_POD, CIJENA) values
 ('NO_SUPP', 'No Support', 'No support service.', 0.00),
 ('HALF_WORK', 'Half Day Support', 'Support for agreed upon time not exceeding half of the customer working hours.', 1000.00),
