@@ -72,6 +72,8 @@
         }
 
         function updateProblemState(event) {
+            // this function currently does not roll back to the previous state
+            // if the request fails
             const selectElement = event.target;
             const problemId = selectElement.dataset.problemId;
             // const previousState = selectElement.getAttribute('data-previous-value');
