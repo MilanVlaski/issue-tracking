@@ -99,6 +99,7 @@ table tbody tr:nth-child(even) {
 @media (max-width: 600px) {
     table {
         font-size: 12px;
+        overflow-x: auto;
     }
 
     table th.description,
