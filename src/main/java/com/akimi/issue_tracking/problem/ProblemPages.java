@@ -36,30 +36,6 @@ public class ProblemPages {
     @PersistenceContext
     private EntityManager em;
 
-    @GetMapping("/reportProblem")
-    public String reportProblem(Model model) {
-        var purchases = currentLogin.user().getPurchases();
-        model.addAttribute("purchases", purchases);
-        return "reportProblem";
-    }
-
-    @GetMapping("/application/{appId}/reportProblem")
-    public String reportProblem() {
-        return "describeProblem";
-    }
-
-    @PostMapping("/application/{appId}/reportProblem")
-    public String reportProblemPost(@PathVariable String appId,
-            @ModelAttribute ProblemReport problemReport,
-            HttpServletRequest request, RedirectAttributes redirectAttributes
-    ) {
-        var application = em.find(Application.class, appId);
-        var user = currentLogin.user();
-        problemProcessing.report(problemReport, application, user);
-        redirectAttributes.addFlashAttribute("problemStatus", "success");
-        return redirectToReferer(request);
-    }
-
     @GetMapping("/engineer/problems")
     public String index(Model model, @RequestParam(required = false) String state) {
         List<Problem> problems;
@@ -177,7 +153,7 @@ public class ProblemPages {
     }
 
     @PostMapping("/engineer/problems/{problemId}/uploadPatch")
-    public String uploadPatch(Model model, @PathVariable String problemId,
+    public String uploadPatch(@PathVariable String problemId,
             @ModelAttribute PatchUpload patchUpload, HttpServletRequest request,
             RedirectAttributes redirectAttributes) {
 

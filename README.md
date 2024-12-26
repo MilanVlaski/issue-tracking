@@ -27,6 +27,9 @@ END $$;
 ```
  # To do
 ## Must do
+- [ ] Patch and Answer problem functions should appear, wherever a problem is rendered, with Patch only appearing if the problem belongs to the current engineer. To do this, I will need to map to a ProblemDto that has a boolean `mine`.
+  - [ ] First make the change and check that tests don't break.
+  - [ ] Then change the tests so that I don't navigate to a different page upon assigning problem to self.
 - [x] Engi should be able to see the problem answers as well, not sure how to display it, though. Maybe just display all problems, in the exact same way that the user sees them.
 - [x] Engi page should say <h2>Problems</h2>
 - [x] Center the filter
@@ -39,7 +42,6 @@ END $$;
 - [ ] Display login error.
 - [ ] Display register error, in case email is not unique.
 ## Nice to have
-- [ ] Patch and Answer problem functions should appear, wherever a problem is rendered, with Patch only appearing if the problem belongs to the current user. To do this, I will need to map to a ProblemDto that has a boolean `mine`.
 - [ ] FEAT: Add date created to answer.
 - [] FEAT: See all engineers, with a count of solved problems, and option to see problems they are working on.
 - [ ] Report problem page should have a logo and app name, of the app the problem relates to
