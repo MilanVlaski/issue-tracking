@@ -4,6 +4,7 @@ import com.akimi.issue_tracking.problem.Problem;
 import com.akimi.issue_tracking.problem.ProblemState;
 import com.akimi.issue_tracking.problem.dto.AnswerDto;
 import com.akimi.issue_tracking.problem.dto.PatchUpload;
+import com.akimi.issue_tracking.problem.dto.ProblemDto;
 import com.akimi.issue_tracking.problem.dto.ProblemWithPatches;
 import com.akimi.issue_tracking.problem.service.MyProblemRepository;
 import com.akimi.issue_tracking.problem.service.ProblemProcessing;
@@ -46,15 +47,25 @@ public class ProblemPages {
         } else {
             problems = problemRepository.findAll();
         }
-        model.addAttribute("problems", problems);
-
+        model.addAttribute("problems", toDto(problems));
         return "engineerProblems";
+    }
+
+    private List<ProblemDto> toDto(List<Problem> problems) {
+        return problems.stream().map(p -> new ProblemDto()
+                               .setId(p.getId())
+                               .setApplication(p.getApplication())
+                               .setUser(p.getUser())
+                               .setEngState(p.getEngState())
+                               .setDescription(p.getDescription())
+                               .setMine(p.getEngineers().contains(currentLogin.engineer())))
+                       .toList();
     }
 
     @GetMapping("/engineer/problems/mine")
     public String mine(Model model, @RequestParam(required = false) String state) {
         var problems = filterProblemsByState(model, state);
-        model.addAttribute("problems", problems);
+        model.addAttribute("problems", toDto(problems));
         return "engineerProblemsOwn";
     }
 
@@ -82,9 +93,9 @@ public class ProblemPages {
     public String problems(Model model) {
         var user = currentLogin.user();
         queryProblemsAndSolutions(em.createQuery(
-                               "select p from Problem p where p.user = :user",
-                               Problem.class
-                       )
+                                            "select p from Problem p where p.user = :user",
+                                            Problem.class
+                                    )
                                     .setParameter("user", user), model);
         model.addAttribute("userRole", "USER");
         return "problemsAndSolutions";
