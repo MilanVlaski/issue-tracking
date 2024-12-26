@@ -47,8 +47,6 @@
                 <a th:href="@{/engineer/problems/{problemId}(problemId=${problem.id})}" aria-label="View Problem">
                     See Problem
                 </a>
-            </td>
-            <td>
                 <form th:unless="${problem.mine}" method="post"
                       th:action="@{/engineer/problems/{problemId}/assignEngineer(problemId=${problem.id})}">
                     <button aria-label="Assign Problem to Self">Assign to Self</button>
