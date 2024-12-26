@@ -43,18 +43,24 @@
                 </select>
             </td>
             <td th:text="${problem.description}">User can't do something.</td>
-            <td>
-                <a th:href="@{/engineer/problems/{problemId}(problemId=${problem.id})}" aria-label="View Problem">
-                    See Problem
-                </a>
-                <form th:unless="${problem.mine}" method="post"
-                      th:action="@{/engineer/problems/{problemId}/assignEngineer(problemId=${problem.id})}">
-                    <button aria-label="Assign Problem to Self">Assign to Self</button>
-                </form>
-                <a th:if="${problem.mine}" th:href="@{/engineer/problems/{problemId}/uploadPatch(problemId=${problem.id})}"
-                   aria-label="Upload a Patch">
-                    Upload a Patch
-                </a>
+            <td style="display: flex">
+                <div>
+                    <a th:href="@{/engineer/problems/{problemId}(problemId=${problem.id})}" aria-label="View Problem">
+                        See Problem
+                    </a>
+                </div>
+                <div>
+                    <form th:unless="${problem.mine}" method="post"
+                          th:action="@{/engineer/problems/{problemId}/assignEngineer(problemId=${problem.id})}">
+                        <button aria-label="Assign Problem to Self">Assign to Self</button>
+                    </form>
+                </div>
+                <div>
+                    <a th:if="${problem.mine}" th:href="@{/engineer/problems/{problemId}/uploadPatch(problemId=${problem.id})}"
+                       aria-label="Upload a Patch">
+                        Upload a Patch
+                    </a>
+                </div>
             </td>
         </tr>
         </tbody>

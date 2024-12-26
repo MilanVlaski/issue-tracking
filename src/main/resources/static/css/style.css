@@ -99,9 +99,6 @@ table tbody tr:nth-child(even) {
 @media (max-width: 600px) {
     table {
         font-size: 12px;
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
     }
 
     table th.description,
