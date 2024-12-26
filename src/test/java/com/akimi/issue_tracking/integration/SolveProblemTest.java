@@ -100,7 +100,7 @@ public class SolveProblemTest extends BaseIntegrationTest {
 
     @When("the engineer patches the problem")
     public void theEngineerPatchesTheProblem() {
-        click("My Problems");
+//        click("My Problems"); // unnecessary
         click("Upload a Patch");
         driver.findElement(By.name("size"))
               .sendKeys("500");
