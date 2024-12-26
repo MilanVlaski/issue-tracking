@@ -1,10 +1,10 @@
-package com.akimi.issue_tracking.problem;
+package com.akimi.issue_tracking.problem.problemPages;
 
-import com.akimi.issue_tracking.application.Application;
+import com.akimi.issue_tracking.problem.Problem;
+import com.akimi.issue_tracking.problem.ProblemState;
 import com.akimi.issue_tracking.problem.dto.AnswerDto;
 import com.akimi.issue_tracking.problem.dto.PatchUpload;
 import com.akimi.issue_tracking.problem.dto.ProblemWithPatches;
-import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import com.akimi.issue_tracking.problem.service.MyProblemRepository;
 import com.akimi.issue_tracking.problem.service.ProblemProcessing;
 import com.akimi.issue_tracking.security.CurrentUser;

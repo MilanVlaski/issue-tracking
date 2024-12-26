@@ -2,7 +2,6 @@ package com.akimi.issue_tracking.application;
 
 import com.akimi.issue_tracking.application.purchase.PurchasingService;
 import com.akimi.issue_tracking.application.purchase.Support;
-import com.akimi.issue_tracking.problem.ProblemPages;
 import com.akimi.issue_tracking.security.CurrentUser;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -18,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 
-import static com.akimi.issue_tracking.problem.ProblemPages.redirectToReferer;
+import static com.akimi.issue_tracking.problem.problemPages.ProblemPages.redirectToReferer;
 
 @Controller
 public class AppShopPage {

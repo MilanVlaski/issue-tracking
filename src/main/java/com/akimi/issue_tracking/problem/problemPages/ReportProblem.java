@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import static com.akimi.issue_tracking.problem.ProblemPages.redirectToReferer;
+import static com.akimi.issue_tracking.problem.problemPages.ProblemPages.redirectToReferer;
 
 @Controller
 public class ReportProblem {
