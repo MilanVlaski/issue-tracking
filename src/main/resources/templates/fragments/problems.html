@@ -42,7 +42,7 @@
                     </option>
                 </select>
             </td>
-            <td th:text="${problem.description}">User can't do something.</td>
+            <td class="description" th:text="${problem.description}">User can't do something.</td>
             <td style="display: flex">
                 <div>
                     <a th:href="@{/engineer/problems/{problemId}(problemId=${problem.id})}" aria-label="View Problem">
