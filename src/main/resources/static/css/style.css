@@ -108,6 +108,18 @@ table tbody tr:nth-child(even) {
     }
 }
 
+.table-buttons {
+    display: flex;
+    gap: 0.2em;
+    font-size: 10px;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+.table-button {
+    padding: 7px;
+    font-size: 15px;
+}
 
 /*---------Containers and Reusable Bits------------*/
 .header-width-container {
@@ -159,10 +171,24 @@ form button {
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
-    text-decoration: none;
+    /* text-decoration: none; */
 }
 
-form input, form textarea, form select {
+form button:hover {
+    background-color: #114b9c;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+form button:active {
+    background-color: #165aba;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(2px);
+}
+
+form input,
+form textarea,
+form select {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -175,7 +201,9 @@ form input[type="radio"] {
     width: auto;
 }
 
-form input:focus, form textarea:focus, form select:focus {
+form input:focus,
+form textarea:focus,
+form select:focus {
     border-color: var(--primary-color);
     outline: none;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
@@ -185,4 +213,3 @@ form label {
     font-weight: bold;
     color: #333;
 }
-
