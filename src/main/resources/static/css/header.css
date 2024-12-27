@@ -26,6 +26,10 @@ header {
     flex-wrap: wrap;
 }
 
+#navigation form button {
+    all: unset;
+}
+
 .header-width-container {
     max-width: 80ch;
     margin: 0 auto;
