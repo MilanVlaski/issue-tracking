@@ -3,10 +3,11 @@
 > Projektovati sistem za potrebe kompanije u cilju praćenja problema. Kompanija razvija aplikacije (naziv, verzija, opis, godina izdavanja) za koje korisnik pri kupovini bira jedan od četiri tipa podrške (bez podrške, ograničena podrška cijelo radno vrijeme, ograničena podrška pola radnog veremena, i neograničena podrška). Korisnik prijavljuje problem kao niz akcija pri kojima se problem manifestuje. Za svaku akciju se evidentira redni broj akcije i opis akcije. Postoje četiri moguća stanja u kojima se problem može naći (prijavljen, preuzet, u fazi rješavanja, riješen). Na problemu može raditi veći broj inženjera a može biti angažovan i samo jedan. Svaki inženjer, bez obzira da li radi na problemu ili ne, može da objavi odgovor (moguće rješenje problema) i pri tome je neophodno voditi evidenciju o datumu objavljivanja i inžinjeru koji ga je objavio. Međutim samo inženjer koji radi na problemu može odrediti da li se neka zakrpa tj. patch (veličina, datum objave, vrsta komunikacije sa korisnikom) odnosi na taj problem. Svaki korisnik ima pravo da instalira proizvoljne zakrpe (bez obzira da li je prijavio konkretan problem ili ne).
 
 # Running
-User pages are at `/`, and the engineers pages are at `/engineer/problems`
+User pages are at `localhost:8080/`, and the engineers pages are at `localhost:8080/engineer/problems`
 1. To run an empty app, run `./gradlew bootRun`
    - There are  5 applications in the shop, a user with email john.doe@example.com, and an engineer john.smith@example.com, with passwords set to "password".
 2. To run an app with a local database, run `DB_USERNAME=your_username DB_PASSWORD=your_password SPRING_PROFILES_ACTIVE=local ./gradlew bootRun` on linux, and for Powershell, `$env:DB_USERNAME="your_username"; $env:DB_PASSWORD="your_password"; $env:SPRING_PROFILES_ACTIVE="local"; ./gradlew bootRun`
+
 To set the db up, you will have to use postgres, run the `src/main/resources/schema.sql` to create the tables as well as the script below, to create a user and allow them to access sequences. Optionally, `src/main/resources/data.sql` is a sql script for some dummy data. It runs in the above configuration by default.
 ```postgresql
 CREATE USER youruser WITH PASSWORD 'yourpassword';
@@ -27,9 +28,9 @@ END $$;
 ```
  # To do
 ## Must do
-- [ ] Patch and Answer problem functions should appear, wherever a problem is rendered, with Patch only appearing if the problem belongs to the current engineer. To do this, I will need to map to a ProblemDto that has a boolean `mine`.
-  - [ ] First make the change and check that tests don't break.
-  - [ ] Then change the tests so that I don't navigate to a different page upon assigning problem to self.
+- [x] Patch and Answer problem functions should appear, wherever a problem is rendered, with Patch only appearing if the problem belongs to the current engineer. To do this, I will need to map to a ProblemDto that has a boolean `mine`.
+  - [x] First make the change and check that tests don't break.
+  - [x] Then change the tests so that I don't navigate to a different page upon assigning problem to self.
 - [x] Engi should be able to see the problem answers as well, not sure how to display it, though. Maybe just display all problems, in the exact same way that the user sees them.
 - [x] Engi page should say <h2>Problems</h2>
 - [x] Center the filter
