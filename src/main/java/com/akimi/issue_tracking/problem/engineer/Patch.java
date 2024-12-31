@@ -33,11 +33,6 @@ public class Patch {
     @JoinColumn(name = "ID_KOR", nullable = false)
     private User user;
 
-    @ManyToOne
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "ID_INZ_KRPIOCA")
-    private Engineer helperEngineer;
-
     @Column(name = "VELICINA_KB", precision = 10)
     private BigDecimal sizeKb;
 
@@ -80,15 +75,6 @@ public class Patch {
 
     public Patch setUser(User user) {
         this.user = user;
-        return this;
-    }
-
-    public Engineer getHelperEngineer() {
-        return helperEngineer;
-    }
-
-    public Patch setHelperEngineer(Engineer helperEngineer) {
-        this.helperEngineer = helperEngineer;
         return this;
     }
 

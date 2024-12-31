@@ -94,7 +94,6 @@ create table ZAKRPA (
                         ID_PRB INT not null,
                         ID_INZ_RJESAVAOCA INT not null,
                         ID_KOR INT not null,
-                        ID_INZ_KRPIOCA INT null,
                         VELICINA_KB NUMERIC(10,0) null,
                         DATUM_OBJAVE DATE null,
                         VRSTA_KOMUNIKACIJE VARCHAR(200) null,
@@ -154,11 +153,6 @@ alter table RJESAVALAC
 alter table ZAKRPA
     add constraint FK_ZAKRPA_INSTALIRA_KORISNIK foreign key (ID_KOR)
         references KORISNIK (ID_KOR)
-        on delete restrict on update restrict;
-
-alter table ZAKRPA
-    add constraint FK_ZAKRPA_PRAVI_INZENJER foreign key (ID_INZ_KRPIOCA)
-        references INZENJER (ID_INZ)
         on delete restrict on update restrict;
 
 alter table ZAKRPA

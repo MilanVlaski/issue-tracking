@@ -51,9 +51,6 @@ public class Engineer {
     @OneToMany(mappedBy = "engineer")
     private Set<ProblemSolver> problemSolvers = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "helperEngineer")
-    private Set<Patch> patches = new LinkedHashSet<>();
-
     public Engineer(String name, String education, LocalDate employedFrom,
             double monthlySalary, String email, String password) {
         this.name = name;
@@ -116,10 +113,6 @@ public class Engineer {
 
     public Set<Problem> getProblems() {
         return problems;
-    }
-
-    public Set<Patch> getPatches() {
-        return patches;
     }
 
     public void add(Answer answer) {
