@@ -127,10 +127,7 @@ public class Engineer {
         problem.setState(ProblemState.SOLVED);
 
         Application problematicApp = problem.getApplication();
-        var user = problem.getUser();
-
-        patch.setUser(user)
-             .setPublishDate(LocalDate.now())
+        patch.setPublishDate(LocalDate.now())
              .setProblemSolver(new ProblemSolver(this, problem, patch));
 
         return problematicApp.copyWithIncrementedVersion();

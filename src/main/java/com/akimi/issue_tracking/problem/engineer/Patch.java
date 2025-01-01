@@ -28,11 +28,6 @@ public class Patch {
     })
     private ProblemSolver problemSolver;
 
-    @ManyToOne(optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "ID_KOR", nullable = false)
-    private User user;
-
     @Column(name = "VELICINA_KB", precision = 10)
     private BigDecimal sizeKb;
 
@@ -69,14 +64,14 @@ public class Patch {
         return this;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public Patch setUser(User user) {
-        this.user = user;
-        return this;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public Patch setUser(User user) {
+//        this.user = user;
+//        return this;
+//    }
 
     public BigDecimal getSizeKb() {
         return sizeKb;

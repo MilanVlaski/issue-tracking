@@ -49,8 +49,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Problem> problems = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
-    private Set<Patch> installedPatches = new LinkedHashSet<>();
+//    @OneToMany(mappedBy = "user")
+//    private Set<Patch> installedPatches = new LinkedHashSet<>();
 
     public User(String name, String email, String password, LocalDate birthYear,
             String location, String phoneNumber) {
@@ -114,9 +114,9 @@ public class User {
         return problems;
     }
 
-    public Set<Patch> getInstalledPatches() {
-        return installedPatches;
-    }
+//    public Set<Patch> getInstalledPatches() {
+//        return installedPatches;
+//    }
 
     public boolean ownsApplication(Application app) {
         return purchases.stream()
