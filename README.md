@@ -31,6 +31,7 @@ END $$;
 ```
  # To do
 ## Must do
+- [ ] The index page should contain a Sign in as engineer <a href>.
 - [x] Patch and Answer problem functions should appear, wherever a problem is rendered, with Patch only appearing if the problem belongs to the current engineer. To do this, I will need to map to a ProblemDto that has a boolean `mine`.
   - [x] First make the change and check that tests don't break.
   - [x] Then change the tests so that I don't navigate to a different page upon assigning problem to self.
