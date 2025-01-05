@@ -27,11 +27,12 @@
         <h1>Report a Problem</h1>
         <form method="post" th:action="@{''}">
             <label>Please briefly describe the problem:
-            <input type="text" name="description" placeholder="Short problem description">
+            <input required type="text" name="description"
+                   placeholder="Short problem description">
             </label>
 
             <label>Actions that led to the problem occurring:
-                <textarea name="actions" rows="8"
+                <textarea required name="actions" rows="8"
                           placeholder="Please describe each action on a new line."></textarea>
             </label>
 
