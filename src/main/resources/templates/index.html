@@ -14,6 +14,7 @@
 
 <main id="item-container">
 
+
     <a th:each="app: ${apps}" th:href="@{/application/{appId}/buy(appId=${app.id})}"
        aria-label="Buy Application" href="">
 
@@ -35,5 +36,9 @@
     </a>
 
 </main>
+
+<div sec:authorize="!isAuthenticated()" style="margin-left: 20px; padding: 1ch">
+    <a th:href="@{/engineer/problems}">Sign in as an Engineer</a>
+</div>
 </body>
 </html>
