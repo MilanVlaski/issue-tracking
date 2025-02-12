@@ -138,7 +138,7 @@ public class ProblemPages {
         problemProcessing.answerProblem(em.find(Problem.class, problemId),
                 answer.toEntity(),
                 currentLogin.engineer(),
-                ProblemState.fromEngName(answer.getProblemState())
+                ProblemState.fromEngName(answer.problemState())
         );
         redirectAttributes.addFlashAttribute("answerStatus", "success");
         return redirectToReferer(request);
