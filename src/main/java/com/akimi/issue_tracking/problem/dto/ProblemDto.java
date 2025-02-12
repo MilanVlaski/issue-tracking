@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 public class ProblemDto {
-
+// todo state and eng state sucks, also use record instead
     private Integer id;
     private User user;
     private Application application;

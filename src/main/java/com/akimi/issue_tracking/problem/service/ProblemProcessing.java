@@ -29,8 +29,8 @@ public class ProblemProcessing {
 
     @Transactional
     public Problem report(ProblemReport problemReport, Application application, User user) {
-        var actions = parseActions(problemReport.getActions());
-        var problem = new Problem(problemReport.getDescription(), application, user, actions);
+        var actions = parseActions(problemReport.actions());
+        var problem = new Problem(problemReport.description(), application, user, actions);
         em.persist(application);
         em.persist(user);
         em.persist(problem);
