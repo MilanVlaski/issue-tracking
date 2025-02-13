@@ -15,7 +15,6 @@ public class ProblemDto {
     private User user;
     private Application application;
     private String state;
-    private String engState;
     private String description;
     private boolean mine;
 }

@@ -30,7 +30,7 @@ public class ProblemController {
 
         if (problem.isPresent()) {
             var prob = problem.get();
-            prob.setState(ProblemState.fromEngName(requestBody.state()));
+            prob.setState(ProblemState.valueOfIgnoreCase(requestBody.state()));
             myProblemRepository.save(prob);
             return ResponseEntity.ok().build();
         } else {

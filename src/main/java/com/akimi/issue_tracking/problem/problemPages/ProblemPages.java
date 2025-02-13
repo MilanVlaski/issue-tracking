@@ -41,8 +41,7 @@ public class ProblemPages {
     public String index(Model model, @RequestParam(required = false) String state) {
         List<Problem> problems;
         if (state != null && !state.isEmpty()) {
-            var dbState = ProblemState.fromEngName(state).name;
-            problems = problemRepository.findByState(dbState);
+            problems = problemRepository.findByState(ProblemState.valueOfIgnoreCase(state));
             model.addAttribute("state", state);
         } else {
             problems = problemRepository.findAll();
@@ -56,7 +55,7 @@ public class ProblemPages {
                                .setId(p.getId())
                                .setApplication(p.getApplication())
                                .setUser(p.getUser())
-                               .setEngState(p.getEngState())
+                               .setState(p.getState())
                                .setDescription(p.getDescription())
                                .setMine(p.getEngineers().contains(currentLogin.engineer())))
                        .toList();
@@ -74,7 +73,7 @@ public class ProblemPages {
                 " join p.engineers e where e.email = :email";
 
         if (state != null && !state.isEmpty()) {
-            var dbState = ProblemState.fromEngName(state).name;
+            var dbState = ProblemState.valueOfIgnoreCase(state);
 
             queryString += " and p.state=:state";
             model.addAttribute("state", state);
@@ -127,7 +126,7 @@ public class ProblemPages {
         model.addAttribute("problem", problem);
         model.addAttribute("actions", problem.getActions());
         model.addAttribute("problemStates", Arrays.stream(ProblemState.values())
-                                                  .map(value -> value.engName));
+                                                  .map(ProblemState::getEnglish));
         return "answerProblem";
     }
 
@@ -138,7 +137,7 @@ public class ProblemPages {
         problemProcessing.answerProblem(em.find(Problem.class, problemId),
                 answer.toEntity(),
                 currentLogin.engineer(),
-                ProblemState.fromEngName(answer.problemState())
+                ProblemState.valueOfIgnoreCase(answer.problemState())
         );
         redirectAttributes.addFlashAttribute("answerStatus", "success");
         return redirectToReferer(request);

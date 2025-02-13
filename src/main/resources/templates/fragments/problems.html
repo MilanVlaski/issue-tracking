@@ -8,8 +8,8 @@
                 <select name="state" onchange="filterPage(this.value)">
                     <option value="">Select a State</option>
                     <option th:each="stateEnum : ${T(com.akimi.issue_tracking.problem.ProblemState).values()}"
-                            th:value="${stateEnum.engName}" th:text="${stateEnum.engName}"
-                            th:selected="${stateEnum.engName == state}"></option>
+                            th:value="${stateEnum.getEnglish()}" th:text="${stateEnum.getEnglish()}"
+                            th:selected="${stateEnum.getEnglish() == state}"></option>
                     <!--"state" is a model attribute-->
                 </select>
             </label>
@@ -35,8 +35,8 @@
                         onchange="updateProblemState(event)">
                     <option
                             th:each="stateEnum : ${T(com.akimi.issue_tracking.problem.ProblemState).values()}"
-                            th:value="${stateEnum.engName}" th:text="${stateEnum.engName}"
-                            th:selected="${stateEnum.engName == problem.engState}">
+                            th:value="${stateEnum.getEnglish()}" th:text="${stateEnum.getEnglish()}"
+                            th:selected="${stateEnum.getEnglish() == problem.state}">
                         Reported
                     </option>
                 </select>

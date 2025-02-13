@@ -36,14 +36,16 @@ public class Problem {
     private Application application;
 
     @Column(name = "STANJE", nullable = false, length = 20)
-    private String state;
-    // this is a hack to avoid a better solution
-    @Transient
-    private String engState;
-
-    public String getEngState() {
-        return ProblemState.fromDbName(state).engName;
-    }
+    @Convert(converter = ProblemStateConverter.class)
+    private ProblemState state;
+//
+//    // this is a hack to avoid a better solution
+//    @Transient
+//    private String engState;
+//
+//    public String getEngState() {
+//        return ProblemState.fromDbName(state).getEnglish();
+//    }
 
     @Column(name = "OPIS_PRB", length = 200)
     private String description;
@@ -79,8 +81,7 @@ public class Problem {
     }
 
     public void setState(ProblemState problemState) {
-        this.state = problemState.name;
-        this.engState = problemState.engName;
+        this.state = problemState;
     }
 
     private void addActions(List<Action> actions) {
@@ -174,5 +175,9 @@ public class Problem {
 
     public Problem copy() {
         return new Problem(description, application, user, List.copyOf(getActions()));
+    }
+
+    public String getState() {
+        return state.getSerbian();
     }
 }
