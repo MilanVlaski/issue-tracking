@@ -48,17 +48,27 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-tasks.register<Test>("fastTest") {
-    useJUnitPlatform()
-    
-    exclude("com/akimi/issue_tracking/integration/**")
-    exclude("com.akimi.issue_tracking.integration.**")
-    exclude("com/akimi/issue_tracking/integration/ProblemTableTest")
-    exclude("com.akimi.issue_tracking.integration.ProblemTableTest")
-    exclude("**/integration/**") 
+
+sourceSets {
+    val slowTest by creating {
+        compileClasspath += sourceSets["main"].output + sourceSets["test"].output + configurations["testRuntimeClasspath"]
+        runtimeClasspath += output + compileClasspath
+        resources.srcDirs("src/test/resources") // Share feature files
+    }
+}
+
+configurations.matching { it.name == "slowTestImplementation" }.configureEach {
+    extendsFrom(configurations["testImplementation"])
+}
+configurations.matching { it.name == "slowTestRuntimeOnly" }.configureEach {
+    extendsFrom(configurations["testRuntimeOnly"])
+}
 
 
-    exclude("**/*CucumberTest*")
-    exclude("com/akimi/issue_tracking/cucumber/**")
-    exclude("com.akimi/issue_tracking/CucumberTest")
+
+tasks.register<Test>("slowTest") {
+    description = "Runs slow tests (Selenium and Spring Boot)"
+    group = "verification"
+    testClassesDirs = sourceSets["slowTest"].output.classesDirs
+    classpath = sourceSets["slowTest"].runtimeClasspath
 }
