@@ -1,10 +1,7 @@
 package com.akimi.issue_tracking;
 
-import com.akimi.issue_tracking.application.Application;
-import com.akimi.issue_tracking.application.User;
-import com.akimi.issue_tracking.problem.Problem;
-import com.akimi.issue_tracking.problem.service.ProblemProcessing;
-import com.akimi.issue_tracking.problem.dto.ProblemReport;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
@@ -12,7 +9,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import com.akimi.issue_tracking.application.Application;
+import com.akimi.issue_tracking.application.User;
+import com.akimi.issue_tracking.problem.Problem;
+import com.akimi.issue_tracking.problem.dto.ProblemReport;
+import com.akimi.issue_tracking.problem.service.ProblemProcessing;
 
 @SpringBootTest
 @AutoConfigureTestEntityManager
@@ -39,7 +40,7 @@ public class ProblemProcessingTest {
         problemProcessing.report(problemReport, application, user);
 
         var actions = em.find(Problem.class, 1L).getActions();
-        assertEquals(2, actions.size());
+	assertEquals(2, actions.size());
     }
 
 }

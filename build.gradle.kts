@@ -47,3 +47,18 @@ dependencies {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+tasks.register<Test>("fastTest") {
+    useJUnitPlatform()
+    
+    exclude("com/akimi/issue_tracking/integration/**")
+    exclude("com.akimi.issue_tracking.integration.**")
+    exclude("com/akimi/issue_tracking/integration/ProblemTableTest")
+    exclude("com.akimi.issue_tracking.integration.ProblemTableTest")
+    exclude("**/integration/**") 
+
+
+    exclude("**/*CucumberTest*")
+    exclude("com/akimi/issue_tracking/cucumber/**")
+    exclude("com.akimi/issue_tracking/CucumberTest")
+}

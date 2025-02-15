@@ -1,24 +1,27 @@
 package com.akimi.issue_tracking.domain;
 
-import com.akimi.issue_tracking.application.Application;
-import com.akimi.issue_tracking.application.purchase.Purchase;
-import com.akimi.issue_tracking.application.purchase.SupportType;
-import com.akimi.issue_tracking.application.User;
-import com.akimi.issue_tracking.problem.Action;
-import com.akimi.issue_tracking.application.service.AppDistribution;
-import com.akimi.issue_tracking.application.service.ApplicationOwners;
-import com.akimi.issue_tracking.problem.Problem;
-import com.akimi.issue_tracking.problem.engineer.Engineer;
-import com.akimi.issue_tracking.problem.engineer.Patch;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.Test;
+
+import com.akimi.issue_tracking.application.Application;
+import com.akimi.issue_tracking.application.User;
+import com.akimi.issue_tracking.application.purchase.Purchase;
+import com.akimi.issue_tracking.application.purchase.SupportType;
+import com.akimi.issue_tracking.application.service.AppDistribution;
+import com.akimi.issue_tracking.application.service.ApplicationOwners;
+import com.akimi.issue_tracking.problem.Action;
+import com.akimi.issue_tracking.problem.Problem;
+import com.akimi.issue_tracking.problem.engineer.Engineer;
+import com.akimi.issue_tracking.problem.engineer.Patch;
 
 public class AppPatchingTest {
 
@@ -51,7 +54,7 @@ public class AppPatchingTest {
     public void when_engineer_patches_the_problem_they_are_assigned_to_a_new_application_with_incremented_version_is_created() {
         problem.assignEngineer(engineer);
         var newApp = engineer.patchProblem(patch, problem);
-        assertEquals("1.2.1", newApp.getVersion());
+	assertEquals("1.2.1", newApp.getVersion());
         assertTrue(newApp.equalsExceptVersion(brokenApp));
     }
 
