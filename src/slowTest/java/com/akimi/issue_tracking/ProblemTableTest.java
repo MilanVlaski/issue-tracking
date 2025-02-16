@@ -1,4 +1,4 @@
-package com.akimi.issue_tracking.integration;
+package com.akimi.issue_tracking;
 
 
 import com.akimi.issue_tracking.application.Application;

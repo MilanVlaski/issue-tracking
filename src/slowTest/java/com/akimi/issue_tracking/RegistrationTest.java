@@ -1,4 +1,4 @@
-package com.akimi.issue_tracking.integration;
+package com.akimi.issue_tracking;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
