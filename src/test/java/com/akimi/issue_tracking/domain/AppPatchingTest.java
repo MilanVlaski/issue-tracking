@@ -71,7 +71,7 @@ public class AppPatchingTest {
         // the variables passed here expose String coupling
         // The app name (or id) plus version should be a special class, with it's own
         // semantics, validation and so on.
-        when(applicationOwners.withApplicationAndFeatureRelease(appName, newApp.getVersion()))
+        when(applicationOwners.withApplicationAndMajorVersion(appName, newApp.getVersion()))
                 .thenReturn(previousOwners);
 
 

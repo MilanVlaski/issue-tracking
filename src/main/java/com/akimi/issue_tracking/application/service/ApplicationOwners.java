@@ -13,7 +13,7 @@ public class ApplicationOwners {
     @PersistenceContext
     private EntityManager em;
 
-    public List<User> withApplicationAndFeatureRelease(String appName, String appVersion) {
+    public List<User> withApplicationAndMajorVersion(String appName, String appVersion) {
         return em.createQuery(
                          "SELECT DISTINCT p.user " +
                                  "FROM Purchase p " +
@@ -21,11 +21,11 @@ public class ApplicationOwners {
                                  "WHERE app.name = :appName " +
                                  "AND app.version LIKE :versionPattern", User.class)
                  .setParameter("appName", appName)
-                 .setParameter("versionPattern", featureReleaseVersion(appVersion))
+                 .setParameter("versionPattern", majorVersion(appVersion))
                  .getResultList();
     }
 
-    private String featureReleaseVersion(String oldVersion) {
+    private String majorVersion(String oldVersion) {
         return oldVersion.substring(0, oldVersion.lastIndexOf('.')) + ".%";
     }
 }

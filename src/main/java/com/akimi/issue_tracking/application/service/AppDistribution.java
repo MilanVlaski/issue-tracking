@@ -21,9 +21,9 @@ public class AppDistribution {
 
     public List<Purchase> sendApplicationToPreviousUsers(Application application,
                 SupportType supportType) {
-        var users = applicationOwners.withApplicationAndFeatureRelease(
+        var users = applicationOwners.withApplicationAndMajorVersion(
                 application.getName(),
-                application.getVersion()
+                application.getVersion() // should be get major version instead
         );
         var purchases = new ArrayList<Purchase>();
         for (User user : users) {

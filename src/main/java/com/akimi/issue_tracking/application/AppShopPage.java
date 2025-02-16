@@ -46,7 +46,7 @@ public class AppShopPage {
     public String buy(Model model, @PathVariable String appId) {
         var app = em.find(Application.class, appId);
         var supportTypes = em.createQuery("select s from SupportType s").getResultList();
-        var ownedByUser = currentUser.user().ownsApplication(app);
+        boolean ownedByUser = currentUser.user().ownsApplication(app);
 
         model.addAttribute("app", app);
         model.addAttribute("supportTypes", supportTypes);
