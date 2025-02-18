@@ -25,17 +25,20 @@ import java.util.List;
 @Controller
 public class ProblemPages {
 
-    @Autowired
-    private CurrentUser currentLogin;
+    private final CurrentUser currentLogin;
 
-    @Autowired
-    private ProblemProcessing problemProcessing;
+    private final ProblemProcessing problemProcessing;
 
-    @Autowired
-    MyProblemRepository problemRepository;
+    private final MyProblemRepository problemRepository;
 
     @PersistenceContext
     private EntityManager em;
+
+    public ProblemPages(CurrentUser currentLogin, ProblemProcessing problemProcessing, MyProblemRepository problemRepository) {
+        this.currentLogin = currentLogin;
+        this.problemProcessing = problemProcessing;
+        this.problemRepository = problemRepository;
+    }
 
     @GetMapping("/engineer/problems")
     public String index(Model model, @RequestParam(required = false) String state) {

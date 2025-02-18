@@ -24,11 +24,14 @@ public class ReportProblem {
     @PersistenceContext
     private EntityManager em;
 
-    @Autowired
-    private CurrentUser currentLogin;
+    private final CurrentUser currentLogin;
 
-    @Autowired
-    private ProblemProcessing problemProcessing;
+    private final ProblemProcessing problemProcessing;
+
+    public ReportProblem(CurrentUser currentLogin, ProblemProcessing problemProcessing) {
+        this.currentLogin = currentLogin;
+        this.problemProcessing = problemProcessing;
+    }
 
     @GetMapping("/reportProblem")
     public String reportProblem(Model model) {
