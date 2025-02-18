@@ -51,14 +51,9 @@ public class ProblemPages {
     }
 
     private List<ProblemDto> toDto(List<Problem> problems) {
-        return problems.stream().map(p -> new ProblemDto()
-                               .setId(p.getId())
-                               .setApplication(p.getApplication())
-                               .setUser(p.getUser())
-                               .setState(p.getState())
-                               .setDescription(p.getDescription())
-                               .setMine(p.getEngineers().contains(currentLogin.engineer())))
-                       .toList();
+        return problems.stream().map(p -> p.toDto(p.getEngineers()
+                        .contains(currentLogin.engineer())))
+                .toList();
     }
 
     @GetMapping("/engineer/problems/mine")
@@ -78,13 +73,13 @@ public class ProblemPages {
             queryString += " and p.state=:state";
             model.addAttribute("state", state);
             return em.createQuery(queryString, Problem.class)
-                     .setParameter("email", currentLogin.engineer().getEmail())
-                     .setParameter("state", dbState)
-                     .getResultList();
+                    .setParameter("email", currentLogin.engineer().getEmail())
+                    .setParameter("state", dbState)
+                    .getResultList();
         } else {
             return em.createQuery(queryString, Problem.class)
-                     .setParameter("email", currentLogin.engineer().getEmail())
-                     .getResultList();
+                    .setParameter("email", currentLogin.engineer().getEmail())
+                    .getResultList();
         }
     }
 
@@ -92,10 +87,10 @@ public class ProblemPages {
     public String problems(Model model) {
         var user = currentLogin.user();
         queryProblemsAndSolutions(em.createQuery(
-                                            "select p from Problem p where p.user = :user",
-                                            Problem.class
-                                    )
-                                    .setParameter("user", user), model);
+                        "select p from Problem p where p.user = :user",
+                        Problem.class
+                )
+                .setParameter("user", user), model);
         model.addAttribute("userRole", "USER");
         return "problemsAndSolutions";
     }
@@ -116,8 +111,8 @@ public class ProblemPages {
 
     public List<ProblemWithPatches> mapProblemsToDTOs(List<Problem> problems) {
         return problems.stream()
-                       .map(ProblemWithPatches::new)
-                       .toList();
+                .map(ProblemWithPatches::new)
+                .toList();
     }
 
     @GetMapping("/engineer/problems/{problemId}")
@@ -126,14 +121,14 @@ public class ProblemPages {
         model.addAttribute("problem", problem);
         model.addAttribute("actions", problem.getActions());
         model.addAttribute("problemStates", Arrays.stream(ProblemState.values())
-                                                  .map(ProblemState::getEnglish));
+                .map(ProblemState::getEnglish));
         return "answerProblem";
     }
 
     @PostMapping("/engineer/problems/{problemId}/answer")
     public String answerProblemPost(@PathVariable String problemId,
-            @ModelAttribute AnswerDto answer, HttpServletRequest request,
-            RedirectAttributes redirectAttributes) {
+                                    @ModelAttribute AnswerDto answer, HttpServletRequest request,
+                                    RedirectAttributes redirectAttributes) {
         problemProcessing.answerProblem(em.find(Problem.class, problemId),
                 answer.toEntity(),
                 currentLogin.engineer(),
@@ -145,7 +140,7 @@ public class ProblemPages {
 
     @PostMapping("/engineer/problems/{problemId}/assignEngineer")
     public String assignEngineer(@PathVariable String problemId,
-            HttpServletRequest request) {
+                                 HttpServletRequest request) {
         problemProcessing.assignEngineerToProblem(
                 currentLogin.engineer(),
                 em.find(Problem.class, problemId)
@@ -164,8 +159,8 @@ public class ProblemPages {
 
     @PostMapping("/engineer/problems/{problemId}/uploadPatch")
     public String uploadPatch(@PathVariable String problemId,
-            @ModelAttribute PatchUpload patchUpload, HttpServletRequest request,
-            RedirectAttributes redirectAttributes) {
+                              @ModelAttribute PatchUpload patchUpload, HttpServletRequest request,
+                              RedirectAttributes redirectAttributes) {
 
         var problem = em.find(Problem.class, problemId);
         var newApp = problemProcessing.patchProblem(problem,

@@ -2,11 +2,11 @@ package com.akimi.issue_tracking.problem;
 
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
+import com.akimi.issue_tracking.problem.dto.ProblemDto;
 import com.akimi.issue_tracking.problem.engineer.Answer;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
 import com.akimi.issue_tracking.problem.engineer.ProblemSolver;
 import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -38,14 +38,6 @@ public class Problem {
     @Column(name = "STANJE", nullable = false, length = 20)
     @Convert(converter = ProblemStateConverter.class)
     private ProblemState state;
-//
-//    // this is a hack to avoid a better solution
-//    @Transient
-//    private String engState;
-//
-//    public String getEngState() {
-//        return ProblemState.fromDbName(state).getEnglish();
-//    }
 
     @Column(name = "OPIS_PRB", length = 200)
     private String description;
@@ -131,6 +123,13 @@ public class Problem {
         return this;
     }
 
+    /**
+     * @return the state in English.
+     */
+    public String getState() {
+        return state.english;
+    }
+
     public Set<Action> getActions() {
         return actions;
     }
@@ -177,7 +176,7 @@ public class Problem {
         return new Problem(description, application, user, List.copyOf(getActions()));
     }
 
-    public String getState() {
-        return state.getSerbian();
+    public ProblemDto toDto(boolean belongsToEngineer) {
+        return new ProblemDto(id,  user, application, state.english, description, belongsToEngineer);
     }
 }

@@ -8,7 +8,7 @@ public class ProblemStateConverter implements AttributeConverter<ProblemState, S
 
     @Override
     public String convertToDatabaseColumn(ProblemState attribute) {
-        return attribute.getSerbian();
+        return attribute.serbian;
     }
 
     @Override

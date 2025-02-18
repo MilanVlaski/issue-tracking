@@ -16,14 +16,6 @@ public enum ProblemState {
         this.english = english;
     }
 
-    public String getSerbian() {
-        return serbian;
-    }
-
-    public String getEnglish() {
-        return english;
-    }
-
 //    private static final Map<String, String> SERBIAN_TO_ENGLISH =
 //            Stream.of(values()).collect(Collectors.toMap(ProblemState::getSerbian, ProblemState::getEnglish));
 //
@@ -41,11 +33,15 @@ public enum ProblemState {
     public static ProblemState valueOfIgnoreCase(String value) {
         for (ProblemState state : values()) {
             if (state.name().equalsIgnoreCase(value) ||
-                    state.getEnglish().equalsIgnoreCase(value) ||
+                    state.english.equalsIgnoreCase(value) ||
                     state.serbian.equalsIgnoreCase(value)) {
                 return state;
             }
         }
         throw new IllegalArgumentException("Unknown state: " + value);
+    }
+
+    public String getEnglish() {
+        return english;
     }
 }

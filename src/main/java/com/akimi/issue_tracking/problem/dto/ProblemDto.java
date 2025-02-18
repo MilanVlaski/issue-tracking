@@ -6,15 +6,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@Getter
-@Setter
-@Accessors(chain = true)
-public class ProblemDto {
-// todo state and eng state sucks, also use record instead
-    private Integer id;
-    private User user;
-    private Application application;
-    private String state;
-    private String description;
-    private boolean mine;
+public record ProblemDto(
+        Integer id,
+        User user,
+        Application application,
+        String state,
+        String description,
+        boolean mine
+) {
 }
