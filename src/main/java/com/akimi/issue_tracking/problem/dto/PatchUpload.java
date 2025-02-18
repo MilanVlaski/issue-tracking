@@ -6,8 +6,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
-public record PatchUpload(String size, String communicationType) {
+public record PatchUpload(BigDecimal size, String communicationType) {
     public Patch toEntity() {
-        return new Patch(communicationType, new BigDecimal(size));
+        return new Patch(communicationType, size);
     }
 }
