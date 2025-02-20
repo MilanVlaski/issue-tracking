@@ -13,13 +13,13 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.core.GenericTypeResolver;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class ProblemPages {
@@ -41,77 +41,53 @@ public class ProblemPages {
 
     @GetMapping("/engineer/problems")
     public String index(Model model, @RequestParam(required = false) String state) {
+        handleShowProblems(model, state);
+        return "engineerProblems";
+    }
+
+    @GetMapping("/engineer/problems/mine")
+    public String mine(Model model, @RequestParam(required = false) String state) {
+        handleShowProblems(model, state);
+        return "engineerProblemsOwn";
+    }
+
+    private void handleShowProblems(Model model, String state) {
         List<ProblemDto> problems;
         if (!(state == null || state.isEmpty())) {
-        var stateEnum = ProblemState.valueOfIgnoreCase(state);
-//            problems = problemRepository.findByState(ProblemState.valueOfIgnoreCase(state));
+            var stateEnum = ProblemState.valueOfIgnoreCase(state);
             problems = problemRepository.findAllBelongingToEngineerByState(currentLogin.engineer(), stateEnum);
             model.addAttribute("state", stateEnum);
         } else {
             problems = problemRepository.findAllBelongingTo(currentLogin.engineer());
-//            problems = problemRepository.findAll();
         }
-        model.addAttribute("problems",
-                problems
-        );
-        return "engineerProblems";
-    }
-
-    private List<ProblemDto> toDto(List<Problem> problems) {
-        return problems.stream().map(p -> p.toDto(currentLogin.engineer().isSolving(p)))
-                .toList();
-    }
-
-
-    @GetMapping("/engineer/problems/mine")
-    public String mine(Model model, @RequestParam(required = false) String state) {
-        var problems = filterProblemsByState(model, state);
-        model.addAttribute("problems", toDto(problems));
-        return "engineerProblemsOwn";
-    }
-
-    private List<Problem> filterProblemsByState(Model model, String state) {
-        var queryString = "select p from Problem p" +
-                " join p.engineers e where e.email = :email";
-
-        if (state != null && !state.isEmpty()) {
-            var dbState = ProblemState.valueOfIgnoreCase(state);
-
-            queryString += " and p.state=:state";
-            model.addAttribute("state", state);
-            return em.createQuery(queryString, Problem.class)
-                    .setParameter("email", currentLogin.engineer().getEmail())
-                    .setParameter("state", dbState)
-                    .getResultList();
-        } else {
-            return em.createQuery(queryString, Problem.class)
-                    .setParameter("email", currentLogin.engineer().getEmail())
-                    .getResultList();
-        }
+        model.addAttribute("problems", problems);
     }
 
     @GetMapping("/problems")
     public String problems(Model model) {
         var user = currentLogin.user();
-        queryProblemsAndSolutions(em.createQuery(
-                        "select p from Problem p where p.user = :user",
+        var problemsWithPatches = em.createQuery(
+                        "SELECT p FROM Problem p " +
+                                "LEFT JOIN FETCH p.problemSolvers ps " +
+                                "LEFT JOIN FETCH ps.patches patch " +
+                                "WHERE p.user = :user",
                         Problem.class
                 )
-                .setParameter("user", user), model);
+                .setParameter("user", user)
+                .getResultList();
+
+        model.addAttribute("problemDtos", mapProblemsToDTOs(problemsWithPatches));
         model.addAttribute("userRole", "USER");
+
         return "problemsAndSolutions";
-    }
-
-    private void queryProblemsAndSolutions(TypedQuery<Problem> em, Model model) {
-        var problems = em.getResultList();
-
-        List<ProblemWithPatches> problemDTOs = mapProblemsToDTOs(problems);
-        model.addAttribute("problemDtos", problemDTOs);
     }
 
     @GetMapping("/engineer/problems/solutions")
     public String problemsAndSolutions(Model model) {
-        queryProblemsAndSolutions(em.createQuery("select p from Problem p", Problem.class), model);
+        TypedQuery<Problem> em1 = em.createQuery("SELECT p FROM Problem p " +
+                "LEFT JOIN FETCH p.problemSolvers ps " +
+                "LEFT JOIN FETCH ps.patches patch ", Problem.class);
+        model.addAttribute("problemDtos", mapProblemsToDTOs(em1.getResultList()));
         model.addAttribute("userRole", "ENGINEER");
         return "problemsAndSolutions";
     }
