@@ -13,7 +13,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,22 +41,27 @@ public class ProblemPages {
 
     @GetMapping("/engineer/problems")
     public String index(Model model, @RequestParam(required = false) String state) {
-        List<Problem> problems;
-        if (state != null && !state.isEmpty()) {
-            problems = problemRepository.findByState(ProblemState.valueOfIgnoreCase(state));
-            model.addAttribute("state", state);
+        List<ProblemDto> problems;
+        if (!(state == null || state.isEmpty())) {
+        var stateEnum = ProblemState.valueOfIgnoreCase(state);
+//            problems = problemRepository.findByState(ProblemState.valueOfIgnoreCase(state));
+            problems = problemRepository.findAllBelongingToEngineerByState(currentLogin.engineer(), stateEnum);
+            model.addAttribute("state", stateEnum);
         } else {
-            problems = problemRepository.findAll();
+            problems = problemRepository.findAllBelongingTo(currentLogin.engineer());
+//            problems = problemRepository.findAll();
         }
-        model.addAttribute("problems", toDto(problems));
+        model.addAttribute("problems",
+                problems
+        );
         return "engineerProblems";
     }
 
     private List<ProblemDto> toDto(List<Problem> problems) {
-        return problems.stream().map(p -> p.toDto(p.getEngineers()
-                        .contains(currentLogin.engineer())))
+        return problems.stream().map(p -> p.toDto(currentLogin.engineer().isSolving(p)))
                 .toList();
     }
+
 
     @GetMapping("/engineer/problems/mine")
     public String mine(Model model, @RequestParam(required = false) String state) {

@@ -9,7 +9,7 @@
                     <option value="">Select a State</option>
                     <option th:each="stateEnum : ${T(com.akimi.issue_tracking.problem.ProblemState).values()}"
                             th:value="${stateEnum.getEnglish()}" th:text="${stateEnum.getEnglish()}"
-                            th:selected="${stateEnum.getEnglish() == state}"></option>
+                            th:selected="${stateEnum == state}"></option>
                     <!--"state" is a model attribute-->
                 </select>
             </label>
@@ -36,7 +36,7 @@
                     <option
                             th:each="stateEnum : ${T(com.akimi.issue_tracking.problem.ProblemState).values()}"
                             th:value="${stateEnum.getEnglish()}" th:text="${stateEnum.getEnglish()}"
-                            th:selected="${stateEnum.getEnglish() == problem.state}">
+                            th:selected="${stateEnum == problem.state}">
                         Reported
                     </option>
                 </select>

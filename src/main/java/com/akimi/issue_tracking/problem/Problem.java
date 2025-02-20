@@ -126,8 +126,8 @@ public class Problem {
     /**
      * @return the state in English.
      */
-    public String getState() {
-        return state.english;
+    public ProblemState getState() {
+        return state;
     }
 
     public Set<Action> getActions() {
@@ -177,6 +177,6 @@ public class Problem {
     }
 
     public ProblemDto toDto(boolean belongsToEngineer) {
-        return new ProblemDto(id,  user, application, state.english, description, belongsToEngineer);
+        return new ProblemDto(id,  user, application, state, description, belongsToEngineer);
     }
 }

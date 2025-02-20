@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -60,8 +62,9 @@ public class ProblemTableTest extends BaseIntegrationTest {
     @Test
     public void when_i_change_the_problem_state_filter_it_reloads_the_page_filtering_the_problems() {
         var requestedState = "Reported";
-        when(problemRepository.findAll()).thenReturn(List.of(reportedProblem, solvedProblem));
-        when(problemRepository.findByState(ProblemState.valueOfIgnoreCase(requestedState))).thenReturn(List.of(reportedProblem));
+        when(problemRepository.findAllBelongingTo(any())).thenReturn(List.of(reportedProblem.toDto(true), solvedProblem.toDto(true)));
+        when(problemRepository.findAllBelongingToEngineerByState(any(), eq(ProblemState.valueOfIgnoreCase(requestedState))))
+                .thenReturn(List.of(reportedProblem.toDto(true)));
 
 
         driver.get(homepage(port) + "/engineer/problems");
@@ -80,7 +83,7 @@ public class ProblemTableTest extends BaseIntegrationTest {
 
     @Test
     public void when_I_change_the_problem_state_to_something_it_changes_accordingly() {
-        when(problemRepository.findAll()).thenReturn(List.of(reportedProblem, solvedProblem));
+        when(problemRepository.findAllBelongingTo(any())).thenReturn(List.of(reportedProblem.toDto(true), solvedProblem.toDto(true)));
         when(problemRepository.findById(Long.valueOf(reportedProblem.getId()))).thenReturn(Optional.of(reportedProblem));
 
         driver.get(homepage(port) + "/engineer/problems");

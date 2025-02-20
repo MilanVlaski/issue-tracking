@@ -144,4 +144,12 @@ public class Engineer {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    /**
+     * Performance destroyed.
+     */
+    public boolean isSolving(Problem problem) {
+        return getProblemSolvers().stream()
+                .anyMatch(problemSolver -> problemSolver.getProblem().equals(problem));
+    }
 }
