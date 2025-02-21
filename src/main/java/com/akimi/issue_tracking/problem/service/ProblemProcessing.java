@@ -39,8 +39,7 @@ public class ProblemProcessing {
 
     @Transactional
     public void answerProblem(Problem problem, Answer answer, Engineer engineer, ProblemState problemState) {
-        problem.add(answer);
-        engineer.add(answer);
+        engineer.answer(problem, answer);
         problem.setState(problemState);
         em.persist(answer);
     }

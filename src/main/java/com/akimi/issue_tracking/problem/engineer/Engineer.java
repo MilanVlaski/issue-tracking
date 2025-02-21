@@ -157,7 +157,7 @@ public class Engineer {
         if(problem.getState() == ProblemState.SOLVED) {
             throw new RuntimeException("Can't answer problem, as it's already solved");
         }
-        getProblems().add(problem);
+        problems.add(problem);
         problem.add(answer);
         answer.setEngineer(this);
     }
