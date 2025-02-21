@@ -3,7 +3,7 @@ package com.akimi.issue_tracking;
 
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
-import com.akimi.issue_tracking.problem.service.MyProblemRepository;
+import com.akimi.issue_tracking.problem.service.ProblemRepository;
 import com.akimi.issue_tracking.problem.Problem;
 import com.akimi.issue_tracking.problem.service.ProblemProcessing;
 import com.akimi.issue_tracking.problem.ProblemState;
@@ -45,7 +45,7 @@ public class ProblemTableTest extends BaseIntegrationTest {
     ProblemProcessing problemProcessing;
 
     @MockBean
-    MyProblemRepository problemRepository;
+    ProblemRepository problemRepository;
 
     private Problem reportedProblem;
     private Problem solvedProblem;

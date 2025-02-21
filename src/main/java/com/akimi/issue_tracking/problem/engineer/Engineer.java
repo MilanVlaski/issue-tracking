@@ -152,4 +152,13 @@ public class Engineer {
         return getProblemSolvers().stream()
                 .anyMatch(problemSolver -> problemSolver.getProblem().equals(problem));
     }
+
+    public void answer(Problem problem, Answer answer) {
+        if(problem.getState() == ProblemState.SOLVED) {
+            throw new RuntimeException("Can't answer problem, as it's already solved");
+        }
+        getProblems().add(problem);
+        problem.add(answer);
+        answer.setEngineer(this);
+    }
 }

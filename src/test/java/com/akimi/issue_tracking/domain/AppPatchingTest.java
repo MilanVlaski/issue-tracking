@@ -54,7 +54,7 @@ public class AppPatchingTest {
     public void when_engineer_patches_the_problem_they_are_assigned_to_a_new_application_with_incremented_version_is_created() {
         problem.assignEngineer(engineer);
         var newApp = engineer.patchProblem(patch, problem);
-	assertEquals("1.2.1", newApp.getVersion());
+        assertEquals("1.2.1", newApp.getVersion());
         assertTrue(newApp.equalsExceptVersion(brokenApp));
     }
 

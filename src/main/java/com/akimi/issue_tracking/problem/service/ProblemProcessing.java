@@ -29,22 +29,12 @@ public class ProblemProcessing {
 
     @Transactional
     public Problem report(ProblemReport problemReport, Application application, User user) {
-        var actions = parseActions(problemReport.actions());
+        var actions = problemReport.parseActions();
         var problem = new Problem(problemReport.description(), application, user, actions);
         em.persist(application);
         em.persist(user);
         em.persist(problem);
         return problem;
-    }
-
-    private List<Action> parseActions(String actions1) {
-        var ordinalNumber = new AtomicInteger(1);
-        return Arrays.stream(actions1.trim().split("\n"))
-                     .map(String::trim)
-                     .filter(line -> !line.isEmpty())
-                     .map(String::trim)
-                     .map(line -> new Action(ordinalNumber.getAndIncrement(), line))
-                     .toList();
     }
 
     @Transactional

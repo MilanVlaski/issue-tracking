@@ -6,14 +6,13 @@ import com.akimi.issue_tracking.problem.dto.AnswerDto;
 import com.akimi.issue_tracking.problem.dto.PatchUpload;
 import com.akimi.issue_tracking.problem.dto.ProblemDto;
 import com.akimi.issue_tracking.problem.dto.ProblemWithPatches;
-import com.akimi.issue_tracking.problem.service.MyProblemRepository;
+import com.akimi.issue_tracking.problem.service.ProblemRepository;
 import com.akimi.issue_tracking.problem.service.ProblemProcessing;
 import com.akimi.issue_tracking.security.CurrentUser;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.core.GenericTypeResolver;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,12 +27,12 @@ public class ProblemPages {
 
     private final ProblemProcessing problemProcessing;
 
-    private final MyProblemRepository problemRepository;
+    private final ProblemRepository problemRepository;
 
     @PersistenceContext
     private EntityManager em;
 
-    public ProblemPages(CurrentUser currentLogin, ProblemProcessing problemProcessing, MyProblemRepository problemRepository) {
+    public ProblemPages(CurrentUser currentLogin, ProblemProcessing problemProcessing, ProblemRepository problemRepository) {
         this.currentLogin = currentLogin;
         this.problemProcessing = problemProcessing;
         this.problemRepository = problemRepository;
@@ -112,7 +111,8 @@ public class ProblemPages {
     public String answerProblemPost(@PathVariable String problemId,
                                     @ModelAttribute AnswerDto answer, HttpServletRequest request,
                                     RedirectAttributes redirectAttributes) {
-        problemProcessing.answerProblem(em.find(Problem.class, problemId),
+        var problem = em.find(Problem.class, problemId);
+        problemProcessing.answerProblem(problem,
                 answer.toEntity(),
                 currentLogin.engineer(),
                 ProblemState.valueOfIgnoreCase(answer.problemState())

@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface MyProblemRepository extends JpaRepository<Problem, Long> {
+public interface ProblemRepository extends JpaRepository<Problem, Long> {
     List<Problem> findByState(ProblemState state);
 
     @Query("""
