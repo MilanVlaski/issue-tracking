@@ -166,6 +166,7 @@ public class Problem {
     public void assignEngineer(Engineer engineer) {
         engineers.add(engineer);
         engineer.getProblems().add(this);
+        this.state = ProblemState.ASSIGNED;
     }
 
     public Set<ProblemSolver> getProblemSolvers() {

@@ -47,9 +47,6 @@ public class ProblemProcessing {
     @Transactional
     public void assignEngineerToProblem(Engineer engineer, Problem problem) {
         problem.assignEngineer(engineer);
-        problem.setState(ProblemState.ASSIGNED);
-        em.persist(problem);
-        em.persist(engineer);
     }
 
     @Autowired
@@ -61,8 +58,6 @@ public class ProblemProcessing {
         distributeNewAppToOldOwners(problem, newApp);
 
         em.persist(newApp);
-        em.persist(engineer);
-        em.persist(problem);
         em.persist(patch);
         return newApp;
     }
