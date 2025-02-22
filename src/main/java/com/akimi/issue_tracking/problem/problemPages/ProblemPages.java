@@ -6,6 +6,7 @@ import com.akimi.issue_tracking.problem.dto.AnswerDto;
 import com.akimi.issue_tracking.problem.dto.PatchUpload;
 import com.akimi.issue_tracking.problem.dto.ProblemDto;
 import com.akimi.issue_tracking.problem.dto.ProblemWithPatches;
+import com.akimi.issue_tracking.problem.engineer.Engineer;
 import com.akimi.issue_tracking.problem.service.ProblemRepository;
 import com.akimi.issue_tracking.problem.service.ProblemProcessing;
 import com.akimi.issue_tracking.security.CurrentUser;
@@ -13,6 +14,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -121,14 +123,13 @@ public class ProblemPages {
         return redirectToReferer(request);
     }
 
+    @Transactional
     @PostMapping("/engineer/problems/{problemId}/assignEngineer")
     public String assignEngineer(@PathVariable String problemId,
                                  HttpServletRequest request) {
-        problemProcessing.assignEngineerToProblem(
-                currentLogin.engineer(),
-                em.find(Problem.class, problemId)
-        );
-
+        Engineer engineer = currentLogin.engineer();
+        var problem = em.find(Problem.class, problemId);
+        problem.assignEngineer(engineer);
         return redirectToReferer(request);
     }
 

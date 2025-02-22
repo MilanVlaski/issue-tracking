@@ -16,20 +16,6 @@ public enum ProblemState {
         this.english = english;
     }
 
-//    private static final Map<String, String> SERBIAN_TO_ENGLISH =
-//            Stream.of(values()).collect(Collectors.toMap(ProblemState::getSerbian, ProblemState::getEnglish));
-//
-//    private static final Map<String, String> ENGLISH_TO_SERBIAN =
-//            Stream.of(values()).collect(Collectors.toMap(ProblemState::getEnglish, ProblemState::getSerbian));
-//
-//    public static String toEnglish(String serbian) {
-//        return SERBIAN_TO_ENGLISH.getOrDefault(serbian, serbian);
-//    }
-//
-//    public static String toSerbian(String english) {
-//        return ENGLISH_TO_SERBIAN.getOrDefault(english, english);
-//    }
-
     public static ProblemState valueOfIgnoreCase(String value) {
         for (ProblemState state : values()) {
             if (state.name().equalsIgnoreCase(value) ||

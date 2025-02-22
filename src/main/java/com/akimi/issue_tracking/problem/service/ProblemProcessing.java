@@ -4,7 +4,6 @@ import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.purchase.SupportType;
 import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.application.service.AppDistribution;
-import com.akimi.issue_tracking.problem.Action;
 import com.akimi.issue_tracking.problem.Problem;
 import com.akimi.issue_tracking.problem.ProblemState;
 import com.akimi.issue_tracking.problem.dto.ProblemReport;
@@ -16,10 +15,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class ProblemProcessing {
@@ -42,11 +37,6 @@ public class ProblemProcessing {
         engineer.answer(problem, answer);
         problem.setState(problemState);
         em.persist(answer);
-    }
-
-    @Transactional
-    public void assignEngineerToProblem(Engineer engineer, Problem problem) {
-        problem.assignEngineer(engineer);
     }
 
     @Autowired
