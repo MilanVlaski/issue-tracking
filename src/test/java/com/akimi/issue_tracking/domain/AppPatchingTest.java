@@ -64,21 +64,18 @@ public class AppPatchingTest {
         var user = new User("Milan", "john@doe.com", "password",
                 LocalDate.of(1989, 12, 12), "Kazakhstan", "123");
         var supportType = new SupportType("1", "Bla", new BigDecimal("11.50"));
-        var purchase = new Purchase(user, brokenApp, supportType);
-        var previousOwners = List.of(user);
+        var previousOwners = List.of(new UserPurchaseInfo(user, supportType));
 
         problem.assignEngineer(engineer);
         var newApp = engineer.patchProblem(patch, problem);
 
-        // the variables passed here expose String coupling
-        // The app name (or id) plus version should be a special class, with it's own
-        // semantics, validation and so on.
         when(applicationOwners.withApplicationAndMajorVersion(appName, newApp.getVersion()))
-                .thenReturn(List.of(new UserPurchaseInfo(user, supportType)));
+                .thenReturn(previousOwners);
 
 
-        var newPurchases = appDistribution.sendApplicationToPreviousUsers(newApp);
+        var newPurchase = appDistribution.sendApplicationToPreviousUsers(newApp)
+                .getFirst();
         assertTrue(user.ownsApplication(newApp));
-        assertEquals(supportType, newPurchases.getFirst().getSupportType());
+        assertEquals(supportType, newPurchase.getSupportType());
     }
 }
