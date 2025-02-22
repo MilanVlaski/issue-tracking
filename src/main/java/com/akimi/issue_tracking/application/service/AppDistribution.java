@@ -2,7 +2,6 @@ package com.akimi.issue_tracking.application.service;
 
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.purchase.Purchase;
-import com.akimi.issue_tracking.application.purchase.SupportType;
 import com.akimi.issue_tracking.application.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,15 +18,14 @@ public class AppDistribution {
         this.applicationOwners = applicationOwners;
     }
 
-    public List<Purchase> sendApplicationToPreviousUsers(Application application,
-                SupportType supportType) {
+    public List<Purchase> sendApplicationToPreviousUsers(Application application) {
         var users = applicationOwners.withApplicationAndMajorVersion(
                 application.getName(),
                 application.getVersion() // should be get major version instead
         );
         var purchases = new ArrayList<Purchase>();
-        for (User user : users) {
-            purchases.add(new Purchase(user, application, supportType));
+        for (UserPurchaseInfo info : users) {
+            purchases.add(new Purchase(info.user(), application, info.supportType()));
         }
         return purchases;
     }

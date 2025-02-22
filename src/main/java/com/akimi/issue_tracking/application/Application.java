@@ -154,4 +154,5 @@ public class Application {
     public boolean isOwnedBy(User user) {
         return user.ownsApplication(this);
     }
+
 }

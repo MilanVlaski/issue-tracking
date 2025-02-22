@@ -1,7 +1,6 @@
 package com.akimi.issue_tracking.problem.service;
 
 import com.akimi.issue_tracking.application.Application;
-import com.akimi.issue_tracking.application.purchase.SupportType;
 import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.application.service.AppDistribution;
 import com.akimi.issue_tracking.problem.Problem;
@@ -45,26 +44,12 @@ public class ProblemProcessing {
     @Transactional
     public Application patchProblem(Problem problem, Patch patch, Engineer engineer) {
         var newApp = engineer.patchProblem(patch, problem);
-        distributeNewAppToOldOwners(problem, newApp);
+        var purchases = appDistribution.sendApplicationToPreviousUsers(newApp);
 
+        purchases.forEach(p -> em.persist(p));
         em.persist(newApp);
         em.persist(patch);
         return newApp;
     }
 
-    private void distributeNewAppToOldOwners(Problem problem, Application newApp) {
-        var previousSupportType = getPreviousSupportType(problem);
-        var purchases = appDistribution.sendApplicationToPreviousUsers(newApp, previousSupportType);
-        purchases.forEach(p -> em.persist(p));
-    }
-
-    private SupportType getPreviousSupportType(Problem problem) {
-        return em.createQuery("select p.supportType " +
-                          "from Purchase p " +
-                          "join p.application app " +
-                          "where app = :problemApplication",
-                  SupportType.class)
-         .setParameter("problemApplication", problem.getApplication())
-         .getSingleResult();
-    }
 }
