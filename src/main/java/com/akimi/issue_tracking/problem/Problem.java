@@ -3,6 +3,7 @@ package com.akimi.issue_tracking.problem;
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.problem.dto.ProblemDto;
+import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import com.akimi.issue_tracking.problem.engineer.Answer;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
 import com.akimi.issue_tracking.problem.engineer.ProblemSolver;
@@ -55,21 +56,20 @@ public class Problem {
     @OneToMany(mappedBy = "problem")
     private Set<ProblemSolver> problemSolvers = new LinkedHashSet<>();
 
-    /**
-     * Creates a new problem, with the REPORTED state, on user request.
-     * @param description
-     * @param application
-     * @param user
-     * @param actions
-     */
-    public Problem(String description, Application application,
-            User user, List<Action> actions) {
+    public Problem(ProblemReport problemReport, Application application, User user) {
         setState(ProblemState.REPORTED);
-        this.description = description;
+        this.description = problemReport.description();
         this.application = application;
-        addActions(actions);
+        addActions(problemReport.parseActions());
         application.getProblems().add(this);
         addUser(user);
+    }
+
+    public Problem(String description, Application application, User user, List<Action> actions) {
+        this.description = description;
+        this.application = application;
+        this.user = user;
+        addActions(actions);
     }
 
     public void setState(ProblemState problemState) {
