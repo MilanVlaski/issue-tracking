@@ -44,9 +44,8 @@ public class ProblemProcessing {
     @Transactional
     public Application patchProblem(Problem problem, Patch patch, Engineer engineer) {
         var newApp = engineer.patchProblem(patch, problem);
-        var purchases = appDistribution.sendApplicationToPreviousUsers(newApp);
+        appDistribution.sendApplicationToPreviousUsers(newApp);
 
-        purchases.forEach(p -> em.persist(p));
         em.persist(newApp);
         em.persist(patch);
         return newApp;

@@ -31,7 +31,7 @@ public class Application {
     @Column(name = "LOGO_URL", length = 500)
     private String logoUrl;
 
-    @OneToMany(mappedBy = "application")
+    @OneToMany(mappedBy = "application", cascade = CascadeType.PERSIST)
     private Set<Purchase> purchases = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "application")
