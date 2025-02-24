@@ -1,5 +1,17 @@
 package com.akimi.issue_tracking.problem.problemPages;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.akimi.issue_tracking.problem.Problem;
 import com.akimi.issue_tracking.problem.ProblemState;
 import com.akimi.issue_tracking.problem.dto.AnswerDto;
@@ -7,20 +19,15 @@ import com.akimi.issue_tracking.problem.dto.PatchUpload;
 import com.akimi.issue_tracking.problem.dto.ProblemDto;
 import com.akimi.issue_tracking.problem.dto.ProblemWithPatches;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
-import com.akimi.issue_tracking.problem.service.ProblemRepository;
 import com.akimi.issue_tracking.problem.service.ProblemProcessing;
+import com.akimi.issue_tracking.problem.service.ProblemRepository;
 import com.akimi.issue_tracking.security.CurrentUser;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.*;
 
 @Controller
 public class ProblemPages {
@@ -94,10 +101,9 @@ public class ProblemPages {
     }
 
     public List<ProblemWithPatches> mapProblemsToDTOs(List<Problem> problems) {
-        return problems.stream()
-                .map(ProblemWithPatches::new)
-                .toList();
+	return problems.stream().map(ProblemWithPatches::new).toList();
     }
+
 
     @GetMapping("/engineer/problems/{problemId}")
     public String answerProblem(@PathVariable String problemId, Model model) {
