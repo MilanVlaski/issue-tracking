@@ -1,18 +1,27 @@
 package com.akimi.issue_tracking.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.application.purchase.SupportType;
+import com.akimi.issue_tracking.application.service.AppDistribution;
+import com.akimi.issue_tracking.application.service.ApplicationOwners;
+import com.akimi.issue_tracking.application.service.UserPurchaseInfo;
+import com.akimi.issue_tracking.problem.ProblemState;
 import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import com.akimi.issue_tracking.problem.engineer.Answer;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
+import com.akimi.issue_tracking.problem.engineer.Patch;
 
 public class MainScenariosTest {
 
@@ -21,15 +30,15 @@ public class MainScenariosTest {
     Application app = new Application("appName", "1.1.0", "Great!", LocalDate.now(), "url");
     SupportType support = new SupportType("1", "Forever", BigDecimal.valueOf(12.2));
     Engineer engineer = new Engineer("Jame Bon", "nothing", LocalDate.of(2024, 1, 1), 250.2, "as@mail.com", "password");
+    ProblemReport problemReport = new ProblemReport("App sucks", "Bla\nBla\n");
+    Answer answer = new Answer("Hold on tight!");
 
     @Test
     public void Users_problem_gets_answered() {
 	user.purchase(app, support);
 
-	var problemReport = new ProblemReport("App sucks", "Bla\nBla\n");
 	var problem = user.reportProblemWithApp(problemReport, app);
 
-	var answer = new Answer("Hold on tight!");
 	engineer.answer(problem, answer);
 
 	var myProblem = user.getProblems().iterator().next();
@@ -40,7 +49,24 @@ public class MainScenariosTest {
 
     @Test
     public void Users_problem_gets_patched() {
+	ApplicationOwners mockAppOwners = Mockito.mock(ApplicationOwners.class);
+	when(mockAppOwners.withApplicationAndMajorVersion(app.getName(), app.getVersion()))
+		.thenReturn(List.of(new UserPurchaseInfo(user, support)));
 
+	user.purchase(app, support);
+
+	var problem = user.reportProblemWithApp(problemReport, app);
+	problem.assignEngineer(engineer);
+
+	// TODO encapsulate both of these
+	Application newApp = engineer.patchProblem(new Patch("telephone", BigDecimal.valueOf(120)), problem);
+	new AppDistribution(mockAppOwners).sendApplicationToPreviousUsers(newApp);
+
+	assertThat(user.ownsApplication(newApp));
+	assertEquals("1.1.1", newApp.getVersion());
+
+	var usersProblem = user.getProblems().iterator().next();
+	assertEquals(ProblemState.SOLVED, usersProblem.getState());
     }
 
 }

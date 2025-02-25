@@ -18,6 +18,7 @@ import com.akimi.issue_tracking.application.User;
 import com.akimi.issue_tracking.application.purchase.Purchase;
 import com.akimi.issue_tracking.application.purchase.SupportType;
 import com.akimi.issue_tracking.application.service.AppDistribution;
+import com.akimi.issue_tracking.application.service.HbnApplicationOwners;
 import com.akimi.issue_tracking.application.service.ApplicationOwners;
 import com.akimi.issue_tracking.problem.Action;
 import com.akimi.issue_tracking.problem.Problem;
@@ -41,7 +42,7 @@ public class AppPatchingTest {
     private final Patch patch = new Patch("Talk",
             new BigDecimal(100));
 
-    private final ApplicationOwners applicationOwners = mock(ApplicationOwners.class);
+    private final ApplicationOwners applicationOwners = mock(HbnApplicationOwners.class);
     private final AppDistribution appDistribution = new AppDistribution(applicationOwners);
 
     @Test
