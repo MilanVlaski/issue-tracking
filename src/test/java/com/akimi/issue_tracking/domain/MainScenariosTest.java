@@ -2,6 +2,7 @@ package com.akimi.issue_tracking.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -50,7 +51,7 @@ public class MainScenariosTest {
     @Test
     public void Users_problem_gets_patched() {
 	ApplicationOwners mockAppOwners = Mockito.mock(ApplicationOwners.class);
-	when(mockAppOwners.withApplicationAndMajorVersion(app.getName(), app.getVersion()))
+	when(mockAppOwners.withApplicationAndMajorVersion(app.getName(), "1.1"))
 		.thenReturn(List.of(new UserPurchaseInfo(user, support)));
 
 	user.purchase(app, support);
@@ -62,7 +63,7 @@ public class MainScenariosTest {
 	Application newApp = engineer.patchProblem(new Patch("telephone", BigDecimal.valueOf(120)), problem);
 	new AppDistribution(mockAppOwners).sendApplicationToPreviousUsers(newApp);
 
-	assertThat(user.ownsApplication(newApp));
+	assertTrue(user.ownsApplication(newApp));
 	assertEquals("1.1.1", newApp.getVersion());
 
 	var usersProblem = user.getProblems().iterator().next();

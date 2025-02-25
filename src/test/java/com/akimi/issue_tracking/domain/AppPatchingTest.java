@@ -42,7 +42,7 @@ public class AppPatchingTest {
     private final Patch patch = new Patch("Talk",
             new BigDecimal(100));
 
-    private final ApplicationOwners applicationOwners = mock(HbnApplicationOwners.class);
+    private final ApplicationOwners applicationOwners = mock(ApplicationOwners.class);
     private final AppDistribution appDistribution = new AppDistribution(applicationOwners);
 
     @Test
@@ -70,7 +70,7 @@ public class AppPatchingTest {
         problem.assignEngineer(engineer);
         var newApp = engineer.patchProblem(patch, problem);
 
-        when(applicationOwners.withApplicationAndMajorVersion(appName, newApp.getVersion()))
+        when(applicationOwners.withApplicationAndMajorVersion(appName, "1.2"))
                 .thenReturn(previousOwners);
 
 

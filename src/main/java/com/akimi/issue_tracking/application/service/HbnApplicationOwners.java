@@ -23,7 +23,7 @@ public class HbnApplicationOwners implements ApplicationOwners {
                                 "WHERE app.name = :appName " +
                                 "AND app.version LIKE :versionPattern", UserPurchaseInfo.class)
                 .setParameter("appName", appName)
-                .setParameter("versionPattern", majorVersion(appVersion))
+                .setParameter("versionPattern", appVersion + ".%")
                 .getResultList();
     }
 

@@ -155,4 +155,7 @@ public class Application {
         return user.ownsApplication(this);
     }
 
+    public String getVersionWithoutPatch() {
+        return version.replaceAll("\\.\\d+$", "");
+    }
 }
