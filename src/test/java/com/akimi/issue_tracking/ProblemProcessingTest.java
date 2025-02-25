@@ -17,7 +17,7 @@ public class ProblemProcessingTest {
     public void Processes_a_description_string_with_line_breaks_into_ordered_actions() {
         var application = new Application()
                 .setName("Wow")
-                .setVersion("1.0");
+		.setVersion("1.0.0");
         var user = new User().setName("John").setEmail("john@example.com");
 
         final ProblemReport description = new ProblemReport("Description",

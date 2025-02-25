@@ -1,12 +1,21 @@
 package com.akimi.issue_tracking.application;
 
-import com.akimi.issue_tracking.application.purchase.Purchase;
-import com.akimi.issue_tracking.problem.Problem;
-import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import com.akimi.issue_tracking.application.purchase.Purchase;
+import com.akimi.issue_tracking.problem.Problem;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "APLIKACIJA")
@@ -19,8 +28,9 @@ public class Application {
     @Column(name = "NAZIV_APP", nullable = false, length = 50)
     private String name;
 
+    @Convert(converter = VersionConverter.class)
     @Column(name = "VERZIJA", nullable = false, length = 20)
-    private String version;
+    private Version version;
 
     @Column(name = "OPIS", length = 100)
     private String description;
@@ -37,14 +47,20 @@ public class Application {
     @OneToMany(mappedBy = "application")
     private Set<Problem> problems = new LinkedHashSet<>();
 
+    public Application(String name, String version, String description, LocalDate releaseYear, String logoUrl) {
+	this.name = name;
+	this.version = Version.fromString(version);
+	this.description = description;
+	this.releaseYear = releaseYear;
+	this.logoUrl = logoUrl;
+    }
 
-    public Application(String name, String version, String description,
-            LocalDate releaseYear, String logoUrl) {
-        this.name = name;
-        this.version = version;
-        this.description = description;
-        this.releaseYear = releaseYear;
-        this.logoUrl = logoUrl;
+    public Application(String name, Version version, String description, LocalDate releaseYear, String logoUrl) {
+	this.name = name;
+	this.version = version;
+	this.description = description;
+	this.releaseYear = releaseYear;
+	this.logoUrl = logoUrl;
     }
 
     public Application() {
@@ -52,107 +68,95 @@ public class Application {
     }
 
     public Application(int id, String name, String version) {
-        this.id = id;
-        this.name = name;
-        this.version = version;
+	this.id = id;
+	this.name = name;
+	this.version = Version.fromString(version);
     }
 
-
     public Integer getId() {
-        return id;
+	return id;
     }
 
     public Application setId(Integer id) {
-        this.id = id;
-        return this;
+	this.id = id;
+	return this;
     }
 
     public String getName() {
-        return name;
+	return name;
     }
 
     public Application setName(String name) {
-        this.name = name;
-        return this;
+	this.name = name;
+	return this;
     }
 
-    public String getVersion() {
-        return version;
+    public Version getVersion() {
+	return version;
     }
 
     public Application setVersion(String version) {
-        this.version = version;
-        return this;
+	this.version = Version.fromString(version);
+	return this;
     }
 
     public String getDescription() {
-        return description;
+	return description;
     }
 
     public Application setDescription(String description) {
-        this.description = description;
-        return this;
+	this.description = description;
+	return this;
     }
 
     public LocalDate getReleaseYear() {
-        return releaseYear;
+	return releaseYear;
     }
 
     public Set<Purchase> getPurchases() {
-        return purchases;
+	return purchases;
     }
 
     public Set<Problem> getProblems() {
-        return problems;
+	return problems;
     }
 
     public Application setProblems(Set<Problem> problems) {
-        this.problems = problems;
-        return this;
+	this.problems = problems;
+	return this;
     }
 
     public String getLogoUrl() {
-        return logoUrl;
+	return logoUrl;
     }
 
     public Application copyWithIncrementedVersion() {
-        return new Application(this.name, incrementedVersion(), this.description,
-                this.releaseYear, this.logoUrl);
+	return new Application(this.name, incrementedVersion(), this.description, this.releaseYear, this.logoUrl);
     }
 
-    private String incrementedVersion() {
-        String versionPattern = "(\\d+)\\.(\\d+)\\.(\\d+)";
-        if (version.matches(versionPattern)) {
-            String[] parts = version.split("\\.");
-            int major = Integer.parseInt(parts[0]);
-            int minor = Integer.parseInt(parts[1]);
-            int patch = Integer.parseInt(parts[2]);
-
-            patch++; // Increment the patch version (z)
-
-            return major + "." + minor + "." + patch;
-        } else {
-            throw new IllegalArgumentException("Invalid version format. Expected x.y.z");
-        }
+    private Version incrementedVersion() {
+	return new Version(this.version.getMajor(), this.version.getMinor(), this.version.getPatch() + 1);
     }
 
     public boolean equalsExceptVersion(Application other) {
-        if (this == other) {
-            return true;
-        }
+	if (this == other) {
+	    return true;
+	}
 
-        if (other == null) {
-            return false;
-        }
+	if (other == null) {
+	    return false;
+	}
 
-        return this.name.equals(other.name) &&
-                this.description.equals(other.description) &&
-                this.releaseYear.equals(other.releaseYear) &&
-                this.logoUrl.equals(other.logoUrl);
+	return this.name.equals(other.name) && this.description.equals(other.description)
+		&& this.releaseYear.equals(other.releaseYear) && this.logoUrl.equals(other.logoUrl);
     }
 
     public boolean isOwnedBy(User user) {
-        return user.ownsApplication(this);
+	return user.ownsApplication(this);
+    }
+
+    public String getMajorVersion() {
+	return String.valueOf(version.getMajor());
     }
 
 }
