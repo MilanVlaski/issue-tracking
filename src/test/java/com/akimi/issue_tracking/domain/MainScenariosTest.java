@@ -9,9 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
-import com.akimi.issue_tracking.application.purchase.Purchase;
 import com.akimi.issue_tracking.application.purchase.SupportType;
-import com.akimi.issue_tracking.problem.Problem;
 import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import com.akimi.issue_tracking.problem.engineer.Answer;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
@@ -26,13 +24,10 @@ public class MainScenariosTest {
 
     @Test
     public void Users_problem_gets_answered() {
-//	user.purchase(app, supportType);
-//	user.reportProblemWithApp(problemReport, app);
-
-	var purchase = new Purchase(user, app, support);
+	user.purchase(app, support);
 
 	var problemReport = new ProblemReport("App sucks", "Bla\nBla\n");
-	var problem = new Problem(problemReport, app, user);
+	var problem = user.reportProblemWithApp(problemReport, app);
 
 	var answer = new Answer("Hold on tight!");
 	engineer.answer(problem, answer);
@@ -41,6 +36,11 @@ public class MainScenariosTest {
 	var receivedAnswer = myProblem.getAnswers().iterator().next();
 
 	assertEquals(answer.getDescription(), receivedAnswer.getDescription());
+    }
+
+    @Test
+    public void Users_problem_gets_patched() {
+
     }
 
 }

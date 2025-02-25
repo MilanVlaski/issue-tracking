@@ -1,13 +1,21 @@
 package com.akimi.issue_tracking.application;
 
-import com.akimi.issue_tracking.application.purchase.Purchase;
-import com.akimi.issue_tracking.problem.Problem;
-import com.akimi.issue_tracking.problem.engineer.Patch;
-import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import com.akimi.issue_tracking.application.purchase.Purchase;
+import com.akimi.issue_tracking.application.purchase.SupportType;
+import com.akimi.issue_tracking.problem.Problem;
+import com.akimi.issue_tracking.problem.dto.ProblemReport;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "KORISNIK")
@@ -122,5 +130,13 @@ public class User {
         return purchases.stream()
                         .anyMatch(purchase -> purchase
                                 .getApplication().equals(app));
+    }
+
+    public Purchase purchase(Application app, SupportType support) {
+	return new Purchase(this, app, support);
+    }
+
+    public Problem reportProblemWithApp(ProblemReport problemReport, Application app) {
+	return new Problem(problemReport, app, this);
     }
 }
