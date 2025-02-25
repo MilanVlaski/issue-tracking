@@ -10,16 +10,16 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.akimi.issue_tracking.application.service.UserPurchaseInfo;
 import org.junit.jupiter.api.Test;
 
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
-import com.akimi.issue_tracking.application.Version;
+import com.akimi.issue_tracking.application.purchase.Purchase;
 import com.akimi.issue_tracking.application.purchase.SupportType;
 import com.akimi.issue_tracking.application.service.AppDistribution;
-import com.akimi.issue_tracking.application.service.ApplicationOwners;
 import com.akimi.issue_tracking.application.service.HbnApplicationOwners;
-import com.akimi.issue_tracking.application.service.UserPurchaseInfo;
+import com.akimi.issue_tracking.application.service.ApplicationOwners;
 import com.akimi.issue_tracking.problem.Action;
 import com.akimi.issue_tracking.problem.Problem;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
@@ -56,7 +56,7 @@ public class AppPatchingTest {
     public void when_engineer_patches_the_problem_they_are_assigned_to_a_new_application_with_incremented_version_is_created() {
         problem.assignEngineer(engineer);
         var newApp = engineer.patchProblem(patch, problem);
-	assertEquals(new Version(1, 2, 1), newApp.getVersion());
+        assertEquals("1.2.1", newApp.getVersion());
         assertTrue(newApp.equalsExceptVersion(brokenApp));
     }
 
@@ -70,7 +70,7 @@ public class AppPatchingTest {
         problem.assignEngineer(engineer);
         var newApp = engineer.patchProblem(patch, problem);
 
-	when(applicationOwners.withApplicationAndMajorVersion(appName, newApp.getMajorVersion()))
+        when(applicationOwners.withApplicationAndMajorVersion(appName, newApp.getVersion()))
                 .thenReturn(previousOwners);
 
 

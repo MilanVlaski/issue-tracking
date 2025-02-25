@@ -1,13 +1,13 @@
 package com.akimi.issue_tracking.application.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.akimi.issue_tracking.application.Application;
+import com.akimi.issue_tracking.application.purchase.Purchase;
+import com.akimi.issue_tracking.application.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.akimi.issue_tracking.application.Application;
-import com.akimi.issue_tracking.application.purchase.Purchase;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AppDistribution {
@@ -21,7 +21,7 @@ public class AppDistribution {
     public List<Purchase> sendApplicationToPreviousUsers(Application application) {
         var users = applicationOwners.withApplicationAndMajorVersion(
                 application.getName(),
-		application.getMajorVersion() // should be get major version instead
+                application.getVersion() // should be get major version instead
         );
         var purchases = new ArrayList<Purchase>();
         for (UserPurchaseInfo info : users) {

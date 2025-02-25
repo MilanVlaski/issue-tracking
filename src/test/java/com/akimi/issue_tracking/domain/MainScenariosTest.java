@@ -13,7 +13,6 @@ import org.mockito.Mockito;
 
 import com.akimi.issue_tracking.application.Application;
 import com.akimi.issue_tracking.application.User;
-import com.akimi.issue_tracking.application.Version;
 import com.akimi.issue_tracking.application.purchase.SupportType;
 import com.akimi.issue_tracking.application.service.AppDistribution;
 import com.akimi.issue_tracking.application.service.ApplicationOwners;
@@ -51,7 +50,7 @@ public class MainScenariosTest {
     @Test
     public void Users_problem_gets_patched() {
 	ApplicationOwners mockAppOwners = Mockito.mock(ApplicationOwners.class);
-	when(mockAppOwners.withApplicationAndMajorVersion(app.getName(), app.getMajorVersion()))
+	when(mockAppOwners.withApplicationAndMajorVersion(app.getName(), app.getVersion()))
 		.thenReturn(List.of(new UserPurchaseInfo(user, support)));
 
 	user.purchase(app, support);
@@ -64,7 +63,7 @@ public class MainScenariosTest {
 	new AppDistribution(mockAppOwners).sendApplicationToPreviousUsers(newApp);
 
 	assertThat(user.ownsApplication(newApp));
-	assertEquals(new Version(1, 1, 1), newApp.getVersion());
+	assertEquals("1.1.1", newApp.getVersion());
 
 	var usersProblem = user.getProblems().iterator().next();
 	assertEquals(ProblemState.SOLVED, usersProblem.getState());

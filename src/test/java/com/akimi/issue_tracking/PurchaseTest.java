@@ -1,15 +1,16 @@
 package com.akimi.issue_tracking;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import com.akimi.issue_tracking.application.Application;
+import com.akimi.issue_tracking.application.purchase.PurchasingService;
+import com.akimi.issue_tracking.application.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.akimi.issue_tracking.application.Application;
-import com.akimi.issue_tracking.application.User;
-import com.akimi.issue_tracking.application.purchase.PurchasingService;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Transactional
@@ -26,7 +27,7 @@ public class PurchaseTest {
 
         var email = "m@v.com";
         var user = new User().setName("Jane Doe").setEmail(email);
-	var app = new Application().setName(appName).setVersion("1.1.0");
+        var app = new Application().setName(appName).setVersion("1.1");
 
         purchasingService.purchaseApp(supportId, app, user);
 
