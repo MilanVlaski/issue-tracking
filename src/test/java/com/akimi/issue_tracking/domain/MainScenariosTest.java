@@ -59,16 +59,13 @@ public class MainScenariosTest {
 	problem.assignEngineer(engineer);
 
 	var patch = new Patch("telephone", BigDecimal.valueOf(120));
-	new PatchingService(engineer, patch, problem, new AppDistribution(mockAppOwners))
+	Application newApp = new PatchingService(engineer, patch, problem, new AppDistribution(mockAppOwners))
 		.createPatchedApplicationAndDistributeItToPreviousUsers();
 
 	var usersProblem = user.getProblems().iterator().next();
 	assertEquals(ProblemState.SOLVED, usersProblem.getState());
 	assertEquals(2, user.getPurchases().size());
 
-	var iterator = user.getPurchases().iterator();
-	iterator.next();
-	var newApp = iterator.next().getApplication();
 	assertEquals("1.1.1", newApp.getVersion());
     }
 

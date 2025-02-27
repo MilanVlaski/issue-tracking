@@ -19,9 +19,10 @@ public class PatchingService {
 	this.appDistribution = appDistribution;
     }
 
-    public void createPatchedApplicationAndDistributeItToPreviousUsers() {
+    public Application createPatchedApplicationAndDistributeItToPreviousUsers() {
 	Application newApp = engineer.patchProblem(patch, problem);
 	appDistribution.sendApplicationToPreviousUsers(newApp);
+	return newApp;
     }
 
 }

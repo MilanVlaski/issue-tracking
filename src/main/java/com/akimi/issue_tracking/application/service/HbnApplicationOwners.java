@@ -1,12 +1,11 @@
 package com.akimi.issue_tracking.application.service;
 
-import com.akimi.issue_tracking.application.User;
-import com.akimi.issue_tracking.application.purchase.SupportType;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 @Service
 public class HbnApplicationOwners implements ApplicationOwners {
@@ -26,11 +25,6 @@ public class HbnApplicationOwners implements ApplicationOwners {
                 .setParameter("versionPattern", appVersion + ".%")
                 .getResultList();
     }
-
-    private String majorVersion(String oldVersion) {
-        return oldVersion.substring(0, oldVersion.lastIndexOf('.')) + ".%";
-    }
-
 
 }
 
