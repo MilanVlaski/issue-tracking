@@ -1,6 +1,7 @@
 package com.akimi.issue_tracking.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -17,6 +18,7 @@ import com.akimi.issue_tracking.application.service.AppDistribution;
 import com.akimi.issue_tracking.application.service.ApplicationOwners;
 import com.akimi.issue_tracking.application.service.UserPurchaseInfo;
 import com.akimi.issue_tracking.problem.PatchingService;
+import com.akimi.issue_tracking.problem.Problem;
 import com.akimi.issue_tracking.problem.ProblemState;
 import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import com.akimi.issue_tracking.problem.engineer.Answer;
@@ -32,6 +34,7 @@ public class MainScenariosTest {
     Engineer engineer = new Engineer("Jame Bon", "nothing", LocalDate.of(2024, 1, 1), 250.2, "as@mail.com", "password");
     ProblemReport problemReport = new ProblemReport("App sucks", "Bla\nBla\n");
     Answer answer = new Answer("Hold on tight!");
+    Patch patch = new Patch("telephone", BigDecimal.valueOf(120));
 
     @Test
     public void Users_problem_gets_answered() {
@@ -58,7 +61,6 @@ public class MainScenariosTest {
 	var problem = user.reportProblemWithApp(problemReport, app);
 	problem.assignEngineer(engineer);
 
-	var patch = new Patch("telephone", BigDecimal.valueOf(120));
 	Application newApp = new PatchingService(engineer, patch, problem, new AppDistribution(mockAppOwners))
 		.createPatchedApplicationAndDistributeItToPreviousUsers();
 
@@ -67,6 +69,13 @@ public class MainScenariosTest {
 	assertEquals(2, user.getPurchases().size());
 
 	assertEquals("1.1.1", newApp.getVersion());
+    }
+
+    @Test
+    public void engineer_cant_patch_a_problem_they_are_not_assigned_to() {
+	assertThrows(IllegalStateException.class, () -> {
+	    engineer.patchProblem(patch, new Problem(problemReport, app, user));
+	});
     }
 
 }
