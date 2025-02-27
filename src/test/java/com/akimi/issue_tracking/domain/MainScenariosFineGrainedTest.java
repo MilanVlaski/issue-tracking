@@ -25,6 +25,10 @@ import com.akimi.issue_tracking.problem.engineer.Answer;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
 import com.akimi.issue_tracking.problem.engineer.Patch;
 
+/**
+ * This test runs the main scenarios, but almost purely with the domain model.
+ * There is not much notion of persistence, and no need for extensive mocking.
+ */
 public class MainScenariosFineGrainedTest {
 
     User user = new User("Josh Doe", "password", "Email@email.com", LocalDate.of(2025, 1, 5), "Just send me location",
