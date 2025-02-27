@@ -1,8 +1,6 @@
 package com.akimi.issue_tracking.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -18,6 +16,7 @@ import com.akimi.issue_tracking.application.purchase.SupportType;
 import com.akimi.issue_tracking.application.service.AppDistribution;
 import com.akimi.issue_tracking.application.service.ApplicationOwners;
 import com.akimi.issue_tracking.application.service.UserPurchaseInfo;
+import com.akimi.issue_tracking.problem.PatchingService;
 import com.akimi.issue_tracking.problem.ProblemState;
 import com.akimi.issue_tracking.problem.dto.ProblemReport;
 import com.akimi.issue_tracking.problem.engineer.Answer;
@@ -59,15 +58,18 @@ public class MainScenariosTest {
 	var problem = user.reportProblemWithApp(problemReport, app);
 	problem.assignEngineer(engineer);
 
-	// TODO encapsulate both of these
-	Application newApp = engineer.patchProblem(new Patch("telephone", BigDecimal.valueOf(120)), problem);
-	new AppDistribution(mockAppOwners).sendApplicationToPreviousUsers(newApp);
-
-	assertTrue(user.ownsApplication(newApp));
-	assertEquals("1.1.1", newApp.getVersion());
+	var patch = new Patch("telephone", BigDecimal.valueOf(120));
+	new PatchingService(engineer, patch, problem, new AppDistribution(mockAppOwners))
+		.createPatchedApplicationAndDistributeItToPreviousUsers();
 
 	var usersProblem = user.getProblems().iterator().next();
 	assertEquals(ProblemState.SOLVED, usersProblem.getState());
+	assertEquals(2, user.getPurchases().size());
+
+	var iterator = user.getPurchases().iterator();
+	iterator.next();
+	var newApp = iterator.next().getApplication();
+	assertEquals("1.1.1", newApp.getVersion());
     }
 
 }
