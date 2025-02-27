@@ -25,7 +25,7 @@ import com.akimi.issue_tracking.problem.engineer.Answer;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
 import com.akimi.issue_tracking.problem.engineer.Patch;
 
-public class MainScenariosTest {
+public class MainScenariosFineGrainedTest {
 
     User user = new User("Josh Doe", "password", "Email@email.com", LocalDate.of(2025, 1, 5), "Just send me location",
 	    "123");
