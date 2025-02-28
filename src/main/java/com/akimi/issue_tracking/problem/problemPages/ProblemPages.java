@@ -75,11 +75,12 @@ public class ProblemPages {
     public String problems(Model model) {
 	var user = currentLogin.user();
 	var problemsWithPatches = em
-		.createQuery("SELECT p FROM Problem p " + "LEFT JOIN FETCH p.problemSolvers ps "
-			+ "LEFT JOIN FETCH ps.patches patch " + "WHERE p.user = :user", Problem.class)
+		.createQuery("SELECT new com.akimi.issue_tracking.problem.dto.ProblemWithPatches(p) "
+			+ "FROM Problem p " + "LEFT JOIN FETCH p.problemSolvers ps LEFT JOIN FETCH ps.patches patch "
+			+ "WHERE p.user = :user", Problem.class)
 		.setParameter("user", user).getResultList();
 
-	model.addAttribute("problemDtos", mapProblemsToDTOs(problemsWithPatches));
+	model.addAttribute("problemDtos", problemsWithPatches);
 	model.addAttribute("userRole", "USER");
 
 	return "problemsAndSolutions";
