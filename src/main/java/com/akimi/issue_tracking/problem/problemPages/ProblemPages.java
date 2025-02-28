@@ -63,7 +63,7 @@ public class ProblemPages {
 	List<ProblemDto> problems;
 	if (!(state == null || state.isEmpty())) {
 	    var stateEnum = ProblemState.valueOfIgnoreCase(state);
-	    problems = pr oblemRepository.findAllBelongingToEngineerByState(currentLogin.engineer(), stateEnum);
+	    problems = problemRepository.findAllBelongingToEngineerByState(currentLogin.engineer(), stateEnum);
 	    model.addAttribute("state", stateEnum);
 	} else {
 	    problems = problemRepository.findAllBelongingTo(currentLogin.engineer());
