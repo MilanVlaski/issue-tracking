@@ -1,11 +1,13 @@
 package com.akimi.issue_tracking.application.purchase;
 
-import com.akimi.issue_tracking.application.Application;
-import com.akimi.issue_tracking.application.User;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.akimi.issue_tracking.application.Application;
+import com.akimi.issue_tracking.application.User;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 /**
  * Dependencies that perform real purchasing should go to this class.
@@ -28,7 +30,7 @@ public class PurchasingService {
     @Transactional
     public boolean purchaseApp(String supportTypeId, Application application, User user) {
         var supportType = em.find(SupportType.class, supportTypeId);
-        var purchase = new Purchase(user, application, supportType);
+	var purchase = user.purchase(application, supportType);
         em.persist(purchase);
         return true;
     }

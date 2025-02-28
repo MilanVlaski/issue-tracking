@@ -26,7 +26,7 @@ public class ProblemProcessing {
 
     @Transactional
     public Problem report(ProblemReport problemReport, Application application, User user) {
-	var problem = new Problem(problemReport, application, user);
+	var problem = user.reportProblemWithApp(problemReport, application);
 	em.persist(application);
 	em.persist(user);
 	em.persist(problem);
