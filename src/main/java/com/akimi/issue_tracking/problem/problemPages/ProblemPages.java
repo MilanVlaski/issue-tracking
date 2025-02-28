@@ -17,7 +17,6 @@ import com.akimi.issue_tracking.problem.ProblemState;
 import com.akimi.issue_tracking.problem.dto.AnswerDto;
 import com.akimi.issue_tracking.problem.dto.PatchUpload;
 import com.akimi.issue_tracking.problem.dto.ProblemDto;
-import com.akimi.issue_tracking.problem.dto.ProblemWithPatches;
 import com.akimi.issue_tracking.problem.engineer.Engineer;
 import com.akimi.issue_tracking.problem.service.ProblemProcessing;
 import com.akimi.issue_tracking.problem.service.ProblemRepository;
@@ -97,10 +96,6 @@ public class ProblemPages {
 	model.addAttribute("problemDtos", problemsAndPatches);
 	model.addAttribute("userRole", "ENGINEER");
 	return "problemsAndSolutions";
-    }
-
-    public List<ProblemWithPatches> mapProblemsToDTOs(List<Problem> problems) {
-	return problems.stream().map(ProblemWithPatches::new).toList();
     }
 
     @GetMapping("/engineer/problems/{problemId}")
