@@ -3,6 +3,7 @@ package com.akimi.issue_tracking.problem.problemPages;
 import java.util.Arrays;
 import java.util.List;
 
+import com.akimi.issue_tracking.problem.dto.ProblemWithPatches;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -75,8 +76,8 @@ public class ProblemPages {
 	var user = currentLogin.user();
 	var problemsWithPatches = em
 		.createQuery("SELECT new com.akimi.issue_tracking.problem.dto.ProblemWithPatches(p) "
-			+ "FROM Problem p " + "LEFT JOIN FETCH p.problemSolvers ps LEFT JOIN FETCH ps.patches patch "
-			+ "WHERE p.user = :user", Problem.class)
+			+ "FROM Problem p LEFT JOIN FETCH p.problemSolvers ps LEFT JOIN FETCH ps.patches patch "
+			+ "WHERE p.user = :user", ProblemWithPatches.class)
 		.setParameter("user", user).getResultList();
 
 	model.addAttribute("problemDtos", problemsWithPatches);
