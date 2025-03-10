@@ -75,12 +75,11 @@ public class ProblemPages {
     public String problems(Model model) {
 	var user = currentLogin.user();
 	var problemsWithPatches = em
-		.createQuery("SELECT new com.akimi.issue_tracking.problem.dto.ProblemWithPatches(p) "
-			+ "FROM Problem p LEFT JOIN FETCH p.problemSolvers ps LEFT JOIN FETCH ps.patches patch "
-			+ "WHERE p.user = :user", ProblemWithPatches.class)
+		.createQuery("SELECT p FROM Problem p " + "LEFT JOIN FETCH p.problemSolvers ps "
+			+ "LEFT JOIN FETCH ps.patches patch " + "WHERE p.user = :user", Problem.class)
 		.setParameter("user", user).getResultList();
 
-	model.addAttribute("problemDtos", problemsWithPatches);
+	model.addAttribute("problemDtos", mapProblemsToDTOs(problemsWithPatches));
 	model.addAttribute("userRole", "USER");
 
 	return "problemsAndSolutions";
@@ -90,13 +89,17 @@ public class ProblemPages {
     public String problemsAndSolutions(Model model) {
 	var problemsAndPatches = em
 		.createQuery(
-			"SELECT new com.akimi.issue_tracking.problem.dto.ProblemWithPatches(p)" + "p FROM Problem p "
+			"SELECT p FROM Problem p "
 				+ "LEFT JOIN FETCH p.problemSolvers ps LEFT JOIN FETCH ps.patches patch ",
 			Problem.class)
 		.getResultList();
-	model.addAttribute("problemDtos", problemsAndPatches);
+	model.addAttribute("problemDtos", mapProblemsToDTOs(problemsAndPatches));
 	model.addAttribute("userRole", "ENGINEER");
 	return "problemsAndSolutions";
+    }
+
+    public List<ProblemWithPatches> mapProblemsToDTOs(List<Problem> problems) {
+	return problems.stream().map(ProblemWithPatches::new).toList();
     }
 
     @GetMapping("/engineer/problems/{problemId}")
