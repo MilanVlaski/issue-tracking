@@ -51,10 +51,11 @@ create table KORISNIK (
 );
 
 create table KUPOVINA (
+                          ID_KUP SERIAL not null,
                           ID_APP INT not null,
                           ID_KOR INT not null,
                           ID_POD VARCHAR(10) not null,
-                          constraint PK_KUPOVINA primary key (ID_APP, ID_KOR)
+                          constraint PK_KUPOVINA primary key (ID_KUP)
 );
 
 create table ODGOVOR (

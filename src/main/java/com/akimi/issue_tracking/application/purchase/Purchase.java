@@ -13,16 +13,17 @@ import org.hibernate.annotations.OnDeleteAction;
         @Index(name = "PODRSKA_FK", columnList = "ID_POD")
 })
 public class Purchase {
-    @EmbeddedId
-    private PurchaseId id;
 
-    @MapsId("idApp")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_KUP", nullable = false)
+    private Integer id;
+
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_APP", nullable = false)
     private Application application;
 
-    @MapsId("idKor")
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_KOR", nullable = false)
@@ -38,10 +39,6 @@ public class Purchase {
         this.application = application;
         this.supportType = support;
 
-        id = new PurchaseId()
-                .setIdApp(application.getId())
-                .setIdKor(user.getId());
-
         user.getPurchases().add(this);
         application.getPurchases().add(this);
         support.getPurchases().add(this);
@@ -49,15 +46,6 @@ public class Purchase {
 
     public Purchase() {
 
-    }
-
-    public PurchaseId getId() {
-        return id;
-    }
-
-    public Purchase setId(PurchaseId id) {
-        this.id = id;
-        return this;
     }
 
     public Application getApplication() {
